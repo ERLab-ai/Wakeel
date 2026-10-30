@@ -1,0 +1,21 @@
+name: v0.22 lab foundation
+on:
+  push:
+    branches: [feat/v022-interactive-lab-foundation]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check
+      - name: Verify local static asset references
+        run: |
+          test -f index.html
+          test -f styles.css
+          test -f src/app.mjs
+          test -f src/models.mjs
+          ! grep -Ei 'https?://' index.html styles.css src/app.mjs src/models.mjs
