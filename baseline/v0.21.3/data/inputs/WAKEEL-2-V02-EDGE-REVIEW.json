@@ -1,0 +1,546 @@
+{
+  "scope": "Independent audit of 38 added_in v0.2 edges, not a mutation of supplied registry",
+  "counts": {
+    "accept": 26,
+    "edit": 10,
+    "remove": 1,
+    "review": 1
+  },
+  "decisions": [
+    {
+      "number": 1,
+      "edge": {
+        "source": "EVA-013",
+        "target": "EVA-005",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "الحالة العدائية تخصيص لاختبار المتانة الأوسع"
+      },
+      "status": "accept",
+      "reason_ar": "اختبار الهجمات حالة متخصصة من اختبارات المتانة، مع ضبط أن «الهجوم» ليس مرادفاً «للاختبار».",
+      "proposed_edge": null
+    },
+    {
+      "number": 2,
+      "edge": {
+        "source": "DAT-007",
+        "target": "NLP-008",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "التطبيع إجراء بيانات داخل تحديات العربية الأوسع"
+      },
+      "status": "accept",
+      "reason_ar": "التطبيع العربي تطبيق محدد داخل معالجة العربية.",
+      "proposed_edge": null
+    },
+    {
+      "number": 3,
+      "edge": {
+        "source": "NLP-016",
+        "target": "EVA-008",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "تقييم العربية حالة خاصة من التقييم عبر اللغات"
+      },
+      "status": "accept",
+      "reason_ar": "تقييم العربية واللهجات صورة متخصصة من التقييم عبر اللغات.",
+      "proposed_edge": null
+    },
+    {
+      "number": 4,
+      "edge": {
+        "source": "AUD-013",
+        "target": "EVA-008",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "تقييم الكلام العربي حالة خاصة من التقييم عبر اللغات"
+      },
+      "status": "edit",
+      "reason_ar": "موضوع الكلام العربي أوسع من «التقييم»؛ يشمل ASR وTTS والفروق اللهجية.",
+      "proposed_edge": {
+        "type": "related",
+        "source": "AUD-013",
+        "target": "EVA-008"
+      }
+    },
+    {
+      "number": 5,
+      "edge": {
+        "source": "DLN-021",
+        "target": "ML-019",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "GNN حالة خاصة من التعلم على الرسوم"
+      },
+      "status": "accept",
+      "reason_ar": "GNN تطبيق خاص للتعلم من الرسوم البيانية.",
+      "proposed_edge": null
+    },
+    {
+      "number": 6,
+      "edge": {
+        "source": "DLN-006",
+        "target": "TRN-001",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "صياغة هدف لمهمة تحتاج مفهوم الخسارة والهدف"
+      },
+      "status": "accept",
+      "reason_ar": "المفهوم الخاص بالخسارة مطلوب لتصميم هدف تدريب معرّف بدالة خسارة كما يصف TRN-001.",
+      "proposed_edge": null
+    },
+    {
+      "number": 7,
+      "edge": {
+        "source": "DLN-006",
+        "target": "TRN-001",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "المفهوم النظري وربطه بالإجراء الهندسي"
+      },
+      "status": "remove",
+      "reason_ar": "العلاقة related الثانية لنفس الزوج تعيد معنى علاقة الاعتماد ولا تضيف تمييزاً مفيداً.",
+      "proposed_edge": null
+    },
+    {
+      "number": 8,
+      "edge": {
+        "source": "HUM-015",
+        "target": "DAT-013",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "بطاقة النموذج وبطاقة البيانات: كيانان مختلفان بوظيفة توثيق واحدة"
+      },
+      "status": "accept",
+      "reason_ar": "بطاقات مجموعات البيانات وبطاقات النماذج منفصلتان مع هدف توثيقي مشترك.",
+      "proposed_edge": null
+    },
+    {
+      "number": 9,
+      "edge": {
+        "source": "MAT-017",
+        "target": "EVA-002",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "حساب Perplexity يحتاج الانتروبيا المتقاطعة"
+      },
+      "status": "edit",
+      "reason_ar": "Perplexity تعتمد على log-loss لكن عنوان EVA-002 يشمل مقاييس أخرى؛ ليس كل تقييم لغوي مشروطاً بالانتروبيا المتقاطعة.",
+      "proposed_edge": {
+        "type": "just_in_time",
+        "source": "MAT-017",
+        "target": "EVA-002"
+      }
+    },
+    {
+      "number": 10,
+      "edge": {
+        "source": "RES-013",
+        "target": "RLC-010",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "نموذج العالم هو الأساس الذي يستخدمه التعلم المعتمد على النموذج"
+      },
+      "status": "accept",
+      "reason_ar": "World model أداة مهمة ضمن model-based RL، مع الإقرار أنهما ليسا مصطلحين مترادفين.",
+      "proposed_edge": null
+    },
+    {
+      "number": 11,
+      "edge": {
+        "source": "LLM-019",
+        "target": "LLM-002",
+        "type": "contrast",
+        "added_in": "v0.2",
+        "rationale_ar": "توليد غير تلقائي الانحدار مقابل توليد رمزاً برمز"
+      },
+      "status": "accept",
+      "reason_ar": "التوليد الانتشاري بديل للتوليد النصي السببي التدريجي.",
+      "proposed_edge": null
+    },
+    {
+      "number": 12,
+      "edge": {
+        "source": "LLM-020",
+        "target": "LLM-002",
+        "type": "contrast",
+        "added_in": "v0.2",
+        "rationale_ar": "وحدة تنبؤ كامنة/مفاهيمية مقابل وحدة رمزية"
+      },
+      "status": "edit",
+      "reason_ar": "النماذج الكامنة قد تكون ذاتية الانحدار أيضاً؛ الاختلاف في وحدة التنبؤ، لا بالضرورة في التوليد التدريجي.",
+      "proposed_edge": {
+        "type": "clarifies",
+        "source": "LLM-020",
+        "target": "LLM-003"
+      }
+    },
+    {
+      "number": 13,
+      "edge": {
+        "source": "MMU-010",
+        "target": "MMU-001",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "النموذج الموحد حالة متقدمة من دمج الوسائط"
+      },
+      "status": "accept",
+      "reason_ar": "ارتباط عائلة النماذج الموحدة بمفهوم تعدد الوسائط صحيح وإن كان واسعاً.",
+      "proposed_edge": null
+    },
+    {
+      "number": 14,
+      "edge": {
+        "source": "MMU-013",
+        "target": "ROB-001",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "سياسة الرؤية واللغة والفعل داخل نظام مجسد"
+      },
+      "status": "accept",
+      "reason_ar": "VLA يرتبط بالأنظمة المجسدة، لكنه ليس مرادفاً لكل روبوت.",
+      "proposed_edge": null
+    },
+    {
+      "number": 15,
+      "edge": {
+        "source": "EVA-020",
+        "target": "EVA-009",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "التفسير الآلي الداخلي منهج داخل التفسير الأوسع"
+      },
+      "status": "accept",
+      "reason_ar": "التفسير الآلي الداخلي شكل متخصص من تفسير النماذج.",
+      "proposed_edge": null
+    },
+    {
+      "number": 16,
+      "edge": {
+        "source": "DLN-020",
+        "target": "ML-020",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "التعلم المستمر والتحديث عند وصول بيانات جديدة: سياقان مختلفان للاحتفاظ بالمعرفة"
+      },
+      "status": "accept",
+      "reason_ar": "التعلم المستمر والتعلم على تدفق بيانات يرتبطان مع اختلاف تعريف الاستقرار والنسيان.",
+      "proposed_edge": null
+    },
+    {
+      "number": 17,
+      "edge": {
+        "source": "DLN-023",
+        "target": "ML-016",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "التعلم الفوقي والنقل: كلاهما استثمار معرفة سابقة في مهمة جديدة"
+      },
+      "status": "accept",
+      "reason_ar": "Meta-learning وTransfer Learning يتداخلان ويختلفان في آلية التعميم.",
+      "proposed_edge": null
+    },
+    {
+      "number": 18,
+      "edge": {
+        "source": "SYM-015",
+        "target": "SYM-007",
+        "type": "contrast",
+        "added_in": "v0.2",
+        "rationale_ar": "الاستدلال بالقواعد المكتوبة مقابل الاستدلال بتعلم التمثيلات مع قيود"
+      },
+      "status": "edit",
+      "reason_ar": "الهجين الرمزي العصبي قد يستخدم القواعد ذاتها؛ contrast يفترض تقابلاً زائفاً.",
+      "proposed_edge": {
+        "type": "related",
+        "source": "SYM-015",
+        "target": "SYM-007"
+      }
+    },
+    {
+      "number": 19,
+      "edge": {
+        "source": "RES-012",
+        "target": "RES-017",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "البحث الآلي عن البنى والاكتشاف الآلي: أتمتة البحث مقابل أتمتة النتائج"
+      },
+      "status": "accept",
+      "reason_ar": "الاكتشاف الآلي وAutoML يتداخلان دون مساواة كاملة.",
+      "proposed_edge": null
+    },
+    {
+      "number": 20,
+      "edge": {
+        "source": "RES-016",
+        "target": "EVA-001",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "تقييم ادعاءات العمومية حالة من الادعاء القابل للفحص"
+      },
+      "status": "accept",
+      "reason_ar": "اختبار ادعاءات العمومية مثال متخصص من الاختبار المنهجي للادعاءات.",
+      "proposed_edge": null
+    },
+    {
+      "number": 21,
+      "edge": {
+        "source": "RES-011",
+        "target": "RES-010",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "الاستدلال وقت الاختبار محور توسع موازٍ لقوانين توسع التدريب"
+      },
+      "status": "accept",
+      "reason_ar": "توسيع الحساب وقت الاختبار يرتبط بأبحاث قوانين التوسع، مع اختلاف أبعاد الموارد.",
+      "proposed_edge": null
+    },
+    {
+      "number": 22,
+      "edge": {
+        "source": "MAT-001",
+        "target": "MAT-007",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "المشتقة تُعرَّف على دالة"
+      },
+      "status": "accept",
+      "reason_ar": "المشتقات تفترض فهم الدوال ومتغيراتها عند الحساب.",
+      "proposed_edge": null
+    },
+    {
+      "number": 23,
+      "edge": {
+        "source": "MAT-004",
+        "target": "MAT-005",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "الضرب الداخلي عملية على متجهات"
+      },
+      "status": "accept",
+      "reason_ar": "الضرب الداخلي يتطلب متجهات عند التنفيذ.",
+      "proposed_edge": null
+    },
+    {
+      "number": 24,
+      "edge": {
+        "source": "MAT-015",
+        "target": "MAT-017",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "الانتروبيا المتقاطعة تُحسب بلوغاريتم"
+      },
+      "status": "accept",
+      "reason_ar": "الحساب العددي للانتروبيا المتقاطعة يتطلب اللوغاريتمات.",
+      "proposed_edge": null
+    },
+    {
+      "number": 25,
+      "edge": {
+        "source": "MAT-016",
+        "target": "MAT-017",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "الانتروبيا أصل مقياس الخسارة"
+      },
+      "status": "edit",
+      "reason_ar": "فهم Shannon entropy يفيد في تفسير cross-entropy وليس شرطاً لتنفيذ -sum p log q.",
+      "proposed_edge": {
+        "type": "just_in_time",
+        "source": "MAT-016",
+        "target": "MAT-017"
+      }
+    },
+    {
+      "number": 26,
+      "edge": {
+        "source": "MAT-003",
+        "target": "LLM-002",
+        "type": "just_in_time",
+        "added_in": "v0.2",
+        "rationale_ar": "التسلسل كترتيب قبل الحديث عن توليد متتابع"
+      },
+      "status": "accept",
+      "reason_ar": "فكرة التسلسل يمكن تمهيدها داخل المدخل إلى التوليد التدريجي.",
+      "proposed_edge": null
+    },
+    {
+      "number": 27,
+      "edge": {
+        "source": "DLN-001",
+        "target": "DLN-003",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "التنشيط يُطبَّق على مخرج العصبون"
+      },
+      "status": "accept",
+      "reason_ar": "وحدة الإدخال الموزونة تجعل لدالة التنشيط سياقاً تنفيذياً.",
+      "proposed_edge": null
+    },
+    {
+      "number": 28,
+      "edge": {
+        "source": "DLN-010",
+        "target": "TRN-004",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "حلقة التدريب تعمل بدفعات وخطوات"
+      },
+      "status": "accept",
+      "reason_ar": "إدراك خطوات ودفعات وعصور التدريب ضروري لكتابة حلقة كاملة ومراقبتها.",
+      "proposed_edge": null
+    },
+    {
+      "number": 29,
+      "edge": {
+        "source": "DLN-011",
+        "target": "DLN-018",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "بنية Transformer تستخدم التطبيع والروابط المتبقية"
+      },
+      "status": "accept",
+      "reason_ar": "الربط بين residual/normalization والتنفيذ القياسي لبنية Transformer صحيح لطبقة التنفيذ.",
+      "proposed_edge": null
+    },
+    {
+      "number": 30,
+      "edge": {
+        "source": "DLN-014",
+        "target": "DLN-018",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "بنية Transformer تحتاج تمثيلاً لترتيب المواضع"
+      },
+      "status": "edit",
+      "reason_ar": "تمثيل المواضع مهم لنمذجة ترتيب اللغة، لكن يمكن بناء Transformer بلا positional embeddings مستقلة، فلا يُعامل كشرط تنفيذي عام مطلق.",
+      "proposed_edge": {
+        "type": "just_in_time",
+        "source": "DLN-014",
+        "target": "DLN-018"
+      }
+    },
+    {
+      "number": 31,
+      "edge": {
+        "source": "DLN-016",
+        "target": "LLM-012",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "نمذجة RNN اللغوية تحتاج شبكة متكررة"
+      },
+      "status": "accept",
+      "reason_ar": "RNN كأساس تنفيذي لنماذج اللغة المتكررة.",
+      "proposed_edge": null
+    },
+    {
+      "number": 32,
+      "edge": {
+        "source": "LLM-007",
+        "target": "LLM-006",
+        "type": "specializes",
+        "added_in": "v0.2",
+        "rationale_ar": "Bigram حالة خاصة من N-gram عند n=2"
+      },
+      "status": "accept",
+      "reason_ar": "Bigram حالة N-gram عند n=2.",
+      "proposed_edge": null
+    },
+    {
+      "number": 33,
+      "edge": {
+        "source": "HIS-009",
+        "target": "LLM-006",
+        "type": "historical_context",
+        "added_in": "v0.2",
+        "rationale_ar": "تاريخ النماذج قبل Transformer يمر بالنماذج الإحصائية"
+      },
+      "status": "edit",
+      "reason_ar": "historical_context معرّفة «من الموضوع إلى سياقه التاريخي»، والحافة الحالية تبدأ من عرض التاريخ إلى N-gram؛ نعكس الاتجاه.",
+      "proposed_edge": {
+        "type": "historical_context",
+        "source": "LLM-006",
+        "target": "HIS-009"
+      }
+    },
+    {
+      "number": 34,
+      "edge": {
+        "source": "DAT-004",
+        "target": "TRN-002",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "تجهيز المدونة يبدأ بالتنظيف والتحقق"
+      },
+      "status": "edit",
+      "reason_ar": "قد تستخدم مدونة تدريب خاماً أو معدة مسبقاً؛ التنظيف مهم غالباً وليس شرطاً عاماً لكل بناء corpus.",
+      "proposed_edge": {
+        "type": "just_in_time",
+        "source": "DAT-004",
+        "target": "TRN-002"
+      }
+    },
+    {
+      "number": 35,
+      "edge": {
+        "source": "FND-006",
+        "target": "FND-010",
+        "type": "hard_implementation",
+        "added_in": "v0.2",
+        "rationale_ar": "برمجة بايثون تحتاج الشروط والحلقات والدوال"
+      },
+      "status": "edit",
+      "reason_ar": "تعلم أساسيات Python يبدأ قبل استيعاب كل الشروط والحلقات والدوال؛ hard_implementation يفرض شرطاً زائفاً.",
+      "proposed_edge": {
+        "type": "related",
+        "source": "FND-006",
+        "target": "FND-010"
+      }
+    },
+    {
+      "number": 36,
+      "edge": {
+        "source": "NLP-007",
+        "target": "NLP-003",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "فك الترميز الوجه الآخر لبناء المقطع"
+      },
+      "status": "accept",
+      "reason_ar": "فك الترميز والتقطيع متصلان، وليس أحدهما متطلباً معرفياً صارماً للآخر.",
+      "proposed_edge": null
+    },
+    {
+      "number": 37,
+      "edge": {
+        "source": "FND-014",
+        "target": "AGT-010",
+        "type": "clarifies",
+        "added_in": "v0.2",
+        "rationale_ar": "تمييز النموذج/النظام يوازي تمييز النموذج/الوكيل/المنظومة"
+      },
+      "status": "review",
+      "reason_ar": "العلاقة معقولة، لكن التقارب بين FND-014 وAGT-010 يقتضي اختبار استقلال أهدافهما قبل تثبيت موضوعين منفصلين.",
+      "proposed_edge": null
+    },
+    {
+      "number": 38,
+      "edge": {
+        "source": "EVA-007",
+        "target": "EVA-001",
+        "type": "related",
+        "added_in": "v0.2",
+        "rationale_ar": "الادعاء غير المسند من أنواع الادعاء غير القابلة للفحص"
+      },
+      "status": "edit",
+      "reason_ar": "الإدعاء بلا مصدر ليس بالضرورة غير قابل للاختبار؛ نصحح التبرير ليشرح الفرق بين قابلية الاختبار وكفاية الأدلة.",
+      "proposed_edge": {
+        "type": "related",
+        "source": "EVA-007",
+        "target": "EVA-001",
+        "rationale_ar": "الادعاء قد يكون قابلاً للاختبار لكنه غير مسند بالأدلة؛ يوضح الربط الفرق بين قابلية الاختبار وصحة الإسناد."
+      }
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "project": "WAKEEL-2 CH9",
+  "stage": "P0 / task identifiability only; no model training",
+  "generator_version": "ch9-binding-p0-0.1",
+  "data_seed": 9102,
+  "vocab_size": 33,
+  "model_seeds_reserved": [
+    42,
+    43,
+    44
+  ],
+  "split_sizes": {
+    "train": 512,
+    "val": 128,
+    "dev_holdout": 128,
+    "p0_probe_in": 64,
+    "p0_probe_ood_length16": 64
+  },
+  "family_counts": {
+    "train": 32,
+    "val": 8,
+    "dev_holdout": 8,
+    "p0_probe_in": 4,
+    "p0_probe_ood_length16": 4
+  },
+  "split_sha256": {
+    "train": "aeb7c68d54fd50bf23d21664cd86e6f60c5b669e3eec22e4bf9e92887bf1f8af",
+    "val": "a43f8a4fa7628cadedf14f6dd35b93a9d711dcd7fc12a2818665ca9a71340995",
+    "dev_holdout": "a4c18eab56e7248faaa37b053a8f3e7a5ebc499b5583624bf1724e2e28e1fd8a",
+    "p0_probe_in": "1b638b10b0462de8add685d0ff9b09e0531999bd7a7508c3a1e7c5ff7758544b",
+    "p0_probe_ood_length16": "4f96b02b873a02d61f7b44b9185b76b546ba6db5420bc3ec51e9ffb72e3b7319"
+  },
+  "segments": {
+    "train": {
+      "oracle_binary_accuracy": 1.0,
+      "first_query_order_free_bag_ceiling": 0.75,
+      "opposite_binding_matched_pairs": 128,
+      "bag_matched_pair_both_correct_ceiling": 0.0,
+      "binding_oracle_matched_pair_both_correct": 1.0,
+      "query_key_counts_both_positions": {
+        "A": 512,
+        "B": 512
+      },
+      "first_query_label_counts": {
+        "A:7": 128,
+        "A:8": 128,
+        "B:7": 128,
+        "B:8": 128
+      }
+    },
+    "val": {
+      "oracle_binary_accuracy": 1.0,
+      "first_query_order_free_bag_ceiling": 0.75,
+      "opposite_binding_matched_pairs": 32,
+      "bag_matched_pair_both_correct_ceiling": 0.0,
+      "binding_oracle_matched_pair_both_correct": 1.0,
+      "query_key_counts_both_positions": {
+        "B": 128,
+        "A": 128
+      },
+      "first_query_label_counts": {
+        "A:7": 32,
+        "A:8": 32,
+        "B:7": 32,
+        "B:8": 32
+      }
+    },
+    "dev_holdout": {
+      "oracle_binary_accuracy": 1.0,
+      "first_query_order_free_bag_ceiling": 0.75,
+      "opposite_binding_matched_pairs": 32,
+      "bag_matched_pair_both_correct_ceiling": 0.0,
+      "binding_oracle_matched_pair_both_correct": 1.0,
+      "query_key_counts_both_positions": {
+        "B": 128,
+        "A": 128
+      },
+      "first_query_label_counts": {
+        "A:7": 32,
+        "A:8": 32,
+        "B:7": 32,
+        "B:8": 32
+      }
+    },
+    "p0_probe_in": {
+      "oracle_binary_accuracy": 1.0,
+      "first_query_order_free_bag_ceiling": 0.75,
+      "opposite_binding_matched_pairs": 16,
+      "bag_matched_pair_both_correct_ceiling": 0.0,
+      "binding_oracle_matched_pair_both_correct": 1.0,
+      "query_key_counts_both_positions": {
+        "B": 64,
+        "A": 64
+      },
+      "first_query_label_counts": {
+        "A:7": 16,
+        "A:8": 16,
+        "B:7": 16,
+        "B:8": 16
+      }
+    },
+    "p0_probe_ood_length16": {
+      "oracle_binary_accuracy": 1.0,
+      "first_query_order_free_bag_ceiling": 0.75,
+      "opposite_binding_matched_pairs": 16,
+      "bag_matched_pair_both_correct_ceiling": 0.0,
+      "binding_oracle_matched_pair_both_correct": 1.0,
+      "query_key_counts_both_positions": {
+        "A": 64,
+        "B": 64
+      },
+      "first_query_label_counts": {
+        "A:7": 16,
+        "A:8": 16,
+        "B:7": 16,
+        "B:8": 16
+      }
+    }
+  },
+  "matched_pairs_total": 224
+}

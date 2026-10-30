@@ -1,0 +1,138 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "wakeel-registry.schema.json",
+ "title": "WAKEEL Knowledge Registry",
+ "description": "سجل المعرفة: موضوعات مستقلة الوصول وعلاقات علمية. المصدر الوحيد للحقيقة هو relations؛ لا تُخزَّن نسخة داخل الموضوع، ولا يُخزَّن topic_count.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "schema", "schema_uri", "date", "status", "supersedes", "revision", "scope", "fundamental_rule",
+  "single_source_of_truth", "edge_review", "domain_groups", "domains", "relation_types",
+  "relations", "topics", "id_history", "sourcing_policy", "reference_basis", "constraints", "notes"
+ ],
+ "properties": {
+  "schema": {"const": "wakeel.knowledge-registry.v0.3"},
+  "schema_uri": {"type": "string"},
+  "date": {"type": "string", "format": "date"},
+  "status": {"enum": ["PLANNING_DRAFT_NOT_IMPLEMENTATION"]},
+  "supersedes": {"type": "string"},
+  "revision": {"type": "string"},
+  "scope": {"type": "string"},
+  "fundamental_rule": {"type": "string"},
+  "single_source_of_truth": {"type": "object"},
+  "edge_review": {"type": "object"},
+  "domain_groups": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "title_ar", "title_en", "domain_ids"],
+    "properties": {
+     "id": {"type": "string", "pattern": "^GRP-[A-Z]+$"},
+     "title_ar": {"type": "string", "minLength": 1},
+     "title_en": {"type": "string", "minLength": 1},
+     "domain_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+    }
+   }
+  },
+  "domains": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "group_id", "title_ar", "title_en"],
+    "properties": {
+     "id": {"type": "string", "pattern": "^[A-Z]{2,3}$"},
+     "group_id": {"type": "string", "pattern": "^GRP-[A-Z]+$"},
+     "title_ar": {"type": "string", "minLength": 1},
+     "title_en": {"type": "string", "minLength": 1}
+    }
+   }
+  },
+  "relation_types": {
+   "type": "object",
+   "minProperties": 1,
+   "additionalProperties": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["title_ar", "direction_ar", "symmetric", "is_dependency"],
+    "properties": {
+     "title_ar": {"type": "string"},
+     "direction_ar": {"type": "string"},
+     "symmetric": {"type": "boolean"},
+     "is_dependency": {"type": "boolean"},
+     "example_ar": {"type": "string"}
+    }
+   }
+  },
+  "relations": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["source", "target", "type"],
+    "properties": {
+     "source": {"type": "string", "pattern": "^[A-Z]{2,3}-\\d{3}$"},
+     "target": {"type": "string", "pattern": "^[A-Z]{2,3}-\\d{3}$"},
+     "type": {"type": "string"},
+     "added_in": {"type": "string"},
+     "rationale_ar": {"type": "string"},
+     "review": {"enum": ["accepted", "edited", "provisional"]},
+     "review_reason_ar": {"type": "string"},
+     "review_note_ar": {"type": "string"},
+     "was_type": {"type": "string"}
+    }
+   }
+  },
+  "topics": {
+   "type": "array",
+   "minItems": 1,
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "domain_id", "title_ar", "title_en", "guiding_question_ar",
+                 "coverage", "independent_entry", "status", "source_status", "sources"],
+    "properties": {
+     "id": {"type": "string", "pattern": "^[A-Z]{2,3}-\\d{3}$"},
+     "domain_id": {"type": "string", "pattern": "^[A-Z]{2,3}$"},
+     "title_ar": {"type": "string", "minLength": 2},
+     "title_en": {"type": "string", "minLength": 2},
+     "guiding_question_ar": {"type": "string", "minLength": 5},
+     "coverage": {"enum": ["flagship_journey", "shared_foundation", "expansion", "research_frontier"]},
+     "independent_entry": {"const": true},
+     "status": {"enum": ["inventory_proposal", "drafted", "reviewed", "published"]},
+     "source_status": {"enum": ["unassigned", "partial", "verified"]},
+     "sources": {"type": "array", "items": {"type": "object"}},
+     "renamed_in": {"type": "string"},
+     "added_in": {"type": "string"}
+    }
+   }
+  },
+  "id_history": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "state", "decided"],
+    "properties": {
+     "id": {"type": "string", "pattern": "^[A-Z]{2,3}-\\d{3}$"},
+     "state": {"enum": ["merged", "renamed", "added", "retired"]},
+     "merged_into": {"type": "string", "pattern": "^[A-Z]{2,3}-\\d{3}$"},
+     "previous_titles": {"type": "object"},
+     "previous_question_ar": {"type": "string"},
+     "previous_coverage": {"type": "string"},
+     "case": {"type": "integer"},
+     "rationale_ar": {"type": "string"},
+     "evidence_ar": {"type": "string"},
+     "decided": {"type": "string", "format": "date"}
+    }
+   }
+  },
+  "sourcing_policy": {"type": "object"},
+  "reference_basis": {"type": "array", "items": {"type": "string"}},
+  "constraints": {"type": "object"},
+  "notes": {"type": "array", "items": {"type": "string"}}
+ }
+}

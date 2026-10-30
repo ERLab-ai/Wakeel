@@ -1,0 +1,900 @@
+{
+ "generated_from": "content/chapter-01/examples.json",
+ "datasets": {
+  "ar": {
+   "seed": {
+    "total": 6,
+    "rule_correct": 6,
+    "example_correct": 6,
+    "rule_rows": [
+     {
+      "id": "S1",
+      "text": "أود تأجيل اجتماع الغد إلى الأسبوع القادم.",
+      "intent": "R1",
+      "matched_rule": "RULE-1",
+      "matched_keyword": "تأجيل",
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "S2",
+      "text": "أعتذر، لن أستطيع الحضور غداً.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "أعتذر",
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "S3",
+      "text": "أين سيعقد الاجتماع؟",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "أين",
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "S4",
+      "text": "سأحضر الاجتماع في موعده.",
+      "intent": "R4",
+      "matched_rule": "RULE-4",
+      "matched_keyword": "سأحضر",
+      "predicted": "R4",
+      "reply": "ممتاز، نراك هناك.",
+      "correct": true
+     },
+     {
+      "id": "S5",
+      "text": "هل يمكن تأجيل الموعد نصف ساعة؟",
+      "intent": "R1",
+      "matched_rule": "RULE-1",
+      "matched_keyword": "تأجيل",
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "S6",
+      "text": "ما رابط الاجتماع؟",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "رابط",
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     }
+    ],
+    "example_rows": [
+     {
+      "id": "S1",
+      "text": "أود تأجيل اجتماع الغد إلى الأسبوع القادم.",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "هل يمكن تأجيل الاجتماع إلى الغد؟",
+      "similarity": 0.3,
+      "shared_words": [
+       "إلى",
+       "الغد",
+       "تأجيل"
+      ],
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "S2",
+      "text": "أعتذر، لن أستطيع الحضور غداً.",
+      "intent": "R2",
+      "nearest_example": "E4",
+      "nearest_text": "أعتذر، لن أستطيع الحضور.",
+      "similarity": 0.8,
+      "shared_words": [
+       "أستطيع",
+       "أعتذر",
+       "الحضور",
+       "لن"
+      ],
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "S3",
+      "text": "أين سيعقد الاجتماع؟",
+      "intent": "R3",
+      "nearest_example": "E7",
+      "nearest_text": "أين سيعقد الاجتماع؟",
+      "similarity": 1.0,
+      "shared_words": [
+       "أين",
+       "الاجتماع",
+       "سيعقد"
+      ],
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "S4",
+      "text": "سأحضر الاجتماع في موعده.",
+      "intent": "R4",
+      "nearest_example": "E10",
+      "nearest_text": "سأحضر الاجتماع غداً.",
+      "similarity": 0.4,
+      "shared_words": [
+       "الاجتماع",
+       "سأحضر"
+      ],
+      "predicted": "R4",
+      "reply": "ممتاز، نراك هناك.",
+      "correct": true
+     },
+     {
+      "id": "S5",
+      "text": "هل يمكن تأجيل الموعد نصف ساعة؟",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "هل يمكن تأجيل الاجتماع إلى الغد؟",
+      "similarity": 0.333,
+      "shared_words": [
+       "تأجيل",
+       "هل",
+       "يمكن"
+      ],
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "S6",
+      "text": "ما رابط الاجتماع؟",
+      "intent": "R3",
+      "nearest_example": "E9",
+      "nearest_text": "ما رابط الاجتماع؟",
+      "similarity": 1.0,
+      "shared_words": [
+       "الاجتماع",
+       "رابط",
+       "ما"
+      ],
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     }
+    ],
+    "rule_matched_but_wrong": [],
+    "rule_fallback_wrong": []
+   },
+   "tests": {
+    "total": 9,
+    "rule_correct": 4,
+    "example_correct": 8,
+    "rule_rows": [
+     {
+      "id": "T1",
+      "text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+      "intent": "R1",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "لم أفهم رسالتك. هل يمكنك ذكر الموضوع باختصار؟",
+      "correct": false
+     },
+     {
+      "id": "T2",
+      "text": "أعتذر عن حضور اجتماع الغد.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "أعتذر",
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "T3",
+      "text": "أين القاعة؟",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "أين",
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "T4",
+      "text": "لن أستطيع المجيء، أرجو أن تعذرني.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "لن أستطيع",
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "T5",
+      "text": "أيمكن نقل الموعد إلى وقت لاحق؟",
+      "intent": "R1",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "لم أفهم رسالتك. هل يمكنك ذكر الموضوع باختصار؟",
+      "correct": false
+     },
+     {
+      "id": "T6",
+      "text": "سأكون معكم غداً بإذن الله.",
+      "intent": "R4",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "لم أفهم رسالتك. هل يمكنك ذكر الموضوع باختصار؟",
+      "correct": false
+     },
+     {
+      "id": "T7",
+      "text": "ما هو مكان الانعقاد؟",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "مكان",
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "T8",
+      "text": "أعتذر عن الإزعاج، ما رابط الاجتماع؟",
+      "intent": "R3",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "أعتذر",
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": false
+     },
+     {
+      "id": "T9",
+      "text": "لن أتخلف عن الحضور هذه المرة.",
+      "intent": "R4",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "لم أفهم رسالتك. هل يمكنك ذكر الموضوع باختصار؟",
+      "correct": false
+     }
+    ],
+    "example_rows": [
+     {
+      "id": "T1",
+      "text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "هل يمكن تأجيل الاجتماع إلى الغد؟",
+      "similarity": 0.182,
+      "shared_words": [
+       "إلى",
+       "هل"
+      ],
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "T2",
+      "text": "أعتذر عن حضور اجتماع الغد.",
+      "intent": "R2",
+      "nearest_example": "E6",
+      "nearest_text": "أعتذر عن الحضور غداً.",
+      "similarity": 0.286,
+      "shared_words": [
+       "أعتذر",
+       "عن"
+      ],
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "T3",
+      "text": "أين القاعة؟",
+      "intent": "R3",
+      "nearest_example": "E7",
+      "nearest_text": "أين سيعقد الاجتماع؟",
+      "similarity": 0.25,
+      "shared_words": [
+       "أين"
+      ],
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "T4",
+      "text": "لن أستطيع المجيء، أرجو أن تعذرني.",
+      "intent": "R2",
+      "nearest_example": "E4",
+      "nearest_text": "أعتذر، لن أستطيع الحضور.",
+      "similarity": 0.25,
+      "shared_words": [
+       "أستطيع",
+       "لن"
+      ],
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": true
+     },
+     {
+      "id": "T5",
+      "text": "أيمكن نقل الموعد إلى وقت لاحق؟",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "هل يمكن تأجيل الاجتماع إلى الغد؟",
+      "similarity": 0.091,
+      "shared_words": [
+       "إلى"
+      ],
+      "predicted": "R1",
+      "reply": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+      "correct": true
+     },
+     {
+      "id": "T6",
+      "text": "سأكون معكم غداً بإذن الله.",
+      "intent": "R4",
+      "nearest_example": "E12",
+      "nearest_text": "سأكون هناك.",
+      "similarity": 0.167,
+      "shared_words": [
+       "سأكون"
+      ],
+      "predicted": "R4",
+      "reply": "ممتاز، نراك هناك.",
+      "correct": true
+     },
+     {
+      "id": "T7",
+      "text": "ما هو مكان الانعقاد؟",
+      "intent": "R3",
+      "nearest_example": "E8",
+      "nearest_text": "ما مكان الاجتماع؟",
+      "similarity": 0.4,
+      "shared_words": [
+       "ما",
+       "مكان"
+      ],
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "T8",
+      "text": "أعتذر عن الإزعاج، ما رابط الاجتماع؟",
+      "intent": "R3",
+      "nearest_example": "E9",
+      "nearest_text": "ما رابط الاجتماع؟",
+      "similarity": 0.5,
+      "shared_words": [
+       "الاجتماع",
+       "رابط",
+       "ما"
+      ],
+      "predicted": "R3",
+      "reply": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+      "correct": true
+     },
+     {
+      "id": "T9",
+      "text": "لن أتخلف عن الحضور هذه المرة.",
+      "intent": "R4",
+      "nearest_example": "E4",
+      "nearest_text": "أعتذر، لن أستطيع الحضور.",
+      "similarity": 0.25,
+      "shared_words": [
+       "الحضور",
+       "لن"
+      ],
+      "predicted": "R2",
+      "reply": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+      "correct": false
+     }
+    ],
+    "rule_matched_but_wrong": [
+     "T8"
+    ],
+    "rule_fallback_wrong": [
+     "T1",
+     "T5",
+     "T6",
+     "T9"
+    ]
+   },
+   "ablations": {
+    "drop_confirm": {
+     "pool_size": 9,
+     "correct": 7,
+     "total": 9,
+     "wrong": [
+      "T6",
+      "T9"
+     ]
+    },
+    "first_eight": {
+     "pool_size": 8,
+     "correct": 7,
+     "total": 9,
+     "wrong": [
+      "T6",
+      "T9"
+     ]
+    },
+    "no_apology": {
+     "pool_size": 9,
+     "correct": 6,
+     "total": 9,
+     "wrong": [
+      "T2",
+      "T4",
+      "T9"
+     ]
+    }
+   }
+  },
+  "en": {
+   "seed": {
+    "total": 6,
+    "rule_correct": 6,
+    "example_correct": 6,
+    "rule_rows": [
+     {
+      "id": "S1",
+      "text": "I'd like to postpone tomorrow's meeting to next week.",
+      "intent": "R1",
+      "matched_rule": "RULE-1",
+      "matched_keyword": "postpone",
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "S2",
+      "text": "Sorry, I can't attend tomorrow.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "sorry",
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "S3",
+      "text": "Where is the meeting?",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "where",
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "S4",
+      "text": "I'll be there on time.",
+      "intent": "R4",
+      "matched_rule": "RULE-4",
+      "matched_keyword": "i'll be there",
+      "predicted": "R4",
+      "reply": "Great, see you there.",
+      "correct": true
+     },
+     {
+      "id": "S5",
+      "text": "Can we push the meeting back by half an hour?",
+      "intent": "R1",
+      "matched_rule": "RULE-1",
+      "matched_keyword": "push the meeting",
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "S6",
+      "text": "What's the meeting link?",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "link",
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     }
+    ],
+    "example_rows": [
+     {
+      "id": "S1",
+      "text": "I'd like to postpone tomorrow's meeting to next week.",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "Can we postpone the meeting to tomorrow?",
+      "similarity": 0.25,
+      "shared_words": [
+       "meeting",
+       "postpone",
+       "to"
+      ],
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "S2",
+      "text": "Sorry, I can't attend tomorrow.",
+      "intent": "R2",
+      "nearest_example": "E4",
+      "nearest_text": "Sorry, I can't attend.",
+      "similarity": 0.8,
+      "shared_words": [
+       "attend",
+       "cant",
+       "i",
+       "sorry"
+      ],
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "S3",
+      "text": "Where is the meeting?",
+      "intent": "R3",
+      "nearest_example": "E7",
+      "nearest_text": "Where is the meeting?",
+      "similarity": 1.0,
+      "shared_words": [
+       "is",
+       "meeting",
+       "the",
+       "where"
+      ],
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "S4",
+      "text": "I'll be there on time.",
+      "intent": "R4",
+      "nearest_example": "E11",
+      "nearest_text": "Count me in, I'll be there.",
+      "similarity": 0.375,
+      "shared_words": [
+       "be",
+       "ill",
+       "there"
+      ],
+      "predicted": "R4",
+      "reply": "Great, see you there.",
+      "correct": true
+     },
+     {
+      "id": "S5",
+      "text": "Can we push the meeting back by half an hour?",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "Can we postpone the meeting to tomorrow?",
+      "similarity": 0.308,
+      "shared_words": [
+       "can",
+       "meeting",
+       "the",
+       "we"
+      ],
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "S6",
+      "text": "What's the meeting link?",
+      "intent": "R3",
+      "nearest_example": "E9",
+      "nearest_text": "What's the meeting link?",
+      "similarity": 1.0,
+      "shared_words": [
+       "link",
+       "meeting",
+       "the",
+       "whats"
+      ],
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     }
+    ],
+    "rule_matched_but_wrong": [],
+    "rule_fallback_wrong": []
+   },
+   "tests": {
+    "total": 9,
+    "rule_correct": 4,
+    "example_correct": 8,
+    "rule_rows": [
+     {
+      "id": "T1",
+      "text": "Could we move the meeting to another day?",
+      "intent": "R1",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "I didn't understand that. Could you say what it's about?",
+      "correct": false
+     },
+     {
+      "id": "T2",
+      "text": "I'm sorry, I won't be able to attend.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "sorry",
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "T3",
+      "text": "Which room is it in?",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "room",
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "T4",
+      "text": "I can't make it tomorrow, apologies.",
+      "intent": "R2",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "apolog",
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "T5",
+      "text": "Can we shift the time to later?",
+      "intent": "R1",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "I didn't understand that. Could you say what it's about?",
+      "correct": false
+     },
+     {
+      "id": "T6",
+      "text": "I'll join you tomorrow.",
+      "intent": "R4",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "I didn't understand that. Could you say what it's about?",
+      "correct": false
+     },
+     {
+      "id": "T7",
+      "text": "What's the location?",
+      "intent": "R3",
+      "matched_rule": "RULE-3",
+      "matched_keyword": "location",
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "T8",
+      "text": "Sorry to bother you — what's the meeting link?",
+      "intent": "R3",
+      "matched_rule": "RULE-2",
+      "matched_keyword": "sorry",
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": false
+     },
+     {
+      "id": "T9",
+      "text": "I won't miss it this time.",
+      "intent": "R4",
+      "matched_rule": null,
+      "matched_keyword": null,
+      "predicted": null,
+      "reply": "I didn't understand that. Could you say what it's about?",
+      "correct": false
+     }
+    ],
+    "example_rows": [
+     {
+      "id": "T1",
+      "text": "Could we move the meeting to another day?",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "Can we postpone the meeting to tomorrow?",
+      "similarity": 0.364,
+      "shared_words": [
+       "meeting",
+       "the",
+       "to",
+       "we"
+      ],
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "T2",
+      "text": "I'm sorry, I won't be able to attend.",
+      "intent": "R2",
+      "nearest_example": "E6",
+      "nearest_text": "Sorry, I won't be there tomorrow.",
+      "similarity": 0.4,
+      "shared_words": [
+       "be",
+       "i",
+       "sorry",
+       "wont"
+      ],
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "T3",
+      "text": "Which room is it in?",
+      "intent": "R3",
+      "nearest_example": "E8",
+      "nearest_text": "Which room is the meeting in?",
+      "similarity": 0.571,
+      "shared_words": [
+       "in",
+       "is",
+       "room",
+       "which"
+      ],
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "T4",
+      "text": "I can't make it tomorrow, apologies.",
+      "intent": "R2",
+      "nearest_example": "E4",
+      "nearest_text": "Sorry, I can't attend.",
+      "similarity": 0.25,
+      "shared_words": [
+       "cant",
+       "i"
+      ],
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": true
+     },
+     {
+      "id": "T5",
+      "text": "Can we shift the time to later?",
+      "intent": "R1",
+      "nearest_example": "E1",
+      "nearest_text": "Can we postpone the meeting to tomorrow?",
+      "similarity": 0.4,
+      "shared_words": [
+       "can",
+       "the",
+       "to",
+       "we"
+      ],
+      "predicted": "R1",
+      "reply": "We'll find another slot and send a new invite.",
+      "correct": true
+     },
+     {
+      "id": "T6",
+      "text": "I'll join you tomorrow.",
+      "intent": "R4",
+      "nearest_example": "E10",
+      "nearest_text": "I will attend tomorrow.",
+      "similarity": 0.143,
+      "shared_words": [
+       "tomorrow"
+      ],
+      "predicted": "R4",
+      "reply": "Great, see you there.",
+      "correct": true
+     },
+     {
+      "id": "T7",
+      "text": "What's the location?",
+      "intent": "R3",
+      "nearest_example": "E9",
+      "nearest_text": "What's the meeting link?",
+      "similarity": 0.4,
+      "shared_words": [
+       "the",
+       "whats"
+      ],
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "T8",
+      "text": "Sorry to bother you — what's the meeting link?",
+      "intent": "R3",
+      "nearest_example": "E9",
+      "nearest_text": "What's the meeting link?",
+      "similarity": 0.5,
+      "shared_words": [
+       "link",
+       "meeting",
+       "the",
+       "whats"
+      ],
+      "predicted": "R3",
+      "reply": "The meeting is in Room 2; the link is in the invite.",
+      "correct": true
+     },
+     {
+      "id": "T9",
+      "text": "I won't miss it this time.",
+      "intent": "R4",
+      "nearest_example": "E6",
+      "nearest_text": "Sorry, I won't be there tomorrow.",
+      "similarity": 0.2,
+      "shared_words": [
+       "i",
+       "wont"
+      ],
+      "predicted": "R2",
+      "reply": "Thanks for letting us know; we'll send you the notes.",
+      "correct": false
+     }
+    ],
+    "rule_matched_but_wrong": [
+     "T8"
+    ],
+    "rule_fallback_wrong": [
+     "T1",
+     "T5",
+     "T6",
+     "T9"
+    ]
+   },
+   "ablations": {
+    "drop_confirm": {
+     "pool_size": 9,
+     "correct": 7,
+     "total": 9,
+     "wrong": [
+      "T6",
+      "T9"
+     ]
+    },
+    "first_eight": {
+     "pool_size": 8,
+     "correct": 6,
+     "total": 9,
+     "wrong": [
+      "T6",
+      "T8",
+      "T9"
+     ]
+    },
+    "no_apology": {
+     "pool_size": 9,
+     "correct": 7,
+     "total": 9,
+     "wrong": [
+      "T2",
+      "T4"
+     ]
+    }
+   }
+  }
+ }
+}

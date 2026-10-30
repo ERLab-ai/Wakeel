@@ -1,0 +1,415 @@
+{
+ "schema": "wakeel.chapter-content.v0.1",
+ "chapter_id": "CH-1",
+ "title": {
+  "ar": "كيف نجعل الحاسوب يتعامل مع لغتنا؟",
+  "en": "How do we get a computer to handle our language?"
+ },
+ "reference_problem": {
+  "ar": "فريق صغير يستقبل رسائل عربية قصيرة عن الاجتماع الأسبوعي: طلب تأجيل، اعتذار عن حضور، سؤال عن المكان أو الرابط، وتأكيد حضور. نريد برنامجاً يرد على كل رسالة برد مناسب. نفس هذه الرسائل ستظل معنا حتى نهاية الفصل.",
+  "en": "A small team receives short English messages about its weekly meeting: requests to reschedule, apologies for not attending, questions about the room or the link, and confirmations. We want a program that replies appropriately to each message. The same messages stay with us to the end of this chapter."
+ },
+ "intents": [
+  {
+   "id": "R1",
+   "label_ar": "تأجيل أو تغيير موعد",
+   "label_en": "reschedule",
+   "response_ar": "سنحدد موعداً بديلاً ونرسل دعوة جديدة.",
+   "response_en": "We'll find another slot and send a new invite."
+  },
+  {
+   "id": "R2",
+   "label_ar": "اعتذار عن الحضور",
+   "label_en": "apology / cannot attend",
+   "response_ar": "شكراً لإبلاغنا، سنرسل لك ملخص الاجتماع.",
+   "response_en": "Thanks for letting us know; we'll send you the notes."
+  },
+  {
+   "id": "R3",
+   "label_ar": "سؤال عن المكان أو الرابط",
+   "label_en": "logistics question",
+   "response_ar": "الاجتماع في القاعة 2، والرابط في الدعوة.",
+   "response_en": "The meeting is in Room 2; the link is in the invite."
+  },
+  {
+   "id": "R4",
+   "label_ar": "تأكيد حضور",
+   "label_en": "confirmation",
+   "response_ar": "ممتاز، نراك هناك.",
+   "response_en": "Great, see you there."
+  }
+ ],
+ "fallback": {
+  "ar": "لم أفهم رسالتك. هل يمكنك ذكر الموضوع باختصار؟",
+  "en": "I didn't understand that. Could you say what it's about?"
+ },
+ "datasets": {
+  "ar": {
+   "rules": [
+    {
+     "id": "RULE-1",
+     "intent": "R1",
+     "keywords": [
+      "تأجيل",
+      "مؤجل",
+      "تأخير"
+     ]
+    },
+    {
+     "id": "RULE-2",
+     "intent": "R2",
+     "keywords": [
+      "أعتذر",
+      "لن أستطيع",
+      "لا أستطيع"
+     ]
+    },
+    {
+     "id": "RULE-3",
+     "intent": "R3",
+     "keywords": [
+      "أين",
+      "رابط",
+      "مكان",
+      "القاعة"
+     ]
+    },
+    {
+     "id": "RULE-4",
+     "intent": "R4",
+     "keywords": [
+      "سأحضر",
+      "سأكون هناك",
+      "أؤكد حضوري"
+     ]
+    }
+   ],
+   "seed": [
+    {
+     "id": "S1",
+     "intent": "R1",
+     "text": "أود تأجيل اجتماع الغد إلى الأسبوع القادم."
+    },
+    {
+     "id": "S2",
+     "intent": "R2",
+     "text": "أعتذر، لن أستطيع الحضور غداً."
+    },
+    {
+     "id": "S3",
+     "intent": "R3",
+     "text": "أين سيعقد الاجتماع؟"
+    },
+    {
+     "id": "S4",
+     "intent": "R4",
+     "text": "سأحضر الاجتماع في موعده."
+    },
+    {
+     "id": "S5",
+     "intent": "R1",
+     "text": "هل يمكن تأجيل الموعد نصف ساعة؟"
+    },
+    {
+     "id": "S6",
+     "intent": "R3",
+     "text": "ما رابط الاجتماع؟"
+    }
+   ],
+   "tests": [
+    {
+     "id": "T1",
+     "intent": "R1",
+     "text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟"
+    },
+    {
+     "id": "T2",
+     "intent": "R2",
+     "text": "أعتذر عن حضور اجتماع الغد."
+    },
+    {
+     "id": "T3",
+     "intent": "R3",
+     "text": "أين القاعة؟"
+    },
+    {
+     "id": "T4",
+     "intent": "R2",
+     "text": "لن أستطيع المجيء، أرجو أن تعذرني."
+    },
+    {
+     "id": "T5",
+     "intent": "R1",
+     "text": "أيمكن نقل الموعد إلى وقت لاحق؟"
+    },
+    {
+     "id": "T6",
+     "intent": "R4",
+     "text": "سأكون معكم غداً بإذن الله."
+    },
+    {
+     "id": "T7",
+     "intent": "R3",
+     "text": "ما هو مكان الانعقاد؟"
+    },
+    {
+     "id": "T8",
+     "intent": "R3",
+     "text": "أعتذر عن الإزعاج، ما رابط الاجتماع؟"
+    },
+    {
+     "id": "T9",
+     "intent": "R4",
+     "text": "لن أتخلف عن الحضور هذه المرة."
+    }
+   ],
+   "examples": [
+    {
+     "id": "E1",
+     "intent": "R1",
+     "text": "هل يمكن تأجيل الاجتماع إلى الغد؟"
+    },
+    {
+     "id": "E2",
+     "intent": "R1",
+     "text": "أحتاج موعداً آخر للاجتماع."
+    },
+    {
+     "id": "E3",
+     "intent": "R1",
+     "text": "هل نؤجل الاجتماع؟"
+    },
+    {
+     "id": "E4",
+     "intent": "R2",
+     "text": "أعتذر، لن أستطيع الحضور."
+    },
+    {
+     "id": "E5",
+     "intent": "R2",
+     "text": "معذرة، لا أستطيع المجيء."
+    },
+    {
+     "id": "E6",
+     "intent": "R2",
+     "text": "أعتذر عن الحضور غداً."
+    },
+    {
+     "id": "E7",
+     "intent": "R3",
+     "text": "أين سيعقد الاجتماع؟"
+    },
+    {
+     "id": "E8",
+     "intent": "R3",
+     "text": "ما مكان الاجتماع؟"
+    },
+    {
+     "id": "E9",
+     "intent": "R3",
+     "text": "ما رابط الاجتماع؟"
+    },
+    {
+     "id": "E10",
+     "intent": "R4",
+     "text": "سأحضر الاجتماع غداً."
+    },
+    {
+     "id": "E11",
+     "intent": "R4",
+     "text": "أؤكد حضوري."
+    },
+    {
+     "id": "E12",
+     "intent": "R4",
+     "text": "سأكون هناك."
+    }
+   ]
+  },
+  "en": {
+   "rules": [
+    {
+     "id": "RULE-1",
+     "intent": "R1",
+     "keywords": [
+      "postpone",
+      "reschedule",
+      "push the meeting",
+      "delay"
+     ]
+    },
+    {
+     "id": "RULE-2",
+     "intent": "R2",
+     "keywords": [
+      "sorry",
+      "can't attend",
+      "cannot attend",
+      "apolog"
+     ]
+    },
+    {
+     "id": "RULE-3",
+     "intent": "R3",
+     "keywords": [
+      "where",
+      "link",
+      "room",
+      "location"
+     ]
+    },
+    {
+     "id": "RULE-4",
+     "intent": "R4",
+     "keywords": [
+      "i'll be there",
+      "i will attend",
+      "confirm",
+      "count me in"
+     ]
+    }
+   ],
+   "seed": [
+    {
+     "id": "S1",
+     "intent": "R1",
+     "text": "I'd like to postpone tomorrow's meeting to next week."
+    },
+    {
+     "id": "S2",
+     "intent": "R2",
+     "text": "Sorry, I can't attend tomorrow."
+    },
+    {
+     "id": "S3",
+     "intent": "R3",
+     "text": "Where is the meeting?"
+    },
+    {
+     "id": "S4",
+     "intent": "R4",
+     "text": "I'll be there on time."
+    },
+    {
+     "id": "S5",
+     "intent": "R1",
+     "text": "Can we push the meeting back by half an hour?"
+    },
+    {
+     "id": "S6",
+     "intent": "R3",
+     "text": "What's the meeting link?"
+    }
+   ],
+   "tests": [
+    {
+     "id": "T1",
+     "intent": "R1",
+     "text": "Could we move the meeting to another day?"
+    },
+    {
+     "id": "T2",
+     "intent": "R2",
+     "text": "I'm sorry, I won't be able to attend."
+    },
+    {
+     "id": "T3",
+     "intent": "R3",
+     "text": "Which room is it in?"
+    },
+    {
+     "id": "T4",
+     "intent": "R2",
+     "text": "I can't make it tomorrow, apologies."
+    },
+    {
+     "id": "T5",
+     "intent": "R1",
+     "text": "Can we shift the time to later?"
+    },
+    {
+     "id": "T6",
+     "intent": "R4",
+     "text": "I'll join you tomorrow."
+    },
+    {
+     "id": "T7",
+     "intent": "R3",
+     "text": "What's the location?"
+    },
+    {
+     "id": "T8",
+     "intent": "R3",
+     "text": "Sorry to bother you — what's the meeting link?"
+    },
+    {
+     "id": "T9",
+     "intent": "R4",
+     "text": "I won't miss it this time."
+    }
+   ],
+   "examples": [
+    {
+     "id": "E1",
+     "intent": "R1",
+     "text": "Can we postpone the meeting to tomorrow?"
+    },
+    {
+     "id": "E2",
+     "intent": "R1",
+     "text": "I need another slot for the meeting."
+    },
+    {
+     "id": "E3",
+     "intent": "R1",
+     "text": "Should we delay the meeting?"
+    },
+    {
+     "id": "E4",
+     "intent": "R2",
+     "text": "Sorry, I can't attend."
+    },
+    {
+     "id": "E5",
+     "intent": "R2",
+     "text": "I cannot attend, apologies."
+    },
+    {
+     "id": "E6",
+     "intent": "R2",
+     "text": "Sorry, I won't be there tomorrow."
+    },
+    {
+     "id": "E7",
+     "intent": "R3",
+     "text": "Where is the meeting?"
+    },
+    {
+     "id": "E8",
+     "intent": "R3",
+     "text": "Which room is the meeting in?"
+    },
+    {
+     "id": "E9",
+     "intent": "R3",
+     "text": "What's the meeting link?"
+    },
+    {
+     "id": "E10",
+     "intent": "R4",
+     "text": "I will attend tomorrow."
+    },
+    {
+     "id": "E11",
+     "intent": "R4",
+     "text": "Count me in, I'll be there."
+    },
+    {
+     "id": "E12",
+     "intent": "R4",
+     "text": "Confirming my attendance."
+    }
+   ]
+  }
+ }
+}

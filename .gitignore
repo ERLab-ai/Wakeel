@@ -1,0 +1,8 @@
+# Generated outputs; scientific source is tracked only from curated original bytes
+baseline/v0.21.3/out/
+__pycache__/
+*.pyc
+.venv/
+venv/
+import-verification.json
+*.zip

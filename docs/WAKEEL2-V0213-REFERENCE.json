@@ -1,0 +1,22 @@
+{
+  "schema": "wakeel2-canonical-source-reference/v1",
+  "version": "v0.21.3",
+  "canonical_pack": "WAKEEL-2-V0.21.3-SOURCE-PACK.zip",
+  "sha256": "a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659",
+  "archive_entries": 149,
+  "manifest_entries": 148,
+  "uncompressed_bytes": 4594746,
+  "input_fingerprint": "c2c989ffcdd54ca7851d0aa8bb37813c2ea283d13b6dc41196617f5de22b18a6",
+  "chapters": 9,
+  "stations": 44,
+  "topics": 389,
+  "relations": 125,
+  "local_validation": {
+    "validator": "PASS",
+    "atlas": "PASS",
+    "chapter8": "178/178 PASS",
+    "chapter9": "107/107 PASS"
+  },
+  "imported_to_github": false,
+  "full_publication_review_required": true
+}

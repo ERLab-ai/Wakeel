@@ -1,0 +1,500 @@
+{
+ "generated_from": "content/chapter-02/examples.json",
+ "pinned_tokenizer": "edu-tok-0.1",
+ "normalization_ar": "لا نزيل التشكيل ولا نوحّده؛ الحرف المشكول يبقى ضمن كلمته",
+ "sections": {
+  "template": {
+   "ar": {
+    "T1": {
+     "slots": {
+      "الموضوع": "اللقاء",
+      "البديل": "نقله إلى يوم آخر"
+     },
+     "composed": "عذراً على الإزعاج، بخصوص «اللقاء» نستطيع نقله إلى يوم آخر، وسنرسل دعوة محدثة.",
+     "status": "composed"
+    },
+    "T5": {
+     "slots": {
+      "الموضوع": "الموعد",
+      "البديل": "نقله إلى وقت لاحق"
+     },
+     "composed": "عذراً على الإزعاج، بخصوص «الموعد» نستطيع نقله إلى وقت لاحق، وسنرسل دعوة محدثة.",
+     "status": "composed"
+    },
+    "T3": {
+     "slots": {
+      "الموضوع": "الاجتماع",
+      "البديل": null
+     },
+     "composed": null,
+     "status": "فشل: لا قيمة لـ ['البديل']"
+    }
+   },
+   "en": {
+    "T1": {
+     "slots": {
+      "topic": "the meeting",
+      "alternative": "move it to another day"
+     },
+     "composed": "Sorry for the bother — regarding \"the meeting\", we can move it to another day, and we'll send an updated invite.",
+     "status": "composed"
+    },
+    "T5": {
+     "slots": {
+      "topic": "the time",
+      "alternative": "shift it later"
+     },
+     "composed": "Sorry for the bother — regarding \"the time\", we can shift it later, and we'll send an updated invite.",
+     "status": "composed"
+    },
+    "T3": {
+     "slots": {
+      "topic": "the meeting",
+      "alternative": null
+     },
+     "composed": null,
+     "status": "فشل: لا قيمة لـ ['alternative']"
+    }
+   }
+  },
+  "units": {
+   "ar": {
+    "ws_words": 5,
+    "characters_incl_punct": 28,
+    "edu_units": 8,
+    "tokens_ws": [
+     "وسيشاركهم",
+     "القرار",
+     "في",
+     "اجتماع",
+     "الغد."
+    ],
+    "tokens_edu": [
+     "و",
+     "سيشاركهم",
+     "ال",
+     "قرار",
+     "في",
+     "اجتماع",
+     "ال",
+     "غد"
+    ]
+   },
+   "en": {
+    "ws_words": 5,
+    "characters_incl_punct": 21,
+    "apostrophe_split_units": 6,
+    "tokens_ws": [
+     "I",
+     "won't",
+     "miss",
+     "the",
+     "meeting."
+    ],
+    "tokens_units": [
+     "I",
+     "won",
+     "t",
+     "miss",
+     "the",
+     "meeting."
+    ]
+   }
+  },
+  "tokenization": {
+   "ar": {
+    "text": "وسيشاركهم القرار في اجتماع الغد.",
+    "ws_keep_count": 5,
+    "ws_keep_tokens": [
+     "وسيشاركهم",
+     "القرار",
+     "في",
+     "اجتماع",
+     "الغد."
+    ],
+    "edu_count": 8,
+    "edu_tokens": [
+     "و",
+     "سيشاركهم",
+     "ال",
+     "قرار",
+     "في",
+     "اجتماع",
+     "ال",
+     "غد"
+    ]
+   },
+   "en": {
+    "text": "I'll share the decision at tomorrow's meeting.",
+    "ws_keep_count": 7,
+    "ws_keep_tokens": [
+     "I'll",
+     "share",
+     "the",
+     "decision",
+     "at",
+     "tomorrow's",
+     "meeting."
+    ],
+    "edu_count": 9,
+    "edu_tokens": [
+     "I",
+     "ll",
+     "share",
+     "the",
+     "decision",
+     "at",
+     "tomorrow",
+     "s",
+     "meeting"
+    ]
+   }
+  },
+  "vocab": {
+   "ar": {
+    "built_with": "edu-tok-0.1",
+    "unk_id": 0,
+    "top12_with_ids": [
+     {
+      "token": "ال",
+      "id": 1
+     },
+     {
+      "token": "اجتماع",
+      "id": 2
+     },
+     {
+      "token": "هل",
+      "id": 3
+     },
+     {
+      "token": "أعتذر",
+      "id": 4
+     },
+     {
+      "token": "أستطيع",
+      "id": 5
+     },
+     {
+      "token": "حضور",
+      "id": 6
+     },
+     {
+      "token": "غداً",
+      "id": 7
+     },
+     {
+      "token": "ما",
+      "id": 8
+     },
+     {
+      "token": "يمكن",
+      "id": 9
+     },
+     {
+      "token": "تأجيل",
+      "id": 10
+     },
+     {
+      "token": "إلى",
+      "id": 11
+     },
+     {
+      "token": "غد",
+      "id": 12
+     }
+    ],
+    "t1_text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+    "t1_tokens": [
+     "هل",
+     "يمكننا",
+     "إرجاء",
+     "ال",
+     "لقاء",
+     "إلى",
+     "يوم",
+     "آخر"
+    ],
+    "t1_encoding": [
+     {
+      "token": "هل",
+      "id": 3,
+      "status": "known"
+     },
+     {
+      "token": "يمكننا",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "إرجاء",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "ال",
+      "id": 1,
+      "status": "known"
+     },
+     {
+      "token": "لقاء",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "إلى",
+      "id": 11,
+      "status": "known"
+     },
+     {
+      "token": "يوم",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "آخر",
+      "id": 0,
+      "status": "<unk>"
+     }
+    ],
+    "coverage": {
+     "vocab_8": {
+      "vocab_size": 8,
+      "unk_id": 0,
+      "total_tokens": 58,
+      "covered": 22,
+      "coverage": 0.379,
+      "unknown_sample": [
+       "آخر",
+       "أتخلف",
+       "أرجو",
+       "أن",
+       "أيمكن",
+       "أين",
+       "إرجاء",
+       "إزعاج",
+       "إلى",
+       "انعقاد",
+       "بإذن",
+       "تعذرني"
+      ]
+     },
+     "vocab_12": {
+      "vocab_size": 12,
+      "unk_id": 0,
+      "total_tokens": 58,
+      "covered": 25,
+      "coverage": 0.431,
+      "unknown_sample": [
+       "آخر",
+       "أتخلف",
+       "أرجو",
+       "أن",
+       "أيمكن",
+       "أين",
+       "إرجاء",
+       "إزعاج",
+       "انعقاد",
+       "بإذن",
+       "تعذرني",
+       "رابط"
+      ]
+     },
+     "vocab_20": {
+      "vocab_size": 20,
+      "unk_id": 0,
+      "total_tokens": 58,
+      "covered": 28,
+      "coverage": 0.483,
+      "unknown_sample": [
+       "أتخلف",
+       "أرجو",
+       "أن",
+       "أيمكن",
+       "أين",
+       "إرجاء",
+       "إزعاج",
+       "انعقاد",
+       "بإذن",
+       "تعذرني",
+       "رابط",
+       "سأكون"
+      ]
+     }
+    }
+   },
+   "en": {
+    "built_with": "edu-tok-0.1",
+    "unk_id": 0,
+    "top12_with_ids": [
+     {
+      "token": "the",
+      "id": 1
+     },
+     {
+      "token": "meeting",
+      "id": 2
+     },
+     {
+      "token": "i",
+      "id": 3
+     },
+     {
+      "token": "tomorrow",
+      "id": 4
+     },
+     {
+      "token": "attend",
+      "id": 5
+     },
+     {
+      "token": "can",
+      "id": 6
+     },
+     {
+      "token": "we",
+      "id": 7
+     },
+     {
+      "token": "sorry",
+      "id": 8
+     },
+     {
+      "token": "t",
+      "id": 9
+     },
+     {
+      "token": "be",
+      "id": 10
+     },
+     {
+      "token": "there",
+      "id": 11
+     },
+     {
+      "token": "is",
+      "id": 12
+     }
+    ],
+    "t1_text": "Could we move the meeting to another day?",
+    "t1_tokens": [
+     "could",
+     "we",
+     "move",
+     "the",
+     "meeting",
+     "to",
+     "another",
+     "day"
+    ],
+    "t1_encoding": [
+     {
+      "token": "could",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "we",
+      "id": 7,
+      "status": "known"
+     },
+     {
+      "token": "move",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "the",
+      "id": 1,
+      "status": "known"
+     },
+     {
+      "token": "meeting",
+      "id": 2,
+      "status": "known"
+     },
+     {
+      "token": "to",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "another",
+      "id": 0,
+      "status": "<unk>"
+     },
+     {
+      "token": "day",
+      "id": 0,
+      "status": "<unk>"
+     }
+    ],
+    "coverage": {
+     "vocab_8": {
+      "vocab_size": 8,
+      "unk_id": 0,
+      "total_tokens": 62,
+      "covered": 20,
+      "coverage": 0.323,
+      "unknown_sample": [
+       "able",
+       "another",
+       "apologies",
+       "be",
+       "bother",
+       "could",
+       "day",
+       "in",
+       "is",
+       "it",
+       "join",
+       "later"
+      ]
+     },
+     "vocab_12": {
+      "vocab_size": 12,
+      "unk_id": 0,
+      "total_tokens": 62,
+      "covered": 25,
+      "coverage": 0.403,
+      "unknown_sample": [
+       "able",
+       "another",
+       "apologies",
+       "bother",
+       "could",
+       "day",
+       "in",
+       "it",
+       "join",
+       "later",
+       "link",
+       "ll"
+      ]
+     },
+     "vocab_20": {
+      "vocab_size": 20,
+      "unk_id": 0,
+      "total_tokens": 62,
+      "covered": 31,
+      "coverage": 0.5,
+      "unknown_sample": [
+       "able",
+       "apologies",
+       "bother",
+       "could",
+       "day",
+       "it",
+       "join",
+       "later",
+       "link",
+       "ll",
+       "location",
+       "m"
+      ]
+     }
+    }
+   }
+  }
+ }
+}

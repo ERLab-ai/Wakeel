@@ -1,0 +1,130 @@
+{
+ "schema": "wakeel.chapter-content.v0.3",
+ "chapter_id": "CH-3",
+ "representation": {
+  "level": "character",
+  "start_symbol": "<s>",
+  "unk": "<unk>",
+  "unk_policy": "أي محرف لم يظهر في تدريب المحارف يرمَّز <unk>؛ ويُسجل عدد حالاته",
+  "normalization_ar": "لا نزيل التشكيل ولا نوحّد الهمزات؛ المحارف كما كُتبت",
+  "split_rule": "التقسيم على مستوى الرسائل قبل التقطيع؛ لا تقسيم سلسلة رموز عشوائي"
+ },
+ "split_targets": {
+  "train": 700,
+  "val": 150,
+  "test": 150
+ },
+ "smoothing_grid": [
+  0.1,
+  0.5,
+  1.0
+ ],
+ "seed": 42,
+ "generation": {
+  "prompt_chars": 3,
+  "max_chars": 120,
+  "stop_chars": [
+   ".",
+   "؟"
+  ]
+ },
+ "neural": {
+  "epochs": 200,
+  "lr": 0.5,
+  "init_seed": 42
+ },
+ "corpus": {
+  "ar": {
+   "train": [
+    "أود تأجيل اجتماع الغد إلى الأسبوع القادم.",
+    "أعتذر، لن أستطيع الحضور غداً.",
+    "أين سيعقد الاجتماع؟",
+    "سأحضر الاجتماع في موعده.",
+    "هل يمكن تأجيل الموعد نصف ساعة؟",
+    "ما رابط الاجتماع؟",
+    "هل يمكن تأجيل الاجتماع إلى الغد؟",
+    "أحتاج موعداً آخر للاجتماع.",
+    "هل نؤجل الاجتماع؟",
+    "أعتذر، لن أستطيع الحضور.",
+    "معذرة، لا أستطيع المجيء.",
+    "أعتذر عن الحضور غداً.",
+    "أين سيعقد الاجتماع؟",
+    "ما مكان الاجتماع؟",
+    "ما رابط الاجتماع؟",
+    "سأحضر الاجتماع غداً.",
+    "أؤكد حضوري.",
+    "سأكون هناك.",
+    "هل يمكن تأجيل الاجتماع إلى يوم الخميس بدلاً من الغد؟",
+    "أعتذر، لدي التزام آخر في نفس الوقت.",
+    "لا أستطيع حضور الاجتماع، أرسل لي الملخص.",
+    "سأنضم إلى الاجتماع متأخراً قليلاً.",
+    "أين نقوم الاجتماع هذا الأسبوع؟",
+    "هل الرابط نفسه لكل الاجتماعات؟",
+    "سأتأكد من حضوري وأؤكد لك.",
+    "بما أن الموعد لا يناسبني، هل ننقله؟",
+    "أؤكد حضوري في الاجتماع الأسبوعي."
+   ],
+   "val": [
+    "أعتذر عن التأخير، أدخل الاجتماع الآن.",
+    "هل يمكننا إضافة نقطة إلى جدول الأعمال؟",
+    "من سيرأس الاجتماع هذه المرة؟",
+    "سأشارك في الاجتماع عبر الرابط."
+   ],
+   "test": [
+    "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+    "أعتذر عن حضور اجتماع الغد.",
+    "أين القاعة؟",
+    "لن أستطيع المجيء، أرجو أن تعذرني.",
+    "أيمكن نقل الموعد إلى وقت لاحق؟",
+    "سأكون معكم غداً بإذن الله.",
+    "ما هو مكان الانعقاد؟",
+    "أعتذر عن الإزعاج، ما رابط الاجتماع؟",
+    "لن أتخلف عن الحضور هذه المرة."
+   ]
+  },
+  "en": {
+   "train": [
+    "I'd like to postpone tomorrow's meeting to next week.",
+    "Sorry, I can't attend tomorrow.",
+    "Where is the meeting?",
+    "I'll be there on time.",
+    "Can we push the meeting back by half an hour?",
+    "What's the meeting link?",
+    "Can we postpone the meeting to tomorrow?",
+    "I need another slot for the meeting.",
+    "Should we delay the meeting?",
+    "Sorry, I can't attend.",
+    "I cannot attend, apologies.",
+    "Sorry, I won't be there tomorrow.",
+    "Where is the meeting?",
+    "Which room is the meeting in?",
+    "What's the meeting link?",
+    "I will attend tomorrow.",
+    "Count me in, I'll be there.",
+    "Confirming my attendance.",
+    "Can we postpone Thursday's meeting to Friday?",
+    "Sorry, something came up and I can't join.",
+    "I'll join late, please start without me.",
+    "Where should we meet this time?",
+    "Is the meeting link the same every week?"
+   ],
+   "val": [
+    "Apologies for the delay; I'm joining the meeting now.",
+    "Can we add an item to the agenda?",
+    "Who will lead the meeting this time?",
+    "I'll attend the meeting through the link."
+   ],
+   "test": [
+    "Could we move the meeting to another day?",
+    "I'm sorry, I won't be able to attend.",
+    "Which room is it in?",
+    "I can't make it tomorrow, apologies.",
+    "Can we shift the time to later?",
+    "I'll join you tomorrow.",
+    "What's the location?",
+    "Sorry to bother you — what's the meeting link?",
+    "I won't miss it this time."
+   ]
+  }
+ }
+}

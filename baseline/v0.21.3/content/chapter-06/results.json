@@ -1,0 +1,925 @@
+{
+ "simulator_version": "simulate_chapter6-3.2",
+ "input_hash": "08214db672a50483034616124218b511347171fcecaf41e96cc7406ebe8441ae",
+ "languages": {
+  "ar": {
+   "rnn": {
+    "seeds": {
+     "42": {
+      "val_nll": 3.1182,
+      "test_nll": 3.1877,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.6511
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.2495
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.1467
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.1174
+       },
+       {
+        "epoch": 100,
+        "train_nll": 3.1033
+       }
+      ]
+     },
+     "43": {
+      "val_nll": 3.1294,
+      "test_nll": 3.1886,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.6384
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.2062
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.1356
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.1108
+       },
+       {
+        "epoch": 100,
+        "train_nll": 3.0997
+       }
+      ]
+     },
+     "44": {
+      "val_nll": 3.1228,
+      "test_nll": 3.1935,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.6351
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.2326
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.1405
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.1137
+       },
+       {
+        "epoch": 100,
+        "train_nll": 3.1004
+       }
+      ]
+     }
+    },
+    "mean_val": 3.1235,
+    "mean_test": 3.1899,
+    "params": 1358,
+    "generation": {
+     "text": "لجمف يلل تاوعمتأر معلاينلآج .فليااجء جؤعتمقاملباغ أ لعكلجر  ",
+     "model_init_seed": 42,
+     "sampling_seed": 42,
+     "prompt": "أو",
+     "start_symbols": 1
+    }
+   },
+   "units": {
+    "train_msgs": 27,
+    "val_msgs": 4,
+    "test_msgs": 9
+   },
+   "vocab": {
+    "context": 39,
+    "output": 38
+   },
+   "vocab_leak_check": {
+    "vocab_source": "train_only",
+    "unseen_chars_in_val_test": 1,
+    "encoded_as": "<unk>"
+   }
+  },
+  "en": {
+   "rnn": {
+    "seeds": {
+     "42": {
+      "val_nll": 2.923,
+      "test_nll": 2.9957,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.5867
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.1131
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.0299
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.0052
+       },
+       {
+        "epoch": 100,
+        "train_nll": 2.9935
+       }
+      ]
+     },
+     "43": {
+      "val_nll": 2.9313,
+      "test_nll": 2.9959,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.5871
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.1735
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.0456
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.0106
+       },
+       {
+        "epoch": 100,
+        "train_nll": 2.9954
+       }
+      ]
+     },
+     "44": {
+      "val_nll": 2.9331,
+      "test_nll": 2.997,
+      "curve": [
+       {
+        "epoch": 1,
+        "train_nll": 3.5794
+       },
+       {
+        "epoch": 25,
+        "train_nll": 3.1195
+       },
+       {
+        "epoch": 50,
+        "train_nll": 3.0348
+       },
+       {
+        "epoch": 75,
+        "train_nll": 3.007
+       },
+       {
+        "epoch": 100,
+        "train_nll": 2.9941
+       }
+      ]
+     }
+    },
+    "mean_val": 2.9291,
+    "mean_test": 2.9962,
+    "params": 1308,
+    "generation": {
+     "text": "rgtn wor getnsfIj smoewtr.g  noweeh. hInesoesrecn ? rnorgk  ",
+     "model_init_seed": 42,
+     "sampling_seed": 42,
+     "prompt": "I'",
+     "start_symbols": 1
+    }
+   },
+   "units": {
+    "train_msgs": 23,
+    "val_msgs": 4,
+    "test_msgs": 9
+   },
+   "vocab": {
+    "context": 37,
+    "output": 36
+   },
+   "vocab_leak_check": {
+    "vocab_source": "train_only",
+    "unseen_chars_in_val_test": 3,
+    "encoded_as": "<unk>"
+   }
+  }
+ },
+ "mixed_length_model": {
+  "purpose": "نموذج واحد يُدرَّب على مزيج أطوال ويُقاس داخل مجاله وخارجه",
+  "train_delays": [
+   2,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "holdout_delays": [
+   16
+  ],
+  "train_per_class_per_delay": 60,
+  "test_per_class": 40,
+  "epochs": 300,
+  "lr": 0.3,
+  "seeds": [
+   42,
+   43,
+   44
+  ],
+  "per_seed": {
+   "42": {
+    "delay_2": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0061
+    },
+    "delay_4": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    },
+    "delay_5": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    },
+    "delay_6": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    },
+    "delay_7": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    },
+    "delay_8": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    },
+    "delay_16": {
+     "in_domain": false,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0054
+    }
+   },
+   "43": {
+    "delay_2": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9519
+    },
+    "delay_4": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    },
+    "delay_5": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    },
+    "delay_6": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    },
+    "delay_7": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    },
+    "delay_8": {
+     "in_domain": true,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    },
+    "delay_16": {
+     "in_domain": false,
+     "binary": 0.5,
+     "argmax": 0.5,
+     "test_nll": 0.9526
+    }
+   },
+   "44": {
+    "delay_2": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0033
+    },
+    "delay_4": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0024
+    },
+    "delay_5": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0023
+    },
+    "delay_6": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0023
+    },
+    "delay_7": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0023
+    },
+    "delay_8": {
+     "in_domain": true,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0023
+    },
+    "delay_16": {
+     "in_domain": false,
+     "binary": 1.0,
+     "argmax": 1.0,
+     "test_nll": 0.0023
+    }
+   }
+  },
+  "means": {
+   "delay_2": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3204
+   },
+   "delay_4": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   },
+   "delay_5": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   },
+   "delay_6": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   },
+   "delay_7": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   },
+   "delay_8": {
+    "in_domain": true,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   },
+   "delay_16": {
+    "in_domain": false,
+    "binary_mean": 0.833,
+    "per_seed_binary": [
+     1.0,
+     0.5,
+     1.0
+    ],
+    "test_nll_mean": 0.3201
+   }
+  }
+ },
+ "memory_probe": {
+  "task": "استرجاع الحرف الأول بعد حشو بطول delay ثم ؟",
+  "eval_position": "التنبؤ بعد استهلاك كل رموز البادئة بما فيها ؟ (predict_next_logits) — مطابق لموضع هدف التدريب",
+  "loss_masking": "الخسارة على موضع الإجابة فقط (بعد ؟) — الحشو عشوائي",
+  "test_dedup": "أمثلة الاختبار بلا تطابق حرفي لمسار الحشو مع أي تسلسل تدريب (الفئتان معاً)؛ عدّاد الرفض مسجل",
+  "classes": [
+   "أ",
+   "م"
+  ],
+  "filler_alphabet_size": 27,
+  "train_per_class": 120,
+  "test_per_class": 40,
+  "epochs": 300,
+  "lr": 0.3,
+  "seeds": [
+   42,
+   43,
+   44
+  ],
+  "delays": [
+   2,
+   4,
+   5,
+   6,
+   7,
+   8,
+   16
+  ],
+  "random_answer_nll": 3.434,
+  "delays_data": {
+   "delay_2": {
+    "n_test": 80,
+    "accuracy_argmax": 1.0,
+    "accuracy_binary": 1.0,
+    "accuracy_class_A_binary": 1.0,
+    "accuracy_class_B_binary": 1.0,
+    "per_seed_binary": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "per_seed_argmax": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "test_answer_nll_mean": 0.0016,
+    "test_answer_nll_std": 0.0001,
+    "per_seed_test_nll": [
+     0.0015,
+     0.0017,
+     0.0017
+    ],
+    "per_seed_test_nll_a": [
+     0.0014,
+     0.0018,
+     0.0016
+    ],
+    "per_seed_test_nll_b": [
+     0.0016,
+     0.0015,
+     0.0018
+    ],
+    "untrained_baseline_binary": 0.571,
+    "untrained_baseline_argmax": 0.083,
+    "untrained_baseline_test_nll": 3.427,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 70,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.4279
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.5582
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.0084
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.0026
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.0016
+     }
+    ]
+   },
+   "delay_4": {
+    "n_test": 80,
+    "accuracy_argmax": 1.0,
+    "accuracy_binary": 1.0,
+    "accuracy_class_A_binary": 1.0,
+    "accuracy_class_B_binary": 1.0,
+    "per_seed_binary": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "per_seed_argmax": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "test_answer_nll_mean": 0.003,
+    "test_answer_nll_std": 0.0007,
+    "per_seed_test_nll": [
+     0.0022,
+     0.0039,
+     0.003
+    ],
+    "per_seed_test_nll_a": [
+     0.0022,
+     0.0044,
+     0.004
+    ],
+    "per_seed_test_nll_b": [
+     0.0022,
+     0.0034,
+     0.002
+    ],
+    "untrained_baseline_binary": 0.513,
+    "untrained_baseline_argmax": 0.067,
+    "untrained_baseline_test_nll": 3.429,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.429
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7633
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.8837
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.9356
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.0031
+     }
+    ]
+   },
+   "delay_5": {
+    "n_test": 80,
+    "accuracy_argmax": 0.667,
+    "accuracy_binary": 0.667,
+    "accuracy_class_A_binary": 0.667,
+    "accuracy_class_B_binary": 0.667,
+    "per_seed_binary": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "per_seed_argmax": [
+     0.5,
+     0.5,
+     1.0
+    ],
+    "test_answer_nll_mean": 0.5234,
+    "test_answer_nll_std": 0.3677,
+    "per_seed_test_nll": [
+     0.8251,
+     0.7393,
+     0.0058
+    ],
+    "per_seed_test_nll_a": [
+     0.3076,
+     1.036,
+     0.0053
+    ],
+    "per_seed_test_nll_b": [
+     1.3427,
+     0.4426,
+     0.0062
+    ],
+    "untrained_baseline_binary": 0.517,
+    "untrained_baseline_argmax": 0.079,
+    "untrained_baseline_test_nll": 3.432,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.43
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7893
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.7219
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.8134
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.5262
+     }
+    ]
+   },
+   "delay_6": {
+    "n_test": 80,
+    "accuracy_argmax": 0.5,
+    "accuracy_binary": 0.5,
+    "accuracy_class_A_binary": 0.667,
+    "accuracy_class_B_binary": 0.333,
+    "per_seed_binary": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "per_seed_argmax": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "test_answer_nll_mean": 0.7763,
+    "test_answer_nll_std": 0.0931,
+    "per_seed_test_nll": [
+     0.7021,
+     0.7191,
+     0.9076
+    ],
+    "per_seed_test_nll_a": [
+     0.5813,
+     0.9472,
+     0.2428
+    ],
+    "per_seed_test_nll_b": [
+     0.8229,
+     0.491,
+     1.5723
+    ],
+    "untrained_baseline_binary": 0.496,
+    "untrained_baseline_argmax": 0.058,
+    "untrained_baseline_test_nll": 3.434,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.4315
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7864
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.7217
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.7064
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.7812
+     }
+    ]
+   },
+   "delay_7": {
+    "n_test": 80,
+    "accuracy_argmax": 0.5,
+    "accuracy_binary": 0.5,
+    "accuracy_class_A_binary": 0.667,
+    "accuracy_class_B_binary": 0.333,
+    "per_seed_binary": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "per_seed_argmax": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "test_answer_nll_mean": 0.7094,
+    "test_answer_nll_std": 0.0107,
+    "per_seed_test_nll": [
+     0.7022,
+     0.7015,
+     0.7245
+    ],
+    "per_seed_test_nll_a": [
+     0.5807,
+     0.818,
+     0.4798
+    ],
+    "per_seed_test_nll_b": [
+     0.8236,
+     0.5851,
+     0.9693
+    ],
+    "untrained_baseline_binary": 0.504,
+    "untrained_baseline_argmax": 0.079,
+    "untrained_baseline_test_nll": 3.433,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.4327
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7825
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.7209
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.7083
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.7061
+     }
+    ]
+   },
+   "delay_8": {
+    "n_test": 80,
+    "accuracy_argmax": 0.5,
+    "accuracy_binary": 0.5,
+    "accuracy_class_A_binary": 0.667,
+    "accuracy_class_B_binary": 0.333,
+    "per_seed_binary": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "per_seed_argmax": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "test_answer_nll_mean": 0.7103,
+    "test_answer_nll_std": 0.0113,
+    "per_seed_test_nll": [
+     0.7018,
+     0.7028,
+     0.7263
+    ],
+    "per_seed_test_nll_a": [
+     0.5832,
+     0.8295,
+     0.4846
+    ],
+    "per_seed_test_nll_b": [
+     0.8205,
+     0.5762,
+     0.968
+    ],
+    "untrained_baseline_binary": 0.504,
+    "untrained_baseline_argmax": 0.058,
+    "untrained_baseline_test_nll": 3.435,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.4343
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7844
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.7205
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.7072
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.7124
+     }
+    ]
+   },
+   "delay_16": {
+    "n_test": 80,
+    "accuracy_argmax": 0.5,
+    "accuracy_binary": 0.5,
+    "accuracy_class_A_binary": 0.667,
+    "accuracy_class_B_binary": 0.333,
+    "per_seed_binary": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "per_seed_argmax": [
+     0.5,
+     0.5,
+     0.5
+    ],
+    "test_answer_nll_mean": 0.7024,
+    "test_answer_nll_std": 0.0003,
+    "per_seed_test_nll": [
+     0.7024,
+     0.7028,
+     0.702
+    ],
+    "per_seed_test_nll_a": [
+     0.5786,
+     0.5758,
+     0.8231
+    ],
+    "per_seed_test_nll_b": [
+     0.8263,
+     0.8299,
+     0.581
+    ],
+    "untrained_baseline_binary": 0.517,
+    "untrained_baseline_argmax": 0.037,
+    "untrained_baseline_test_nll": 3.444,
+    "oracle_binary_through_eval_path": 1.0,
+    "test_draws_rejected_as_collisions": 0,
+    "train_curve_mean": [
+     {
+      "epoch": 1,
+      "train_answer_nll": 3.4455
+     },
+     {
+      "epoch": 50,
+      "train_answer_nll": 0.7878
+     },
+     {
+      "epoch": 100,
+      "train_answer_nll": 0.7235
+     },
+     {
+      "epoch": 200,
+      "train_answer_nll": 0.7073
+     },
+     {
+      "epoch": 300,
+      "train_answer_nll": 0.7025
+     }
+    ]
+   }
+  },
+  "oracle_label_swap_control": 0.0,
+  "sanity_checks": [
+   "PASS: كل الفحوص سليمة"
+  ],
+  "note": "الدقة والخسارة عند موضع الإجابة (بعد استهلاك ؟) عبر مسار تقييم واحد؛ binary إجبار بين حرفي الفئة (خط الأساس ≈ 0.5)، argmax على كامل مساحة الإخراج (خط الأساس ≈ 1/V_out). test_answer_nll خسارة اختبار — منحنى train_curve_mean تدريب فقط."
+ },
+ "provenance": {
+  "input_hash": "08214db672a50483034616124218b511347171fcecaf41e96cc7406ebe8441ae",
+  "state_reset": "كل forward يبدأ h=0 — لا تسرب بين الرسائل",
+  "output_excludes_start": true,
+  "vocab_source": "train_only",
+  "synth_train_test": "سحبات منفصلة (بذور 1000+seed للتدريب و2000+seed للاختبار) مع استبعاد تطابقات مسار الحشو الحرفية",
+  "wh_init": "هوية 0.9 + ضجيج — يسهل تدفق التدرج عبر التأخير (وثّق بشفافية)",
+  "eval_fix": "v3.0: تصحيح off-by-one — التقييم بعد استهلاك ؟ (تدقيق مستقل v0.10)"
+ },
+ "total_seconds": 422.8
+}

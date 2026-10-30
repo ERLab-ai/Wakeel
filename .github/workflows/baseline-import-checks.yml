@@ -1,0 +1,45 @@
+name: Wakeel 2.0 baseline source safeguards
+on:
+  push:
+    branches: [chore/v0213-baseline-import-p0]
+  pull_request:
+jobs:
+  import-tooling:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest discover -s tools -p 'test_import_v0213.py' -v
+      - run: python -m py_compile tools/import_v0213.py tools/prepare_public_v0213.py tools/verify_public_v0213.py tools/publish_curated_v0213.py
+  scientific-baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Require actual 75-file baseline (no false green)
+        run: test -f baseline/v0.21.3/PUBLIC-MANIFEST.json
+      - name: Reject source drift and extra files
+        run: python tools/verify_public_v0213.py baseline/v0.21.3
+      - name: Reference dependencies
+        run: python -m pip install 'jsonschema>=4.18,<5' 'numpy==2.2.6'
+      - name: Scientific validation and selftest
+        working-directory: baseline/v0.21.3
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python tools/validate.py
+          python tools/selftest.py
+          python tools/build_atlas.py
+      - name: Scientific chapters 8 and 9
+        working-directory: baseline/v0.21.3
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'
+        run: |
+          python tools/test_chapter8.py
+          python tools/test_chapter9.py
+      - name: Confirm no frozen evidence changed
+        run: python tools/verify_public_v0213.py baseline/v0.21.3
