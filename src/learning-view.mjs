@@ -7,7 +7,9 @@ const labels={
  ar:{
   journeyTag:"المسار التعليمي المعتمد · 9 فصول · 44 محطة",
   journeyTitle:"رحلة بناء نموذج لغوي",
-  journeyIntro:"اختر محطة مباشرة أو تنقل بين الفصول. كل محطة تعرض النشاط العلمي المؤلف، ولا يُشترط إكمال المحطات السابقة.",
+  journeyIntro:"اختر محطة أو اقرأ الفصل العلمي كاملاً. يمكن دخول أي محطة مباشرة دون شرط مسبق.",
+  fullChapter:"اقرأ النص العلمي الكامل لهذا الفصل",
+  chapterSource:"النص الأصلي المعتمد · بصمة SHA-256",
   atlasTag:"سجل معرفي مفتوح · 389 موضوعاً",
   atlasTitle:"الأطلس المعرفي",
   atlasIntro:"ادخل أي موضوع مباشرة. الموضوع في السجل ليس درساً مؤلفاً بالضرورة؛ ستجد رابط محطته إن كان جزءاً من الرحلة.",
@@ -27,7 +29,9 @@ const labels={
  en:{
   journeyTag:"Approved learning journey · 9 chapters · 44 stations",
   journeyTitle:"Build a language model: the journey",
-  journeyIntro:"Open any station directly or browse chapters. Each station contains its authored scientific activity; prior completion is not required.",
+  journeyIntro:"Open any station or read its entire authored scientific chapter. Prior completion is never required.",
+  fullChapter:"Read the complete authored chapter",
+  chapterSource:"Approved source text · SHA-256",
   atlasTag:"Open knowledge registry · 389 topics",
   atlasTitle:"Knowledge atlas",
   atlasIntro:"Open any topic directly. A registry topic is not necessarily an authored lesson; a journey link is provided where one exists.",
@@ -49,7 +53,7 @@ const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className
 const append=(p,...children)=>{p.append(...children);return p;};
 const local=(object,l,field)=>object?.[field+"_"+l]||"";
 const link=(hash,txt,cls)=>{const a=el("a",cls,txt);a.href=hash;return a;};
-let catalog=null,language="ar",currentStation=1,currentTopic="FND-001",shown=40,search="";
+let catalog=null,language="ar",currentStation=1,currentTopic="FND-001",shown=40,search="",expandedChapter="";
 const getDict=()=>labels[language];
 function setStaticLanguage(){
  const d=getDict();
@@ -100,6 +104,24 @@ function renderJourney(){
      section.append(list);
    }else{section.append(el("p","",local(act,language,key)));}
    area.append(section);
+ }
+ // The HTML is rendered at build time from exactly 18 SHA-checked, approved
+ // Markdown chapters, with raw HTML disabled. Never insert user input here.
+ const approved=catalog.chapter_articles?.[chapter.id]?.[language];
+ if(approved && typeof approved.html==="string"){
+   const details=el("details","chapter-reader");
+   details.open=expandedChapter===chapter.id;
+   const summary=el("summary","chapter-reader-summary",d.fullChapter);
+   const sourceInfo=el("p","chapter-provenance",d.chapterSource+": "+approved.source_sha256);
+   const prose=el("div","chapter-prose");
+   prose.lang=language;
+   prose.dir=language==="ar"?"rtl":"ltr";
+   prose.innerHTML=approved.html;
+   details.append(summary,sourceInfo,prose);
+   details.addEventListener("toggle",()=>{
+      expandedChapter=details.open?chapter.id:"";
+   });
+   area.append(details);
  }
  const foot=append(el("div","learning-source"),el("span","",d.source+": "),el("span","",d.sourceInfo));
  area.append(foot);
@@ -164,9 +186,19 @@ function navigateHash(){
  const hash=decodeURIComponent(location.hash.slice(1));
  const station=/^station\/([1-9]\d?)$/.exec(hash);
  const topic=/^topic\/([A-Za-z0-9-]+)$/.exec(hash);
+ const chapterHash=/^chapter\/([1-9])$/.exec(hash);
  if(station){
   const num=Number(station[1]);
   if(num>=1 && num<=44){currentStation=num;renderJourney();document.getElementById("journey").scrollIntoView({block:"start"});}
+ }else if(chapterHash){
+  const index=Number(chapterHash[1]);
+  const chapter=catalog.chapters[index-1];
+  if(chapter){
+    currentStation=chapter.station_orders[0];
+    expandedChapter=chapter.id;
+    renderJourney();
+    document.getElementById("journey").scrollIntoView({block:"start"});
+  }
  }else if(topic){
   if(catalog.topics.some(t=>t.id===topic[1])){
    currentTopic=topic[1];renderTopic();renderTopicList();
@@ -188,7 +220,8 @@ export async function initLearning(){
   if(!response.ok)throw new Error("HTTP "+response.status);
   const data=await response.json();
   if(data.schema!=="wakeel-v022-learning-catalog/v1" || data.counts.stations!==44 ||
-     data.counts.topics!==389 || data.counts.chapters!==9 || data.counts.relations!==125)throw new Error("Invalid approved catalog");
+     data.counts.topics!==389 || data.counts.chapters!==9 || data.counts.relations!==125 ||
+     !data.chapter_articles || Object.keys(data.chapter_articles).length!==9)throw new Error("Invalid approved catalog");
   catalog=data;renderAll();navigateHash();
  }catch(err){
   console.error("Wakeel catalog loading failed",err);

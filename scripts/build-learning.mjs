@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync, cpSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 
 const source = "baseline/v0.21.3";
 const JOURNEY = source + "/data/WAKEEL-2-JOURNEYS-v0.3.json";
@@ -82,9 +83,39 @@ export function compileLearning(journeyData, registry, manifest) {
     chapters,stations,topics,domains,relations
   };
 }
+export function renderApprovedChapters(root=process.cwd()){
+  const isWindows=process.platform==="win32";
+  const executable=process.env.PYTHON || (isWindows ? "py" : "python3");
+  const args=[...(isWindows && executable==="py"?["-3"]:[]),"tools/render_chapters.py"];
+  const processResult=spawnSync(executable,args,{
+    cwd:root,encoding:"utf8",maxBuffer:6*1024*1024,windowsHide:true
+  });
+  demand(!processResult.error && processResult.status===0,
+    "approved chapter renderer failed: "+(processResult.error?.message || processResult.stderr || "unknown failure"));
+  let result;
+  try{ result=JSON.parse(processResult.stdout); }
+  catch{ throw new Error("Approved chapter renderer produced invalid JSON"); }
+  demand(result.schema==="wakeel-v022-bilingual-chapter-render/v1" &&
+    result.count===18 && Object.keys(result.chapters||{}).length===9,
+    "unexpected approved chapter render count");
+  return result;
+}
+
 export function build(root=process.cwd()){
   const read=(relative)=>JSON.parse(readFileSync(path.join(root,relative),"utf8"));
-  const out=compileLearning(read(JOURNEY), read(REGISTRY), read(MANIFEST));
+  const sourceManifest=read(MANIFEST);
+  const out=compileLearning(read(JOURNEY), read(REGISTRY), sourceManifest);
+  const rendered=renderApprovedChapters(root);
+  for(const chapter of out.chapters){
+    const article=rendered.chapters[chapter.id];
+    demand(article && article.ar && article.en, "missing bilingual authored chapter " + chapter.id);
+    for(const lang of ["ar","en"]){
+      const file=article[lang].source_path;
+      demand(sourceManifest.files[file]===article[lang].source_sha256,
+        "chapter source digest differs from frozen public source: " + file);
+    }
+  }
+  out.chapter_articles=rendered.chapters;
   const dir=path.join(root,"dist");
   mkdirSync(path.join(dir,"src"),{recursive:true});
   mkdirSync(path.join(dir,"data"),{recursive:true});

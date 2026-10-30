@@ -34,3 +34,28 @@
 .show-more{margin-top:8px;width:100%;font-size:12px}
 @media(max-width:780px){.journey-grid,.atlas-grid{grid-template-columns:1fr}.learning-aside{display:grid;grid-template-columns:1fr 1fr}#chapter-nav,#station-nav{max-height:280px;overflow-y:auto}.topic-results{max-height:360px}}
 @media(max-width:470px){.learning-aside{display:block}#chapter-nav,#station-nav{max-height:220px;margin-bottom:12px}.nav{flex-wrap:wrap;gap:9px;font-size:12px}}
+
+/* Scoped rendering of approved, checksum-verified full scientific chapters */
+.chapter-reader{margin:22px 0 18px;border:1px solid #b8d6ce;background:#fbfdfc;border-radius:12px;overflow:hidden}
+.chapter-reader-summary{cursor:pointer;font-size:15px;font-weight:800;color:#176c60;padding:16px 18px;background:#eff8f4}
+.chapter-reader-summary:hover{background:#e2f2eb}
+.chapter-reader-summary:focus-visible{outline:3px solid #9b6bdd;outline-offset:-3px}
+.chapter-provenance{font-size:11px;color:var(--muted);padding:10px 18px;margin:0;overflow-wrap:anywhere}
+.chapter-prose{padding:6px 22px 24px;overflow-x:auto;line-height:1.9;font-size:14px;max-width:100%;word-wrap:break-word}
+.chapter-prose h1{font-size:clamp(21px,2.6vw,29px);line-height:1.45}
+.chapter-prose h2{font-size:21px;line-height:1.5;margin-top:32px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.chapter-prose h3{font-size:17px;margin-top:24px}
+.chapter-prose p{margin:12px 0}
+.chapter-prose a{text-decoration:underline;text-underline-offset:3px;color:var(--blue)}
+.chapter-prose ul,.chapter-prose ol{padding-inline-start:26px}
+.chapter-prose li{margin:5px 0}
+.chapter-prose blockquote{border-inline-start:3px solid #8caea8;margin:15px 0;padding:4px 14px;color:#48626e;background:#f3f6f6}
+.chapter-prose pre{direction:ltr;text-align:left;unicode-bidi:plaintext;overflow:auto;max-width:100%;padding:15px;border-radius:10px;background:#172a39;color:#edf5f7;font-size:12px;line-height:1.65}
+.chapter-prose code{direction:ltr;unicode-bidi:isolate;font-size:.92em;background:#eaf1f2;border-radius:4px;padding:2px 4px}
+.chapter-prose pre code{padding:0;background:transparent;color:inherit;white-space:pre}
+.chapter-prose table{border-collapse:collapse;width:max-content;min-width:100%;margin:18px 0;font-size:13px}
+.chapter-prose th,.chapter-prose td{border:1px solid var(--line);padding:8px 12px;text-align:start;vertical-align:top}
+.chapter-prose thead{background:#eaf2ef}
+.chapter-prose tr:nth-child(even){background:#f6f9f8}
+.chapter-prose hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+@media(max-width:520px){.chapter-prose{padding:4px 13px 16px}.chapter-prose table{font-size:12px}.chapter-prose th,.chapter-prose td{padding:7px}}
