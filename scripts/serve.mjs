@@ -5,6 +5,7 @@
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 
 const root=path.resolve(process.cwd(),"dist");
 const whitelist=new Set([
@@ -28,7 +29,7 @@ export function handler(req,res){
  }).catch(()=>{res.writeHead(404);res.end("Not found")});
 }
 
-if(import.meta.url===new URL("file://"+process.argv[1]?.replaceAll("\\","/")).href) {
+if(process.argv[1] && import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href) {
   const port=Number(process.env.PORT||8080);
   createServer(handler).listen(port,"127.0.0.1",()=>console.log("Wakeel preview: http://127.0.0.1:"+port));
 }
