@@ -1,0 +1,73 @@
+name: v0.22 authentic journey and atlas
+on:
+  push:
+    branches: [feat/v022-journey-atlas-integration]
+  pull_request:
+jobs:
+  learning-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned build-only Markdown renderer
+        run: python -m pip install markdown-it-py==4.2.0
+      - name: Reject modified chapter bytes and unsafe Markdown
+        run: python -m unittest discover -s tools -p 'test_render_chapters.py' -v
+      - run: npm run check
+      - name: Upload 6-file static preview for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: wakeel-v022-learning-preview
+          path: dist/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Local HTTP smoke and prohibited paths
+        run: |
+          npm run serve > /tmp/wakeel-preview.log 2>&1 &
+          srv_pid=$!
+          trap 'kill $srv_pid 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ > /tmp/wakeel-home.html; then break; fi
+            sleep 0.2
+          done
+          grep -q 'id="journey"' /tmp/wakeel-home.html
+          curl -fsS http://127.0.0.1:8080/data/learning.json | node -e 'let v="";process.stdin.on("data",x=>v+=x);process.stdin.on("end",()=>{let j=JSON.parse(v);if(j.counts.stations!==44||j.counts.topics!==389)process.exit(1)})'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/baseline/v0.21.3/content/chapter-09/results.json)" = 404
+      - name: Allowlisted distribution only — reject research/test archives
+        run: |
+          test -f dist/data/learning.json
+          test "$(find dist -type f | wc -l)" -eq 6
+          ! find dist -type f | grep -E '(/archive/|/review|/tools/|/results.json|/runs.log|/test_)'
+          node -e 'const j=require("./dist/data/learning.json");if(j.counts.chapters!==9||j.counts.stations!==44||j.counts.topics!==389||j.counts.relations!==125)process.exit(1)'
+
+  learning-shell-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned build-only Markdown renderer
+        run: python -m pip install markdown-it-py==4.2.0
+      - name: Reject modified chapter bytes and unsafe Markdown
+        run: python -m unittest discover -s tools -p 'test_render_chapters.py' -v
+      - name: Full build and tests on Windows (Arabic render acceptance)
+        run: npm run check
+        env:
+          # Use the setup-python interpreter (the one markdown-it-py was
+          # installed for); the `py -3` launcher may resolve to the image's
+          # default Python without the renderer dependency.
+          PYTHON: python
+      - name: Allowlisted distribution only (6 files)
+        shell: pwsh
+        run: |
+          if ((Get-ChildItem dist -Recurse -File).Count -ne 6) { exit 1 }
+          node -e "const j=require('./dist/data/learning.json');if(j.counts.chapters!==9||j.counts.stations!==44||j.counts.topics!==389||j.counts.relations!==125)process.exit(1)"

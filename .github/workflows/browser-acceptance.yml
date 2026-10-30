@@ -1,0 +1,35 @@
+name: v0.22 actual browser acceptance (Chromium)
+on:
+  push:
+    branches: [feat/v022-journey-atlas-integration]
+  pull_request:
+jobs:
+  chromium-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Pinned Markdown and browser runner
+        run: python -m pip install markdown-it-py==4.2.0 playwright==1.56.0
+      - name: Install real Chromium for interaction tests
+        run: python -m playwright install --with-deps chromium
+      - name: Create allowlisted site, checking frozen sources first
+        run: |
+          python tools/verify_public_v0213.py baseline/v0.21.3
+          npm run check
+      - name: Actual browser regression on authentic built site
+        run: python -m unittest discover -s tests -p 'test_browser.py' -v
+      - name: Capture desktop/mobile visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wakeel-v022-browser-evidence
+          path: artifacts/browser/*.png
+          retention-days: 7
+          if-no-files-found: warn

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101e2a">
+  <meta name="description" content="وكيل — مختبرات تفاعلية لتعلّم مبادئ بناء النماذج اللغوية وحدود الاستنتاج.">
+  <title>وكيل | المختبرات التفاعلية</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" defer src="./src/app.mjs"></script>
+</head>
+<body>
+  <a href="#main" class="skip" data-i18n="skip">تجاوز إلى المحتوى</a>
+  <header class="topbar">
+    <a class="brand" href="#main" aria-label="Wakeel"><span class="mark">و</span><span><strong>وكيل</strong><small data-i18n="brandSubtitle">تعلم الذكاء الاصطناعي بالتجربة</small></span></a>
+    <nav aria-label="التنقل الرئيسي" class="nav">
+      <a href="#journey" data-i18n="navJourney">الرحلة</a>
+      <a href="#atlas" data-i18n="navAtlas">الأطلس</a>
+      <a href="#bigram" data-i18n="navBigram">النموذج الأول</a>
+      <a href="#associations" data-i18n="navAssociations">الارتباطات</a>
+    </nav>
+    <label class="language"><span data-i18n="langLabel">اللغة</span>
+      <select id="locale" aria-label="Language / اللغة"><option value="ar">العربية</option><option value="en">English</option></select>
+    </label>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="eyebrow" data-i18n="eyebrow">نسخة تطوير تجريبية · v0.22</div>
+      <h1 data-i18n="headline">لا تكتفِ بمعرفة الإجابة. غيّر التجربة واكتشف لماذا.</h1>
+      <p data-i18n="intro">ابدأ بنموذج يحسب احتمالات الحرف التالي، ثم اختبر ارتباط المفتاح بالقيمة. كل نتيجة هنا توضيحية، وليست ادعاءً عن قدرات نموذج لغوي مدرّب.</p>
+      <div class="hero-links"><a href="#journey" class="primary" data-i18n="start">ابدأ الرحلة</a><a href="#atlas" class="secondary" data-i18n="explore">استكشف الأطلس</a></div>
+      <p class="limitation"><span aria-hidden="true">ⓘ</span> <span data-i18n="heroLimit">هذه محاكيات تعليمية محلية، لا تمثل أدلة التجارب العلمية المجمدة في وكيل v0.21.3.</span></p>
+    </section>
+    <section class="catalog" id="journey" aria-labelledby="journeyTitle">
+      <div class="section-heading"><span class="index">01</span><div>
+        <div class="eyebrow" data-learn="journeyTag">المسار التعليمي المعتمد · 9 فصول · 44 محطة</div>
+        <h2 id="journeyTitle" data-learn="journeyTitle">رحلة بناء نموذج لغوي</h2>
+        <p data-learn="journeyIntro">اختر محطة مباشرة أو تنقل بين الفصول، دون شرط إكمال مسبق.</p>
+      </div></div>
+      <div class="journey-grid">
+        <aside class="learning-aside" aria-label="Chapters and stations">
+          <nav id="chapter-nav" aria-label="الفصول"></nav>
+          <nav id="station-nav" aria-label="المحطات"></nav>
+        </aside>
+        <article id="station-content" class="learning-article" aria-live="polite">
+          <p>جار تحميل المحطات التعليمية…</p>
+        </article>
+      </div>
+    </section>
+    <section class="catalog" id="atlas" aria-labelledby="atlasTitle">
+      <div class="section-heading"><span class="index">02</span><div>
+        <div class="eyebrow" data-learn="atlasTag">سجل معرفي مفتوح · 389 موضوعاً</div>
+        <h2 id="atlasTitle" data-learn="atlasTitle">الأطلس المعرفي</h2>
+        <p data-learn="atlasIntro">مداخل موضوعات مستقلة، وليس كل موضوع درساً مكتمل التأليف.</p>
+      </div></div>
+      <div class="atlas-search">
+        <label for="topic-search" data-learn="atlasSearch">ابحث بالعربية أو الإنجليزية أو معرّف الموضوع</label>
+        <input id="topic-search" type="search" autocomplete="off" placeholder="ابحث باسم الموضوع أو رمزه…" />
+      </div>
+      <div class="atlas-grid">
+        <nav id="topic-results" class="topic-results" aria-label="الموضوعات المعرفية"></nav>
+        <article id="topic-detail" class="learning-article" aria-live="polite"></article>
+      </div>
+    </section>
+    <section class="lab" id="bigram" aria-labelledby="bigramTitle">
+      <div class="section-heading"><span class="index">03</span><div><div class="eyebrow" data-i18n="bigramTag">تجربة قابلة لإعادة التشغيل</div><h2 id="bigramTitle" data-i18n="bigramTitle">من عدّ الحروف إلى توقع الحرف التالي</h2><p data-i18n="bigramDesc">نموذج Bigram حرفي بسيط: يرى فقط الحرف السابق، ويقدر احتمال الحرف الذي يليه من عدد مرات ظهور كل انتقال.</p></div></div>
+      <div class="workspace">
+        <div class="controls">
+          <label for="corpus" data-i18n="corpusLabel">النص المستخدم لبناء جدول العدّ</label>
+          <textarea id="corpus" maxlength="320" rows="4" spellcheck="false"></textarea>
+          <p class="hint" data-i18n="corpusHint">عدّل النص لتكتشف كيف تتغير الاحتمالات. حتى 320 حرف Unicode.</p>
+          <div class="control-grid">
+            <label for="context"><span data-i18n="contextLabel">الحرف السابق</span><select id="context"></select></label>
+            <label for="smoothing"><span data-i18n="smoothingLabel">التنعيم</span><select id="smoothing"><option value="1" data-i18n="smoothOn">إضافة واحد</option><option value="0" data-i18n="smoothOff">بدون</option></select></label>
+          </div>
+          <p class="hint" data-i18n="bigramLimit">التنعيم خيار تعليمي. الاحتمالات ليست نتيجة تدريب شبكة عصبية.</p>
+        </div>
+        <div class="output">
+          <div class="output-head"><h3 data-i18n="distributionTitle">توزيع الحرف التالي</h3><span class="tag" data-i18n="computed">محسوب مباشرة</span></div>
+          <div id="bigram-output" aria-live="polite" aria-atomic="true"></div>
+        </div>
+      </div>
+    </section>
+    <section class="lab" id="associations" aria-labelledby="assocTitle">
+      <div class="section-heading"><span class="index">04</span><div><div class="eyebrow" data-i18n="assocTag">اختبار مضاد بسيط</div><h2 id="assocTitle" data-i18n="assocTitle">هل تتبع الإجابة المفتاح أم موقع القيمة؟</h2><p data-i18n="assocDesc">ابدأ بجدول مفتاح/قيمة، توقع الإجابة، ثم بدّل القيم مع الإبقاء على المفاتيح واختبر توقعك مجدداً.</p></div></div>
+      <div class="workspace">
+        <div class="controls">
+          <div class="pair-grid"><div class="pair"><span data-i18n="keyA">المفتاح A</span><strong id="value-a">1</strong></div><div class="pair"><span data-i18n="keyB">المفتاح B</span><strong id="value-b">2</strong></div></div>
+          <button id="swap" type="button" class="secondary action" data-i18n="swap">بدّل القيم</button>
+          <div class="control-grid">
+            <label for="query-key"><span data-i18n="question">ما قيمة المفتاح؟</span><select id="query-key"><option value="A">A</option><option value="B">B</option></select></label>
+            <label for="answer"><span data-i18n="yourAnswer">توقعك</span><select id="answer"><option value="">—</option><option value="1">1</option><option value="2">2</option></select></label>
+          </div>
+          <button id="check" type="button" class="primary action" data-i18n="check">افحص التوقع</button>
+        </div>
+        <div class="output">
+          <div class="output-head"><h3 data-i18n="observationTitle">الملاحظة</h3><span class="tag" data-i18n="notEvidence">تمثيل توضيحي</span></div>
+          <div id="association-output" class="observation" role="status" aria-live="polite"></div>
+          <p class="hint" data-i18n="assocLimit">هذه ذاكرة ارتباطات مصغرة؛ ليست آلية Attention ولا اختباراً تجريبياً لقدرة Transformer.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer><span data-i18n="footer">وكيل — المعرفة تبدأ بسؤال يمكن اختباره.</span><span data-i18n="footerLimit">تعتمد هذه الواجهة على المصدر العلمي المعتمد v0.21.3؛ العرض التجريبي لا يعيد تشغيل التجارب المجمدة.</span></footer>
+</body>
+</html>

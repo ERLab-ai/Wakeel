@@ -1,44 +1,56 @@
 # وكيل 2.0 | Wakeel 2.0
 
-**تعليم بناء النماذج اللغوية بالتجارب القابلة للفحص — بالعربية والإنجليزية.**  
-**Learn how language models work through testable experiments — in Arabic and English.**
+**من سؤال إنساني إلى نموذج لغوي قابل للقياس — تعلّم بالتجربة لا بالحفظ.**
 
-## Current state (2026-10-30)
+## Scientific source and release state
 
-The canonical approved educational/scientific baseline is **v0.21.3**, with **44 stations, 9 authored chapters, 389 knowledge topics and 125 links**. The v0.21.3 source archive is immutable:
+**P0 is COMPLETE.** The curated scientific source of Wakeel 2.0 **v0.21.3** has been merged into `main` via [PR #3](https://github.com/ERLab-ai/Wakeel/pull/3), with the final verified source at `542e256`, and [Issue #2 closed](https://github.com/ERLab-ai/Wakeel/issues/2). The canonical frozen 149-file scientific ZIP remains out of GitHub history:
 
-- Original artifact: `WAKEEL-2-V0.21.3-SOURCE-PACK.zip`
-- SHA-256: `a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659`
-- Archive: 149 members (148 files covered by its internal manifest).
-- Scientific G7 bilingual-journey parity: previously accepted in its scoped independent review.
-- Scientific G8: chapter 6/7 reproducibility accepted only in the documented reference environment. Cross-environment replay is **not** certified.
+- Canonical source SHA-256: `a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659`.
+- Curated in Git: **75 exact-byte source files + PUBLIC-MANIFEST.json**.
+- Authored learner stations: **44**, organized in **9 chapters**.
+- Knowledge registry: **389** topics and **125** recorded relationships.
+- Published source is strictly separated from historical reviews, private signoff material and the deployable website.
+- Chapter 8 and 9 scientific regressions and selftest passed on GitHub; chapter 6/7 experimental reruns remain bound to their reference environment.
 
-**Publication:** A **75-file curated source subset** (plus its own immutable manifest) has been verified but is **not yet committed to this public GitHub repository**. Historic reviews, internal experimental archives, and `signoff-v0.21.3/` remain outside public GitHub. This README is repository documentation, **not** a modified copy of the frozen 2026 v0.21.3 release README.
+## v0.22 experimental user experience (this draft PR)
 
-## Source import and current development
+The **v0.22** shell reads the real, approved knowledge/learning data from the repository, and generates a small browser-ready distribution.
 
-- [P0 scientific source import — Issue #2](https://github.com/ERLab-ai/Wakeel/issues/2)
-- [P0 safe import and source-policy PR #3](https://github.com/ERLab-ai/Wakeel/pull/3) (draft; the 75 source files are not yet in Git)
-- [v0.22 interactive learning prototype PR #1](https://github.com/ERLab-ai/Wakeel/pull/1) (draft; toy examples, not a substitute for the scientific results)
-- [Publication decisions](docs/PUBLICATION-DECISION-V0213.md)
+### Local use
 
-The earlier `WKL-024BC / v1.58` workstream is a **different** version and is not the approved Wakeel 2.0 research source.
-
-### Import curated source to this GitHub branch
-
-On a trusted workstation with an authenticated Git checkout of `chore/v0213-baseline-import-p0`, save the already verified `WAKEEL2-V0213-CURATED-PUBLIC-SOURCE-CANDIDATE.zip` **outside the checkout**.
+Requires Node.js 20+ and Python 3.10+ (plus a pinned, build-only Markdown renderer):
 
 ```sh
-python tools/publish_curated_v0213.py --archive /path/to/WAKEEL2-V0213-CURATED-PUBLIC-SOURCE-CANDIDATE.zip --push
+python -m pip install markdown-it-py==4.2.0
+npm run check
+npm run serve
 ```
 
-The command checks the exact ZIP and manifest hashes, all 75 included files, the current Git branch/remote and a clean worktree; it then commits only `baseline/v0.21.3/` and pushes that P0 branch. Do not upload the full historic 149-file ZIP or internal reviews directly.
+Open [http://localhost:8080](http://localhost:8080). The site includes:
 
-## What's next
+- **Journey:** all 44 authored stations, their bilingual hypotheses, actions, outcome alternatives, interpretations and discoveries, plus expandable **full original scientific chapter prose** for all nine chapters in both languages. Each chapter source is SHA-256 checked against the immutable public manifest before rendering. Chapter lists and direct `#station/44` links.
+- **Atlas:** search all 389 topics by Arabic/English title or ID, view the 125 recorded links, open `#topic/NLP-003` directly without journey prerequisites. **Registry topics without authored station activities are explicitly labeled as non-lessons.**
+- **Illustrative labs:** a count-based character Bigram and a tiny key/value counterfactual. These are **not** live replays of the frozen chapter-8/9 experiments.
 
-1. Pass **mandatory source CI** from a GitHub checkout containing those real 75 immutable files.
-2. Connect the nine chapters, 44 stations and 389 topics to the bilingual v0.22 learning experience.
-3. Implement honest interactive lab modes: illustration, bounded computation, validated experiment and immutable evidence replay.
-4. Define a strictly separate **website** publication allowlist and perform accessibility and scientific review before live release.
+The build outputs exactly **six allowlisted public files** under `dist/`: HTML, CSS, three app modules, and a generated learning catalog containing 18 safely rendered original chapter texts. This intentionally excludes scientific experiment logs, analysis results, internal review evidence, archived documents and Python tooling.
 
-**Licensing:** No new blanket repository license is implied by this README. All imported educational materials, external references, and dependencies must retain appropriate original notices; verify their distribution permissions before public release.
+### Limits and next gates
+
+This is a **reviewable bilingual interactive prototype**, not a deployed production learning platform:
+- [x] Source imports and scientific verification in P0.
+- [x] Journey/atlas derived from approved JSON; complete station/registry count and parity tests.
+- [x] Windows checkout safeguard: `baseline/v0.21.3/** -text`; no frozen Git blob modifications.
+- [ ] Review the browser flow and keyboard/screen-reader operation, RTL/LTR on mobile, and page-level scientific consistency.
+- [x] Render all original bilingual chapter Markdown pages at build time, with per-file original-byte SHA verification and HTML disabled.
+- [ ] Independent human review of chapter readability, tables, complex scientific notation and responsive display.
+- [ ] Connect actual scientific engines and frozen output evidence to interactive learning labs without a false claim of retraining.
+- [ ] Review website deployment allowlist and publish on HTTPS.
+
+This branch is a separate draft [PR #4](https://github.com/ERLab-ai/Wakeel/pull/4). The earlier [PR #1](https://github.com/ERLab-ai/Wakeel/pull/1) remains a separate exploratory spike.
+
+## Licensing and provenance
+
+The content imported from Wakeel v0.21.3 is an approved **project-source subset**, with immutable source checksums. No Tongjiang Lab source code, diagrams or lesson assets were copied. Publishing this repository's source does not imply a license to republish it under unrelated terms.
+
+See [v0.22 integration scope](docs/V022-JOURNEY-ATLAS-INTEGRATION.md) and [P0 publication decision](docs/PUBLICATION-DECISION-V0213.md).
