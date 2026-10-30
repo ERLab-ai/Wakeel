@@ -1,0 +1,13 @@
+{
+  "name": "wakeel-v022-lab-foundation",
+  "private": true,
+  "version": "0.22.0-dev.1",
+  "type": "module",
+  "description": "Dependency-free, bilingual interactive lab prototype. Not a replacement for the WKL-024BC scientific baseline.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check src/models.mjs && node --check src/app.mjs && npm test",
+    "serve": "python3 -m http.server 8080"
+  },
+  "engines": { "node": ">=20" }
+}
