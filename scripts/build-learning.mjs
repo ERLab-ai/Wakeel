@@ -87,8 +87,12 @@ export function renderApprovedChapters(root=process.cwd()){
   const isWindows=process.platform==="win32";
   const executable=process.env.PYTHON || (isWindows ? "py" : "python3");
   const args=[...(isWindows && executable==="py"?["-3"]:[]),"tools/render_chapters.py"];
+  // Windows: the Python child inherits a legacy console code page (cp1252) unless
+  // UTF-8 mode is forced, which corrupts Arabic chapter output through the pipe.
+  // PYTHONUTF8/PYTHONIOENCODING make the renderer locale-independent by design.
   const processResult=spawnSync(executable,args,{
-    cwd:root,encoding:"utf8",maxBuffer:6*1024*1024,windowsHide:true
+    cwd:root,encoding:"utf8",maxBuffer:6*1024*1024,windowsHide:true,
+    env:{...process.env,PYTHONUTF8:"1",PYTHONIOENCODING:"utf-8"}
   });
   demand(!processResult.error && processResult.status===0,
     "approved chapter renderer failed: "+(processResult.error?.message || processResult.stderr || "unknown failure"));

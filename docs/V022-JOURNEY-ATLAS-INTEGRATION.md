@@ -47,3 +47,14 @@ npm run serve
 Open http://localhost:8080. No npm install is required. The `dist/` directory is generated and should not be committed back into Git.
 
 **Scientific source invariance:** no content under `baseline/v0.21.3/` is changed by the v0.22 generation. Windows `.gitattributes` disables line ending normalization for frozen source bytes.
+
+## Cross-platform build guarantee (v0.22)
+
+`scripts/build-learning.mjs` spawns `tools/render_chapters.py` with
+`PYTHONUTF8=1` and `PYTHONIOENCODING=utf-8`. On Windows the Python child
+otherwise inherits the console code page (cp1252) and the 18 bilingual
+chapter render fails on Arabic text. With these variables the build output
+is byte-identical on Linux and Windows; CI builds the full chapter set on
+`windows-latest` as an acceptance condition, mirroring the Linux job.
+The frozen `baseline/v0.21.3/` bytes remain outside the scope of any
+presentation-layer change.
