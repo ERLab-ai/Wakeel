@@ -8,7 +8,7 @@ const samples = {
 const t = {
   ar: {
     skip:"تجاوز إلى المحتوى",brandSubtitle:"تعلم الذكاء الاصطناعي بالتجربة",
-    navBigram:"النموذج الأول",navAssociations:"الارتباطات",langLabel:"اللغة",
+    navJourney:"الرحلة",navAtlas:"الأطلس",navAria:"التنقل الرئيسي",chaptersAria:"الفصول",stationsAria:"المحطات",topicsAria:"الموضوعات المعرفية",navBigram:"النموذج الأول",navAssociations:"الارتباطات",langLabel:"اللغة",
     eyebrow:"نسخة تطوير تجريبية · v0.22",
     headline:"ابدأ بسؤال، واقرأ الدليل، واختبر ما تعلمته.",
     intro:"تصفّح الرحلة العلمية المعتمدة: تسعة فصول وأربع وأربعون محطة، مع نصوص الفصول الأصلية بالعربية والإنجليزية وأطلس يتيح الوصول المباشر إلى 389 موضوعاً. المختبران المصغران أداتان توضيحيتان منفصلتان عن الأدلة المجمدة.",
@@ -26,7 +26,7 @@ const t = {
     yourAnswer:"توقعك",check:"افحص التوقع",observationTitle:"الملاحظة",notEvidence:"تمثيل توضيحي",
     assocLimit:"هذه ذاكرة ارتباطات مصغرة؛ ليست آلية Attention ولا اختباراً تجريبياً لقدرة Transformer.",
     footer:"وكيل — المعرفة تبدأ بسؤال يمكن اختباره.",
-    footerLimit:"لم يُنقل بعد مصدر v0.21.3 إلى هذا المستودع؛ هذه تجربة واجهة مستقلة للمراجعة.",
+    footerLimit:"تعتمد هذه الواجهة على المصدر العلمي المعتمد v0.21.3؛ العرض التجريبي لا يعيد تشغيل التجارب المجمدة.",
     startLabel:"بداية النص",endLabel:"نهاية النص",spaceLabel:"مسافة",
     corpusError:"أدخل نصاً من حرف واحد على الأقل، وبحد أقصى 320 حرفاً.",
     noSamples:"لم يُرصد انتقال لهذه الحالة. أضف بيانات أو اختر التنعيم.",
@@ -37,7 +37,7 @@ const t = {
   },
   en: {
     skip:"Skip to content",brandSubtitle:"Learning AI through experimentation",
-    navBigram:"First model",navAssociations:"Associations",langLabel:"Language",
+    navJourney:"Journey",navAtlas:"Atlas",navAria:"Main navigation",chaptersAria:"Chapters",stationsAria:"Stations",topicsAria:"Knowledge topics",navBigram:"First model",navAssociations:"Associations",langLabel:"Language",
     eyebrow:"Experimental development · v0.22",
     headline:"Start with a question, read the evidence, and test your understanding.",
     intro:"Explore the approved nine-chapter, 44-station scientific learning journey, including the complete Arabic and English chapters, or jump directly into any of 389 atlas topics. The two small interactive labs are illustrative and distinct from frozen experiment evidence.",
@@ -55,7 +55,7 @@ const t = {
     check:"Check prediction",observationTitle:"Observation",notEvidence:"Illustrative analogy",
     assocLimit:"This is a tiny association memory, not the Attention mechanism or an empirical test of a Transformer.",
     footer:"Wakeel — knowledge starts with a testable question.",
-    footerLimit:"The v0.21.3 source has not yet been imported into this repository; this is a separate UI experiment for review.",
+    footerLimit:"This interface uses the approved v0.21.3 scientific source; its preview does not rerun frozen experiments.",
     startLabel:"Start of text",endLabel:"End of text",spaceLabel:"Space",
     corpusError:"Enter between 1 and 320 Unicode characters.",
     noSamples:"No transition was observed in this state. Add data or enable smoothing.",
@@ -78,6 +78,15 @@ function translate() {
   document.title = locale === "ar" ? "وكيل | المختبرات التفاعلية" : "Wakeel | Interactive labs";
   for (const node of document.querySelectorAll("[data-i18n]")) {
     node.textContent = dict[node.dataset.i18n];
+  }
+  const landmarks = [
+    [".nav", "navAria"],
+    ["#chapter-nav", "chaptersAria"],
+    ["#station-nav", "stationsAria"],
+    ["#topic-results", "topicsAria"]
+  ];
+  for(const [selector,key] of landmarks){
+    document.querySelector(selector)?.setAttribute("aria-label",dict[key]);
   }
 }
 function readable(token) {

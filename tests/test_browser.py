@@ -70,6 +70,10 @@ class BrowserGate(unittest.TestCase):
         self.assertEqual(self.page.locator("html").get_attribute("lang"),"ar")
         self.assertEqual(self.page.locator("html").get_attribute("dir"),"rtl")
         self.assertEqual(self.page.locator("#chapter-nav a").count(),9)
+        self.assertEqual(self.page.locator(".nav a[href='#journey']").inner_text(),"الرحلة")
+        self.assertEqual(self.page.locator(".nav a[href='#atlas']").inner_text(),"الأطلس")
+        self.assertEqual(self.page.locator(".nav").get_attribute("aria-label"),"التنقل الرئيسي")
+        self.assertNotIn("لم يُنقل",self.page.locator("footer").inner_text())
         self.assertEqual(self.page.locator("#station-nav a").count(),5)
         catalog=self.page.evaluate("""async()=> {
           const j=await(await fetch('/data/learning.json')).json();
@@ -95,6 +99,10 @@ class BrowserGate(unittest.TestCase):
         self.page.locator("#locale").select_option("en")
         self.assertEqual(self.page.locator("html").get_attribute("lang"),"en")
         self.assertEqual(self.page.locator("html").get_attribute("dir"),"ltr")
+        self.assertEqual(self.page.locator(".nav a[href='#journey']").inner_text(),"Journey")
+        self.assertEqual(self.page.locator(".nav a[href='#atlas']").inner_text(),"Atlas")
+        self.assertEqual(self.page.locator(".nav").get_attribute("aria-label"),"Main navigation")
+        self.assertNotIn("not yet been imported",self.page.locator("footer").inner_text())
         self.assertEqual(self.page.locator(".chapter-prose").get_attribute("dir"),"ltr")
         self.assertNotEqual(arabic_source,self.page.locator(".chapter-provenance").inner_text())
         self.assertTrue(self.page.locator(".chapter-reader").evaluate("(d)=>d.open"),
