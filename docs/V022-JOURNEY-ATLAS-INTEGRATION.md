@@ -13,6 +13,7 @@ The original source files remain unchanged at:
 
 ## Content boundaries
 
+- The **18 full authored chapter Markdown texts** (nine chapters in Arabic and English) are SHA-checked against the immutable public manifest and rendered to safe HTML at build time. Users may expand each full chapter from its station, or deep-link using `#chapter/9`. Raw Markdown HTML is escaped; no user input enters this renderer.
 - The **44 stations** are authored learning activities. Each displays a why, a hypothesis, an attempt, outcomes, an interpretation, and discovery in the selected language; a deliverable is displayed **only if present** in both languages. For historical optional stations 31–36 the approved original intentionally omits both deliverables.
 - The other **389 topics** are knowledge registry entries; they must not be described as completed explanatory lessons if they lack authoring. They remain independently accessible, without a prerequisite route.
 - The **125 relations** are links between concepts, not numerical evidence of mastery.
@@ -33,7 +34,7 @@ The original source files remain unchanged at:
 ### Review still required
 - Browser navigation: `#station/1`, `#station/44`, `#topic/NLP-003`, direct open and back/forward.
 - Verify search filtering, local keyboard use, mobile wrapping, live announcements and AR/EN switching.
-- Full authored Markdown chapter rendering and human bilingual/scientific review.
+- Full authored Markdown chapter rendering is implemented; **independent human bilingual/scientific presentation review remains required**.
 - Separate real experiment display with explicit source labels, not the toy analogies.
 
 ## Reproduction

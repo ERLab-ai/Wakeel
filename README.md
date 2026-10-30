@@ -19,20 +19,21 @@ The **v0.22** shell reads the real, approved knowledge/learning data from the re
 
 ### Local use
 
-Requires Node.js 20+ and Python 3.10+, with no npm dependencies:
+Requires Node.js 20+ and Python 3.10+ (plus a pinned, build-only Markdown renderer):
 
 ```sh
+python -m pip install markdown-it-py==4.2.0
 npm run check
 npm run serve
 ```
 
 Open [http://localhost:8080](http://localhost:8080). The site includes:
 
-- **Journey:** all 44 authored stations, their bilingual hypotheses, actions, outcome alternatives, interpretations and discoveries. Chapter lists and direct `#station/44` links.
+- **Journey:** all 44 authored stations, their bilingual hypotheses, actions, outcome alternatives, interpretations and discoveries, plus expandable **full original scientific chapter prose** for all nine chapters in both languages. Each chapter source is SHA-256 checked against the immutable public manifest before rendering. Chapter lists and direct `#station/44` links.
 - **Atlas:** search all 389 topics by Arabic/English title or ID, view the 125 recorded links, open `#topic/NLP-003` directly without journey prerequisites. **Registry topics without authored station activities are explicitly labeled as non-lessons.**
 - **Illustrative labs:** a count-based character Bigram and a tiny key/value counterfactual. These are **not** live replays of the frozen chapter-8/9 experiments.
 
-The build outputs exactly **six allowlisted public files** under `dist/`: HTML, CSS, three app modules, and a generated learning catalog. This intentionally excludes scientific experiment logs, analysis results, internal review evidence, archived documents and Python tooling.
+The build outputs exactly **six allowlisted public files** under `dist/`: HTML, CSS, three app modules, and a generated learning catalog containing 18 safely rendered original chapter texts. This intentionally excludes scientific experiment logs, analysis results, internal review evidence, archived documents and Python tooling.
 
 ### Limits and next gates
 
@@ -41,7 +42,8 @@ This is a **reviewable bilingual interactive prototype**, not a deployed product
 - [x] Journey/atlas derived from approved JSON; complete station/registry count and parity tests.
 - [x] Windows checkout safeguard: `baseline/v0.21.3/** -text`; no frozen Git blob modifications.
 - [ ] Review the browser flow and keyboard/screen-reader operation, RTL/LTR on mobile, and page-level scientific consistency.
-- [ ] Render and review full chapter Markdown prose within the learning pages.
+- [x] Render all original bilingual chapter Markdown pages at build time, with per-file original-byte SHA verification and HTML disabled.
+- [ ] Independent human review of chapter readability, tables, complex scientific notation and responsive display.
 - [ ] Connect actual scientific engines and frozen output evidence to interactive learning labs without a false claim of retraining.
 - [ ] Review website deployment allowlist and publish on HTTPS.
 
