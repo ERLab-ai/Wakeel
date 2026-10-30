@@ -11,6 +11,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned build-only Markdown renderer
+        run: python -m pip install markdown-it-py==4.2.0
       - run: npm run check
       - name: Upload 6-file static preview for review
         uses: actions/upload-artifact@v4
