@@ -1,0 +1,3 @@
+# Preserve the exact approved scientific bytes on Windows checkouts.
+# Git must NOT convert LF to CRLF for these frozen data/source files.
+baseline/v0.21.3/** -text

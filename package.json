@@ -1,0 +1,16 @@
+{
+  "name": "wakeel-v022-learning-shell",
+  "private": true,
+  "version": "0.22.0-dev.2",
+  "type": "module",
+  "description": "A bilingual learning shell derived from the immutable Wakeel 2.0 v0.21.3 scientific source.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build-learning.mjs",
+    "check": "node --check scripts/build-learning.mjs && node --check src/app.mjs && node --check src/models.mjs && node --check src/learning-view.mjs && npm test && npm run build",
+    "serve": "python3 -m http.server 8080 -d dist"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

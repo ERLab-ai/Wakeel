@@ -1,8 +1,10 @@
-# Generated outputs; scientific source is tracked only from curated original bytes
-baseline/v0.21.3/out/
+# Dist is generated from approved source and contains only publishable content.
+dist/
+# Never commit approved source ZIPs or local audit exports.
+*.zip
 __pycache__/
 *.pyc
 .venv/
 venv/
 import-verification.json
-*.zip
+baseline/v0.21.3/out/

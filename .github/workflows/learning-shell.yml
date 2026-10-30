@@ -1,0 +1,20 @@
+name: v0.22 authentic journey and atlas
+on:
+  push:
+    branches: [feat/v022-journey-atlas-integration]
+  pull_request:
+jobs:
+  learning-shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm run check
+      - name: Allowlisted distribution only — reject research/test archives
+        run: |
+          test -f dist/data/learning.json
+          test "$(find dist -type f | wc -l)" -eq 6
+          ! find dist -type f | grep -E '(/archive/|/review|/tools/|/results.json|/runs.log|/test_)'
+          node -e 'const j=require("./dist/data/learning.json");if(j.counts.chapters!==9||j.counts.stations!==44||j.counts.topics!==389||j.counts.relations!==125)process.exit(1)'
