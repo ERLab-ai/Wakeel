@@ -12,6 +12,13 @@ jobs:
         with:
           node-version: '22'
       - run: npm run check
+      - name: Upload 6-file static preview for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: wakeel-v022-learning-preview
+          path: dist/
+          retention-days: 7
+          if-no-files-found: error
       - name: Local HTTP smoke and prohibited paths
         run: |
           npm run serve > /tmp/wakeel-preview.log 2>&1 &
