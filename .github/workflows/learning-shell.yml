@@ -12,6 +12,18 @@ jobs:
         with:
           node-version: '22'
       - run: npm run check
+      - name: Local HTTP smoke and prohibited paths
+        run: |
+          npm run serve > /tmp/wakeel-preview.log 2>&1 &
+          srv_pid=$!
+          trap 'kill $srv_pid 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8080/ > /tmp/wakeel-home.html; then break; fi
+            sleep 0.2
+          done
+          grep -q 'id="journey"' /tmp/wakeel-home.html
+          curl -fsS http://127.0.0.1:8080/data/learning.json | node -e 'let v="";process.stdin.on("data",x=>v+=x);process.stdin.on("end",()=>{let j=JSON.parse(v);if(j.counts.stations!==44||j.counts.topics!==389)process.exit(1)})'
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:8080/baseline/v0.21.3/content/chapter-09/results.json)" = 404
       - name: Allowlisted distribution only — reject research/test archives
         run: |
           test -f dist/data/learning.json
