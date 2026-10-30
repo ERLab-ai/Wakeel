@@ -1,41 +1,53 @@
-# وكيل | Wakeel
+# وكيل 2.0 | Wakeel 2.0
 
-**Arabic-first and English-equivalent learning through experiments.**
+**تعلم بناء النماذج اللغوية بالتجربة والفرضية والدليل.**  
+**Learn language-model construction through experiments, falsifiable hypotheses, and evidence.**
 
-## Repository status — October 30, 2026
+## Project source of truth
 
-This repository previously held only a placeholder README. The first feature branch introduces a **standalone v0.22 interactive-lab interface prototype** to validate bilingual interaction and scientific representation boundaries. It is **not** a migration of the existing Wakeel scientific platform and **must not** be described as v1.58 production content.
+The approved **Wakeel 2.0** educational/scientific baseline is **v0.21.3**, comprising:
+- **44** journey stations across **9** authored chapters.
+- **389** topics in a separately managed knowledge registry.
+- Arabic/English station parity accepted by the project review.
+- Frozen chapter 8/9 experiments, results, and review evidence. Do not silently recompute or modify these.
+- Chapter 6/7 rerun acceptance remains scoped to the documented reference environment.
 
-### Local run
+**Canonical owner-provided archive:** `WAKEEL-2-V0.21.3-SOURCE-PACK.zip`  
+**Archive SHA-256:** `a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659`  
+**Verified package:** 149 files (148 of them recorded in the internal SHA-256 manifest); local byte checks passed as of 2026-10-30.
 
-Requires Node.js 20+ and Python 3.10+; no npm dependencies or external network calls.
+**Important:** That complete approved source has **not yet been imported to this GitHub repository**. It must first pass public-distribution review: the source ZIP includes archived research and review materials that must not be deployed by accident. See [v0.22 integration contract](docs/WAKEEL2-V022-INTEGRATION-CONTRACT.md) and [P0 baseline import issue](https://github.com/ERLab-ai/Wakeel/issues/2).
 
-~~~sh
+The previously referenced **WKL-024BC / Wakeel v1.58.0** is a **different archive/workstream** and **not the approved Wakeel 2.0 baseline** for this repository. Never substitute it for v0.21.3.
+
+## v0.22 prototype (draft PR #1)
+
+This development branch currently holds a **standalone bilingual interface spike**, not a replacement for the approved source. Its two original teaching demonstrations are:
+
+1. A character-level count-based Bigram with optional add-one smoothing.
+2. A key/value mapping swap test, explicitly **not** Transformer Attention or experimentally validated evidence.
+
+### Run locally
+
+Requires Node.js >=20 and Python 3.10+ (no npm packages required):
+
+```sh
 npm run check
 npm run serve
-~~~
+```
 
-Open http://localhost:8080 and use the Arabic/English switch. Two small demonstrators are included:
+Open `http://localhost:8080`. The first development branch has 8 unit tests. Browser, assistive-technology and deployed-site acceptance are still open.
 
-1. **Character Bigram**: an actual count-based probability distribution computed from user-supplied text, with optional add-one smoothing.
-2. **Key/value association**: an intentionally simple lookup counterfactual with a value-swap control. **Not Transformer Attention or a KV cache.**
+## Next milestones
 
-The accessible static page uses semantic controls, supports RTL/LTR layout, and labels illustrative results as such. Browser/assistive-technology acceptance is not yet complete.
+- [ ] **P0:** inspect and import the real v0.21.3 scientific/educational source using a documented repository/release-file allowlist; verify all original hashes before modifying anything.
+- [ ] Run `validate.py`, `selftest.py`, `build_atlas.py`, and chapter regression tests using the correct Python environment; report limits honestly.
+- [ ] Bind the v0.22 user interface to the actual 44-station journey and 389-topic registry rather than creating competing content.
+- [ ] Integrate an interactive scientific lab with clear provenance categories: illustration / computed demonstration / validated experiment / frozen evidence.
+- [ ] Review accessibility, mobile support, bilingual scientific equivalence, public deployment and reproducibility.
 
-### Scientific baseline: not yet imported
+## Licensing
 
-The owner-provided canonical candidate is **Wakeel v1.58.0 / WKL-024BC**, delivered as an independently verified development source archive (651 source files) and public-site artifact (332 deployable files), dated October 22, 2026. Its recorded gates: 602/602 JavaScript, 24/24 Python, 250 static references, and 331/331 local HTTP checks. This **does not** mean a full scientific peer review, bilingual human approval, or deployed-browser acceptance.
+Tongjiang Lab was reviewed as an interaction reference; **none of its course code or assets** were copied. Licensing for the repository as a whole must be established before public distribution of imported materials; preserve third-party notices.
 
-The baseline is presently available in the project delivery bundle but **not yet represented in Git history here**. Do not replace or rewrite its original scientific engines, progress storage/JSON v5, review provenance, or licensed materials during import. Treat source imports and the new UI integration as separate reviewed changes. See [integration contract](docs/WKL-V022-INTEGRATION-CONTRACT.md).
-
-### Current milestone
-
-- [x] Branch-based lab runtime prototype, two interactive examples, bilingual interface, deterministic unit tests.
-- [ ] Import the **complete** clean WKL-024BC source, preserving hashes and confidential/public distribution boundaries.
-- [ ] Run the unchanged v1.58 release verification and record the results on the new repository.
-- [ ] Integrate the new lab runtime with the original nine laboratories and existing 18 lesson investigations.
-- [ ] Validate deployed HTTPS, keyboard and screen reader interactions, mobile behavior, human scientific and bilingual review.
-
-**Legal:** The Tongjiang Lab project was studied for interaction patterns. No Tongjiang course code or lesson assets are copied here; this implementation is original.
-
-**License:** No repository-wide license is asserted for newly created content until ownership and publication terms are confirmed; the imported v1.58 source includes its own MIT LICENSE and must retain its notices.
+This repository's `main` remains untouched by the v0.22 draft PR until review.
