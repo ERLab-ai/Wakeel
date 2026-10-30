@@ -1,59 +1,41 @@
-# قرار تصنيف ونشر مصدر وكيل 2.0 — v0.21.3
+# Wakeel 2.0 — P0 publication decision and final editorial resolutions
 
-**Status:** APPROVED AS PUBLIC-SOURCE CANDIDATE; NOT YET COMMITTED. This is *not* approval to deploy source files on the public website or an assertion that content licensing has been resolved.
+**2026-10-30 — Signed-off selection:** 75 immutable science/source files, SHA-pinned to `WAKEEL-2-V0.21.3-SOURCE-PACK.zip`; 73 of 148 inner-manifest records intentionally excluded, plus original `MANIFEST.sha256.json` = 74 of 149 archive members excluded.
 
-## Scope
+**Final inspection evidence:** 75/75 byte-identical, public manifest SHA-256 `919b552c0427740849483e5fe8e47edc638a80bfcb351f4a3beefcb251468cb9`, curated archive SHA-256 `77da30249ce9d4baa51d17e8166ae4efdf66c03604f64352578b2270f2c217e6`.
 
-The full approved v0.21.3 ZIP remains frozen with SHA-256 `a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659` (149 entries). We do not alter or replace it.
+## Editorial issue closure
 
-The public Git source candidate contains exactly **75 original-byte files**:
-- **44** educational/scientific data and content,
-- **27** source, schema, tests, and tools,
-- **4** targeted machine-readable reproducibility inputs required by existing chapter-8/9 read-only tests:
-  - `_ch9_p0/golden_ch9_p0.json`
-  - `content/chapter-08/runs.log`
-  - `content/chapter-09/runs.log`
-  - `content/chapter-09/archive/v1.0/results.json`
+1. **Original `README.md` remains excluded.** GitHub repository uses an independently maintained README for product and contributor context. It is not the frozen educational README.
+2. **`content/chapter-01/review-notes.md` remains excluded.** It is reviewer-facing, not learner content. Keep it with the controlled 149-file research archive.
+3. **`content/chapter-08/test_invocation_replay.transcript.txt` remains excluded.** The read-only 178/178 suite passes without it; the replay mode is separate and can generate a fresh transcript when intentionally invoked. It is not a prerequisite of P0.
 
-**74 original files excluded**, including historic reviews/archived atlases, change logs, generated build outputs, and the original 149-file manifest (which must not be misrepresented as a 75-file manifest). A separate `PUBLIC-MANIFEST.json` records exact SHA-256 for the 75 public source files and the canonical full source ZIP digest.
+The post-release `signoff-v0.21.3/` remains a separately controlled archive, not published to GitHub.
 
-The **post-release `signoff-v0.21.3/`** remains outside the public repository. Preserve it in the owner's controlled evidence archive. A public summary may cite its approved state and hashes, but must not reproduce internal review records by default.
+## Local tests completed on selected 75-file subset
 
-## Independently verified: 75-file subset
-
-From a fresh copy of the curated 75 files using Python 3.13.5 and NumPy 2.3.5:
-- `validate.py`: PASS, 44 stations, 9 chapters, 389 topics, 125 relations.
+- `validate.py`: PASS (44 stations, 9 chapters, 389 topics, 125 links).
+- `selftest.py`: PASS — 14 invalid mutations rejected, 2 healthy accepted, no baseline report modification.
 - `build_atlas.py`: PASS.
-- `test_chapter8.py`: 178/178 PASS (read-only).
-- `test_chapter9.py`: 107/107 PASS (read-only).
-- These are not new training runs. Full chapter 6/7 replay is still restricted to the reference environment; the full selftest was not independently completed in this curated subset run.
+- `test_chapter8.py`: 178/178 PASS, read-only.
+- `test_chapter9.py`: 107/107 PASS, read-only.
 
-## Build candidate and check exact bytes
+This verifies a scoped source release, not browser deploy, cross-environment chapter-6/7 reruns or full independent scientific peer review.
 
-Obtain the owner-provided approved ZIP and `IMPORT-REPORT.json` in a trusted local workstation. Both are required and SHA-256 pinned.
+## Safely stage actual ZIP to GitHub
+
+The approved curated ZIP is available in this conversation and must be placed **outside** the cloned repository. On a trusted workstation with Git access and a clean checkout of branch `chore/v0213-baseline-import-p0`:
 
 ```sh
-python tools/prepare_public_v0213.py --archive /path/to/WAKEEL-2-V0.21.3-SOURCE-PACK.zip --classification /path/to/IMPORT-REPORT.json --output /tmp/WAKEEL2-V0213-CURATED-PUBLIC-SOURCE-CANDIDATE.zip
+python tools/publish_curated_v0213.py --repo . --archive /path/to/WAKEEL2-V0213-CURATED-PUBLIC-SOURCE-CANDIDATE.zip
 ```
 
-Extract the output **only** into a staging branch of `ERLab-ai/Wakeel` and run:
-```sh
-python tools/verify_public_v0213.py baseline/v0.21.3
-cd baseline/v0.21.3
-python tools/validate.py
-python tools/build_atlas.py
-python tools/test_chapter8.py
-python tools/test_chapter9.py
-```
+The default operation checks archive SHA-256, 76 safe members, embedded 75-file manifest and its pinned SHA-256, Git origin, current branch and clean work tree, then stages **only the 76 files** under `baseline/v0.21.3/`. Inspect with `git diff --cached --stat`. Then commit and push manually, or use `--push` in a first invocation from a **clean** checkout to commit/push in one operation.
 
-The original source archive and private review evidence never need to be added to Git.
+**The original scientific source archive, private historical reviews, signoff evidence and local audit reports must not enter the Git staging area.**
 
-## Publication controls
+## Source is not the deploy artifact
 
-- The repository is public: before committing the 75 source files, verify copyright and third-party distribution rights and confirm no personal/confidential data. A simple automated pattern scan found no obvious email, private-key PEM or credential strings, but **does not constitute full approval**.
-- This is a **source allowlist**, not a hosted web allowlist. Public hosting uses a distinct, stricter build allowlist. Do not expose Python tools, raw scientific run logs, experiment archives, review notes or manifest internals as accessible website assets.
-- No rewrite of the 75 original files is permitted; the public manifest is an additional record.
-- Do not retroactively edit the approved scientific ZIP or move sign-off evidence into a public `signoff-v0.21.3/` folder without separate authorization.
-- Until the actual source is committed to the correct branch and GitHub CI runs on it, PR #3 and Issue #2 remain OPEN.
+No raw `baseline/v0.21.3/` folder is served via a public web host. Create a distinct deployment allowlist for the actual browser-facing content and deny internal tools, review files, scientific run logs and archived P0 evidence. Do not claim P0 complete until 76 files are actually in GitHub and the mandatory `scientific-baseline` CI job passes there.
 
-**Workstreams:** v0.21.3 = frozen educational science. v0.22 = new user interface and interactive learning runtime. Avoid cross-import of unrelated WKL-024BC/v1.58 content.
+**Approved frozen identity:** `a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659`. Distinct `WKL-024BC/v1.58` is not part of Wakeel 2.0 v0.21.3.
