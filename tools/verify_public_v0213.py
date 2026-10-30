@@ -3,6 +3,7 @@
 import hashlib, json, pathlib, sys
 
 CANONICAL = "a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659"
+APPROVED_PUBLIC_MANIFEST_SHA256 = "919b552c0427740849483e5fe8e47edc638a80bfcb351f4a3beefcb251468cb9"
 EVIDENCE = {
  "_ch9_p0/golden_ch9_p0.json",
  "content/chapter-08/runs.log",
@@ -22,7 +23,10 @@ def permitted(name):
 
 def verify(root):
     root=pathlib.Path(root)
-    meta=json.loads((root/"PUBLIC-MANIFEST.json").read_text(encoding="utf-8"))
+    raw=(root/"PUBLIC-MANIFEST.json").read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=APPROVED_PUBLIC_MANIFEST_SHA256:
+        raise ValueError("Public manifest digest differs from the reviewed 75-file original-byte allowlist")
+    meta=json.loads(raw)
     files=meta.get("files",{})
     if meta.get("canonical_source_sha256")!=CANONICAL or len(files)!=75:
         raise ValueError("Missing or wrong canonical archive identity / count")

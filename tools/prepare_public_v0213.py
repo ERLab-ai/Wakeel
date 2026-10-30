@@ -5,6 +5,7 @@ from import_v0213 import verify
 
 CANONICAL="a97899ca74ec4a269b9a677c9618b0901de07dcbb9fc65b97059b2bd9eac6659"
 CLASSIFICATION="305af558ed5fc584787217dcf2b2470a682a690ae781841252a611d5b130425b"
+APPROVED_PUBLIC_MANIFEST_SHA256="919b552c0427740849483e5fe8e47edc638a80bfcb351f4a3beefcb251468cb9"
 EVIDENCE={"_ch9_p0/golden_ch9_p0.json","content/chapter-08/runs.log","content/chapter-09/runs.log","content/chapter-09/archive/v1.0/results.json"}
 CATEGORIES={"educational-scientific-source","source-tooling"}
 def digest(b):return hashlib.sha256(b).hexdigest()
@@ -36,10 +37,13 @@ def prepare(archive,classification,output):
               "scope":"Source for public Git repository, NOT a website deployment allowlist",
               "evidence_required_by_readonly_scientific_tests":sorted(EVIDENCE),
               "files":{n:digest(b) for n,b in sorted(data.items())}}
+    serialized=(json.dumps(manifest,ensure_ascii=False,sort_keys=True,indent=2)+"\n").encode()
+    if digest(serialized)!=APPROVED_PUBLIC_MANIFEST_SHA256:
+        raise ValueError("Generated allowlist differs from the independently reviewed exact-byte set")
     if output.exists():raise FileExistsError("Refusing to overwrite existing ZIP")
     output.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(output,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-        data["PUBLIC-MANIFEST.json"]=(json.dumps(manifest,ensure_ascii=False,sort_keys=True,indent=2)+"\n").encode()
+        data["PUBLIC-MANIFEST.json"]=serialized
         for name, b in sorted(data.items()):
             f=zipfile.ZipInfo("baseline/v0.21.3/"+name,date_time=(2026,10,30,0,0,0))
             f.compress_type=zipfile.ZIP_DEFLATED;f.external_attr=0o644<<16
