@@ -1,0 +1,5940 @@
+{
+ "schema": "wakeel.knowledge-registry.v0.3",
+ "schema_uri": "schema/wakeel-registry.schema.json",
+ "date": "2026-10-25",
+ "status": "PLANNING_DRAFT_NOT_IMPLEMENTATION",
+ "supersedes": "wakeel.knowledge-registry.v0.2",
+ "revision": "r2-review-applied",
+ "scope": "All major AI branches; open-ended not final exhaustive universal ontology",
+ "fundamental_rule": "Every topic independently accessible; prerequisites inform explanations, never gate access.",
+ "single_source_of_truth": {
+  "rule_ar": "العلاقات تُخزَّن في relations وحدها. لا تُنسخ داخل الموضوع. ما يظهر في صفحة الموضوع مشتق عند القراءة.",
+  "reason_ar": "v0.1 كان يخزن كل علاقة مرتين (prerequisites وrelated) بفردتين مختلفتين لاسم النوع، فكان الانحراف الصامت ممكناً.",
+  "derived_at_read_time": [
+   "prerequisites(topic)",
+   "related(topic)",
+   "topic_count(domain)",
+   "coverage_counts"
+  ]
+ },
+ "domain_groups": [
+  {
+   "id": "GRP-FOUND",
+   "title_ar": "الأسس",
+   "title_en": "Foundations",
+   "domain_ids": [
+    "FND",
+    "MAT",
+    "DAT",
+    "HIS"
+   ]
+  },
+  {
+   "id": "GRP-METHODS",
+   "title_ar": "مناهج الذكاء",
+   "title_en": "AI Methods",
+   "domain_ids": [
+    "SYM",
+    "ML",
+    "DLN",
+    "RLC"
+   ]
+  },
+  {
+   "id": "GRP-MODELS",
+   "title_ar": "النماذج والتوليد",
+   "title_en": "Models and Generation",
+   "domain_ids": [
+    "NLP",
+    "LLM",
+    "TRN",
+    "INF",
+    "CVG",
+    "AUD",
+    "MMU"
+   ]
+  },
+  {
+   "id": "GRP-SYSTEMS",
+   "title_ar": "الأنظمة والفعل",
+   "title_en": "Systems and Action",
+   "domain_ids": [
+    "AGT",
+    "ROB",
+    "SYS"
+   ]
+  },
+  {
+   "id": "GRP-QUALITY",
+   "title_ar": "الجودة والبحث",
+   "title_en": "Quality, Society and Research",
+   "domain_ids": [
+    "EVA",
+    "HUM",
+    "RES",
+    "APP"
+   ]
+  }
+ ],
+ "domains": [
+  {
+   "id": "FND",
+   "group_id": "GRP-FOUND",
+   "title_ar": "المفاهيم التأسيسية والحوسبة",
+   "title_en": "Foundations and Computing"
+  },
+  {
+   "id": "MAT",
+   "group_id": "GRP-FOUND",
+   "title_ar": "الرياضيات والاحتمال والتحسين",
+   "title_en": "Mathematics and Optimization"
+  },
+  {
+   "id": "DAT",
+   "group_id": "GRP-FOUND",
+   "title_ar": "البيانات والقياس والمنهج التجريبي",
+   "title_en": "Data and Experimental Practice"
+  },
+  {
+   "id": "SYM",
+   "group_id": "GRP-METHODS",
+   "title_ar": "الذكاء الرمزي والبحث وتمثيل المعرفة",
+   "title_en": "Symbolic AI, Search and Reasoning"
+  },
+  {
+   "id": "HIS",
+   "group_id": "GRP-FOUND",
+   "title_ar": "تاريخ الذكاء الاصطناعي وتطور أفكاره",
+   "title_en": "History of AI and Paradigms"
+  },
+  {
+   "id": "ML",
+   "group_id": "GRP-METHODS",
+   "title_ar": "التعلم الآلي الكلاسيكي",
+   "title_en": "Classical Machine Learning"
+  },
+  {
+   "id": "DLN",
+   "group_id": "GRP-METHODS",
+   "title_ar": "الشبكات العصبية والتعلم العميق",
+   "title_en": "Neural Networks and Deep Learning"
+  },
+  {
+   "id": "NLP",
+   "group_id": "GRP-MODELS",
+   "title_ar": "اللغة والنصوص والتمثيل اللغوي",
+   "title_en": "Natural Language Processing"
+  },
+  {
+   "id": "LLM",
+   "group_id": "GRP-MODELS",
+   "title_ar": "النمذجة اللغوية وبناء النماذج",
+   "title_en": "Language Modeling and Architectures"
+  },
+  {
+   "id": "TRN",
+   "group_id": "GRP-MODELS",
+   "title_ar": "التدريب والضبط اللاحق والمحاذاة",
+   "title_en": "Training and Post-Training"
+  },
+  {
+   "id": "INF",
+   "group_id": "GRP-MODELS",
+   "title_ar": "الاستدلال والتوليد وكفاءة التشغيل",
+   "title_en": "Inference and Generation Efficiency"
+  },
+  {
+   "id": "AGT",
+   "group_id": "GRP-SYSTEMS",
+   "title_ar": "الاسترجاع والأدوات والوكلاء",
+   "title_en": "Retrieval, Tools and Agents"
+  },
+  {
+   "id": "CVG",
+   "group_id": "GRP-MODELS",
+   "title_ar": "الرؤية الحاسوبية وتوليد الصور",
+   "title_en": "Computer Vision and Image Generation"
+  },
+  {
+   "id": "AUD",
+   "group_id": "GRP-MODELS",
+   "title_ar": "الصوت والكلام",
+   "title_en": "Speech and Audio AI"
+  },
+  {
+   "id": "MMU",
+   "group_id": "GRP-MODELS",
+   "title_ar": "الذكاء متعدد الوسائط والفيديو",
+   "title_en": "Multimodal and Video AI"
+  },
+  {
+   "id": "RLC",
+   "group_id": "GRP-METHODS",
+   "title_ar": "التعلم المعزز والقرار والسببية",
+   "title_en": "Reinforcement Learning, Decision and Causality"
+  },
+  {
+   "id": "ROB",
+   "group_id": "GRP-SYSTEMS",
+   "title_ar": "الروبوتات والإدراك والتحكم",
+   "title_en": "Robotics and Embodied AI"
+  },
+  {
+   "id": "SYS",
+   "group_id": "GRP-SYSTEMS",
+   "title_ar": "هندسة النظم والعتاد والنشر",
+   "title_en": "AI Engineering, Systems and Hardware"
+  },
+  {
+   "id": "EVA",
+   "group_id": "GRP-QUALITY",
+   "title_ar": "التقييم والموثوقية والأمن",
+   "title_en": "Evaluation, Reliability and Security"
+  },
+  {
+   "id": "HUM",
+   "group_id": "GRP-QUALITY",
+   "title_ar": "الإنسان والمجتمع والحوكمة",
+   "title_en": "Human Factors, Society and Governance"
+  },
+  {
+   "id": "RES",
+   "group_id": "GRP-QUALITY",
+   "title_ar": "منهج البحث العلمي والجبهات الجديدة",
+   "title_en": "Scientific Research and Frontiers"
+  },
+  {
+   "id": "APP",
+   "group_id": "GRP-QUALITY",
+   "title_ar": "التطبيقات والحلول القطاعية",
+   "title_en": "Applications and Domain Practice"
+  }
+ ],
+ "relation_types": {
+  "motivates": {
+   "title_ar": "يحرّك",
+   "direction_ar": "من المشكلة/الحاجة إلى السؤال الذي تُنتجه",
+   "symmetric": false,
+   "is_dependency": false,
+   "example_ar": "الحاجة إلى التعامل مع اللغة ← التعلم من أمثلة ← النمذجة اللغوية"
+  },
+  "reveals_limit": {
+   "title_ar": "يكشف حداً",
+   "direction_ar": "من حل إلى السؤال الذي يظهر عند فشله",
+   "symmetric": false,
+   "is_dependency": false,
+   "example_ar": "Bigram ← محدودية السياق ← نموذج يستخدم سياقاً أطول"
+  },
+  "hard_implementation": {
+   "title_ar": "شرط تنفيذ",
+   "direction_ar": "من المتطلب إلى ما يتطلبه عند التنفيذ فقط",
+   "symmetric": false,
+   "is_dependency": true,
+   "example_ar": "المشتقات ← الانتشار العكسي عند برمجته عددياً"
+  },
+  "just_in_time": {
+   "title_ar": "تمهيد موجز",
+   "direction_ar": "من المفهوم المساعد إلى الموضوع الذي يحتاجه",
+   "symmetric": false,
+   "is_dependency": true,
+   "example_ar": "معرّف الرمز ← نشاط التضمين"
+  },
+  "contrast": {
+   "title_ar": "تقابل",
+   "direction_ar": "من نهج إلى نهج بديل يصلح للمقارنة",
+   "symmetric": true,
+   "is_dependency": false,
+   "example_ar": "القواعد المكتوبة ↔ التعلم من الأمثلة"
+  },
+  "related": {
+   "title_ar": "مرتبط",
+   "direction_ar": "ارتباط معرفي بلا ترتيب مفروض",
+   "symmetric": true,
+   "is_dependency": false,
+   "example_ar": "التحليل الصرفي ↔ التقطيع تحت الكلمة"
+  },
+  "historical_context": {
+   "title_ar": "سياق تاريخي",
+   "direction_ar": "من اللاحق إلى محطته التاريخية",
+   "symmetric": false,
+   "is_dependency": false,
+   "example_ar": "Transformer ← مراحل تطور الانتباه"
+  },
+  "explains": {
+   "title_ar": "يفسّر",
+   "direction_ar": "من الأعمق تفسيراً إلى الظاهرة التي يفسرها",
+   "symmetric": false,
+   "is_dependency": false,
+   "example_ar": "الاحتمالات ← توزيع التنبؤ والتوليد"
+  },
+  "clarifies": {
+   "title_ar": "يوضّح تمييزاً",
+   "direction_ar": "من المفهوم إلى المفاهيم المتشابهة التي يميّزها",
+   "symmetric": true,
+   "is_dependency": false,
+   "example_ar": "البرنامج ↔ النموذج ↔ البيانات"
+  },
+  "specializes": {
+   "title_ar": "تخصيص",
+   "direction_ar": "من الحالة الخاصة إلى المفهوم العام",
+   "symmetric": false,
+   "is_dependency": false,
+   "example_ar": "مثال عدائي ← اختبار المتانة"
+  }
+ },
+ "relations": [
+  {
+   "source": "FND-002",
+   "target": "FND-003",
+   "type": "motivates"
+  },
+  {
+   "source": "FND-003",
+   "target": "FND-004",
+   "type": "clarifies"
+  },
+  {
+   "source": "FND-004",
+   "target": "FND-013",
+   "type": "contrast"
+  },
+  {
+   "source": "FND-008",
+   "target": "DAT-006",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "FND-008",
+   "target": "NLP-001",
+   "type": "just_in_time"
+  },
+  {
+   "source": "DAT-001",
+   "target": "ML-001",
+   "type": "just_in_time"
+  },
+  {
+   "source": "DAT-001",
+   "target": "LLM-001",
+   "type": "just_in_time"
+  },
+  {
+   "source": "DAT-007",
+   "target": "NLP-014",
+   "type": "just_in_time"
+  },
+  {
+   "source": "DAT-008",
+   "target": "ML-015",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DAT-008",
+   "target": "TRN-006",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DAT-009",
+   "target": "EVA-003",
+   "type": "just_in_time"
+  },
+  {
+   "source": "FND-002",
+   "target": "NLP-001",
+   "type": "motivates"
+  },
+  {
+   "source": "FND-013",
+   "target": "ML-001",
+   "type": "motivates"
+  },
+  {
+   "source": "ML-001",
+   "target": "LLM-001",
+   "type": "motivates"
+  },
+  {
+   "source": "LLM-001",
+   "target": "LLM-002",
+   "type": "motivates"
+  },
+  {
+   "source": "LLM-002",
+   "target": "LLM-003",
+   "type": "motivates"
+  },
+  {
+   "source": "LLM-003",
+   "target": "LLM-004",
+   "type": "explains"
+  },
+  {
+   "source": "MAT-010",
+   "target": "LLM-005",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-011",
+   "target": "LLM-007",
+   "type": "just_in_time"
+  },
+  {
+   "source": "DAT-006",
+   "target": "NLP-002",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "NLP-002",
+   "target": "NLP-003",
+   "type": "just_in_time"
+  },
+  {
+   "source": "NLP-003",
+   "target": "NLP-004",
+   "type": "explains"
+  },
+  {
+   "source": "NLP-004",
+   "target": "LLM-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "NLP-005",
+   "target": "NLP-006",
+   "type": "just_in_time"
+  },
+  {
+   "source": "NLP-006",
+   "target": "NLP-008",
+   "type": "related"
+  },
+  {
+   "source": "NLP-004",
+   "target": "NLP-009",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "NLP-004",
+   "target": "LLM-003",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-017",
+   "target": "LLM-008",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-001",
+   "target": "LLM-008",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "LLM-007",
+   "target": "LLM-008",
+   "type": "contrast"
+  },
+  {
+   "source": "LLM-008",
+   "target": "LLM-010",
+   "type": "reveals_limit"
+  },
+  {
+   "source": "LLM-010",
+   "target": "LLM-011",
+   "type": "motivates"
+  },
+  {
+   "source": "LLM-011",
+   "target": "LLM-012",
+   "type": "reveals_limit"
+  },
+  {
+   "source": "LLM-012",
+   "target": "LLM-013",
+   "type": "motivates"
+  },
+  {
+   "source": "DLN-017",
+   "target": "LLM-013",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-018",
+   "target": "LLM-014",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "LLM-013",
+   "target": "LLM-014",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "LLM-014",
+   "target": "LLM-021",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-002",
+   "target": "DLN-005",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-005",
+   "target": "DLN-006",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-006",
+   "target": "DLN-002",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-007",
+   "target": "DLN-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-008",
+   "target": "DLN-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-006",
+   "target": "DLN-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "MAT-009",
+   "target": "DLN-008",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-007",
+   "target": "DLN-008",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "DLN-008",
+   "target": "TRN-004",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "TRN-002",
+   "target": "TRN-004",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "TRN-004",
+   "target": "TRN-005",
+   "type": "just_in_time"
+  },
+  {
+   "source": "TRN-004",
+   "target": "TRN-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "TRN-004",
+   "target": "INF-001",
+   "type": "contrast"
+  },
+  {
+   "source": "INF-001",
+   "target": "INF-002",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "INF-002",
+   "target": "LLM-009",
+   "type": "related"
+  },
+  {
+   "source": "LLM-009",
+   "target": "LLM-010",
+   "type": "reveals_limit"
+  },
+  {
+   "source": "LLM-014",
+   "target": "HIS-010",
+   "type": "historical_context"
+  },
+  {
+   "source": "LLM-010",
+   "target": "AGT-001",
+   "type": "reveals_limit"
+  },
+  {
+   "source": "AGT-001",
+   "target": "AGT-005",
+   "type": "motivates"
+  },
+  {
+   "source": "AGT-001",
+   "target": "AGT-008",
+   "type": "motivates"
+  },
+  {
+   "source": "AGT-005",
+   "target": "AGT-007",
+   "type": "just_in_time"
+  },
+  {
+   "source": "AGT-008",
+   "target": "AGT-009",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "AGT-009",
+   "target": "AGT-010",
+   "type": "explains"
+  },
+  {
+   "source": "AGT-010",
+   "target": "AGT-011",
+   "type": "explains"
+  },
+  {
+   "source": "AGT-016",
+   "target": "AGT-011",
+   "type": "just_in_time"
+  },
+  {
+   "source": "SYS-002",
+   "target": "SYS-003",
+   "type": "explains"
+  },
+  {
+   "source": "SYS-003",
+   "target": "TRN-003",
+   "type": "just_in_time"
+  },
+  {
+   "source": "HUM-013",
+   "target": "SYS-015",
+   "type": "related"
+  },
+  {
+   "source": "DAT-015",
+   "target": "RES-003",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "EVA-019",
+   "target": "RES-005",
+   "type": "related"
+  },
+  {
+   "source": "SYM-001",
+   "target": "SYM-002",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "SYM-002",
+   "target": "SYM-003",
+   "type": "contrast"
+  },
+  {
+   "source": "SYM-005",
+   "target": "SYM-006",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "SYM-006",
+   "target": "SYM-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "SYM-010",
+   "target": "AGT-005",
+   "type": "contrast"
+  },
+  {
+   "source": "RLC-002",
+   "target": "RLC-003",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "RLC-003",
+   "target": "RLC-005",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "RLC-005",
+   "target": "RLC-007",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "ROB-002",
+   "target": "ROB-006",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "ROB-003",
+   "target": "ROB-004",
+   "type": "hard_implementation"
+  },
+  {
+   "source": "ROB-004",
+   "target": "ROB-009",
+   "type": "just_in_time"
+  },
+  {
+   "source": "ROB-006",
+   "target": "ROB-011",
+   "type": "just_in_time"
+  },
+  {
+   "source": "CVG-001",
+   "target": "CVG-005",
+   "type": "just_in_time"
+  },
+  {
+   "source": "CVG-005",
+   "target": "MMU-003",
+   "type": "just_in_time"
+  },
+  {
+   "source": "AUD-001",
+   "target": "AUD-004",
+   "type": "just_in_time"
+  },
+  {
+   "source": "AUD-001",
+   "target": "AUD-005",
+   "type": "just_in_time"
+  },
+  {
+   "source": "MMU-001",
+   "target": "MMU-003",
+   "type": "just_in_time"
+  },
+  {
+   "source": "RLC-013",
+   "target": "RES-004",
+   "type": "related"
+  },
+  {
+   "source": "EVA-010",
+   "target": "HUM-013",
+   "type": "related"
+  },
+  {
+   "source": "HUM-012",
+   "target": "APP-002",
+   "type": "related"
+  },
+  {
+   "source": "EVA-013",
+   "target": "EVA-005",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "الحالة العدائية تخصيص لاختبار المتانة الأوسع",
+   "review": "accepted",
+   "review_reason_ar": "اختبار الهجمات حالة متخصصة من اختبارات المتانة، مع ضبط أن «الهجوم» ليس مرادفاً «للاختبار»."
+  },
+  {
+   "source": "DAT-007",
+   "target": "NLP-008",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "التطبيع إجراء بيانات داخل تحديات العربية الأوسع",
+   "review": "accepted",
+   "review_reason_ar": "التطبيع العربي تطبيق محدد داخل معالجة العربية."
+  },
+  {
+   "source": "NLP-016",
+   "target": "EVA-008",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "تقييم العربية حالة خاصة من التقييم عبر اللغات",
+   "review": "accepted",
+   "review_reason_ar": "تقييم العربية واللهجات صورة متخصصة من التقييم عبر اللغات."
+  },
+  {
+   "source": "AUD-013",
+   "target": "EVA-008",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "تقييم الكلام العربي حالة خاصة من التقييم عبر اللغات",
+   "review": "edited",
+   "was_type": "specializes",
+   "review_reason_ar": "موضوع الكلام العربي أوسع من «التقييم»؛ يشمل ASR وTTS والفروق اللهجية."
+  },
+  {
+   "source": "DLN-021",
+   "target": "ML-019",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "GNN حالة خاصة من التعلم على الرسوم",
+   "review": "accepted",
+   "review_reason_ar": "GNN تطبيق خاص للتعلم من الرسوم البيانية."
+  },
+  {
+   "source": "DLN-006",
+   "target": "TRN-001",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "صياغة هدف لمهمة تحتاج مفهوم الخسارة والهدف",
+   "review": "accepted",
+   "review_reason_ar": "المفهوم الخاص بالخسارة مطلوب لتصميم هدف تدريب معرّف بدالة خسارة كما يصف TRN-001."
+  },
+  {
+   "source": "HUM-015",
+   "target": "DAT-013",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "بطاقة النموذج وبطاقة البيانات: كيانان مختلفان بوظيفة توثيق واحدة",
+   "review": "accepted",
+   "review_reason_ar": "بطاقات مجموعات البيانات وبطاقات النماذج منفصلتان مع هدف توثيقي مشترك."
+  },
+  {
+   "source": "MAT-017",
+   "target": "EVA-002",
+   "type": "just_in_time",
+   "added_in": "v0.2",
+   "rationale_ar": "حساب Perplexity يحتاج الانتروبيا المتقاطعة",
+   "review": "edited",
+   "was_type": "hard_implementation",
+   "review_reason_ar": "Perplexity تعتمد على log-loss لكن عنوان EVA-002 يشمل مقاييس أخرى؛ ليس كل تقييم لغوي مشروطاً بالانتروبيا المتقاطعة."
+  },
+  {
+   "source": "RES-013",
+   "target": "RLC-010",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "نموذج العالم هو الأساس الذي يستخدمه التعلم المعتمد على النموذج",
+   "review": "accepted",
+   "review_reason_ar": "World model أداة مهمة ضمن model-based RL، مع الإقرار أنهما ليسا مصطلحين مترادفين."
+  },
+  {
+   "source": "LLM-019",
+   "target": "LLM-002",
+   "type": "contrast",
+   "added_in": "v0.2",
+   "rationale_ar": "توليد غير تلقائي الانحدار مقابل توليد رمزاً برمز",
+   "review": "accepted",
+   "review_reason_ar": "التوليد الانتشاري بديل للتوليد النصي السببي التدريجي."
+  },
+  {
+   "source": "LLM-020",
+   "target": "LLM-003",
+   "type": "clarifies",
+   "added_in": "v0.2",
+   "rationale_ar": "وحدة تنبؤ كامنة/مفاهيمية مقابل وحدة رمزية",
+   "review": "edited",
+   "was_type": "contrast",
+   "review_reason_ar": "النماذج الكامنة قد تكون ذاتية الانحدار أيضاً؛ الاختلاف في وحدة التنبؤ، لا بالضرورة في التوليد التدريجي."
+  },
+  {
+   "source": "MMU-010",
+   "target": "MMU-001",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "النموذج الموحد حالة متقدمة من دمج الوسائط",
+   "review": "accepted",
+   "review_reason_ar": "ارتباط عائلة النماذج الموحدة بمفهوم تعدد الوسائط صحيح وإن كان واسعاً."
+  },
+  {
+   "source": "MMU-013",
+   "target": "ROB-001",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "سياسة الرؤية واللغة والفعل داخل نظام مجسد",
+   "review": "accepted",
+   "review_reason_ar": "VLA يرتبط بالأنظمة المجسدة، لكنه ليس مرادفاً لكل روبوت."
+  },
+  {
+   "source": "EVA-020",
+   "target": "EVA-009",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "التفسير الآلي الداخلي منهج داخل التفسير الأوسع",
+   "review": "accepted",
+   "review_reason_ar": "التفسير الآلي الداخلي شكل متخصص من تفسير النماذج."
+  },
+  {
+   "source": "DLN-020",
+   "target": "ML-020",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "التعلم المستمر والتحديث عند وصول بيانات جديدة: سياقان مختلفان للاحتفاظ بالمعرفة",
+   "review": "accepted",
+   "review_reason_ar": "التعلم المستمر والتعلم على تدفق بيانات يرتبطان مع اختلاف تعريف الاستقرار والنسيان."
+  },
+  {
+   "source": "DLN-023",
+   "target": "ML-016",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "التعلم الفوقي والنقل: كلاهما استثمار معرفة سابقة في مهمة جديدة",
+   "review": "accepted",
+   "review_reason_ar": "Meta-learning وTransfer Learning يتداخلان ويختلفان في آلية التعميم."
+  },
+  {
+   "source": "SYM-015",
+   "target": "SYM-007",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "الاستدلال بالقواعد المكتوبة مقابل الاستدلال بتعلم التمثيلات مع قيود",
+   "review": "edited",
+   "was_type": "contrast",
+   "review_reason_ar": "الهجين الرمزي العصبي قد يستخدم القواعد ذاتها؛ contrast يفترض تقابلاً زائفاً."
+  },
+  {
+   "source": "RES-012",
+   "target": "RES-017",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "البحث الآلي عن البنى والاكتشاف الآلي: أتمتة البحث مقابل أتمتة النتائج",
+   "review": "accepted",
+   "review_reason_ar": "الاكتشاف الآلي وAutoML يتداخلان دون مساواة كاملة."
+  },
+  {
+   "source": "RES-016",
+   "target": "EVA-001",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "تقييم ادعاءات العمومية حالة من الادعاء القابل للفحص",
+   "review": "accepted",
+   "review_reason_ar": "اختبار ادعاءات العمومية مثال متخصص من الاختبار المنهجي للادعاءات."
+  },
+  {
+   "source": "RES-011",
+   "target": "RES-010",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "الاستدلال وقت الاختبار محور توسع موازٍ لقوانين توسع التدريب",
+   "review": "accepted",
+   "review_reason_ar": "توسيع الحساب وقت الاختبار يرتبط بأبحاث قوانين التوسع، مع اختلاف أبعاد الموارد."
+  },
+  {
+   "source": "MAT-001",
+   "target": "MAT-007",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "المشتقة تُعرَّف على دالة",
+   "review": "accepted",
+   "review_reason_ar": "المشتقات تفترض فهم الدوال ومتغيراتها عند الحساب."
+  },
+  {
+   "source": "MAT-004",
+   "target": "MAT-005",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "الضرب الداخلي عملية على متجهات",
+   "review": "accepted",
+   "review_reason_ar": "الضرب الداخلي يتطلب متجهات عند التنفيذ."
+  },
+  {
+   "source": "MAT-015",
+   "target": "MAT-017",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "الانتروبيا المتقاطعة تُحسب بلوغاريتم",
+   "review": "accepted",
+   "review_reason_ar": "الحساب العددي للانتروبيا المتقاطعة يتطلب اللوغاريتمات."
+  },
+  {
+   "source": "MAT-016",
+   "target": "MAT-017",
+   "type": "just_in_time",
+   "added_in": "v0.2",
+   "rationale_ar": "الانتروبيا أصل مقياس الخسارة",
+   "review": "edited",
+   "was_type": "hard_implementation",
+   "review_reason_ar": "فهم Shannon entropy يفيد في تفسير cross-entropy وليس شرطاً لتنفيذ -sum p log q."
+  },
+  {
+   "source": "MAT-003",
+   "target": "LLM-002",
+   "type": "just_in_time",
+   "added_in": "v0.2",
+   "rationale_ar": "التسلسل كترتيب قبل الحديث عن توليد متتابع",
+   "review": "accepted",
+   "review_reason_ar": "فكرة التسلسل يمكن تمهيدها داخل المدخل إلى التوليد التدريجي."
+  },
+  {
+   "source": "DLN-001",
+   "target": "DLN-003",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "التنشيط يُطبَّق على مخرج العصبون",
+   "review": "accepted",
+   "review_reason_ar": "وحدة الإدخال الموزونة تجعل لدالة التنشيط سياقاً تنفيذياً."
+  },
+  {
+   "source": "DLN-010",
+   "target": "TRN-004",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "حلقة التدريب تعمل بدفعات وخطوات",
+   "review": "accepted",
+   "review_reason_ar": "إدراك خطوات ودفعات وعصور التدريب ضروري لكتابة حلقة كاملة ومراقبتها."
+  },
+  {
+   "source": "DLN-011",
+   "target": "DLN-018",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "بنية Transformer تستخدم التطبيع والروابط المتبقية",
+   "review": "accepted",
+   "review_reason_ar": "الربط بين residual/normalization والتنفيذ القياسي لبنية Transformer صحيح لطبقة التنفيذ."
+  },
+  {
+   "source": "DLN-014",
+   "target": "DLN-018",
+   "type": "just_in_time",
+   "added_in": "v0.2",
+   "rationale_ar": "بنية Transformer تحتاج تمثيلاً لترتيب المواضع",
+   "review": "edited",
+   "was_type": "hard_implementation",
+   "review_reason_ar": "تمثيل المواضع مهم لنمذجة ترتيب اللغة، لكن يمكن بناء Transformer بلا positional embeddings مستقلة، فلا يُعامل كشرط تنفيذي عام مطلق."
+  },
+  {
+   "source": "DLN-016",
+   "target": "LLM-012",
+   "type": "hard_implementation",
+   "added_in": "v0.2",
+   "rationale_ar": "نمذجة RNN اللغوية تحتاج شبكة متكررة",
+   "review": "accepted",
+   "review_reason_ar": "RNN كأساس تنفيذي لنماذج اللغة المتكررة."
+  },
+  {
+   "source": "LLM-007",
+   "target": "LLM-006",
+   "type": "specializes",
+   "added_in": "v0.2",
+   "rationale_ar": "Bigram حالة خاصة من N-gram عند n=2",
+   "review": "accepted",
+   "review_reason_ar": "Bigram حالة N-gram عند n=2."
+  },
+  {
+   "source": "LLM-006",
+   "target": "HIS-009",
+   "type": "historical_context",
+   "added_in": "v0.2",
+   "rationale_ar": "تاريخ النماذج قبل Transformer يمر بالنماذج الإحصائية",
+   "review": "edited",
+   "was_type": "historical_context",
+   "review_reason_ar": "historical_context معرّفة «من الموضوع إلى سياقه التاريخي»، والحافة الحالية تبدأ من عرض التاريخ إلى N-gram؛ نعكس الاتجاه."
+  },
+  {
+   "source": "DAT-004",
+   "target": "TRN-002",
+   "type": "just_in_time",
+   "added_in": "v0.2",
+   "rationale_ar": "تجهيز المدونة يبدأ بالتنظيف والتحقق",
+   "review": "edited",
+   "was_type": "hard_implementation",
+   "review_reason_ar": "قد تستخدم مدونة تدريب خاماً أو معدة مسبقاً؛ التنظيف مهم غالباً وليس شرطاً عاماً لكل بناء corpus."
+  },
+  {
+   "source": "FND-006",
+   "target": "FND-010",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "برمجة بايثون تحتاج الشروط والحلقات والدوال",
+   "review": "edited",
+   "was_type": "hard_implementation",
+   "review_reason_ar": "تعلم أساسيات Python يبدأ قبل استيعاب كل الشروط والحلقات والدوال؛ hard_implementation يفرض شرطاً زائفاً."
+  },
+  {
+   "source": "NLP-007",
+   "target": "NLP-003",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "فك الترميز الوجه الآخر لبناء المقطع",
+   "review": "accepted",
+   "review_reason_ar": "فك الترميز والتقطيع متصلان، وليس أحدهما متطلباً معرفياً صارماً للآخر."
+  },
+  {
+   "source": "FND-014",
+   "target": "AGT-010",
+   "type": "clarifies",
+   "added_in": "v0.2",
+   "rationale_ar": "تمييز النموذج/النظام يوازي تمييز النموذج/الوكيل/المنظومة",
+   "review": "provisional",
+   "review_note_ar": "العلاقة معقولة، لكن التقارب بين FND-014 وAGT-010 يقتضي اختبار استقلال أهدافهما قبل تثبيت موضوعين منفصلين."
+  },
+  {
+   "source": "EVA-007",
+   "target": "EVA-001",
+   "type": "related",
+   "added_in": "v0.2",
+   "rationale_ar": "الادعاء قد يكون قابلاً للاختبار لكنه غير مسند بالأدلة؛ يوضح الربط الفرق بين قابلية الاختبار وصحة الإسناد.",
+   "review": "edited",
+   "was_type": "related",
+   "review_reason_ar": "الإدعاء بلا مصدر ليس بالضرورة غير قابل للاختبار؛ نصحح التبرير ليشرح الفرق بين قابلية الاختبار وكفاية الأدلة."
+  }
+ ],
+ "edge_review": {
+  "source": "data/inputs/WAKEEL-2-V02-EDGE-REVIEW.json",
+  "scope_ar": "مراجعة مستقلة للحواف المضافة في v0.2؛ لا تُعد تصديقاً بمصدر علمي فردي.",
+  "counts": {
+   "accept": 26,
+   "edit": 10,
+   "remove": 1,
+   "review": 1
+  },
+  "applied": {
+   "accepted": 26,
+   "edited": 10,
+   "removed": 1,
+   "provisional": 1
+  },
+  "provisional_edges": [
+   [
+    "FND-014",
+    "AGT-010",
+    "clarifies"
+   ]
+  ]
+ },
+ "topics": [
+  {
+   "id": "FND-001",
+   "domain_id": "FND",
+   "title_ar": "ما الذكاء وما الذي نقيسه؟",
+   "title_en": "Intelligence and its measurement",
+   "guiding_question_ar": "بأي معنى نصف نظاماً بأنه ذكي، وما حدود هذا الوصف؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-002",
+   "domain_id": "FND",
+   "title_ar": "لماذا نريد أن تفهم الآلات طلباتنا؟",
+   "title_en": "Human problems motivating AI",
+   "guiding_question_ar": "ما المشكلات التي نأمل أن تساعدنا الآلات في حلها؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-003",
+   "domain_id": "FND",
+   "title_ar": "ما الفرق بين الحاسوب والبرنامج والنموذج؟",
+   "title_en": "Computer, program and model",
+   "guiding_question_ar": "ما الذي تنفذه الآلة وما الذي نتعلمه من البيانات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-004",
+   "domain_id": "FND",
+   "title_ar": "البيانات مقابل التعليمات",
+   "title_en": "Data versus instructions",
+   "guiding_question_ar": "متى نعطي البرنامج قواعد، ومتى نعطيه أمثلة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-005",
+   "domain_id": "FND",
+   "title_ar": "الخوارزمية والخطوات القابلة للتنفيذ",
+   "title_en": "Algorithms and procedures",
+   "guiding_question_ar": "كيف نحول فكرة إلى خطوات محددة تنفذها آلة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-006",
+   "domain_id": "FND",
+   "title_ar": "الشروط والحلقات والدوال",
+   "title_en": "Conditions, loops and functions",
+   "guiding_question_ar": "كيف تُبنى أبسط البرامج التي سنقارنها بالنماذج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-007",
+   "domain_id": "FND",
+   "title_ar": "حالات الإدخال والإخراج",
+   "title_en": "Inputs, outputs and state",
+   "guiding_question_ar": "كيف نستدل على سلوك نظام من مدخلاته ومخرجاته؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-008",
+   "domain_id": "FND",
+   "title_ar": "التمثيل الرقمي والبتات والبايتات",
+   "title_en": "Digital representation, bits and bytes",
+   "guiding_question_ar": "كيف يخزن الحاسوب النص والصورة والصوت؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-009",
+   "domain_id": "FND",
+   "title_ar": "الأعداد والحساب العائم",
+   "title_en": "Numbers and floating-point arithmetic",
+   "guiding_question_ar": "لماذا لا تكون حسابات الحاسوب دقيقة دائماً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-010",
+   "domain_id": "FND",
+   "title_ar": "البرمجة بلغة Python",
+   "title_en": "Python programming essentials",
+   "guiding_question_ar": "كيف نجرب فكرة حسابية في برنامج صغير؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-011",
+   "domain_id": "FND",
+   "title_ar": "هياكل البيانات الأساسية",
+   "title_en": "Basic data structures",
+   "guiding_question_ar": "متى نستخدم قائمة أو قاموساً أو مصفوفة أو رسماً بيانياً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-012",
+   "domain_id": "FND",
+   "title_ar": "التعقيد الحسابي والموارد",
+   "title_en": "Computational complexity and resources",
+   "guiding_question_ar": "لماذا يستغرق حل بعض المشكلات وقتاً أو ذاكرة أكثر؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-013",
+   "domain_id": "FND",
+   "title_ar": "البرنامج ذي القواعد الثابتة",
+   "title_en": "Rule-based software",
+   "guiding_question_ar": "متى تنجح القواعد اليدوية، ومتى تصبح هشة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-014",
+   "domain_id": "FND",
+   "title_ar": "النموذج مقابل نظام الذكاء الاصطناعي",
+   "title_en": "AI model versus AI system",
+   "guiding_question_ar": "ما الفرق بين أوزان النموذج والواجهة والأدوات والقيود حوله؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-015",
+   "domain_id": "FND",
+   "title_ar": "أشكال مخرجات أنظمة الذكاء الاصطناعي",
+   "title_en": "AI outputs and tasks",
+   "guiding_question_ar": "كيف تختلف التنبؤات والتصنيفات والتوليد والقرارات؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-016",
+   "domain_id": "FND",
+   "title_ar": "الذكاء العام والمتخصص",
+   "title_en": "Narrow and general AI",
+   "guiding_question_ar": "ماذا تعني القدرة المتخصصة وما الذي لا تعنيه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "FND-017",
+   "domain_id": "FND",
+   "title_ar": "الفرضيات والادعاءات القابلة للاختبار",
+   "title_en": "Testable claims and assumptions",
+   "guiding_question_ar": "كيف نحول وعداً غامضاً عن الذكاء إلى سؤال قابل للفحص؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-001",
+   "domain_id": "MAT",
+   "title_ar": "المتغيرات والدوال والرسوم",
+   "title_en": "Variables, functions and graphs",
+   "guiding_question_ar": "كيف نصف علاقة بين مدخلات ومخرجات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-002",
+   "domain_id": "MAT",
+   "title_ar": "المعادلات والنسب والتغير",
+   "title_en": "Equations, ratios and change",
+   "guiding_question_ar": "كيف نقارن كميتين ونفسر الفرق بينهما؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-003",
+   "domain_id": "MAT",
+   "title_ar": "المجموعات والتسلسلات",
+   "title_en": "Sets and sequences",
+   "guiding_question_ar": "كيف نمثل مفردات النص وتسلسل الرموز؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-004",
+   "domain_id": "MAT",
+   "title_ar": "المتجهات والمصفوفات",
+   "title_en": "Vectors and matrices",
+   "guiding_question_ar": "كيف نمثل مجموعة أعداد ونجري عليها عمليات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-005",
+   "domain_id": "MAT",
+   "title_ar": "الضرب الداخلي وأطوال المتجهات",
+   "title_en": "Dot products and norms",
+   "guiding_question_ar": "كيف نقيس توافق تمثيلين عدديين؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-006",
+   "domain_id": "MAT",
+   "title_ar": "تحويلات خطية ومصفوفات أوزان",
+   "title_en": "Linear maps and weight matrices",
+   "guiding_question_ar": "كيف تحول الشبكة متجه مدخلات إلى تمثيل جديد؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-007",
+   "domain_id": "MAT",
+   "title_ar": "المشتقات والميل",
+   "title_en": "Derivatives and slopes",
+   "guiding_question_ar": "كيف نعرف اتجاه تغير خطأ النموذج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-008",
+   "domain_id": "MAT",
+   "title_ar": "قاعدة السلسلة والمشتقات الجزئية",
+   "title_en": "Chain rule and partial derivatives",
+   "guiding_question_ar": "كيف ينتقل أثر الخطأ عبر عمليات متتابعة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-009",
+   "domain_id": "MAT",
+   "title_ar": "التدرج والتحسين التدريجي",
+   "title_en": "Gradients and gradient descent",
+   "guiding_question_ar": "كيف نحسّن مجموعة كبيرة من المعلمات خطوة خطوة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-010",
+   "domain_id": "MAT",
+   "title_ar": "الاحتمال والاحتمال الشرطي",
+   "title_en": "Probability and conditional probability",
+   "guiding_question_ar": "كيف نعبر عن عدم اليقين بعد معرفة السياق؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-011",
+   "domain_id": "MAT",
+   "title_ar": "المتغيرات العشوائية والتوزيعات",
+   "title_en": "Random variables and distributions",
+   "guiding_question_ar": "كيف نمثل نتائج متعددة واحتمالاتها؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-012",
+   "domain_id": "MAT",
+   "title_ar": "بايز والاستدلال الاحتمالي",
+   "title_en": "Bayesian inference",
+   "guiding_question_ar": "كيف تتغير معتقداتنا عندما تظهر أدلة جديدة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-013",
+   "domain_id": "MAT",
+   "title_ar": "المتوسط والتباين وفواصل الثقة",
+   "title_en": "Mean, variance and confidence intervals",
+   "guiding_question_ar": "كيف نميز الفرق الحقيقي من تقلب العينة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-014",
+   "domain_id": "MAT",
+   "title_ar": "أخذ العينات والتقدير",
+   "title_en": "Sampling and estimation",
+   "guiding_question_ar": "كيف نستنتج من جزء من البيانات إلى مجموعة أكبر؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-015",
+   "domain_id": "MAT",
+   "title_ar": "اللوغاريتمات والأسس",
+   "title_en": "Logarithms and exponentials",
+   "guiding_question_ar": "لماذا تستخدم لوغاريتمات الاحتمالات في التدريب؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-016",
+   "domain_id": "MAT",
+   "title_ar": "الانتروبيا والمعلومات",
+   "title_en": "Entropy and information theory",
+   "guiding_question_ar": "كيف نقيس عدم اليقين أو مقدار المعلومات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-017",
+   "domain_id": "MAT",
+   "title_ar": "الخسارة والانتروبيا المتقاطعة",
+   "title_en": "Loss and cross-entropy",
+   "guiding_question_ar": "كيف نقيس جودة توقع النموذج لرمز صحيح؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-018",
+   "domain_id": "MAT",
+   "title_ar": "مبادئ الإحصاء والفرضيات",
+   "title_en": "Statistical hypothesis testing",
+   "guiding_question_ar": "كيف نختبر فروق النتائج دون مبالغة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-019",
+   "domain_id": "MAT",
+   "title_ar": "التحسين المحدب وغير المحدب",
+   "title_en": "Convex and nonconvex optimization",
+   "guiding_question_ar": "لماذا يصعب ضمان أفضل حل أثناء تدريب الشبكات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MAT-020",
+   "domain_id": "MAT",
+   "title_ar": "القيود والأهداف المتعددة",
+   "title_en": "Constraints and multi-objective optimization",
+   "guiding_question_ar": "كيف نوازن بين الدقة والسرعة والتكلفة والسلامة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-001",
+   "domain_id": "DAT",
+   "title_ar": "ما مجموعة البيانات؟",
+   "title_en": "What is a dataset?",
+   "guiding_question_ar": "كيف تتكون الأمثلة التي نعلّم النموذج منها؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-002",
+   "domain_id": "DAT",
+   "title_ar": "مصادر البيانات وتراخيصها",
+   "title_en": "Data origins and licenses",
+   "guiding_question_ar": "من أين تأتي البيانات وما حدود استخدامها؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-003",
+   "domain_id": "DAT",
+   "title_ar": "جمع البيانات وتوثيق المصدر",
+   "title_en": "Data collection and provenance",
+   "guiding_question_ar": "كيف نعرف ما الذي دخل مجموعة التدريب؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-004",
+   "domain_id": "DAT",
+   "title_ar": "التنظيف والتحقق من الجودة",
+   "title_en": "Data cleaning and validation",
+   "guiding_question_ar": "كيف تؤثر الأخطاء والتكرارات في النتائج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-005",
+   "domain_id": "DAT",
+   "title_ar": "التنميط اللغوي والتنوع",
+   "title_en": "Language coverage and diversity",
+   "guiding_question_ar": "كيف نضمن ألا نختبر العربية ببيانات لا تمثلها؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-006",
+   "domain_id": "DAT",
+   "title_ar": "ترميز النصوص وUnicode",
+   "title_en": "Text encoding and Unicode",
+   "guiding_question_ar": "لماذا يختلف تمثيل الأحرف والنصوص المتشابهة بصرياً؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-007",
+   "domain_id": "DAT",
+   "title_ar": "التطبيع العربي والتشكيل",
+   "title_en": "Arabic normalization and diacritics",
+   "guiding_question_ar": "متى نزيل التشكيل أو نوحد الألف، وماذا نفقد؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-008",
+   "domain_id": "DAT",
+   "title_ar": "تجزئة التدريب والتحقق والاختبار",
+   "title_en": "Train, validation and test splits",
+   "guiding_question_ar": "لماذا لا نختبر النموذج على ما تعلم منه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-009",
+   "domain_id": "DAT",
+   "title_ar": "تسرب البيانات والتكرارات",
+   "title_en": "Data leakage and duplicates",
+   "guiding_question_ar": "كيف ترفع النسخ المتكررة نتائج التقييم دون تحسن حقيقي؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-010",
+   "domain_id": "DAT",
+   "title_ar": "اختلال التوزيع وتغير البيانات",
+   "title_en": "Distribution shift and drift",
+   "guiding_question_ar": "لماذا تختلف النتيجة عندما تتغير بيئة الاستخدام؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-011",
+   "domain_id": "DAT",
+   "title_ar": "التوسيم البشري وجودة التعليقات",
+   "title_en": "Human annotation and label quality",
+   "guiding_question_ar": "كيف يؤثر اختلاف المقيمين في صحة البيانات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-012",
+   "domain_id": "DAT",
+   "title_ar": "البيانات الاصطناعية",
+   "title_en": "Synthetic data",
+   "guiding_question_ar": "متى تساعد البيانات المولدة ومتى تضخم الانحياز؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-013",
+   "domain_id": "DAT",
+   "title_ar": "توثيق مجموعات البيانات",
+   "title_en": "Datasheets and dataset cards",
+   "guiding_question_ar": "ما المعلومات التي يحتاجها من يعيد التجربة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-014",
+   "domain_id": "DAT",
+   "title_ar": "تحديد سؤال قابل للقياس",
+   "title_en": "Operationalizing a research question",
+   "guiding_question_ar": "كيف نحدد ما الذي سنقيسه قبل التنفيذ؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-015",
+   "domain_id": "DAT",
+   "title_ar": "التجربة الضابطة وتغيير متغير واحد",
+   "title_en": "Controlled experiments",
+   "guiding_question_ar": "كيف نعزل أثر تغيير واحد؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-016",
+   "domain_id": "DAT",
+   "title_ar": "البذور العشوائية وإعادة الإنتاج",
+   "title_en": "Seeds and reproducibility",
+   "guiding_question_ar": "لماذا لا تعني النتيجة من تشغيل واحد قانوناً عاماً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DAT-017",
+   "domain_id": "DAT",
+   "title_ar": "مقاييس البيانات والانحياز",
+   "title_en": "Dataset statistics and bias",
+   "guiding_question_ar": "كيف نرى ما تغطيه البيانات وما تهمله؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-001",
+   "domain_id": "SYM",
+   "title_ar": "تمثيل الحالات والأهداف",
+   "title_en": "State spaces and goals",
+   "guiding_question_ar": "كيف نحول مشكلة إلى حالات وانتقالات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-002",
+   "domain_id": "SYM",
+   "title_ar": "البحث غير الموجه BFS وDFS",
+   "title_en": "Uninformed search BFS and DFS",
+   "guiding_question_ar": "كيف نعثر على حل دون معرفة اتجاه جيد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-003",
+   "domain_id": "SYM",
+   "title_ar": "البحث الموجه A*",
+   "title_en": "Heuristic search A*",
+   "guiding_question_ar": "كيف نستعمل تقديراً لاختيار مسار أفضل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-004",
+   "domain_id": "SYM",
+   "title_ar": "دوال التقييم والحدود",
+   "title_en": "Heuristics and admissibility",
+   "guiding_question_ar": "متى تعطي دالة التوجيه مساراً صحيحاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-005",
+   "domain_id": "SYM",
+   "title_ar": "إرضاء القيود CSP",
+   "title_en": "Constraint satisfaction",
+   "guiding_question_ar": "كيف نحسب حلاً يلتزم بقيود متعددة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-006",
+   "domain_id": "SYM",
+   "title_ar": "المنطق القضي والمنطق المحمول",
+   "title_en": "Propositional and predicate logic",
+   "guiding_question_ar": "كيف نمثل قواعد يمكن التحقق من صحتها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-007",
+   "domain_id": "SYM",
+   "title_ar": "الاستدلال بالقواعد",
+   "title_en": "Rule-based inference",
+   "guiding_question_ar": "كيف نستنتج معلومة جديدة من حقائق وقواعد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-008",
+   "domain_id": "SYM",
+   "title_ar": "الأنظمة الخبيرة",
+   "title_en": "Expert systems",
+   "guiding_question_ar": "لماذا نجحت القواعد المتخصصة في مهام وفشلت في غيرها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-009",
+   "domain_id": "SYM",
+   "title_ar": "الأنطولوجيا وتصنيف المفاهيم",
+   "title_en": "Ontologies and taxonomies",
+   "guiding_question_ar": "كيف نميز «ينتمي إلى» من «يسبب»؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-010",
+   "domain_id": "SYM",
+   "title_ar": "الرسوم المعرفية",
+   "title_en": "Knowledge graphs",
+   "guiding_question_ar": "كيف نخزن العلاقات بين الكيانات والمفاهيم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-011",
+   "domain_id": "SYM",
+   "title_ar": "الاستدلال الاحتمالي وشبكات بايز",
+   "title_en": "Probabilistic graphical models",
+   "guiding_question_ar": "كيف نربط احتمالات الأحداث بأسبابها المحتملة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-012",
+   "domain_id": "SYM",
+   "title_ar": "التخطيط باستخدام الأفعال",
+   "title_en": "Classical planning",
+   "guiding_question_ar": "كيف نختار سلسلة أفعال تحقق هدفاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-013",
+   "domain_id": "SYM",
+   "title_ar": "التخطيط تحت عدم اليقين",
+   "title_en": "Planning under uncertainty",
+   "guiding_question_ar": "كيف تتغير الخطة عندما لا نعرف حالة العالم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-014",
+   "domain_id": "SYM",
+   "title_ar": "نظرية الألعاب والبحث التنافسي",
+   "title_en": "Game search and minimax",
+   "guiding_question_ar": "كيف نخطط أمام خصم له أهداف مختلفة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-015",
+   "domain_id": "SYM",
+   "title_ar": "الجمع بين الرمزي والعصبي",
+   "title_en": "Neuro-symbolic AI",
+   "guiding_question_ar": "متى نحتاج تعلم التمثيلات مع قيود منطقية؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-016",
+   "domain_id": "SYM",
+   "title_ar": "الاستدلال القابل للتحقق",
+   "title_en": "Verifiable reasoning and proofs",
+   "guiding_question_ar": "كيف نميز تفسيراً لغوياً من برهان يمكن مراجعته؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-017",
+   "domain_id": "SYM",
+   "title_ar": "الاستدلال التلقائي وإثبات النظريات",
+   "title_en": "Automated theorem proving",
+   "guiding_question_ar": "كيف يتحقق برنامج من صحة استنتاج أو برهان؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYM-018",
+   "domain_id": "SYM",
+   "title_ar": "الخوارزميات التطورية",
+   "title_en": "Evolutionary algorithms",
+   "guiding_question_ar": "كيف نستخدم الطفرات والاختيار للبحث عن حلول؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-001",
+   "domain_id": "HIS",
+   "title_ar": "نشأة سؤال الذكاء الآلي",
+   "title_en": "Origins of machine intelligence",
+   "guiding_question_ar": "كيف تحولت فكرة الذكاء الآلي إلى مجال بحثي؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-002",
+   "domain_id": "HIS",
+   "title_ar": "اختبار تورنغ وحدوده",
+   "title_en": "Turing test and its limits",
+   "guiding_question_ar": "ماذا تقيس محاكاة المحادثة وماذا لا تقيس؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-003",
+   "domain_id": "HIS",
+   "title_ar": "البدايات الرمزية ومؤتمر دارتموث",
+   "title_en": "Symbolic AI and Dartmouth",
+   "guiding_question_ar": "لماذا بدأ الباحثون بالقواعد والرموز؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-004",
+   "domain_id": "HIS",
+   "title_ar": "تاريخ البحث والتخطيط",
+   "title_en": "History of search and planning",
+   "guiding_question_ar": "كيف تطورت حلول المشكلات قبل الشبكات العميقة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-005",
+   "domain_id": "HIS",
+   "title_ar": "الأنظمة الخبيرة والشتاء الاصطناعي",
+   "title_en": "Expert systems and AI winters",
+   "guiding_question_ar": "لماذا تراجعت وعود مبكرة رغم نجاحات حقيقية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-006",
+   "domain_id": "HIS",
+   "title_ar": "التعلم الإحصائي والنماذج الاحتمالية",
+   "title_en": "Rise of statistical learning",
+   "guiding_question_ar": "كيف أصبحت البيانات بديلاً عن كتابة القواعد؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-007",
+   "domain_id": "HIS",
+   "title_ar": "الانتشار العكسي والتعلم العميق",
+   "title_en": "Backpropagation and deep learning",
+   "guiding_question_ar": "ما الذي جعل تدريب الشبكات الكبيرة ممكناً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-008",
+   "domain_id": "HIS",
+   "title_ar": "ثورة البيانات وGPU",
+   "title_en": "Data and GPU revolutions",
+   "guiding_question_ar": "كيف غيرت العتاد والبيانات نوع النماذج الممكنة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-009",
+   "domain_id": "HIS",
+   "title_ar": "من N-gram إلى RNN وLSTM",
+   "title_en": "Language models before Transformers",
+   "guiding_question_ar": "كيف حاولت النماذج القديمة معالجة السياق؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-010",
+   "domain_id": "HIS",
+   "title_ar": "الانتباه وTransformer",
+   "title_en": "Attention and Transformer milestones",
+   "guiding_question_ar": "ما المشكلة التي عالجتها آليات الانتباه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-011",
+   "domain_id": "HIS",
+   "title_ar": "التدريب المسبق ونماذج الأساس",
+   "title_en": "Pretraining and foundation models",
+   "guiding_question_ar": "لماذا أصبح النموذج العام يعاد توظيفه لمهام مختلفة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-012",
+   "domain_id": "HIS",
+   "title_ar": "نماذج الانتشار والتوليد متعدد الوسائط",
+   "title_en": "Diffusion and multimodal timeline",
+   "guiding_question_ar": "لماذا اختلف توليد الصور والصوت عن توليد النص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HIS-013",
+   "domain_id": "HIS",
+   "title_ar": "الوكلاء والأدوات والأنظمة المركبة",
+   "title_en": "Evolution of agents and tools",
+   "guiding_question_ar": "كيف تحولت النماذج إلى مكونات داخل أنظمة تنفيذ؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-001",
+   "domain_id": "ML",
+   "title_ar": "ما المقصود بالتعلم من الأمثلة؟",
+   "title_en": "Learning from examples",
+   "guiding_question_ar": "كيف تختلف القاعدة المتعلمة عن القاعدة اليدوية؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-002",
+   "domain_id": "ML",
+   "title_ar": "تصنيف مقابل انحدار",
+   "title_en": "Classification versus regression",
+   "guiding_question_ar": "متى نتوقع فئة ومتى نتوقع قيمة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-003",
+   "domain_id": "ML",
+   "title_ar": "التعلم الخاضع وغير الخاضع للإشراف",
+   "title_en": "Supervised and unsupervised learning",
+   "guiding_question_ar": "متى تتوفر إجابة صحيحة لكل مثال؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-004",
+   "domain_id": "ML",
+   "title_ar": "التعلم الذاتي وشبه الخاضع للإشراف",
+   "title_en": "Self-supervised and semi-supervised learning",
+   "guiding_question_ar": "كيف نتعلم عندما لا توجد تسميات بشرية لكل مثال؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-005",
+   "domain_id": "ML",
+   "title_ar": "الانحدار الخطي",
+   "title_en": "Linear regression",
+   "guiding_question_ar": "كيف نتنبأ بقيمة مع تفسير معاملات النموذج؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-006",
+   "domain_id": "ML",
+   "title_ar": "الانحدار اللوجستي",
+   "title_en": "Logistic regression",
+   "guiding_question_ar": "كيف نحول درجة خطية إلى احتمال فئة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-007",
+   "domain_id": "ML",
+   "title_ar": "أقرب الجيران KNN",
+   "title_en": "K-nearest neighbors",
+   "guiding_question_ar": "كيف نصنف مثالا بالاستناد إلى أمثلة شبيهة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-008",
+   "domain_id": "ML",
+   "title_ar": "أشجار القرار والغابات",
+   "title_en": "Decision trees and random forests",
+   "guiding_question_ar": "كيف تتعلم سلسلة قرارات قابلة للفحص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-009",
+   "domain_id": "ML",
+   "title_ar": "SVM وهوامش الفصل",
+   "title_en": "Support vector machines",
+   "guiding_question_ar": "كيف نفصل فئات مع تعظيم الهامش؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-010",
+   "domain_id": "ML",
+   "title_ar": "التجميع K-means",
+   "title_en": "Clustering with K-means",
+   "guiding_question_ar": "كيف نجمع أمثلة دون تسميات سابقة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-011",
+   "domain_id": "ML",
+   "title_ar": "خفض الأبعاد PCA",
+   "title_en": "Dimensionality reduction and PCA",
+   "guiding_question_ar": "كيف نرى بنية البيانات في أبعاد أقل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-012",
+   "domain_id": "ML",
+   "title_ar": "نماذج الخليط والتجميع الاحتمالي",
+   "title_en": "Mixture models",
+   "guiding_question_ar": "متى تكون الفئات احتمالية وليست حدوداً حادة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-013",
+   "domain_id": "ML",
+   "title_ar": "التوصية والترتيب",
+   "title_en": "Recommendation and ranking",
+   "guiding_question_ar": "كيف نقترح عنصرًا يناسب سياق المستخدم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-014",
+   "domain_id": "ML",
+   "title_ar": "التوازن بين الانحياز والتباين",
+   "title_en": "Bias-variance tradeoff",
+   "guiding_question_ar": "لماذا يفشل النموذج البسيط أو المعقد جداً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-015",
+   "domain_id": "ML",
+   "title_ar": "فرط التكيّف والتعميم",
+   "title_en": "Overfitting and generalization",
+   "guiding_question_ar": "لماذا تنجح نتائج التدريب ولا تنتقل إلى بيانات جديدة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-016",
+   "domain_id": "ML",
+   "title_ar": "التعلم الانتقالي",
+   "title_en": "Transfer learning",
+   "guiding_question_ar": "كيف نستفيد من نموذج تعلم من مهمة أخرى؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-017",
+   "domain_id": "ML",
+   "title_ar": "تفسير الميزات وأهمية المتغير",
+   "title_en": "Feature importance",
+   "guiding_question_ar": "كيف نفحص العوامل المؤثرة في التوقع دون ادعاء السببية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-018",
+   "domain_id": "ML",
+   "title_ar": "تقييم التصنيف والدقة والاستدعاء",
+   "title_en": "Classification metrics",
+   "guiding_question_ar": "لماذا لا تكفي الدقة العامة عندما تكون الفئات غير متوازنة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-019",
+   "domain_id": "ML",
+   "title_ar": "التعلم على الرسوم البيانية",
+   "title_en": "Graph machine learning",
+   "guiding_question_ar": "كيف نتعلم من علاقات بين عقد وروابط؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-020",
+   "domain_id": "ML",
+   "title_ar": "التعلم عبر الزمن والتحديث المستمر",
+   "title_en": "Online learning",
+   "guiding_question_ar": "كيف نحدث النموذج عند وصول بيانات جديدة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-021",
+   "domain_id": "ML",
+   "title_ar": "التعلم النشط",
+   "title_en": "Active learning",
+   "guiding_question_ar": "كيف نختار أمثلة يقل بها احتياجنا إلى التسميات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-022",
+   "domain_id": "ML",
+   "title_ar": "السلاسل الزمنية والتنبؤ",
+   "title_en": "Time-series forecasting",
+   "guiding_question_ar": "كيف نستخدم الاعتماد الزمني في توقع قيمة مستقبلية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ML-023",
+   "domain_id": "ML",
+   "title_ar": "كشف الشذوذ",
+   "title_en": "Anomaly detection",
+   "guiding_question_ar": "كيف نكتشف حالات نادرة يصعب جمع أمثلتها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-001",
+   "domain_id": "DLN",
+   "title_ar": "ما العصبون الاصطناعي؟",
+   "title_en": "Artificial neuron",
+   "guiding_question_ar": "كيف تجمع وحدة حسابية المدخلات والأوزان؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-002",
+   "domain_id": "DLN",
+   "title_ar": "الطبقات والشبكة متعددة الطبقات",
+   "title_en": "Layers and MLPs",
+   "guiding_question_ar": "ماذا تضيف طبقات متعددة إلى نموذج بسيط؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-003",
+   "domain_id": "DLN",
+   "title_ar": "دوال التنشيط",
+   "title_en": "Activation functions",
+   "guiding_question_ar": "لماذا لا تكفي سلسلة تحويلات خطية فقط؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-004",
+   "domain_id": "DLN",
+   "title_ar": "التمثيلات المتعلمة",
+   "title_en": "Learned representations",
+   "guiding_question_ar": "كيف ينشئ النموذج سمات لم نكتبها يدوياً؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-005",
+   "domain_id": "DLN",
+   "title_ar": "التمرير الأمامي",
+   "title_en": "Forward pass",
+   "guiding_question_ar": "كيف نحسب مخرجات النموذج من المدخلات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-006",
+   "domain_id": "DLN",
+   "title_ar": "دالة الخسارة وهدف التدريب",
+   "title_en": "Training objectives and losses",
+   "guiding_question_ar": "ما الذي نحسّنه أثناء التدريب بالضبط؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-007",
+   "domain_id": "DLN",
+   "title_ar": "الانتشار العكسي",
+   "title_en": "Backpropagation",
+   "guiding_question_ar": "كيف يصل تأثير الخطأ إلى الأوزان الأولى؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-008",
+   "domain_id": "DLN",
+   "title_ar": "المحسنات SGD وAdam",
+   "title_en": "SGD and Adam optimizers",
+   "guiding_question_ar": "كيف نختار حجم واتجاه تحديثات الأوزان؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-009",
+   "domain_id": "DLN",
+   "title_ar": "معدلات التعلم والجداول",
+   "title_en": "Learning rates and schedules",
+   "guiding_question_ar": "لماذا قد يجعل تحديث سريع التدريب غير مستقر؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-010",
+   "domain_id": "DLN",
+   "title_ar": "دفعات التدريب والعصور",
+   "title_en": "Batches, steps and epochs",
+   "guiding_question_ar": "ما الفرق بين مثال وخطوة وعصر تدريب؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-011",
+   "domain_id": "DLN",
+   "title_ar": "التطبيع والروابط المتبقية",
+   "title_en": "Normalization and residual connections",
+   "guiding_question_ar": "كيف نثبّت التدريب في شبكات عميقة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-012",
+   "domain_id": "DLN",
+   "title_ar": "التهيئة والتشبع واختفاء التدرج",
+   "title_en": "Initialization and gradient pathologies",
+   "guiding_question_ar": "لماذا قد لا تتعلم الشبكة رغم وجود بيانات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-013",
+   "domain_id": "DLN",
+   "title_ar": "الانتظام وDropout",
+   "title_en": "Regularization and dropout",
+   "guiding_question_ar": "كيف نحد من اعتماد النموذج على التفاصيل العرضية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-014",
+   "domain_id": "DLN",
+   "title_ar": "الترميزات الموضعية",
+   "title_en": "Positional representations",
+   "guiding_question_ar": "كيف يعرف النموذج ترتيب العناصر في التسلسل؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-015",
+   "domain_id": "DLN",
+   "title_ar": "الشبكات الالتفافية CNN",
+   "title_en": "Convolutional networks",
+   "guiding_question_ar": "لماذا تفيد المرشحات المحلية في الصور؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-016",
+   "domain_id": "DLN",
+   "title_ar": "الشبكات المتكررة RNN وLSTM",
+   "title_en": "Recurrent networks and LSTM",
+   "guiding_question_ar": "كيف تمثل الشبكات تسلسلاً ذا ذاكرة متغيرة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-017",
+   "domain_id": "DLN",
+   "title_ar": "الانتباه الذاتي",
+   "title_en": "Self-attention",
+   "guiding_question_ar": "كيف تقارن وحدات تسلسل بعضها ببعض؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-018",
+   "domain_id": "DLN",
+   "title_ar": "Transformer من الداخل",
+   "title_en": "Transformer architecture",
+   "guiding_question_ar": "كيف نجمع الانتباه والطبقات والتطبيع في بنية واحدة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-019",
+   "domain_id": "DLN",
+   "title_ar": "نماذج الخبراء MoE",
+   "title_en": "Mixture of experts",
+   "guiding_question_ar": "كيف يمكن تفعيل جزء من النموذج لكل مدخل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-020",
+   "domain_id": "DLN",
+   "title_ar": "التعلم المستمر والنسيان الكارثي",
+   "title_en": "Continual learning and forgetting",
+   "guiding_question_ar": "كيف يكتسب النموذج معرفة جديدة دون محو القديمة؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-021",
+   "domain_id": "DLN",
+   "title_ar": "الشبكات العصبية البيانية GNN",
+   "title_en": "Graph neural networks",
+   "guiding_question_ar": "كيف تنقل العقد المعلومات عبر علاقات الرسم البياني؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-022",
+   "domain_id": "DLN",
+   "title_ar": "التعلم المقابل Contrastive Learning",
+   "title_en": "Contrastive learning",
+   "guiding_question_ar": "كيف نقرب الأمثلة المرتبطة ونبعد غير المرتبطة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "DLN-023",
+   "domain_id": "DLN",
+   "title_ar": "التعلم الفوقي Meta-learning",
+   "title_en": "Meta-learning",
+   "guiding_question_ar": "كيف يتعلم النموذج التكيف السريع مع مهام جديدة؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-001",
+   "domain_id": "NLP",
+   "title_ar": "لماذا اللغة صعبة على الحاسوب؟",
+   "title_en": "Why language is difficult for computers",
+   "guiding_question_ar": "كيف يؤثر الغموض والسياق والتنوع في فهم النص؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-002",
+   "domain_id": "NLP",
+   "title_ar": "الكلمة والمحرف والرمز",
+   "title_en": "Characters, words and tokens",
+   "guiding_question_ar": "لماذا لا يتطابق الرمز دائماً مع كلمة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-003",
+   "domain_id": "NLP",
+   "title_ar": "مُقطِّع النصوص Tokenizer",
+   "title_en": "Tokenizers",
+   "guiding_question_ar": "كيف يحول النظام النص إلى وحدات يمكن عدها وترميزها؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-004",
+   "domain_id": "NLP",
+   "title_ar": "المفردات ومعرّفات الرموز",
+   "title_en": "Vocabulary and token IDs",
+   "guiding_question_ar": "كيف نربط الرمز بمعرّف عددي ثابت؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-005",
+   "domain_id": "NLP",
+   "title_ar": "طرق التقطيع Word وCharacter وByte",
+   "title_en": "Word, character and byte tokenization",
+   "guiding_question_ar": "كيف تختلف طرق التقسيم وما تكلفتها؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-006",
+   "domain_id": "NLP",
+   "title_ar": "BPE وWordPiece وUnigram",
+   "title_en": "Subword tokenization algorithms",
+   "guiding_question_ar": "كيف تتعلم مفردات من وحدات تتكرر؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-007",
+   "domain_id": "NLP",
+   "title_ar": "فك الترميز وإعادة بناء النص",
+   "title_en": "Detokenization",
+   "guiding_question_ar": "متى نستطيع استرجاع النص الأصلي من الرموز؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-008",
+   "domain_id": "NLP",
+   "title_ar": "تحديات معالجة العربية",
+   "title_en": "Arabic NLP challenges",
+   "guiding_question_ar": "كيف تؤثر اللواصق والتشكيل واختلاف الكتابة واللهجات في المعالجة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "NLP-009",
+   "domain_id": "NLP",
+   "title_ar": "التمثيلات المتجهية Embeddings",
+   "title_en": "Token embeddings",
+   "guiding_question_ar": "لماذا لا يكفي معرف الرمز العددي لتمثيل العلاقات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-010",
+   "domain_id": "NLP",
+   "title_ar": "التمثيلات السياقية",
+   "title_en": "Contextual representations",
+   "guiding_question_ar": "كيف يختلف تمثيل الكلمة باختلاف الجملة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-011",
+   "domain_id": "NLP",
+   "title_ar": "التحليل الصرفي والنحوي",
+   "title_en": "Morphology and syntax",
+   "guiding_question_ar": "كيف تساعد بنية الكلمة والجملة في بعض المهام؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-012",
+   "domain_id": "NLP",
+   "title_ar": "تمييز الكيانات والمعلومات",
+   "title_en": "Named entity recognition",
+   "guiding_question_ar": "كيف نتعرف على الأشخاص والأماكن والمؤسسات في نص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-013",
+   "domain_id": "NLP",
+   "title_ar": "تصنيف النصوص وتحليل المشاعر",
+   "title_en": "Text classification",
+   "guiding_question_ar": "كيف نصنف نصاً مع الانتباه إلى حدود التسميات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-014",
+   "domain_id": "NLP",
+   "title_ar": "الترجمة الآلية",
+   "title_en": "Machine translation",
+   "guiding_question_ar": "كيف نقيّم نقل المعنى بين لغتين؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-015",
+   "domain_id": "NLP",
+   "title_ar": "الاسترجاع الدلالي للنص",
+   "title_en": "Semantic text retrieval",
+   "guiding_question_ar": "كيف نسترجع نصوصاً تتشابه معنى لا صياغة فقط؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "NLP-016",
+   "domain_id": "NLP",
+   "title_ar": "تقييم النماذج بالعربية واللهجات",
+   "title_en": "Arabic and dialect evaluation",
+   "guiding_question_ar": "كيف نختبر التغطية اللغوية دون افتراض أن العربية نمط واحد؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-001",
+   "domain_id": "LLM",
+   "title_ar": "ما النموذج اللغوي؟",
+   "title_en": "What is a language model?",
+   "guiding_question_ar": "ماذا يتعلم النموذج عن تسلسل الرموز وما الذي لا يضمنه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-002",
+   "domain_id": "LLM",
+   "title_ar": "لماذا نولّد النص تدريجياً؟",
+   "title_en": "Autoregressive generation motivation",
+   "guiding_question_ar": "لماذا يمكن تقسيم توليد النص إلى خطوات؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-003",
+   "domain_id": "LLM",
+   "title_ar": "لماذا نتدرب على توقع الرمز التالي؟",
+   "title_en": "Next-token prediction objective",
+   "guiding_question_ar": "كيف نحول النص نفسه إلى أمثلة تدريب قابلة للقياس؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-004",
+   "domain_id": "LLM",
+   "title_ar": "التنبؤ بكل المواضع أثناء التدريب",
+   "title_en": "All-position autoregressive training",
+   "guiding_question_ar": "لماذا نتعلم من مواضع كثيرة في المثال نفسه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-005",
+   "domain_id": "LLM",
+   "title_ar": "الاحتمالات الشرطية وتسلسلها",
+   "title_en": "Autoregressive probability factorization",
+   "guiding_question_ar": "كيف يصبح احتمال النص حاصل احتمالات مشروطة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-006",
+   "domain_id": "LLM",
+   "title_ar": "نموذج N-gram الإحصائي",
+   "title_en": "N-gram language models",
+   "guiding_question_ar": "ماذا نتعلم عندما نعتمد على سياق ثابت الطول؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-007",
+   "domain_id": "LLM",
+   "title_ar": "نموذج Bigram بالتكرارات",
+   "title_en": "Count-based bigram model",
+   "guiding_question_ar": "كيف نبني أول جدول لاحتمالات الرمز التالي؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-008",
+   "domain_id": "LLM",
+   "title_ar": "نموذج Bigram العصبي",
+   "title_en": "Neural bigram model",
+   "guiding_question_ar": "كيف نستخدم الأوزان والخسارة بدلاً من عد التكرارات فقط؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-009",
+   "domain_id": "LLM",
+   "title_ar": "التوليد من توزيع احتمالي",
+   "title_en": "Sampling generated tokens",
+   "guiding_question_ar": "كيف ننتج نصاً من توزيع وليس من إجابة واحدة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-010",
+   "domain_id": "LLM",
+   "title_ar": "أثر طول السياق",
+   "title_en": "Context window and history",
+   "guiding_question_ar": "ماذا يفقد النموذج عندما لا يرى إلا آخر رمز؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-011",
+   "domain_id": "LLM",
+   "title_ar": "من Bigram إلى MLP للسياق",
+   "title_en": "Context MLP language model",
+   "guiding_question_ar": "كيف يستخدم نموذج عصبي عدة رموز سابقة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-012",
+   "domain_id": "LLM",
+   "title_ar": "RNN وLSTM للنمذجة اللغوية",
+   "title_en": "RNN language modeling",
+   "guiding_question_ar": "كيف نخزن معلومات متراكمة في حالة داخلية؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-013",
+   "domain_id": "LLM",
+   "title_ar": "الانتباه السببي والأقنعة",
+   "title_en": "Causal attention and masks",
+   "guiding_question_ar": "كيف نسمح بالنظر إلى الماضي دون تسرب المستقبل؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-014",
+   "domain_id": "LLM",
+   "title_ar": "Transformer فك الترميز",
+   "title_en": "Decoder-only Transformer",
+   "guiding_question_ar": "كيف يتنبأ النموذج بالرمز التالي باستخدام Attention؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-015",
+   "domain_id": "LLM",
+   "title_ar": "Encoder وEncoder-decoder",
+   "title_en": "Encoder and encoder-decoder models",
+   "guiding_question_ar": "لماذا لا تستخدم كل النماذج هدف التوقع السببي نفسه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-016",
+   "domain_id": "LLM",
+   "title_ar": "الموضعية RoPE وبدائلها",
+   "title_en": "RoPE and positional encodings",
+   "guiding_question_ar": "كيف يتعامل النموذج مع ترتيب المواضع المختلفة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-017",
+   "domain_id": "LLM",
+   "title_ar": "تحجيم النماذج وقوانين التوسع",
+   "title_en": "Scaling laws",
+   "guiding_question_ar": "متى يفيد زيادة المعلمات أو البيانات أو الحساب؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-018",
+   "domain_id": "LLM",
+   "title_ar": "النماذج الكثيفة والخبراء",
+   "title_en": "Dense and mixture-of-experts LLMs",
+   "guiding_question_ar": "ما الفرق بين إجمالي المعلمات والفعالة في الاستدلال؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-019",
+   "domain_id": "LLM",
+   "title_ar": "نماذج الانتشار النصية والبدائل",
+   "title_en": "Diffusion and non-autoregressive text models",
+   "guiding_question_ar": "هل يمكن توليد النص بطرق غير توقع الرمز التالي تسلسلياً؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "LLM-020",
+   "domain_id": "LLM",
+   "title_ar": "وحدات التنبؤ غير الرمزية",
+   "title_en": "Non-token prediction units: latent and concept models",
+   "guiding_question_ar": "متى تكون وحدة التنبؤ حالة كامنة أو مفهوماً بدل رمز نصي، وهل يلزم أن يكون التوليد تسلسلياً؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "LLM-021",
+   "domain_id": "LLM",
+   "title_ar": "بناء GPT صغير متكامل",
+   "title_en": "End-to-end tiny GPT build",
+   "guiding_question_ar": "كيف ننفذ ونختبر نموذجاً سببيّاً صغيراً خطوة بخطوة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-001",
+   "domain_id": "TRN",
+   "title_ar": "صياغة هدف التدريب",
+   "title_en": "Training objective design",
+   "guiding_question_ar": "كيف نربط المطلوب من النموذج بدالة خسارة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-002",
+   "domain_id": "TRN",
+   "title_ar": "إعداد مدونة التدريب",
+   "title_en": "Preparing a training corpus",
+   "guiding_question_ar": "كيف نوحد التنظيف والتقسيم والتقطيع قبل التدريب؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-003",
+   "domain_id": "TRN",
+   "title_ar": "تقدير المعلمات والذاكرة",
+   "title_en": "Parameter and memory budgeting",
+   "guiding_question_ar": "هل يستطيع عتادنا تدريب هذا النموذج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-004",
+   "domain_id": "TRN",
+   "title_ar": "حلقة التدريب ومراقبة الخسارة",
+   "title_en": "Training loop and loss monitoring",
+   "guiding_question_ar": "كيف نعرف أن التدريب يتقدم فعلاً؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-005",
+   "domain_id": "TRN",
+   "title_ar": "التحقق من عدم تسرب المستقبل",
+   "title_en": "Causal training leakage checks",
+   "guiding_question_ar": "كيف نكتشف نموذجاً يرى الإجابة أثناء التدريب؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-006",
+   "domain_id": "TRN",
+   "title_ar": "التحقق المبكر وتوقف التدريب",
+   "title_en": "Validation and early stopping",
+   "guiding_question_ar": "متى نوقف التدريب قبل فرط التكيّف؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-007",
+   "domain_id": "TRN",
+   "title_ar": "حفظ الأوزان والحالة واستئنافها",
+   "title_en": "Checkpointing and exact resume",
+   "guiding_question_ar": "ما الذي يجب حفظه لاستئناف تدريب حقيقي؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-008",
+   "domain_id": "TRN",
+   "title_ar": "التدريب المسبق واسع النطاق",
+   "title_en": "Large-scale pretraining",
+   "guiding_question_ar": "كيف تختلف متطلبات نموذج صغير عن نموذج أساس؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-009",
+   "domain_id": "TRN",
+   "title_ar": "الضبط الخاضع للإشراف SFT",
+   "title_en": "Supervised fine-tuning",
+   "guiding_question_ar": "كيف نعلّم النموذج اتباع أمثلة للتعليمات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-010",
+   "domain_id": "TRN",
+   "title_ar": "تنسيق المحادثات والقوالب",
+   "title_en": "Chat templates and role formatting",
+   "guiding_question_ar": "كيف يتعلم النموذج حدود أدوار المحادثة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-011",
+   "domain_id": "TRN",
+   "title_ar": "نمذجة التفضيلات",
+   "title_en": "Preference modeling",
+   "guiding_question_ar": "كيف نحول مقارنات البشر إلى إشارة تدريب؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-012",
+   "domain_id": "TRN",
+   "title_ar": "DPO وأساليب تفضيلية",
+   "title_en": "Direct preference optimization",
+   "guiding_question_ar": "كيف نحسن الاختيارات دون إعادة كتابة هدف التدريب من الصفر؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-013",
+   "domain_id": "TRN",
+   "title_ar": "RL بعد التدريب",
+   "title_en": "Reinforcement learning post-training",
+   "guiding_question_ar": "كيف نوظف المكافآت في تحسين سلوك النموذج؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-014",
+   "domain_id": "TRN",
+   "title_ar": "LoRA وPEFT",
+   "title_en": "Parameter-efficient fine-tuning",
+   "guiding_question_ar": "كيف نكيّف نموذجاً كبيراً بتحديث عدد محدود من المعلمات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-015",
+   "domain_id": "TRN",
+   "title_ar": "تقطير النماذج",
+   "title_en": "Knowledge distillation",
+   "guiding_question_ar": "كيف ننقل بعض سلوك نموذج إلى نموذج أصغر؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-016",
+   "domain_id": "TRN",
+   "title_ar": "التدريب متعدد المهام واللغات",
+   "title_en": "Multitask and multilingual training",
+   "guiding_question_ar": "كيف نوازن بين مهام ولغات مختلفة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-017",
+   "domain_id": "TRN",
+   "title_ar": "التدريب الموزع وFSDP",
+   "title_en": "Distributed model training",
+   "guiding_question_ar": "متى نحتاج تقسيم البيانات أو المعلمات عبر أجهزة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-019",
+   "domain_id": "TRN",
+   "title_ar": "التعلم الاتحادي Federated Learning",
+   "title_en": "Federated learning",
+   "guiding_question_ar": "كيف نتعلم عبر أجهزة دون تجميع البيانات الأولية مركزياً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "TRN-020",
+   "domain_id": "TRN",
+   "title_ar": "الخصوصية التفاضلية أثناء التدريب",
+   "title_en": "Differentially private learning",
+   "guiding_question_ar": "كيف نضبط أثر العينة الفردية على النموذج؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-001",
+   "domain_id": "INF",
+   "title_ar": "ما الاستدلال مقارنة بالتدريب؟",
+   "title_en": "Inference versus training",
+   "guiding_question_ar": "لماذا يتغير تشغيل النموذج عن مرحلة تعلم أوزانه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-002",
+   "domain_id": "INF",
+   "title_ar": "Greedy وTemperature وTop-k وTop-p",
+   "title_en": "Decoding strategies",
+   "guiding_question_ar": "كيف يغير اختيار الرمز التالي مخرجات النموذج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-003",
+   "domain_id": "INF",
+   "title_ar": "البحث الشعاعي Beam Search",
+   "title_en": "Beam search decoding",
+   "guiding_question_ar": "متى نحتاج مقارنة تسلسلات بدلاً من رمز واحد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-004",
+   "domain_id": "INF",
+   "title_ar": "زمن الرمز الأول ومعدل الرموز",
+   "title_en": "Time to first token and throughput",
+   "guiding_question_ar": "كيف نقيس سرعة خدمة النموذج فعلياً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-005",
+   "domain_id": "INF",
+   "title_ar": "ذاكرة السياق KV Cache",
+   "title_en": "KV cache",
+   "guiding_question_ar": "لماذا نخزن حسابات رموز سابقة أثناء التوليد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-006",
+   "domain_id": "INF",
+   "title_ar": "التكميم والأعداد منخفضة الدقة",
+   "title_en": "Model quantization",
+   "guiding_question_ar": "كيف نوفر الذاكرة وما خطأ التقريب المحتمل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-007",
+   "domain_id": "INF",
+   "title_ar": "تنفيذ الانتباه بكفاءة",
+   "title_en": "Efficient attention kernels",
+   "guiding_question_ar": "لماذا تؤثر حركة الذاكرة في سرعة Attention؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-008",
+   "domain_id": "INF",
+   "title_ar": "الاستدلال بدُفعات",
+   "title_en": "Batching and continuous batching",
+   "guiding_question_ar": "كيف نخدم طلبات كثيرة مع استغلال العتاد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-009",
+   "domain_id": "INF",
+   "title_ar": "الاستدلال المقيد بمخططات JSON",
+   "title_en": "Constrained decoding",
+   "guiding_question_ar": "كيف نجعل بنية المخرجات قابلة للتحقق؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-010",
+   "domain_id": "INF",
+   "title_ar": "Speculative Decoding",
+   "title_en": "Speculative decoding",
+   "guiding_question_ar": "كيف نستعمل مسودة سريعة دون تغيير توزيع النموذج الأساسي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-011",
+   "domain_id": "INF",
+   "title_ar": "إدارة السياق الطويل",
+   "title_en": "Long-context inference",
+   "guiding_question_ar": "لماذا لا يكون دعم نافذة أطول ضماناً لاستخدام المعلومات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-012",
+   "domain_id": "INF",
+   "title_ar": "التشغيل المحلي مقابل الاستضافة",
+   "title_en": "Local versus hosted inference",
+   "guiding_question_ar": "متى نختار تشغيل النموذج محلياً، وما الذي ندفعه ثمناً لذلك؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "INF-013",
+   "domain_id": "INF",
+   "title_ar": "تقدير تكلفة التشغيل والطاقة",
+   "title_en": "Inference cost and energy",
+   "guiding_question_ar": "كيف نحسب تكلفة الإجابة وحدود القياس؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-014",
+   "domain_id": "INF",
+   "title_ar": "المزامنة وتدفق الرموز",
+   "title_en": "Streaming and interruption",
+   "guiding_question_ar": "كيف نصمم تجربة توليد تفاعلية قابلة للإيقاف؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "INF-015",
+   "domain_id": "INF",
+   "title_ar": "السلامة أثناء توليد الأدوات",
+   "title_en": "Generation-to-tool execution boundary",
+   "guiding_question_ar": "متى تصبح سلسلة أحرف مولدة فعلاً مؤثراً في نظام حقيقي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-001",
+   "domain_id": "AGT",
+   "title_ar": "لماذا لا نكتفي بأوزان النموذج؟",
+   "title_en": "Why models need external resources",
+   "guiding_question_ar": "متى يحتاج النموذج إلى معلومات حديثة أو عمليات قابلة للتحقق؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-002",
+   "domain_id": "AGT",
+   "title_ar": "البحث اللفظي والفهرسة",
+   "title_en": "Lexical search and indexing",
+   "guiding_question_ar": "كيف نعثر على مقطع مناسب دون نموذج لغوي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-003",
+   "domain_id": "AGT",
+   "title_ar": "التضمينات والتشابه المتجهي",
+   "title_en": "Embeddings and vector similarity",
+   "guiding_question_ar": "كيف نقارن المعنى تقريبياً في فضاء متجهي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-004",
+   "domain_id": "AGT",
+   "title_ar": "تجزئة المستندات",
+   "title_en": "Document chunking",
+   "guiding_question_ar": "كيف يؤثر تقسيم المصدر في دقة الاسترجاع؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-005",
+   "domain_id": "AGT",
+   "title_ar": "الاسترجاع المعزز بالتوليد RAG",
+   "title_en": "Retrieval-augmented generation",
+   "guiding_question_ar": "كيف نعطي النموذج مقتطفات مصدرية قبل الإجابة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-006",
+   "domain_id": "AGT",
+   "title_ar": "إعادة الترتيب Reranking",
+   "title_en": "Reranking retrieved results",
+   "guiding_question_ar": "لماذا لا يكفي استرجاع أول نتيجة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-007",
+   "domain_id": "AGT",
+   "title_ar": "قياس الاسترجاع والإسناد",
+   "title_en": "Retrieval evaluation and citations",
+   "guiding_question_ar": "كيف نفرق بين إجابة ذات مصدر وإجابة صحيحة فعلاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-008",
+   "domain_id": "AGT",
+   "title_ar": "استدعاء الدوال والأدوات",
+   "title_en": "Function and tool calling",
+   "guiding_question_ar": "كيف يحول النموذج طلباً لغوياً إلى عملية يحددها البرنامج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-009",
+   "domain_id": "AGT",
+   "title_ar": "عقود الأدوات والتفويض",
+   "title_en": "Tool schemas and authorization",
+   "guiding_question_ar": "كيف نضمن صحة الوسائط وحدود صلاحيات التنفيذ؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-010",
+   "domain_id": "AGT",
+   "title_ar": "النموذج والوكيل والنظام",
+   "title_en": "Models, agents and systems",
+   "guiding_question_ar": "متى يكون النموذج مجرد مكون من منظومة أكبر؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-011",
+   "domain_id": "AGT",
+   "title_ar": "حلقة الوكيل: ملاحظة وقرار وفعل",
+   "title_en": "Agent loops",
+   "guiding_question_ar": "كيف تتكرر الملاحظة والتخطيط والتنفيذ والتحقق؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-012",
+   "domain_id": "AGT",
+   "title_ar": "التخطيط متعدد الخطوات",
+   "title_en": "Multi-step tool planning",
+   "guiding_question_ar": "متى تحتاج المهمة إلى خطة وقرار باستمرارها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-013",
+   "domain_id": "AGT",
+   "title_ar": "الذاكرة والتخزين الخارجي",
+   "title_en": "Agent memory and external state",
+   "guiding_question_ar": "ما الذي يُحفظ وأين وكيف يتحقق منه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-014",
+   "domain_id": "AGT",
+   "title_ar": "استعمال المتصفح والحاسوب",
+   "title_en": "Browser and computer-use agents",
+   "guiding_question_ar": "كيف نتعامل مع حالات واجهات غير مستقرة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-015",
+   "domain_id": "AGT",
+   "title_ar": "الوكلاء المتعددون",
+   "title_en": "Multi-agent coordination",
+   "guiding_question_ar": "متى تفيد الوحدات المتخصصة ومتى تزيد التعقيد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-016",
+   "domain_id": "AGT",
+   "title_ar": "الموافقة البشرية وحدود الاستقلالية",
+   "title_en": "Human approval and autonomy boundaries",
+   "guiding_question_ar": "متى ينبغي أن يتوقف الوكيل قبل فعل مؤثر؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-017",
+   "domain_id": "AGT",
+   "title_ar": "الاستدلال القابل للفحص والتتبع",
+   "title_en": "Agent observability and traces",
+   "guiding_question_ar": "كيف نعرف أين فشل تنفيذ مهمة مركبة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AGT-019",
+   "domain_id": "AGT",
+   "title_ar": "تصميم تقييمات الوكلاء",
+   "title_en": "Agent task benchmarks",
+   "guiding_question_ar": "كيف نقيس إكمال المهمة وليس بلاغة الرد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-001",
+   "domain_id": "CVG",
+   "title_ar": "كيف تصبح الصورة أرقاماً؟",
+   "title_en": "Pixels and image representation",
+   "guiding_question_ar": "كيف تتحول صورة إلى شبكة قيم قابلة للحساب؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-002",
+   "domain_id": "CVG",
+   "title_ar": "الإضاءة والألوان وقنوات الصورة",
+   "title_en": "Color spaces and image channels",
+   "guiding_question_ar": "كيف يتغير وصف الصورة بتغير تمثيل اللون؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-003",
+   "domain_id": "CVG",
+   "title_ar": "معالجة الصور والمرشحات",
+   "title_en": "Image filters and preprocessing",
+   "guiding_question_ar": "كيف نزيل ضجيجاً أو نبرز حوافاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-004",
+   "domain_id": "CVG",
+   "title_ar": "استخراج السمات",
+   "title_en": "Feature extraction",
+   "guiding_question_ar": "ما السمات التي تساعد على التمييز بين الصور؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-005",
+   "domain_id": "CVG",
+   "title_ar": "تصنيف الصور",
+   "title_en": "Image classification",
+   "guiding_question_ar": "كيف نصنف الصورة ومتى قد نخطئ؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-006",
+   "domain_id": "CVG",
+   "title_ar": "كشف الأجسام وتحديد الموضع",
+   "title_en": "Object detection",
+   "guiding_question_ar": "كيف نحدد ما في الصورة وأين يوجد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-007",
+   "domain_id": "CVG",
+   "title_ar": "تقسيم الصور",
+   "title_en": "Image segmentation",
+   "guiding_question_ar": "كيف نعطي كل منطقة أو بكسل وصفاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-008",
+   "domain_id": "CVG",
+   "title_ar": "CNN ومجال الرؤية",
+   "title_en": "CNNs and receptive fields",
+   "guiding_question_ar": "لماذا تناسب العمليات المحلية كثيراً من مهام الصور؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-009",
+   "domain_id": "CVG",
+   "title_ar": "Vision Transformer",
+   "title_en": "Vision Transformers",
+   "guiding_question_ar": "كيف نطبق الانتباه على أجزاء الصورة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-010",
+   "domain_id": "CVG",
+   "title_ar": "مقاييس تقييم الرؤية",
+   "title_en": "Vision metrics and datasets",
+   "guiding_question_ar": "كيف نقيس الكشف والتقسيم خارج عينات مألوفة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-011",
+   "domain_id": "CVG",
+   "title_ar": "التعلم بتمثيلات الصور",
+   "title_en": "Self-supervised visual representations",
+   "guiding_question_ar": "كيف نتعلم من صور بلا تسميات مفصلة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-012",
+   "domain_id": "CVG",
+   "title_ar": "التوليد الخصومي GAN",
+   "title_en": "Generative adversarial networks",
+   "guiding_question_ar": "كيف تتنافس شبكتان لتوليد صور؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-013",
+   "domain_id": "CVG",
+   "title_ar": "المشفّر التلقائي وVAE",
+   "title_en": "Autoencoders and VAEs",
+   "guiding_question_ar": "كيف نضغط صورة إلى فضاء كامن ونولد منها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-014",
+   "domain_id": "CVG",
+   "title_ar": "نماذج الانتشار للصور",
+   "title_en": "Diffusion image models",
+   "guiding_question_ar": "كيف يتعلم النموذج إزالة الضجيج تدريجياً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-015",
+   "domain_id": "CVG",
+   "title_ar": "التوليد المشروط والصور المرجعية",
+   "title_en": "Conditional image generation",
+   "guiding_question_ar": "كيف نتحكم في الناتج بنص أو صورة أو بنية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-016",
+   "domain_id": "CVG",
+   "title_ar": "التحرير والملاءمة البصرية",
+   "title_en": "Image editing and consistency",
+   "guiding_question_ar": "كيف نقيس الحفاظ على العناصر والهوية البصرية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-017",
+   "domain_id": "CVG",
+   "title_ar": "الرؤية ثلاثية الأبعاد",
+   "title_en": "3D vision and geometry",
+   "guiding_question_ar": "كيف نستنتج عمقاً أو بنية من مشاهد متعددة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-018",
+   "domain_id": "CVG",
+   "title_ar": "السلامة وحقوق الصور",
+   "title_en": "Image safety and provenance",
+   "guiding_question_ar": "كيف نفرق بين الاستخدام المسموح والتلاعب المضلل؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-019",
+   "domain_id": "CVG",
+   "title_ar": "التدفقات المطابقة Flow Matching",
+   "title_en": "Flow matching generative models",
+   "guiding_question_ar": "كيف نتعلم تحولاً مستمراً من ضجيج إلى بيانات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "CVG-020",
+   "domain_id": "CVG",
+   "title_ar": "توليد الصور ذاتياً بالرموز",
+   "title_en": "Autoregressive image generation",
+   "guiding_question_ar": "كيف يولد نموذج صورة تدريجياً عبر وحدات مرمزة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-001",
+   "domain_id": "AUD",
+   "title_ar": "كيف يُمثل الصوت رقمياً؟",
+   "title_en": "Waveforms and sampling",
+   "guiding_question_ar": "ما الفرق بين الموجة والتردد ومعدل العينات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-002",
+   "domain_id": "AUD",
+   "title_ar": "الإشارة والضجيج والمقاطع",
+   "title_en": "Audio preprocessing and noise",
+   "guiding_question_ar": "كيف نعالج التسجيل قبل التعلم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-003",
+   "domain_id": "AUD",
+   "title_ar": "الطيف وMel Spectrogram",
+   "title_en": "Spectrograms and Mel features",
+   "guiding_question_ar": "كيف نظهر توزيع الترددات عبر الزمن؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-004",
+   "domain_id": "AUD",
+   "title_ar": "التعرف على الكلام ASR",
+   "title_en": "Automatic speech recognition",
+   "guiding_question_ar": "كيف نحول الصوت المنطوق إلى نص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-005",
+   "domain_id": "AUD",
+   "title_ar": "التوليد الصوتي TTS",
+   "title_en": "Text-to-speech synthesis",
+   "guiding_question_ar": "كيف نولد كلاماً مسموعاً من النص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-006",
+   "domain_id": "AUD",
+   "title_ar": "النماذج الصوتية المستمرة والمتقطعة",
+   "title_en": "Continuous and tokenized audio models",
+   "guiding_question_ar": "كيف نختار وحدة التنبؤ للصوت؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-007",
+   "domain_id": "AUD",
+   "title_ar": "ترميز الصوت والصوتيات",
+   "title_en": "Audio codecs and neural codecs",
+   "guiding_question_ar": "كيف نضغط الصوت ونحتفظ بما يلزم للسمع؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-008",
+   "domain_id": "AUD",
+   "title_ar": "الزمن والتزامن في المحادثة",
+   "title_en": "Speech timing and turn-taking",
+   "guiding_question_ar": "متى يتكلم النظام ومتى يستمع؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-009",
+   "domain_id": "AUD",
+   "title_ar": "الكلام ثنائي الاتجاه والمتدفق",
+   "title_en": "Streaming duplex speech",
+   "guiding_question_ar": "كيف نتبادل الكلام دون انتظار انتهاء التسجيل كاملاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-010",
+   "domain_id": "AUD",
+   "title_ar": "تحديد المتحدثين",
+   "title_en": "Speaker diarization",
+   "guiding_question_ar": "كيف نحدد من تحدث ومتى؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-011",
+   "domain_id": "AUD",
+   "title_ar": "فهم الأحداث الصوتية",
+   "title_en": "Audio event understanding",
+   "guiding_question_ar": "كيف نتعرف على الأصوات غير الكلام؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-012",
+   "domain_id": "AUD",
+   "title_ar": "مقاييس الجودة والوضوح",
+   "title_en": "Speech intelligibility and quality",
+   "guiding_question_ar": "كيف نقيس الجودة دون اختزالها إلى مؤشر واحد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-013",
+   "domain_id": "AUD",
+   "title_ar": "العربية ولهجاتها في الكلام",
+   "title_en": "Arabic speech and dialects",
+   "guiding_question_ar": "كيف نختبر التعرف والنطق عبر تنوع اللهجات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "AUD-014",
+   "domain_id": "AUD",
+   "title_ar": "حقوق الصوت والهوية",
+   "title_en": "Voice privacy and consent",
+   "guiding_question_ar": "متى يصبح تقليد الصوت استخداماً حساساً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-001",
+   "domain_id": "MMU",
+   "title_ar": "ما الوسائط المتعددة؟",
+   "title_en": "What is multimodal AI?",
+   "guiding_question_ar": "كيف يجمع النظام النص والصورة والصوت؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-002",
+   "domain_id": "MMU",
+   "title_ar": "محاذاة تمثيلات النص والصورة",
+   "title_en": "Image-text alignment",
+   "guiding_question_ar": "كيف نعثر على صورة من وصف لغوي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-003",
+   "domain_id": "MMU",
+   "title_ar": "النماذج البصرية اللغوية VLM",
+   "title_en": "Vision-language models",
+   "guiding_question_ar": "كيف يجيب النموذج عن أسئلة حول صورة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-004",
+   "domain_id": "MMU",
+   "title_ar": "التعليقات البصرية وفهم المشهد",
+   "title_en": "Image captioning and scene understanding",
+   "guiding_question_ar": "ما الذي تصفه الصورة وما الذي لا نستطيع استنتاجه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-005",
+   "domain_id": "MMU",
+   "title_ar": "التأصيل البصري Grounding",
+   "title_en": "Visual grounding",
+   "guiding_question_ar": "كيف نربط عبارة لغوية بمنطقة مرئية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-006",
+   "domain_id": "MMU",
+   "title_ar": "الوثائق والجداول وOCR",
+   "title_en": "Document understanding",
+   "guiding_question_ar": "كيف نفهم مستنداً يحوي نصوصاً وجداول وصوراً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-007",
+   "domain_id": "MMU",
+   "title_ar": "فهم الفيديو عبر الزمن",
+   "title_en": "Temporal video understanding",
+   "guiding_question_ar": "كيف نستنتج حدثاً من لقطات متعاقبة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-008",
+   "domain_id": "MMU",
+   "title_ar": "توليد الفيديو والاتساق الزمني",
+   "title_en": "Video generation and coherence",
+   "guiding_question_ar": "كيف نحافظ على الحركة والهوية عبر الإطارات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-009",
+   "domain_id": "MMU",
+   "title_ar": "تزامن الصوت والفيديو",
+   "title_en": "Audio-visual alignment",
+   "guiding_question_ar": "كيف نربط حركة الشفاه والمشهد بالصوت؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-010",
+   "domain_id": "MMU",
+   "title_ar": "النماذج الموحدة عبر الوسائط",
+   "title_en": "Unified multimodal models",
+   "guiding_question_ar": "متى تفيد مساحة تمثيل مشتركة بين الوسائط؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-011",
+   "domain_id": "MMU",
+   "title_ar": "التمثيل الزماني المكاني",
+   "title_en": "Spatiotemporal representations",
+   "guiding_question_ar": "كيف نعرض ما حدث وأين ومتى؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-012",
+   "domain_id": "MMU",
+   "title_ar": "تقييم الهلوسة متعددة الوسائط",
+   "title_en": "Multimodal hallucination evaluation",
+   "guiding_question_ar": "كيف نكتشف أوصافاً لا تسندها المدخلات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "MMU-013",
+   "domain_id": "MMU",
+   "title_ar": "نماذج الرؤية واللغة والفعل",
+   "title_en": "Vision-language-action models",
+   "guiding_question_ar": "كيف تتحول الملاحظات متعددة الوسائط إلى سياسة فعل قابلة للتنفيذ؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "MMU-014",
+   "domain_id": "MMU",
+   "title_ar": "التفاعلات الحية متعددة الوسائط",
+   "title_en": "Real-time multimodal interaction",
+   "guiding_question_ar": "كيف نوازن الكمون والتزامن والدقة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-001",
+   "domain_id": "RLC",
+   "title_ar": "ما اتخاذ القرار عبر الزمن؟",
+   "title_en": "Sequential decision making",
+   "guiding_question_ar": "كيف تختلف سلسلة القرارات عن توقع واحد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-002",
+   "domain_id": "RLC",
+   "title_ar": "الحالة والفعل والمكافأة",
+   "title_en": "States, actions and rewards",
+   "guiding_question_ar": "كيف نصوغ هدف وكيل يتفاعل مع بيئة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-003",
+   "domain_id": "RLC",
+   "title_ar": "عمليات ماركوف MDP",
+   "title_en": "Markov decision processes",
+   "guiding_question_ar": "متى يكفي وصف الحالة الحالية لاتخاذ القرار؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-004",
+   "domain_id": "RLC",
+   "title_ar": "المكافأة المؤجلة والخصم",
+   "title_en": "Delayed rewards and discounting",
+   "guiding_question_ar": "لماذا نضحي بمكسب قريب من أجل نتيجة بعيدة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-005",
+   "domain_id": "RLC",
+   "title_ar": "سياسات الاختيار ودوال القيمة",
+   "title_en": "Policies and value functions",
+   "guiding_question_ar": "كيف نقارن الأفعال بناء على نتائج محتملة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-006",
+   "domain_id": "RLC",
+   "title_ar": "الاستكشاف مقابل الاستغلال",
+   "title_en": "Exploration vs exploitation",
+   "guiding_question_ar": "متى نجرب فعلاً مجهولاً بدلاً من تكرار الأفضل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-007",
+   "domain_id": "RLC",
+   "title_ar": "التعلم Q-Learning",
+   "title_en": "Q-learning",
+   "guiding_question_ar": "كيف نتعلم جودة الأفعال بالتفاعل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-008",
+   "domain_id": "RLC",
+   "title_ar": "Policy Gradient وActor-Critic",
+   "title_en": "Policy gradients and actor-critic",
+   "guiding_question_ar": "كيف نتعلم سياسة مباشرة ونقدّر قيمتها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-009",
+   "domain_id": "RLC",
+   "title_ar": "التعلم المعزز دون نموذج",
+   "title_en": "Model-free RL",
+   "guiding_question_ar": "متى يكفي تعلم السلوك من الخبرة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-010",
+   "domain_id": "RLC",
+   "title_ar": "التعلم باستخدام نموذج للعالم",
+   "title_en": "Model-based RL and world models",
+   "guiding_question_ar": "كيف نخطط باستعمال محاكاة داخلية للبيئة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-011",
+   "domain_id": "RLC",
+   "title_ar": "التعلم من عرض خبير",
+   "title_en": "Imitation learning",
+   "guiding_question_ar": "كيف نتعلم سياسة من أمثلة بشرية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-012",
+   "domain_id": "RLC",
+   "title_ar": "التعلم المعزز من بيانات ثابتة",
+   "title_en": "Offline reinforcement learning",
+   "guiding_question_ar": "كيف نتعلم دون تجارب جديدة على البيئة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-013",
+   "domain_id": "RLC",
+   "title_ar": "الاستدلال السببي والتداخلات",
+   "title_en": "Causal inference and interventions",
+   "guiding_question_ar": "لماذا لا تعني علاقة الارتباط وجود سبب؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-014",
+   "domain_id": "RLC",
+   "title_ar": "السببية المضادة للواقع",
+   "title_en": "Counterfactual reasoning",
+   "guiding_question_ar": "ماذا كان سيتغير لو غيرنا قراراً واحداً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-015",
+   "domain_id": "RLC",
+   "title_ar": "الذكاء متعدد الوكلاء والألعاب",
+   "title_en": "Multi-agent reinforcement learning",
+   "guiding_question_ar": "كيف يتغير القرار عندما يتعلم الآخرون أيضاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-016",
+   "domain_id": "RLC",
+   "title_ar": "سلامة الاستكشاف والتحكم",
+   "title_en": "Safe exploration and control",
+   "guiding_question_ar": "كيف نحد من المخاطر أثناء تعلم سياسة جديدة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-017",
+   "domain_id": "RLC",
+   "title_ar": "التحقق من المكافأة ومشكلات اختراقها",
+   "title_en": "Reward specification and hacking",
+   "guiding_question_ar": "كيف قد يتعلم الوكيل تحسين المقياس لا الهدف الحقيقي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-018",
+   "domain_id": "RLC",
+   "title_ar": "التعلم المعزز الهرمي",
+   "title_en": "Hierarchical reinforcement learning",
+   "guiding_question_ar": "كيف نقسم مهمة طويلة إلى مهارات فرعية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RLC-019",
+   "domain_id": "RLC",
+   "title_ar": "التعلم المعزز العكسي",
+   "title_en": "Inverse reinforcement learning",
+   "guiding_question_ar": "كيف نستنتج هدف السلوك من عرضه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-001",
+   "domain_id": "ROB",
+   "title_ar": "ما النظام المجسد؟",
+   "title_en": "Embodied intelligence and robotics",
+   "guiding_question_ar": "كيف يختلف نموذج يجيب بنص عن نظام يتحرك؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-002",
+   "domain_id": "ROB",
+   "title_ar": "الحساسات والمشغلات",
+   "title_en": "Sensors and actuators",
+   "guiding_question_ar": "كيف يلاحظ الروبوت بيئته ويؤثر فيها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-003",
+   "domain_id": "ROB",
+   "title_ar": "الإحداثيات والإطارات المرجعية",
+   "title_en": "Coordinate frames",
+   "guiding_question_ar": "كيف نصف موضع جسم بالنسبة إلى جسم آخر؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-004",
+   "domain_id": "ROB",
+   "title_ar": "الحركيات الأمامية والعكسية",
+   "title_en": "Forward and inverse kinematics",
+   "guiding_question_ar": "كيف نحسب موضع الذراع من زوايا مفاصله والعكس؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-005",
+   "domain_id": "ROB",
+   "title_ar": "ديناميكيات الحركة",
+   "title_en": "Robot dynamics",
+   "guiding_question_ar": "كيف تؤثر القوى والعزم والكتلة في الحركة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-006",
+   "domain_id": "ROB",
+   "title_ar": "التحكم PID والاستقرار",
+   "title_en": "PID and stability",
+   "guiding_question_ar": "كيف نعيد نظاماً إلى وضع مطلوب رغم الاضطراب؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-007",
+   "domain_id": "ROB",
+   "title_ar": "الحالة والتقدير والترشيح",
+   "title_en": "State estimation and filtering",
+   "guiding_question_ar": "كيف نستنتج الحالة من حساسات مشوشة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-008",
+   "domain_id": "ROB",
+   "title_ar": "الرؤية والتموضع SLAM",
+   "title_en": "Visual localization and SLAM",
+   "guiding_question_ar": "كيف يبني الروبوت خريطة ويحدد موقعه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-009",
+   "domain_id": "ROB",
+   "title_ar": "تخطيط الحركة وتجنب العوائق",
+   "title_en": "Motion planning and avoidance",
+   "guiding_question_ar": "كيف ينتقل الروبوت إلى هدف بأمان؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-010",
+   "domain_id": "ROB",
+   "title_ar": "القبض والتلاعب بالأجسام",
+   "title_en": "Grasping and manipulation",
+   "guiding_question_ar": "كيف يتحكم الذراع في جسم حقيقي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-011",
+   "domain_id": "ROB",
+   "title_ar": "الروبوتات المتحركة والمشي",
+   "title_en": "Mobile robots and locomotion",
+   "guiding_question_ar": "كيف ننسق التوازن والحركة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-012",
+   "domain_id": "ROB",
+   "title_ar": "التعلم بالمحاكاة وSim-to-Real",
+   "title_en": "Simulation-to-real transfer",
+   "guiding_question_ar": "لماذا لا ينجح سلوك المحاكاة دائماً على الروبوت الحقيقي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-014",
+   "domain_id": "ROB",
+   "title_ar": "التحكم متعدد الروبوتات",
+   "title_en": "Multi-robot coordination",
+   "guiding_question_ar": "كيف تنسق عدة روبوتات ضمن قواعد اتصال محدودة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-015",
+   "domain_id": "ROB",
+   "title_ar": "قيود الطاقة والكمون والأمان",
+   "title_en": "Embodied resource and safety constraints",
+   "guiding_question_ar": "كيف تؤثر البطارية وزمن الاستجابة والبيئة في التصميم؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-016",
+   "domain_id": "ROB",
+   "title_ar": "التفاعل البشري الروبوتي",
+   "title_en": "Human-robot interaction",
+   "guiding_question_ar": "كيف نوضح نية الحركة وحدود استقلالية الروبوت؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "ROB-017",
+   "domain_id": "ROB",
+   "title_ar": "التجارب الآمنة على روبوتات صغيرة",
+   "title_en": "Safe small-robot experiments",
+   "guiding_question_ar": "كيف نختبر سياسة حركة دون مخاطر غير لازمة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-001",
+   "domain_id": "SYS",
+   "title_ar": "دورة حياة النظام الذكي",
+   "title_en": "AI system lifecycle",
+   "guiding_question_ar": "كيف ننتقل من الفكرة إلى نظام عامل قابل للصيانة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-002",
+   "domain_id": "SYS",
+   "title_ar": "CPU مقابل GPU وموازاة العمليات",
+   "title_en": "CPU, GPU and parallelism",
+   "guiding_question_ar": "متى يكون التنفيذ المتوازي مفيداً؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-003",
+   "domain_id": "SYS",
+   "title_ar": "الذاكرة والذاكرة المرئية VRAM",
+   "title_en": "Memory and VRAM budgeting",
+   "guiding_question_ar": "لماذا يمكن لبطاقة سريعة أن تعجز عن تحميل نموذج؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-004",
+   "domain_id": "SYS",
+   "title_ar": "المصفوفات والحسابات منخفضة الدقة",
+   "title_en": "Tensor computation and precision",
+   "guiding_question_ar": "كيف يؤثر نوع العدد وحركة البيانات في الأداء؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-005",
+   "domain_id": "SYS",
+   "title_ar": "Wasm وWeb Workers",
+   "title_en": "Wasm and Web Workers",
+   "guiding_question_ar": "كيف نشغل تجارب تعليمية محلياً في المتصفح؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-006",
+   "domain_id": "SYS",
+   "title_ar": "العتاد الطرفي والهواتف",
+   "title_en": "Edge AI and on-device models",
+   "guiding_question_ar": "كيف نختار نموذجاً يعمل دون خادم مركزي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-007",
+   "domain_id": "SYS",
+   "title_ar": "واجهات النماذج API",
+   "title_en": "Model serving APIs",
+   "guiding_question_ar": "كيف يفصل النظام بين الاستدلال والعميل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-008",
+   "domain_id": "SYS",
+   "title_ar": "الحاويات والعزل",
+   "title_en": "Containers and isolation",
+   "guiding_question_ar": "كيف نحزم بيئة التنفيذ ونحد المخاطر؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-009",
+   "domain_id": "SYS",
+   "title_ar": "النشر والتدرج والتوافر",
+   "title_en": "Deployment and scaling",
+   "guiding_question_ar": "كيف نحافظ على إتاحة الخدمة عند زيادة الطلب؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-010",
+   "domain_id": "SYS",
+   "title_ar": "مراقبة الكمون والأخطاء",
+   "title_en": "Observability and telemetry",
+   "guiding_question_ar": "كيف نرصد تدهور الخدمة دون جمع بيانات غير لازمة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-011",
+   "domain_id": "SYS",
+   "title_ar": "MLOps وتتبع النماذج",
+   "title_en": "MLOps and model registry",
+   "guiding_question_ar": "كيف نعرف أي نسخة نموذج أدت إلى أي نتيجة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-012",
+   "domain_id": "SYS",
+   "title_ar": "المصادر المتكررة والاختبارات المستمرة",
+   "title_en": "Versioning and continuous tests",
+   "guiding_question_ar": "كيف نمنع تغييرا صغيراً من كسر تجربة علمية؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-013",
+   "domain_id": "SYS",
+   "title_ar": "إدارة بيانات التدريب والبنية",
+   "title_en": "Data pipelines and feature stores",
+   "guiding_question_ar": "كيف نحافظ على سلامة انتقال البيانات بين المراحل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-014",
+   "domain_id": "SYS",
+   "title_ar": "تكلفة الحوسبة والجدولة",
+   "title_en": "Compute budgeting and scheduling",
+   "guiding_question_ar": "كيف نوازن بين زمن التدريب والميزانية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-015",
+   "domain_id": "SYS",
+   "title_ar": "مفاتيح المزود وحدود الاعتماد (BYOK)",
+   "title_en": "Provider keys and BYOK trust",
+   "guiding_question_ar": "من يملك المفتاح، وما الذي يتعرض له عند الاعتماد على مزود خارجي؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "SYS-016",
+   "domain_id": "SYS",
+   "title_ar": "الهندسة الموفرة للطاقة",
+   "title_en": "Energy-aware AI engineering",
+   "guiding_question_ar": "كيف نقيس الاستهلاك وما جدوى تسريع التنفيذ؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-017",
+   "domain_id": "SYS",
+   "title_ar": "توثيق واجهات ومكونات النظام",
+   "title_en": "Architecture contracts and interfaces",
+   "guiding_question_ar": "كيف نمنع تعقيد الترقيعات وعلاقات الاعتماد الخفية؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-001",
+   "domain_id": "EVA",
+   "title_ar": "ما الذي يجعل الادعاء قابلاً للاختبار؟",
+   "title_en": "Operational claims and evaluation",
+   "guiding_question_ar": "كيف نفرق بين عرض مقنع ودليل على قدرة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-002",
+   "domain_id": "EVA",
+   "title_ar": "مقاييس التوليد اللغوي",
+   "title_en": "Language model evaluation metrics",
+   "guiding_question_ar": "ماذا تقيس Perplexity وما الذي لا تقيسه؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-003",
+   "domain_id": "EVA",
+   "title_ar": "مجموعات التقييم ومخاطر التلوث",
+   "title_en": "Benchmarks and contamination",
+   "guiding_question_ar": "متى يكون الاختبار معروفاً للنموذج مسبقاً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-004",
+   "domain_id": "EVA",
+   "title_ar": "التقييم البشري والاتفاق",
+   "title_en": "Human evaluation and agreement",
+   "guiding_question_ar": "كيف نجمع أحكاماً بشرية مع تقليل التحيز؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-005",
+   "domain_id": "EVA",
+   "title_ar": "الاختبارات العدائية والمتانة",
+   "title_en": "Adversarial and robustness testing",
+   "guiding_question_ar": "متى تنكسر القدرة عند تغيير صياغة المدخل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-006",
+   "domain_id": "EVA",
+   "title_ar": "المعايرة والثقة",
+   "title_en": "Calibration and confidence",
+   "guiding_question_ar": "هل تتوافق الثقة المعلنة مع احتمال الصحة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-007",
+   "domain_id": "EVA",
+   "title_ar": "الهلوسة والادعاءات غير المسندة",
+   "title_en": "Hallucinations and unsupported claims",
+   "guiding_question_ar": "كيف نكشف إجابة لا تدعمها الأدلة؟",
+   "coverage": "flagship_journey",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-008",
+   "domain_id": "EVA",
+   "title_ar": "التقييم حسب اللغة واللهجة",
+   "title_en": "Cross-lingual evaluation",
+   "guiding_question_ar": "كيف نكشف عدم التكافؤ بين العربية والإنجليزية؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-009",
+   "domain_id": "EVA",
+   "title_ar": "التفسير والقابلية للفهم",
+   "title_en": "Interpretability and explanation",
+   "guiding_question_ar": "ماذا تعلمنا أداة تفسير وما الذي لا تستطيع إثباته؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-010",
+   "domain_id": "EVA",
+   "title_ar": "سلامة البيانات والخصوصية",
+   "title_en": "Privacy, data minimization and consent",
+   "guiding_question_ar": "كيف نحمي ما يدخله المتعلم إلى التجربة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-011",
+   "domain_id": "EVA",
+   "title_ar": "حقن المطالبات وحدود الثقة",
+   "title_en": "Prompt injection and trust boundaries",
+   "guiding_question_ar": "كيف يهاجم نص غير موثوق حدود تعليمات النظام، ومتى يصل أثره إلى فعّل الوكيل؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "renamed_in": "v0.2"
+  },
+  {
+   "id": "EVA-012",
+   "domain_id": "EVA",
+   "title_ar": "تسرب بيانات التدريب وحفظ الأمثلة",
+   "title_en": "Memorization and training-data leakage",
+   "guiding_question_ar": "متى يعيد النموذج معلومات حساسة من بيانات سابقة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-013",
+   "domain_id": "EVA",
+   "title_ar": "الهجمات على النماذج والسمات",
+   "title_en": "Adversarial examples and model attacks",
+   "guiding_question_ar": "كيف تخدع تغييرات صغيرة نموذجاً متعلماً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-014",
+   "domain_id": "EVA",
+   "title_ar": "صلاحيات الوكلاء والحدود البشرية",
+   "title_en": "Agent permissions and approvals",
+   "guiding_question_ar": "متى نمنع الوكيل من اتخاذ فعل ذاتي؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-015",
+   "domain_id": "EVA",
+   "title_ar": "التقييم السببي والتجارب المضبوطة",
+   "title_en": "Causal evaluation and controlled trials",
+   "guiding_question_ar": "كيف ننسب التحسن إلى تغيير محدد؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-016",
+   "domain_id": "EVA",
+   "title_ar": "المراقبة بعد النشر والاستجابة للحوادث",
+   "title_en": "Post-deployment monitoring and incidents",
+   "guiding_question_ar": "كيف نكتشف الفشل في العالم الحقيقي ونتعامل معه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-017",
+   "domain_id": "EVA",
+   "title_ar": "السلامة متعددة الوسائط",
+   "title_en": "Multimodal safety and deceptive media",
+   "guiding_question_ar": "كيف نعالج مخاطر الصوت والصورة والفيديو؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-018",
+   "domain_id": "EVA",
+   "title_ar": "التقييم على مهام المستخدم النهائية",
+   "title_en": "End-to-end task success evaluation",
+   "guiding_question_ar": "هل أنجز النظام ما أراده المستخدم فعلاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-019",
+   "domain_id": "EVA",
+   "title_ar": "حدود الاختبار الاصطناعي والتعلم البشري",
+   "title_en": "Synthetic learner limits",
+   "guiding_question_ar": "لماذا لا يثبت أداء وكلاء اصطناعيين أثر التعلم على البشر؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-020",
+   "domain_id": "EVA",
+   "title_ar": "التفسير الآلي الداخلي للدوائر",
+   "title_en": "Mechanistic interpretability",
+   "guiding_question_ar": "كيف نفحص آليات حسابية داخل نموذج دون افتراض قصة سببية سهلة؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "EVA-021",
+   "domain_id": "EVA",
+   "title_ar": "الخصوصية التفاضلية والتحقق",
+   "title_en": "Differential privacy guarantees",
+   "guiding_question_ar": "كيف نفسر حدود ضمان الخصوصية المعلن؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-001",
+   "domain_id": "HUM",
+   "title_ar": "الإنسان في حلقة القرار",
+   "title_en": "Human oversight and control",
+   "guiding_question_ar": "متى نحتاج موافقة الإنسان وكيف نظهرها؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-002",
+   "domain_id": "HUM",
+   "title_ar": "الإتاحة وإمكانية الوصول",
+   "title_en": "Accessibility and inclusive design",
+   "guiding_question_ar": "كيف نجعل التجربة ممكنة لذوي الاحتياجات المختلفة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-003",
+   "domain_id": "HUM",
+   "title_ar": "الانحياز والعدالة",
+   "title_en": "Bias and fairness",
+   "guiding_question_ar": "من قد يتضرر من قياس صمم لعينة غير ممثلة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-004",
+   "domain_id": "HUM",
+   "title_ar": "الشفافية والإفصاح عن استخدام AI",
+   "title_en": "AI transparency and disclosure",
+   "guiding_question_ar": "ماذا يجب أن يعرف المستخدم عن النموذج والبيانات؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-005",
+   "domain_id": "HUM",
+   "title_ar": "الملكية وحقوق المحتوى",
+   "title_en": "Copyright and content rights",
+   "guiding_question_ar": "كيف نفصل حرية التعلم عن حقوق الأعمال والبيانات؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-006",
+   "domain_id": "HUM",
+   "title_ar": "أمن المعلومات والمسؤولية",
+   "title_en": "Accountability and security governance",
+   "guiding_question_ar": "من يقرر المخاطر ومن يتحمل نتائج النظام؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-007",
+   "domain_id": "HUM",
+   "title_ar": "المخاطر التنظيمية واختلاف الولايات",
+   "title_en": "Regulatory approaches and jurisdictions",
+   "guiding_question_ar": "لماذا تختلف المتطلبات القانونية باختلاف السياق والمكان؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-008",
+   "domain_id": "HUM",
+   "title_ar": "أطر حوكمة المخاطر",
+   "title_en": "AI risk management frameworks",
+   "guiding_question_ar": "كيف نصنف المخاطر ونربطها بضوابط قابلة للفحص؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-009",
+   "domain_id": "HUM",
+   "title_ar": "التأثير في العمل والمهن",
+   "title_en": "AI labor and productivity",
+   "guiding_question_ar": "كيف نقيس تغير المهام بدلاً من الاكتفاء بشعارات الإحلال؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-010",
+   "domain_id": "HUM",
+   "title_ar": "التأثير البيئي والطاقة",
+   "title_en": "Environmental impacts of AI",
+   "guiding_question_ar": "كيف نوازن استخدام الطاقة والماء والموارد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-011",
+   "domain_id": "HUM",
+   "title_ar": "العلاقة بين الإنسان والآلة",
+   "title_en": "Human-AI interaction",
+   "guiding_question_ar": "كيف نفهم حدود الثقة والاعتماد على المخرجات؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-012",
+   "domain_id": "HUM",
+   "title_ar": "التربية على الذكاء الاصطناعي",
+   "title_en": "AI literacy",
+   "guiding_question_ar": "ما الذي ينبغي أن يعرفه المستخدم والمطور والباحث؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-013",
+   "domain_id": "HUM",
+   "title_ar": "الخصوصية حسب التصميم",
+   "title_en": "Privacy by design",
+   "guiding_question_ar": "لماذا نقلل الجمع افتراضياً حتى مع توفر تقنية للتحليل؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-014",
+   "domain_id": "HUM",
+   "title_ar": "سيادة البيانات واللغات",
+   "title_en": "AI sovereignty and language inclusion",
+   "guiding_question_ar": "كيف يؤثر توزيع البيانات والبنية في فرص اللغات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-015",
+   "domain_id": "HUM",
+   "title_ar": "التوثيق والبطاقات النموذجية",
+   "title_en": "Model cards and disclosure",
+   "guiding_question_ar": "كيف نصف حدود النموذج والاستخدام المناسب؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "HUM-016",
+   "domain_id": "HUM",
+   "title_ar": "التصميم المتمحور حول الإنسان",
+   "title_en": "Human-centered AI design",
+   "guiding_question_ar": "كيف نقيس إن كان المنتج يساعد الشخص على اتخاذ قرار أفضل؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-001",
+   "domain_id": "RES",
+   "title_ar": "كيف نقرأ ورقة علمية؟",
+   "title_en": "Reading scientific papers",
+   "guiding_question_ar": "أين نجد الادعاء والطريقة والدليل والحدود؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-002",
+   "domain_id": "RES",
+   "title_ar": "من الادعاء إلى الفرضية",
+   "title_en": "From claim to hypothesis",
+   "guiding_question_ar": "كيف نصوغ تفسيراً قد تثبت خطأه تجربة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-003",
+   "domain_id": "RES",
+   "title_ar": "تجارب Ablation",
+   "title_en": "Ablation studies",
+   "guiding_question_ar": "كيف نعرف أي مكون ساهم في التحسن؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-004",
+   "domain_id": "RES",
+   "title_ar": "المقارنة العادلة وخط الأساس",
+   "title_en": "Baselines and fair comparisons",
+   "guiding_question_ar": "هل تقارن التجربة تكاليف وبيانات متكافئة؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-005",
+   "domain_id": "RES",
+   "title_ar": "الاستنساخ وإعادة الإنتاج",
+   "title_en": "Replication and reproducibility",
+   "guiding_question_ar": "كيف نكرر الدراسة ونوثق اختلاف النتائج؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-006",
+   "domain_id": "RES",
+   "title_ar": "عدم اليقين والقوة الإحصائية",
+   "title_en": "Uncertainty and statistical power",
+   "guiding_question_ar": "هل تكفي عيناتنا لدعم الاستنتاج؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-007",
+   "domain_id": "RES",
+   "title_ar": "تدقيق المصادر والمراجعة العلمية",
+   "title_en": "Scientific sourcing and peer review",
+   "guiding_question_ar": "كيف نفصل المصدر الأولي عن الادعاء المنقول؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-008",
+   "domain_id": "RES",
+   "title_ar": "تتبع الإصدارات البحثية والقطعيات",
+   "title_en": "Research artifact versioning",
+   "guiding_question_ar": "كيف نحافظ على تطابق الشيفرة والنتائج والنص؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-009",
+   "domain_id": "RES",
+   "title_ar": "تاريخ وتحولات مناهج البحث",
+   "title_en": "Research paradigm shifts",
+   "guiding_question_ar": "كيف تتغير الأسئلة العلمية مع تغير أدوات القياس؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-010",
+   "domain_id": "RES",
+   "title_ar": "قوانين التوسع وحدودها",
+   "title_en": "Scaling law research",
+   "guiding_question_ar": "متى نفترض قانون قدرة ومتى نفشل في تعميمه؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-011",
+   "domain_id": "RES",
+   "title_ar": "الاستدلال الحسابي وقت الاختبار",
+   "title_en": "Test-time compute and reasoning",
+   "guiding_question_ar": "كيف نقيس أثر زيادة الحساب أثناء الإجابة؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-012",
+   "domain_id": "RES",
+   "title_ar": "التعلم الذاتي والاكتشاف الآلي",
+   "title_en": "Automated discovery and self-improvement",
+   "guiding_question_ar": "كيف نختبر أن اكتشافاً جديداً صالح وقابل للتكرار؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-013",
+   "domain_id": "RES",
+   "title_ar": "نماذج العالم والمحاكاة",
+   "title_en": "World models and simulation",
+   "guiding_question_ar": "ماذا يتعلم النموذج عن تغير العالم تحت الأفعال؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-016",
+   "domain_id": "RES",
+   "title_ar": "تقييم ادعاءات الذكاء العام",
+   "title_en": "Evaluating broad AI claims",
+   "guiding_question_ar": "كيف نقيس التعميم المتعدد دون تخطي الأدلة؟",
+   "coverage": "research_frontier",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "RES-017",
+   "domain_id": "RES",
+   "title_ar": "البحث الآلي عن البنى AutoML",
+   "title_en": "Automated model and hyperparameter search",
+   "guiding_question_ar": "كيف نقارن إجراءات البحث بلا تسرب من مجموعة الاختبار؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-001",
+   "domain_id": "APP",
+   "title_ar": "تصميم مشكلة قطاعية قابلة للقياس",
+   "title_en": "Problem framing by domain",
+   "guiding_question_ar": "كيف نعرف أن الذكاء الاصطناعي مناسب للمشكلة أصلاً؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-002",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي للتعليم",
+   "title_en": "AI for education",
+   "guiding_question_ar": "كيف نساعد على التعلم دون خلط الاستخدام بأثر التعلم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-003",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الصحة",
+   "title_en": "AI in healthcare",
+   "guiding_question_ar": "كيف نقيّم الدقة والسلامة وحدود المسؤولية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-004",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في العلوم الطبيعية",
+   "title_en": "AI for science",
+   "guiding_question_ar": "كيف يسرع توليد فرضيات مع بقاء التحقق التجريبي ضرورياً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-005",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في البرمجة",
+   "title_en": "AI for software engineering",
+   "guiding_question_ar": "كيف نقيّم نجاح كتابة الشيفرة وإصلاح الاختبارات؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-006",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الأعمال والعمليات",
+   "title_en": "AI in business operations",
+   "guiding_question_ar": "متى تكون الأتمتة مفيدة وكيف نقيس عائدها؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-007",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي للغة العربية",
+   "title_en": "Arabic language technology",
+   "guiding_question_ar": "كيف نصمم منتجات تراعي الصرف واللهجات والاتجاه والموارد؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-008",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الجغرافيا والمكان",
+   "title_en": "Geospatial AI",
+   "guiding_question_ar": "كيف نستعمل الصور والخرائط مع حدود التموضع؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-009",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الصناعة والطاقة",
+   "title_en": "Industrial and energy AI",
+   "guiding_question_ar": "كيف نتنبأ بالأعطال أو نحسن العمليات مع قيود السلامة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-010",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الزراعة والبيئة",
+   "title_en": "AI for agriculture and climate",
+   "guiding_question_ar": "كيف نربط النماذج بالملاحظة الميدانية والتأثير الواقعي؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-011",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الإعلام والإبداع",
+   "title_en": "AI for creative production",
+   "guiding_question_ar": "كيف ندعم التأليف دون إخفاء المصدر والحقوق؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-012",
+   "domain_id": "APP",
+   "title_ar": "التقنية المساعدة وإمكانية الوصول",
+   "title_en": "Assistive AI",
+   "guiding_question_ar": "كيف نختبر ما إذا كانت التقنية تحسن استقلال المستخدم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-013",
+   "domain_id": "APP",
+   "title_ar": "محاكاة وDigital Twins",
+   "title_en": "Simulation and digital twins",
+   "guiding_question_ar": "كيف نقارن النظام الافتراضي بسلوك العالم؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-014",
+   "domain_id": "APP",
+   "title_ar": "دراسات حالة فشل ونجاح",
+   "title_en": "AI system case studies",
+   "guiding_question_ar": "كيف نستخلص دروساً قابلة للتحقق من تطبيقات فعلية؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-015",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في النقل والتنقل",
+   "title_en": "AI for transportation",
+   "guiding_question_ar": "كيف تُختبر قرارات الحركة في بيئات تتطلب أماناً مرتفعاً؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "APP-016",
+   "domain_id": "APP",
+   "title_ar": "الذكاء الاصطناعي في الأمن السيبراني",
+   "title_en": "AI for cybersecurity",
+   "guiding_question_ar": "كيف نقيّم كشف الهجمات والدفاع مع تقليل الإنذارات الكاذبة؟",
+   "coverage": "expansion",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": []
+  },
+  {
+   "id": "SYS-018",
+   "domain_id": "SYS",
+   "title_ar": "التصميم دون اتصال والتدهور الآمن",
+   "title_en": "Offline-first behaviour and graceful degradation",
+   "guiding_question_ar": "كيف يظل المنتج صالحاً للاستخدام حين تنقطع الخدمة أو يتعذر الوصول إلى المزود؟",
+   "coverage": "shared_foundation",
+   "independent_entry": true,
+   "status": "inventory_proposal",
+   "source_status": "unassigned",
+   "sources": [],
+   "added_in": "v0.2"
+  }
+ ],
+ "id_history": [
+  {
+   "id": "AGT-018",
+   "state": "merged",
+   "merged_into": "EVA-011",
+   "previous_titles": {
+    "title_ar": "حقن الأوامر وعزل الثقة",
+    "title_en": "Prompt injection and trust boundaries"
+   },
+   "previous_coverage": "shared_foundation",
+   "case": 1,
+   "rationale_ar": "المفهوم واحد: نص غير موثوق يتجاوز حدود التعليمات. الاختلاف في سياق التطبيق (وكيل/استرجاع) لا في المسألة العلمية.",
+   "evidence_ar": "السؤالان يصفان الآلية نفسها، وكانت بينهما حافة just_in_time أي أن النموذج نفسه ربط الموضوع بنسخته.",
+   "decided": "2026-10-25"
+  },
+  {
+   "id": "TRN-018",
+   "state": "merged",
+   "merged_into": "EVA-003",
+   "previous_titles": {
+    "title_ar": "تلوث المقاييس أثناء التدريب",
+    "title_en": "Benchmark contamination"
+   },
+   "previous_coverage": "shared_foundation",
+   "case": 2,
+   "rationale_ar": "تلوث المقاييس ظاهرة قياس واحدة. موضعها الطبيعي في مجال التقييم، ومنشأها في التدريب يُشرح داخل الموضوع.",
+   "evidence_ar": "EVA-003 يضم التلوث أصلاً في عنوانه وسؤاله، وTRN-018 يعيد الحالة نفسها من جهة التدريب.",
+   "decided": "2026-10-25"
+  },
+  {
+   "id": "RES-014",
+   "state": "merged",
+   "merged_into": "SYM-015",
+   "previous_titles": {
+    "title_ar": "الذكاء الهجين الرمزي العصبي",
+    "title_en": "Neuro-symbolic systems research"
+   },
+   "previous_coverage": "research_frontier",
+   "case": 3,
+   "rationale_ar": "الرمزي العصبي برنامج واحد؛ وجود نسخة في مجال البحث لا يضيف مسألة، بل يضيف زاوية نشر.",
+   "evidence_ar": "العنوانان مترادفان تقريباً، والسؤالان يطلبان الشيء نفسه بصياغتين.",
+   "decided": "2026-10-25"
+  },
+  {
+   "id": "RES-015",
+   "state": "merged",
+   "merged_into": "LLM-020",
+   "previous_titles": {
+    "title_ar": "نماذج كامنة وتنبؤ بديل",
+    "title_en": "Latent predictive models"
+   },
+   "previous_coverage": "research_frontier",
+   "case": 4,
+   "rationale_ar": "سؤال واحد: هل تكون وحدة التنبؤ غير رمزية؟ الإطار البحثي يوصف داخل الموضوع نفسه.",
+   "evidence_ar": "«وحدة التنبؤ إذا لم تكن رمزاً» و«حالة أو مفهوم لا رمز» سؤال واحد بلفظين.",
+   "decided": "2026-10-25"
+  },
+  {
+   "id": "ROB-013",
+   "state": "merged",
+   "merged_into": "MMU-013",
+   "previous_titles": {
+    "title_ar": "سياسات الرؤية واللغة والفعل",
+    "title_en": "Vision-language-action policies"
+   },
+   "previous_coverage": "research_frontier",
+   "case": 6,
+   "rationale_ar": "VLA بنية متعددة الوسائط تُطبَّق في الروبوتات. الروبوت تطبيق لا مفهوم مستقل.",
+   "evidence_ar": "العنوانان يتطابقان مصطلحياً، والسؤالان يصفان الانتقال من الإدراك إلى الفعل.",
+   "decided": "2026-10-25"
+  },
+  {
+   "id": "EVA-011",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "حقن المطالبات عبر المصادر",
+    "title_en": "Prompt injection"
+   },
+   "previous_question_ar": "كيف يهاجم نص غير موثوق حدود تعليمات النظام؟"
+  },
+  {
+   "id": "MMU-013",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "الوسائط الحسية والأفعال",
+    "title_en": "Vision-language-action models"
+   },
+   "previous_question_ar": "كيف تتحول الملاحظات متعددة الوسائط إلى أفعال؟"
+  },
+  {
+   "id": "NLP-008",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "النص العربي والتطبيع والتشكيل",
+    "title_en": "Arabic NLP challenges"
+   },
+   "previous_question_ar": "كيف تؤثر اللواصق والتشكيل واختلاف الكتابة في المعالجة؟"
+  },
+  {
+   "id": "INF-012",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "النماذج المحلية وBYOK",
+    "title_en": "Local models and BYOK"
+   },
+   "previous_question_ar": "ما الفرق بين التشغيل المحلي واستخدام واجهة خدمة خارجية؟"
+  },
+  {
+   "id": "SYS-015",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "التشغيل دون اتصال وBYOK",
+    "title_en": "Offline-first AI systems and BYOK"
+   },
+   "previous_question_ar": "كيف نتعامل مع خصوصية المفاتيح وحالات فقد الاتصال؟"
+  },
+  {
+   "id": "LLM-020",
+   "state": "renamed",
+   "decided": "2026-10-25",
+   "previous_titles": {
+    "title_ar": "نماذج المفاهيم والتمثيلات الكامنة",
+    "title_en": "Latent and concept-based language modeling"
+   },
+   "previous_question_ar": "كيف تختلف وحدة التنبؤ إذا لم تكن رمزاً نصياً؟"
+  },
+  {
+   "id": "SYS-018",
+   "state": "added",
+   "decided": "2026-10-25",
+   "rationale_ar": "كانت مدمجة في SYS-015 مع BYOK؛ وهما مسألتان مختلفتان: ملكية المفتاح مقابل سلوك النظام عند فقد الاتصال."
+  }
+ ],
+ "sourcing_policy": {
+  "current_state_ar": "لا موضوع مرتبط بمصدر فردي في هذا الإصدار. الحقل موجود فارغاً ومعه حالة صريحة، ولا يُملأ بمصادر مُختلقة.",
+  "required_before_publication_ar": "لكل موضوع مصدر مؤسس واحد على الأقل، وتاريخ للادعاء إن كان بحثياً.",
+  "frontier_rule_ar": "موضوعات research_frontier لا تُعرض كحقائق نهائية؛ يلزمها مصدر وتاريخ وقيود معلنة.",
+  "fields": {
+   "sources": "قائمة مصادر فردية (فارغة الآن)",
+   "source_status": "unassigned | partial | verified"
+  }
+ },
+ "reference_basis": [
+  "https://csed.acm.org/",
+  "https://ai4k12.org/gradeband-progression-charts/",
+  "https://www.unesco.org/en/articles/ai-competency-framework-students",
+  "https://www.nist.gov/itl/ai-risk-management-framework",
+  "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+  "https://www.oecd.org/en/publications/explanatory-memorandum-on-the-updated-oecd-definition-of-an-ai-system_623da898-en.html"
+ ],
+ "constraints": {
+  "no_gatekeeping": true,
+  "no_legacy_runtime_dependencies": true,
+  "ar_en_educational_parity_required_before_publication": true,
+  "topic_is_not_a_lesson": true,
+  "frontier_claims_require_date_and_sources": true
+ },
+ "notes": [
+  "topic_count يُشتق ولا يُخزَّن؛ المدقق يتحقق من تطابق أي مجموع معلن في الوثائق.",
+  "العلاقات تصف المعرفة العلمية فقط؛ ترتيب الرحلات يعيش في wakeel.journey-graph.v0.2 ولا يُدمج هنا.",
+  "الحقول prerequisites/related أُزيلت من الموضوعات؛ الأداة tools/validate.py تطبع العرض المشتق للتحقق.",
+  "المعرّفات المدموجة محفوظة في id_history ولا تُعاد للاستخدام.",
+  "كل حافة مضافة في v0.2 تحمل حقل review: accepted أو edited أو provisional، مع سبب المراجعة.",
+  "الحواف provisional غير معتمدة للمحتوى؛ لا تُعرض كحقيقة في الدروس قبل حسمها."
+ ]
+}

@@ -1,0 +1,1639 @@
+{
+ "schema": "wakeel.journey-graph.v0.3",
+ "schema_uri": "schema/wakeel-journey.schema.json",
+ "date": "2026-10-29",
+ "status": "V0.21.3_44_STATIONS_9_AUTHORED_CHAPTERS",
+ "separation_rule_ar": "هذا الملف يعبّر عن تجربة تعليمية مرتّبة، لا عن حقيقة معرفية. لا تُقرأ محطاته كمتطلبات علمية، ولا تُدمج حوافه في سجل العلاقات. الترتيب هنا قرار تصميم تدريس، وقد يخالفه ترتيب الاعتماد العلمي بين الموضوعين نفسيهما.",
+ "station_roles": {
+  "core": "محطة أساسية في مسار الرحلة؛ لها نشاط ومخرج يتحقق منه المتعلم.",
+  "optional": "تُفتح عند الحاجة فقط؛ يمكن إتمام الرحلة دونها مع تمهيد موجز داخل المحطة التي تحتاجها.",
+  "reference": "مادة مرجعية مرتبطة بالرحلة لا تُدرج في تسلسلها."
+ },
+ "journeys": [
+  {
+   "id": "JRN-LLM-001",
+   "title_ar": "من السؤال الإنساني إلى نموذج لغوي صغير يعمل ويُقاس",
+   "title_en": "From a human question to a small language model that runs and is measured",
+   "status": "built",
+   "nature": "pedagogical_order",
+   "goal_ar": "أن يبني المتعلم نموذجاً لغوياً صغيراً من الصفر، ويدرّبه، ويتحقق من سلامته قبل التشغيل، ويقيسه بخط أساس ثابت، ويشغّله — مع فهم سبب كل خطوة لا حفظ ترتيبها.",
+   "starts_with_question_ar": "كيف نجعل الحاسوب يتعامل مع اللغة؟ ولماذا أصبح توقع الرمز التالي إحدى الطرق المهمة لتدريب النماذج اللغوية؟",
+   "independence_note_ar": "كل محطة هنا رابط مستقل إلى موضوعه. لم تُصمم الرحلة لتكون بوابة؛ من يريد Tokenizer وحده يدخل NLP-003 مباشرة ويجد تمهيده الموجز داخلها.",
+   "exit_evidence_ar": [
+    "نموذج صغير يعمل من البداية إلى النهاية على نص اختاره المتعلم.",
+    "تقرير تقييم على مجموعة تحقق منفصلة، ببيانات ثابتة وخط أساس وتكرار واحد على الأقل، يذكر صراحة ما لم يتحسن.",
+    "اختبار تسرب مكتوب قبل تشغيل التدريب، يفشل عند التسرب وينجح على النموذج السببي.",
+    "مقارنة بين استراتيجيتي فك ترميز على المطالبة نفسها، مع تفسير الفرق.",
+    "اختبار ربط تركيبي بأزواج مضادة يفصل الربط عن تعداد الرموز، مع ضابط اختصار معلن على السؤال الثاني وقراءة بذور مشروطة بحدودها."
+   ],
+   "chapters": [
+    {
+     "id": "CH-1",
+     "title_ar": "من الحاجة إلى السؤال",
+     "station_orders": [
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "goal_ar": "أن يصل المتعلم إلى قرار «نحتاج تعلماً من أمثلة» من تجربة قواعد فاشلة، لا من تصريح.",
+     "content": {
+      "ar": "content/chapter-01/ar.md",
+      "en": "content/chapter-01/en.md",
+      "status": "authored"
+     },
+     "title_en": "From Need to Question",
+     "goal_en": "That the learner arrive at 'we need learning from examples' through an experiment with failing rules, not from a declaration."
+    },
+    {
+     "id": "CH-2",
+     "title_ar": "اللغة تصبح وحدات",
+     "station_orders": [
+      6,
+      7,
+      8
+     ],
+     "goal_ar": "أن ينتقل من اختيار رد إلى فكرة كتابة نص جديد خطوة بخطوة، ثم يكتشف أن الكتابة تحتاج وحدة، فيصل إلى التقطيع بدافع لا بأمر.",
+     "content": {
+      "ar": "content/chapter-02/ar.md",
+      "en": "content/chapter-02/en.md",
+      "status": "authored"
+     },
+     "title_en": "Language Becomes Units",
+     "goal_en": "That they move from choosing a reply to writing new text step by step, then discover that writing needs a unit, reaching tokenization from motive rather than command."
+    },
+    {
+     "id": "CH-3",
+     "title_ar": "أول نموذج: من العد إلى الأوزان",
+     "station_orders": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "goal_ar": "أن ينتقل من وحدات مرقمة إلى أول نموذج توليد: تمثيل بالمحارف، جدول Bigram بالعدّ، توليد ببذرة ثابتة، مقياس خسارة عادل، ومقارنة بالشبكة الصغيرة، وحد موثق يفتح سؤال السياق الأطول.",
+     "content": {
+      "ar": "content/chapter-03/ar.md",
+      "en": "content/chapter-03/en.md",
+      "status": "authored"
+     },
+     "title_en": "A First Model: From Counting to Weights",
+     "goal_en": "From numbered units to a first generative model: character representation, a counting Bigram table, seed-fixed generation, a fair loss metric, a comparison with a small network, and a documented limit that opens the longer-context question."
+    },
+    {
+     "id": "CH-4",
+     "title_ar": "السياق والانتباه",
+     "station_orders": [
+      17,
+      18,
+      19,
+      20,
+      21
+     ],
+     "goal_ar": "أن يكتشف المتعلم مفاضلة السياق الأطول عبر تجارب N-gram (k=0..3) على البيانات نفسها: متى تضيف المعلومات السابقة قدرة تنبؤية، ومتى تتحول الندرة والتكلفة إلى عائق. المحطات العصبية هنا مراسي مؤجلة — تُفتح بعد أن يصبح سؤالها مُلحّاً بالتجربة.",
+     "content": {
+      "ar": "content/chapter-04/ar.md",
+      "en": "content/chapter-04/en.md",
+      "status": "authored"
+     },
+     "title_en": "Context and Attention",
+     "goal_en": "That the learner discover the longer-context trade-off through N-gram experiments (k=0..3) on the same data: when previous tokens add predictive power, and when sparsity and cost become the obstacle. The neural stations here are deferred anchors — opened after their question becomes urgent by experiment."
+    },
+    {
+     "id": "CH-5",
+     "title_ar": "التدريب الآمن",
+     "station_orders": [
+      22,
+      23,
+      24,
+      25
+     ],
+     "goal_ar": "أن يدرّب دون أن يرى النموذج الإجابة، وأن يتخذ قرار توقف مبني على تحقق.",
+     "content": {
+      "ar": "content/chapter-05/ar.md",
+      "en": "content/chapter-05/en.md",
+      "status": "authored"
+     },
+     "title_en": "Safe Training",
+     "goal_en": "That they train without the model seeing the answer, and make a stopping decision grounded in validation."
+    },
+    {
+     "id": "CH-6",
+     "title_ar": "البناء والتقييم والتشغيل",
+     "station_orders": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "goal_ar": "أن يشغّل النموذج ويقيسه بحدود واضحة.",
+     "content": {
+      "ar": "content/chapter-06/ar.md",
+      "en": "content/chapter-06/en.md",
+      "status": "authored"
+     },
+     "title_en": "Build, Evaluate, and Run",
+     "goal_en": "That they run the model and measure it within clear limits."
+    },
+    {
+     "id": "CH-7",
+     "title_ar": "الانتباه والوصول إلى معلومة سابقة",
+     "station_orders": [
+      31,
+      32,
+      33,
+      34,
+      35,
+      36
+     ],
+     "goal_ar": "أن يفرّق المتعلم بين الاحتفاظ والعثور والاستخدام، ويقيس الوصول بمهمة مضبوطة بأزواج متقابلة وضوابط معلنة.",
+     "content": {
+      "ar": "content/chapter-07/ar.md",
+      "en": "content/chapter-07/en.md",
+      "status": "authored"
+     },
+     "title_en": "Attention and Access to Earlier Information",
+     "goal_en": "That the learner distinguish retaining, finding, and using, and measure access with a controlled task using counterbalanced pairs and declared controls."
+    },
+    {
+     "id": "CH-8",
+     "title_ar": "من قارئ استعلام واحد إلى الانتباه الذاتي السببي",
+     "station_orders": [
+      37,
+      38,
+      39,
+      40
+     ],
+     "goal_ar": "أن يميز المتعلم بين الاستعلام الثابت والمشتق من حالة الموضع، ويقرأ شبكة عاملية منضبطة بكامل خلاياها، ويفصل خريطة الانتباه عن الدليل التدخلي.",
+     "content": {
+      "ar": "content/chapter-08/ar.md",
+      "en": "content/chapter-08/en.md",
+      "status": "reviewed"
+     },
+     "title_en": "From a Single-Query Reader to Causal Self-Attention",
+     "goal_en": "That the learner distinguish the fixed query from the state-derived one, read a controlled factorial grid in full, and separate attention maps from interventional evidence."
+    },
+    {
+     "id": "CH-9",
+     "title_ar": "الارتباط التركيبي بين المفتاح والقيمة",
+     "station_orders": [
+      41,
+      42,
+      43,
+      44
+     ],
+     "goal_ar": "أن يحول المتعلم الربط إلى سؤال قابل للقياس بأزواج مضادة، يكشف اختصارات السؤال الثاني ويفصلها عن الدليل، ويقرأ تفاعل العمق مع الترميز الموضعي بحدود مقارنته.",
+     "content": {
+      "ar": "content/chapter-09/ar.md",
+      "en": "content/chapter-09/en.md",
+      "status": "reviewed"
+     },
+     "title_en": "Compositional Binding Between Key and Value",
+     "goal_en": "That the learner turn binding into a measurable question with counterfactual pairs, expose second-question shortcuts and separate them from the evidence, and read the depth-by-encoding interaction within its comparison limits."
+    }
+   ],
+   "stations": [
+    {
+     "order": 1,
+     "topic_id": "FND-002",
+     "role": "core",
+     "why_here_ar": "نبدأ من مشكلة يريد الإنسان حلها، لا من تقنية. هذا يحدد لاحقاً ما يُعد نجاحاً.",
+     "deliverable_ar": "صياغة مشكلة واحدة بجملة قابلة للفحص: من يتأثر، وما السلوك المطلوب.",
+     "activity": {
+      "sees_ar": "ست رسائل قصيرة عن الاجتماع، وأربعة ردود متاحة فقط.",
+      "tries_ar": "يصنّف كل رسالة يدوياً قبل أي أداة، ويسجل أي رسالة تردد فيها.",
+      "hypothesis_ar": "أتوقع أن كل الرسائل ستنتمي إلى حالة واحدة من الأربع.",
+      "possible_outcomes_ar": [
+       "كلها تنتمي بلا تردد",
+       "واحدة تحتمل حالتين",
+       "واحدة على الأقل خارج الحالات الأربع"
+      ],
+      "interpretation_ar": "إن وجدت رسالة لا تنتمي، فالحالات نفسها تحتاج تعريفاً أدق. وإن انتمت كلها، فالمشكلة أضيق مما تظن، وهذا ليس نجاحاً بعد.",
+      "discovers_ar": "المشكلة ليست في البرمجة بعد، بل في تعريف الحالات. وهذا ما ستختبره القواعد لاحقاً.",
+      "sees_en": "Six short meeting messages and only four available replies.",
+      "tries_en": "Classifies every message by hand before any tool, noting any message they hesitate on.",
+      "hypothesis_en": "I expect all six messages to fall into one of the four cases.",
+      "possible_outcomes_en": [
+       "all fit without hesitation",
+       "one admits two cases",
+       "at least one falls outside the four"
+      ],
+      "interpretation_en": "If a message fits nowhere, the cases themselves need sharper definition. If all fit, the problem is narrower than you thought — and that is not success yet.",
+      "discovers_en": "The problem is not in programming yet; it is in defining the cases. That is what the rules will test later."
+     },
+     "why_here_en": "We start from a problem a human wants solved, not from a technology. This later defines what counts as success.",
+     "deliverable_en": "One problem stated in a testable sentence: who is affected, and what behavior is wanted."
+    },
+    {
+     "order": 2,
+     "topic_id": "FND-004",
+     "role": "core",
+     "why_here_ar": "أول قرار هندسي: نكتب قواعد أم نعطي أمثلة؟ يُتخذ قبل أي كود.",
+     "deliverable_ar": "تصنيف ثلاث مهام إلى «قواعد» و«أمثلة» مع تبرير.",
+     "activity": {
+      "sees_ar": "الرسائل الست والحالات الأربع.",
+      "tries_ar": "يكتب قواعده بكلماته، ثم يشغلها على الست ويقارن.",
+      "hypothesis_ar": "أتوقع أن تنجح قواعدي في خمس أو ست رسائل من ست.",
+      "possible_outcomes_ar": [
+       "ست من ست",
+       "أربع أو خمس من ست",
+       "ثلاث أو أقل"
+      ],
+      "interpretation_ar": "ست من ست تعني أن الاختبار سهل، لا أن الحل صحيح: الرسائل هي التي كُتبت عليها القواعد. أي نتيجة أقل تعني أن صياغة القاعدة نفسها تحتاج قراراً.",
+      "discovers_ar": "النجاح على رسائلنا لا يقيس شيئاً بعد؛ نحتاج رسائل لم نرها.",
+      "sees_en": "The six messages and the four cases.",
+      "tries_en": "Writes their rules in their own words, runs them on the six, and compares.",
+      "hypothesis_en": "I expect my rules to succeed on five or six of the six messages.",
+      "possible_outcomes_en": [
+       "six of six",
+       "four or five of six",
+       "three or fewer"
+      ],
+      "interpretation_en": "Six of six means the test is easy, not that the solution is right: these are the messages the rules were written against. Any lower result means the rule wording itself needs a decision.",
+      "discovers_en": "Success on our own messages measures nothing yet; we need messages we have not seen."
+     },
+     "why_here_en": "The first engineering decision: do we write rules or give examples? Taken before any code.",
+     "deliverable_en": "Classifying three tasks as 'rules' or 'examples', with justification."
+    },
+    {
+     "order": 3,
+     "topic_id": "FND-013",
+     "role": "core",
+     "why_here_ar": "نجرّب القواعد على اللغة فعلياً، فيظهر حدها من التجربة لا من التصريح.",
+     "deliverable_ar": "قائمة حالات ملموسة تفشل فيها القاعدة المكتوبة رغم وضوحها.",
+     "activity": {
+      "sees_ar": "ثماني صيغ جديدة ونموذج توقع.",
+      "tries_ar": "يضع توقعاً لكل رسالة ثم يقارن.",
+      "hypothesis_ar": "أتوقع ألا تفشل أكثر من ثلاث رسائل.",
+      "possible_outcomes_ar": [
+       "صفر إلى واحد فشل",
+       "اثنان أو ثلاثة",
+       "أربعة أو أكثر"
+      ],
+      "interpretation_ar": "عدد الإخفاقات يقول حجم تنوع اللغة أمام قاعدتك؛ ونوع الإخفاق (مرادف، بنية، تطابق خاطئ) يقول ما الذي تحتاجه القاعدة.",
+      "discovers_ar": "الفشل ثلاثة أنواع، وأخطرها التطابق الخاطئ الواثق: ردّ بمكان الاجتماع على سؤال عن الاعتذار.",
+      "sees_en": "Eight new phrasings and a prediction sheet.",
+      "tries_en": "Predicts each message's reply, then compares.",
+      "hypothesis_en": "I expect no more than three messages to fail.",
+      "possible_outcomes_en": [
+       "zero to one failure",
+       "two or three",
+       "four or more"
+      ],
+      "interpretation_en": "The count of failures measures the language's variety against your rule; the kind of failure (synonym, structure, wrong match) tells what the rule needs.",
+      "discovers_en": "Failures come in three kinds, and the gravest is the confident wrong match: answering with the meeting place to a question about apologizing."
+     },
+     "why_here_en": "We try the rules on real language, so their limit shows from experiment, not from declaration.",
+     "deliverable_en": "A list of concrete cases where the written rule fails despite its clarity."
+    },
+    {
+     "order": 4,
+     "topic_id": "NLP-001",
+     "role": "core",
+     "why_here_ar": "نسمّي سبب الفشل: الغموض والسياق وتعدد الكتابة.",
+     "deliverable_ar": "مثال غموض واحد يفسد قاعدة، مع تفسيرين محتملين.",
+     "activity": {
+      "sees_ar": "حالات الفشل الثلاث: مرادف، صياغة، تطابق خاطئ.",
+      "tries_ar": "يضيف كلمات إلى القواعد ويعيد التشغيل.",
+      "hypothesis_ar": "أتوقع أن إضافة الكلمات ستحل كل الأخطاء.",
+      "possible_outcomes_ar": [
+       "يبقى خطأ واحد على الأقل",
+       "تُحل كلها بلا أخطاء جديدة",
+       "تُحل المرادفات وتظهر أخطاء جديدة"
+      ],
+      "interpretation_ar": "بقاء التطابق الخاطئ يعني أن المشكلة في تمييز النية لا في المفردات. وحلّها بكلمات أكثر قد يجعل القاعدة تلتقط رسائل أخرى.",
+      "discovers_ar": "الغموض قد يحسمه السياق، وقد يبقى. زيادة الكلمات ليست حلاً عاماً، وقد تزيد الأخطاء.",
+      "sees_en": "The three failure kinds: synonym, phrasing, wrong match.",
+      "tries_en": "Adds words to the rules and reruns them.",
+      "hypothesis_en": "I expect adding words to fix every error.",
+      "possible_outcomes_en": [
+       "at least one error remains",
+       "all fixed with no new errors",
+       "synonyms fixed and new errors appear"
+      ],
+      "interpretation_en": "A surviving wrong match means the problem is intent discrimination, not vocabulary. Fixing it with more words may make the rule catch other messages too.",
+      "discovers_en": "Ambiguity may be settled by context, or may persist. More words are not a general fix, and may add errors."
+     },
+     "why_here_en": "We name the cause of failure: ambiguity, context, and variety of writing.",
+     "deliverable_en": "One ambiguity example that breaks a rule, with two possible readings."
+    },
+    {
+     "order": 5,
+     "topic_id": "ML-001",
+     "role": "core",
+     "why_here_ar": "التحول المنهجي: من قاعدة نكتبها إلى دالة نتعلمها من أمثلة.",
+     "deliverable_ar": "تعريف «مثال» و«هدف» و«خطأ» لمهمة نصية واحدة.",
+     "activity": {
+      "sees_ar": "اثنا عشر مثالاً موسوماً، وتعريف صريح لمعنى «أقرب مثال».",
+      "tries_ar": "يصنف الرسائل الثماني بالأمثلة ويقارن بالقواعد.",
+      "hypothesis_ar": "أتوقع أن تتفوق الأمثلة بوضوح.",
+      "possible_outcomes_ar": [
+       "تتفوق في العدد والنوع",
+       "تتعادل في العدد",
+       "تتفوق عدداً وتفشل في حالة مشتركة"
+      ],
+      "interpretation_ar": "الفارق في النوع أهم من الفارق في العدد؛ وإذا حذفت نوعاً من الأمثلة فستختفي قدرته عليه.",
+      "discovers_ar": "الطريقتان تختاران من مخزون؛ لا تكتبان نصاً جديداً. وهذا يفتح سؤال الفصل الثاني.",
+      "sees_en": "Twelve labeled examples and an explicit definition of 'nearest example'.",
+      "tries_en": "Classifies the eight messages by examples and compares against the rules.",
+      "hypothesis_en": "I expect the examples to win clearly.",
+      "possible_outcomes_en": [
+       "they win on count and on kind",
+       "a tie on count",
+       "they win on count and fail on a shared case"
+      ],
+      "interpretation_en": "The difference in kind matters more than the count; remove one kind of example and its ability on that kind disappears.",
+      "discovers_en": "Both methods select from a stock; neither writes new text. This opens Chapter Two's question."
+     },
+     "why_here_en": "The methodological turn: from a rule we write to a function learned from examples.",
+     "deliverable_en": "Definitions of 'example', 'target', and 'error' for one text task."
+    },
+    {
+     "order": 6,
+     "topic_id": "LLM-002",
+     "role": "core",
+     "why_here_ar": "لماذا نولّد رمزاً واحداً في كل خطوة؛ هذا يفسر شكل النموذج لاحقاً.",
+     "deliverable_ar": "توليد نص قصير من جدول احتمالات يدوي دون أي نموذج.",
+     "activity": {
+      "sees_ar": "رسالة T1 والردود الأربعة الثابتة، وقالب بفجوتين: {الموضوع} و{البديل}.",
+      "tries_ar": "يكتب رداً يدوياً محدداً المعلومات والقرارات التي احتاجها، ثم يملأ القالب ويجربه على T5 ثم على T3.",
+      "hypothesis_ar": "أتوقع أن القالب يعمل على كل رسالة تأجيل، وأن T3 ستعمل أيضاً.",
+      "possible_outcomes_ar": [
+       "يعمل على T1 وT5 ويكفي T3",
+       "يعمل على T1 وT5 ويفشل في T3",
+       "يحتاج تعديلاً حتى في T5"
+      ],
+      "interpretation_ar": "نجاحه في T1 وT5 طبيعي لأنهما من النوع الذي صُمم لهما؛ فشله في T3 يكشف أن التركيب يحتاج قالباً لكل نوع. وحتى نجاحه يحتاج قيماً يقدّمها إنسان.",
+      "discovers_ar": "التركيب ممكن وثمنه يتزايد مع التنوع؛ وهذا يفتح سؤال التعلم — لا يغلق القوالب نهائياً.",
+      "sees_en": "Message T1 and the four fixed replies, and a template with two slots: {topic} and {alternative}.",
+      "tries_en": "Writes a reply by hand noting the information and decisions it needed, then fills the template and tries it on T5, then on T3.",
+      "hypothesis_en": "I expect the template to work on every postponement message, and T3 to work too.",
+      "possible_outcomes_en": [
+       "works on T1 and T5 and suffices for T3",
+       "works on T1 and T5 and fails on T3",
+       "needs editing even on T5"
+      ],
+      "interpretation_en": "Success on T1 and T5 is natural — they are the kind it was designed for; failure on T3 reveals that composition needs a template per kind. Even success needs values a human supplies.",
+      "discovers_en": "Composition is possible and its cost grows with variety; this opens the learning question — it does not close templates forever."
+     },
+     "why_here_en": "Why generate one token per step; this explains the model's shape later on.",
+     "deliverable_en": "A short text generated from a hand-made probability table, with no model."
+    },
+    {
+     "order": 7,
+     "topic_id": "NLP-002",
+     "role": "core",
+     "why_here_ar": "أول مفاجأة عملية: الرمز ليس الكلمة. هذا يحدد وحدة كل الحساب التالي.",
+     "deliverable_ar": "عدّ المحارف والكلمات والرموز في جملة عربية ومقارنة الأرقام.",
+     "activity": {
+      "sees_ar": "الجملة العربية «وسيشاركهم القرار في اجتماع الغد.» — أو في النسخة الإنجليزية جملة فيها won't وmeeting.",
+      "tries_ar": "يعدّ كلمات المسافات، ثم المحارف، ثم يقترح وحدات: هل «وسيشاركهم» واحدة أم أكثر؟",
+      "hypothesis_ar": "أتوقع أن كلمة المسافات هي الوحدة الطبيعية.",
+      "possible_outcomes_ar": [
+       "يتطابق العدّان",
+       "تختلف الأعداد بفارق واضح",
+       "تختلف حسب الجملة بلا قاعدة ثابتة"
+      ],
+      "interpretation_ar": "اختلاف الأعداد يعني أن الوحدة قرار تصميم؛ وتطابقها في جملة واحدة لا يُعمم — جملة باللواصق تقلبه.",
+      "discovers_ar": "لا وحدة طبيعية معطاة؛ المسافات خطوة أولى ثم قرارات إضافية. اللواصق والضمائر العربية تضغط على القرار أكثر، والاختصارات الإنجليزية كذلك.",
+      "sees_en": "The Arabic sentence «وسيشاركهم القرار في اجتماع الغد.» and the English example \"I won't miss the meeting.\"",
+      "tries_en": "Counts whitespace-delimited words and characters, then proposes token boundaries: is «وسيشاركهم» one unit or more, and is \"won't\" one token or several?",
+      "hypothesis_en": "I expect the space-word to be the natural unit.",
+      "possible_outcomes_en": [
+       "the counts agree",
+       "the counts differ clearly",
+       "they differ by sentence with no fixed rule"
+      ],
+      "interpretation_en": "Differing counts mean the unit is a design decision; agreement in one sentence does not generalize — a sentence with clitics flips it.",
+      "discovers_en": "There is no given natural unit; spaces are a first step, then further decisions. Arabic clitics and pronouns press the decision harder, and so do English abbreviations."
+     },
+     "why_here_en": "The first practical surprise: the token is not the word. This fixes the unit of all later computation.",
+     "deliverable_en": "Counting characters, words, and tokens in an Arabic sentence and comparing the numbers."
+    },
+    {
+     "order": 8,
+     "topic_id": "NLP-003",
+     "role": "core",
+     "why_here_ar": "المقطع يقرر ما يراه النموذج أصلاً؛ خطأ هنا ينتقل إلى كل ما بعده.",
+     "deliverable_ar": "تقطيع جملتين بمقطع محدد الإصدار، ونتيجة قابلة للتكرار.",
+     "activity": {
+      "sees_ar": "النص العربي نفسه وطريقتان: مسافات بعد حذف الترقيم، ومقطع تعليمي بقاعدتين معلنتين (edu-tok-0.1).",
+      "tries_ar": "يحسب العدد في التجربة الأولى (نفس النص بطريقتين)، ثم يقارن نصين متقاربي المعنى في التجربة الثانية.",
+      "hypothesis_ar": "أتوقع أن الفرق بين النصين المتقاربين سببه اللغة نفسها.",
+      "possible_outcomes_ar": [
+       "يتغير العدد بتغير الطريقة في النص نفسه",
+       "يقترب عدد النصين المتقاربين",
+       "يتساوى أو يتباعد بحسب الصياغة وقواعد الترقيم"
+      ],
+      "interpretation_ar": "التجربة الأولى تثبت أثر الطريقة على النص نفسه. الثانية تعطي فرقاً مرصوداً فقط: لا يُنسب تلقائياً إلى طبيعة اللغة، فالعوامل تشمل الصياغة وقواعد الترقيم وتصميم المقطع.",
+      "discovers_ar": "عدد الرموز يؤثر في جوانب من الحساب والاستهلاك؛ والتكلفة الفعلية تعتمد كذلك على النموذج والعتاد والتنفيذ والتسعير — فلا تتحول إلى حكم مطلق.",
+      "sees_en": "The same Arabic text two ways: spaces after stripping punctuation, and a teaching tokenizer with two declared rules (edu-tok-0.1).",
+      "tries_en": "Counts in the first experiment (same text, two ways), then compares two near-meaning texts in the second.",
+      "hypothesis_en": "I expect the difference between the near-meaning texts to come from the language itself.",
+      "possible_outcomes_en": [
+       "the count changes with the method on the same text",
+       "the two near-meaning texts come close in count",
+       "they equalize or diverge by phrasing and punctuation rules"
+      ],
+      "interpretation_en": "The first experiment proves the method's effect on the same text. The second yields an observed difference only: it is not automatically attributed to the language's nature — the factors include phrasing, punctuation rules, and tokenizer design.",
+      "discovers_en": "Token count affects aspects of computation and consumption; actual cost also depends on the model, hardware, implementation, and pricing — so it must not become an absolute verdict."
+     },
+     "why_here_en": "Tokenization decides what the model sees at all; an error here propagates to everything after it.",
+     "deliverable_en": "Tokenizing two sentences with a versioned tokenizer, with a repeatable result."
+    },
+    {
+     "order": 9,
+     "topic_id": "DAT-001",
+     "role": "core",
+     "why_here_ar": "التدريب يحتاج نصاً محدداً موثقاً؛ نختار نص التجربة الأولى من رسائل الاجتماع نفسها.",
+     "deliverable_ar": "مجموعة تدريب موثقة المصدر، وأهداف تقسيم معلنة (نحو 700/150/150 وحدة).",
+     "activity": {
+      "sees_ar": "رسائل الاجتماع وحدودها.",
+      "tries_ar": "يجمع رسائل التدريب ويسجل مصدرها وترخيصها وأهداف التقسيم.",
+      "hypothesis_ar": "أتوقع أن أي نص يصلح للتدريب.",
+      "possible_outcomes_ar": [
+       "أي نص يصلح",
+       "النص القصير جداً يقلل تنوع الجدول",
+       "النص غير التمثيلي يضخم بعض الوحدات"
+      ],
+      "interpretation_ar": "جودة النص وتنوعه يحددان جدول Bigram لاحقاً؛ النص المتكرر يعطي جدولاً منحازاً.",
+      "discovers_ar": "بيانات التدريب قرار يحدد سقف ما سيتعلمه النموذج.",
+      "sees_en": "The meeting messages and their boundaries.",
+      "tries_en": "Gathers the training messages and records their source, license, and split targets.",
+      "hypothesis_en": "I expect any text to serve for training.",
+      "possible_outcomes_en": [
+       "any text works",
+       "very short text reduces table variety",
+       "unrepresentative text inflates some units"
+      ],
+      "interpretation_en": "Text quality and variety determine the later Bigram table; repeated text yields a biased table.",
+      "discovers_en": "The training-data decision sets the ceiling of what the model will learn."
+     },
+     "why_here_en": "Training needs a defined, documented text; we pick the first experiment's corpus from the meeting messages themselves.",
+     "deliverable_en": "A training set with documented source and declared split targets (about 700/150/150 units)."
+    },
+    {
+     "order": 10,
+     "topic_id": "NLP-004",
+     "role": "core",
+     "why_here_ar": "مفردة الكلمات حوّلت 5 من 8 وحدات في T1 إلى <unk>؛ نراجع التمثيل قبل التدريب ولا بعده.",
+     "deliverable_ar": "قرار تمثيل معلن: محارف مع سياسة <unk>، ومفاضلة التغطية/الطول.",
+     "activity": {
+      "sees_ar": "ترميز T1 بمفردة الكلمات (5 من 8 مجهولة) وبالمحارف (0 من 35).",
+      "tries_ar": "يقارن التمثيلين ويختار مستوى الوحدات لأول Bigram.",
+      "hypothesis_ar": "أتوقع أن المحارف تحل المشكلة بلا ثمن.",
+      "possible_outcomes_ar": [
+       "تغطية كاملة بتسلسل أطول",
+       "تغطية كاملة وتحسن الجودة",
+       "لا فرق عملي"
+      ],
+      "interpretation_ar": "التغطية الكاملة تضاعف طول التسلسل تقريباً، وكل خطوة توليد تصبح أصغر معنى — مفاضلة لا حل مجاني.",
+      "discovers_ar": "تمثيل المدخلات يحدد سقف ما يمكن أن يتعلمه النموذج بعده.",
+      "sees_en": "T1 tokenized with the word vocabulary (5 of 8 unknown) and with characters (0 of 35).",
+      "tries_en": "Compares the two representations and picks the unit level for the first Bigram.",
+      "hypothesis_en": "I expect characters to solve the problem at no cost.",
+      "possible_outcomes_en": [
+       "full coverage with a longer sequence",
+       "full coverage and better quality",
+       "no practical difference"
+      ],
+      "interpretation_en": "Full coverage roughly doubles the sequence length, and every generation step becomes smaller in meaning — a trade-off, not a free fix.",
+      "discovers_en": "Input representation sets the ceiling of what the model can learn afterward."
+     },
+     "why_here_en": "The word vocabulary turned 5 of 8 units in T1 into <unk>; we review representation before training, not after it.",
+     "deliverable_en": "A declared representation decision: characters with an <unk> policy, and a coverage/length trade-off."
+    },
+    {
+     "order": 11,
+     "topic_id": "LLM-003",
+     "role": "core",
+     "why_here_ar": "هدف التدريب الأول: توقع الوحدة التالية؛ نحوّل النص إلى أزواج (سياق، تالٍ).",
+     "deliverable_ar": "قائمة أزواج التدريب المستخرجة من نص المتعلم وعدّها.",
+     "activity": {
+      "sees_ar": "نص تدريب محارفه مرقمة.",
+      "tries_ar": "يستخرج كل زوج (المحرف الحالي، التالي) ويعدها.",
+      "hypothesis_ar": "أتوقع عدد الأزواج يساوي عدد المحارف.",
+      "possible_outcomes_ar": [
+       "يساوي عدد المحارف",
+       "أقل بمقدار رموز البداية",
+       "أكثر"
+      ],
+      "interpretation_ar": "كل موضع مثال، ورمز البداية يعطي أول انتقال لكل رسالة.",
+      "discovers_ar": "النص نفسه بيانات تدريب بلا وسوم بشرية.",
+      "sees_en": "A training text with numbered characters.",
+      "tries_en": "Extracts every (current, next) character pair and counts them.",
+      "hypothesis_en": "I expect the pair count to equal the character count.",
+      "possible_outcomes_en": [
+       "it equals the character count",
+       "fewer, by the start tokens",
+       "more"
+      ],
+      "interpretation_en": "Every position is an example, and the start token gives each message its first transition.",
+      "discovers_en": "The text itself is training data, without human labels."
+     },
+     "why_here_en": "The first training objective: predicting the next unit; we turn text into (context, next) pairs.",
+     "deliverable_en": "The list of training pairs extracted from the learner's text, with their count."
+    },
+    {
+     "order": 12,
+     "topic_id": "LLM-007",
+     "role": "core",
+     "why_here_ar": "أول تقدير احتمالات: عدّ الانتقالات وتنعيم بسيط يمنع الاحتمالات الصفرية.",
+     "deliverable_ar": "جدول Bigram مع α مختار على مجموعة التحقق.",
+     "activity": {
+      "sees_ar": "جدول عدّ الانتقالات وشبكة α.",
+      "tries_ar": "يبني الجدول ويختار α على التحقق ثم يقيس الاختبار مرة واحدة.",
+      "hypothesis_ar": "أتوقع أن السياق يخفض الخسارة تحت خط Unigram.",
+      "possible_outcomes_ar": [
+       "أقل من Unigram",
+       "مساوٍ له",
+       "أعلى"
+      ],
+      "interpretation_ar": "النزول تحت Unigram دليل أن السياق أضاف معلومة على هذه البيانات؛ المساواة أو الزيادة تعني أن العينة لم تكفِ.",
+      "discovers_ar": "جدول العدّ نموذج معلماته مقدرة من البيانات بالعدّ.",
+      "sees_en": "The transition-count table and an α grid.",
+      "tries_en": "Builds the table, chooses α on validation, then measures the test set once.",
+      "hypothesis_en": "I expect context to push loss below the Unigram line.",
+      "possible_outcomes_en": [
+       "below Unigram",
+       "equal to it",
+       "higher"
+      ],
+      "interpretation_en": "Dropping below Unigram is evidence that context added information on this data; equality or rise means the sample did not suffice.",
+      "discovers_en": "The count table is a model whose parameters are estimated from data by counting."
+     },
+     "why_here_en": "The first probability estimate: counting transitions, with simple smoothing to prevent zero probabilities.",
+     "deliverable_en": "A Bigram table with α chosen on the validation set."
+    },
+    {
+     "order": 13,
+     "topic_id": "LLM-009",
+     "role": "core",
+     "why_here_ar": "بعد الجدول: كيف يولد النموذج نصاً؟ يختار من توزيع ويعيد التغذية.",
+     "deliverable_ar": "نص مولد ثابت البذرة مع جدول احتمالات أول خمس خطوات.",
+     "activity": {
+      "sees_ar": "جدول الاحتمالات ورسالة بداية.",
+      "tries_ar": "يولد خطوة بخطوة ببذرة ثابتة ويسجل احتمال كل اختيار.",
+      "hypothesis_ar": "أتوقع نصاً متصلاً.",
+      "possible_outcomes_ar": [
+       "تصلب محلي وتقطع عالمياً",
+       "تكرار لعبارات التدريب",
+       "توقف مبكر"
+      ],
+      "interpretation_ar": "الجودة العالمية تحتاج سياقاً أطول؛ التكرار سلوك الجداول الصغيرة؛ التوقف يحتاج قاعدة.",
+      "discovers_ar": "التوليد اختيار متكرر من توزيع — لا جملة مكتوبة سلفاً.",
+      "sees_en": "The probability table and a start message.",
+      "tries_en": "Generates step by step with a fixed seed and records each choice's probability.",
+      "hypothesis_en": "I expect connected text.",
+      "possible_outcomes_en": [
+       "locally coherent, globally choppy",
+       "repetition of training phrases",
+       "an early stop"
+      ],
+      "interpretation_en": "Global quality needs longer context; repetition is small-table behavior; stopping needs a rule.",
+      "discovers_en": "Generation is repeated sampling from a distribution — not a pre-written sentence."
+     },
+     "why_here_en": "After the table: how does the model generate text? It samples from a distribution and feeds the sample back.",
+     "deliverable_en": "Seed-fixed generated text, with a probability table for the first five steps."
+    },
+    {
+     "order": 14,
+     "topic_id": "DAT-008",
+     "role": "core",
+     "why_here_ar": "قبل الحكم على التحسن: بيانات التحقق للاختيار، والاختبار محفوظ للحكم النهائي.",
+     "deliverable_ar": "خسارة التحقق لاختيار α، وخسارة الاختبار مرة واحدة.",
+     "activity": {
+      "sees_ar": "شبكة α وبيانات التحقق والاختبار.",
+      "tries_ar": "يختار α على التحقق ثم يقيس الاختبار مرة.",
+      "hypothesis_ar": "أتوقع أن الاختيار على التحقق يحسن الاختبار أيضاً.",
+      "possible_outcomes_ar": [
+       "يتحسن الاختبار",
+       "يتحسن التحقق فقط",
+       "لا فرق"
+      ],
+      "interpretation_ar": "اختيار α على الاختبار نفسه يجعل الرقم متفائلاً زوراً؛ الفصل يحمي صدق القياس.",
+      "discovers_ar": "مجموعة التحقق للقرارات، والاختبار للحكم مرة واحدة.",
+      "sees_en": "The α grid and the validation/test data.",
+      "tries_en": "Chooses α on validation, then measures the test set once.",
+      "hypothesis_en": "I expect the validation-based choice to improve the test as well.",
+      "possible_outcomes_en": [
+       "the test improves",
+       "only validation improves",
+       "no difference"
+      ],
+      "interpretation_en": "Choosing α on the test itself makes the number falsely optimistic; the chapter protects the honesty of measurement.",
+      "discovers_en": "Validation is for decisions; the test is for one-time judgment."
+     },
+     "why_here_en": "Before judging improvement: validation data for choices, and the test set held back for final judgment.",
+     "deliverable_en": "Validation loss for choosing α, and test loss measured exactly once."
+    },
+    {
+     "order": 15,
+     "topic_id": "LLM-008",
+     "role": "core",
+     "why_here_ar": "نفس المهمة بطريقة تقدير أخرى: أوزان تبدأ عشوائية وتُحسن بخطوات على دالة الخسارة.",
+     "deliverable_ar": "مقارنة مكتوبة بين الجدول والشبكة على التجربة نفسها: منحنى تدريب وخسارتا تحقق واختبار.",
+     "activity": {
+      "sees_ar": "شبكة من طبقة واحدة وبيانات التدريب نفسها.",
+      "tries_ar": "يدرب 200 عصر ويسجل المنحنى، ثم يقارن بالجدول.",
+      "hypothesis_ar": "أتوقع أن الشبكة تتفوق لأنها عصبية.",
+      "possible_outcomes_ar": [
+       "الشبكة تتفوق",
+       "الجدول يتفوق على هذه العينة",
+       "متقاربان"
+      ],
+      "interpretation_ar": "كلاهما يمثل توزيعاً شرطياً؛ العد يقدر مباشرة والشبكة تتعلم معلمات بالتحسين — وعلى بيانات صغيرة قد يكون العد أكثر كفاءة.",
+      "discovers_ar": "الفرق في طريقة تقدير المعلمات وتمثيلها، لا في كلمة «تدريب».",
+      "sees_en": "A one-layer network and the same training data.",
+      "tries_en": "Trains for 200 epochs, records the curve, then compares to the table.",
+      "hypothesis_en": "I expect the network to win because it is neural.",
+      "possible_outcomes_en": [
+       "the network wins",
+       "the table wins on this sample",
+       "they come close"
+      ],
+      "interpretation_en": "Both represent a conditional distribution; counting estimates directly, the network learns parameters by optimization — and on small data counting may be more efficient.",
+      "discovers_en": "The difference is in how parameters are estimated and represented, not in the word 'training'."
+     },
+     "why_here_en": "The same task by another estimation route: weights start random and improve by steps on a loss function.",
+     "deliverable_en": "A written comparison of table versus network on the same experiment: a training curve and validation/test losses."
+    },
+    {
+     "order": 16,
+     "topic_id": "LLM-010",
+     "role": "core",
+     "why_here_ar": "حد أول نموذج توليد موثق بالتجربة: محرف سابق واحد لا يكفي للتمييز بين سياقات.",
+     "deliverable_ar": "ثلاثة أحكام: أين فشل، ولماذا، وماذا كان سيغيره سياق أطول.",
+     "activity": {
+      "sees_ar": "رسائل اختبار تحتاج سياقاً أطول من محرف.",
+      "tries_ar": "يمررها على الجدول ويسجل أين أخطأ ولماذا.",
+      "hypothesis_ar": "أتوقع فشلاً مفهوم السبب لا عشوائياً.",
+      "possible_outcomes_ar": [
+       "فشل منهجي في السياقات الطويلة",
+       "نجاح مصادفي",
+       "تفاوت"
+      ],
+      "interpretation_ar": "الفشل المنهجي حد معلن للنموذج؛ النجاح المصادفي لا يثبت فهماً؛ التفاوت يعني أن الحد احتمالي.",
+      "discovers_ar": "الحاجة إلى سياق أطول صارت سؤالاً بتجربة — مدخل الفصل الرابع.",
+      "sees_en": "Test messages that need context longer than one character.",
+      "tries_en": "Runs them through the table and records where and why it erred.",
+      "hypothesis_en": "I expect failures that are explicable, not random.",
+      "possible_outcomes_en": [
+       "systematic failure on long contexts",
+       "accidental success",
+       "mixed results"
+      ],
+      "interpretation_en": "Systematic failure is a declared limit of the model; accidental success proves no understanding; mixed results mean the limit is probabilistic.",
+      "discovers_en": "The need for longer context is now a question with an experiment behind it — the gateway to Chapter Four."
+     },
+     "why_here_en": "The first documented limit of a generative model: one preceding character cannot distinguish contexts.",
+     "deliverable_en": "Three verdicts: where it failed, why, and what a longer context would have changed."
+    },
+    {
+     "order": 17,
+     "topic_id": "LLM-011",
+     "role": "core",
+     "why_here_ar": "أول امتداد للسياق: شبكة صغيرة تقرأ عدة رموز سابقة.",
+     "deliverable_ar": "نموذج سياق بـMLP ومقارنة خسارته بـBigram.",
+     "activity": {
+      "sees_ar": "نفس البيانات، مع نافذة من ثلاثة رموز.",
+      "tries_ar": "تدريب MLP صغير ومقارنة الخسارة.",
+      "discovers_ar": "السياق الأطول يحسّن، لكن النافذة الثابتة تبقى حداً.",
+      "hypothesis_ar": "أتوقع أن نافذة السياق الثلاثية تخفض خسارة التحقق أكثر من Bigram بلا ثمن يُذكر.",
+      "possible_outcomes_ar": [
+       "خسارة أقل مع ثمن زمن/ذاكرة ملموس",
+       "خسارة أقرب لـBigram أو أسوأ منه",
+       "تحسن على التدريب وحده دون التحقق"
+      ],
+      "interpretation_ar": "التحسن المصحوب بثمن يعني أن السياق ينفع وثمنه حقيقي؛ والتساوي يعني أن النافذة لم تضف معلومة يلتقطها العدّ؛ وتحسن التدريب وحده علامة حفظ لا تعلم.",
+      "hypothesis_en": "I expect a three-token context window to beat Bigram on validation with no meaningful cost.",
+      "possible_outcomes_en": [
+       "lower loss with a tangible time/memory cost",
+       "loss close to or worse than Bigram",
+       "training gains without validation gains"
+      ],
+      "interpretation_en": "Gains with a cost mean context pays and its price is real; parity means the window added nothing counting had not captured; training-only gains signal memorization, not learning.",
+      "sees_en": "The same data, with a three-token window.",
+      "tries_en": "Trains a small MLP and compares the losses.",
+      "discovers_en": "Longer context helps, but the fixed window remains a limit."
+     },
+     "why_here_en": "The first extension of context: a small network reading several previous tokens.",
+     "deliverable_en": "A context model with an MLP, and a comparison of its loss to Bigram."
+    },
+    {
+     "order": 18,
+     "topic_id": "DLN-017",
+     "role": "core",
+     "why_here_ar": "الانتباه يحل مشكلة السياق بطريقة مختلفة عن النافذة الثابتة.",
+     "deliverable_ar": "مصفوفة انتباه صغيرة محسوبة يدوياً ومقارنتها بالناتج البرمجي.",
+     "activity": {
+      "sees_ar": "جملة من ثلاث كلمات ومتجهات جاهزة.",
+      "tries_ar": "حساب الأوزان يدوياً لموضع واحد، ثم برمجياً.",
+      "discovers_ar": "الانتباه توزيع لا اختيار، ويعطي كل موضع سياقه الكامل.",
+      "hypothesis_ar": "أتوقع أن الكلمة الأقرب موقعاً هي دائماً صاحبة أعلى وزن انتباه.",
+      "possible_outcomes_ar": [
+       "المجموع واحد والأقرب ليس دائماً الأعلى",
+       "المجموع واحد والأقرب دائماً الأعلى",
+       "المجموع لا يساوي واحداً"
+      ],
+      "interpretation_ar": "غياب أولوية القرب يظهر أن الانتباه توزيع لا اختيار؛ وثبات أولوية القرب يعني أن المتجهات لم تحمل تمييزاً كافياً بعد؛ والمجموع المخالف خطأ حساب يدوي يُتتبع قبل أي استنتاج.",
+      "hypothesis_en": "I expect the positionally nearest word to always carry the highest attention weight.",
+      "possible_outcomes_en": [
+       "row sums one, nearest not always highest",
+       "row sums one, nearest always highest",
+       "row sums not one"
+      ],
+      "interpretation_en": "Nearest-not-highest shows attention is a distribution, not a selection; nearest-always-highest suggests the vectors carry too little discrimination; sums off one means a hand-arithmetic error to trace before any conclusion.",
+      "sees_en": "A three-word sentence with ready-made vectors.",
+      "tries_en": "Computes the weights by hand for one position, then in code.",
+      "discovers_en": "Attention is a distribution, not a selection, and it gives every position its full context."
+     },
+     "why_here_en": "Attention solves the context problem differently from the fixed window.",
+     "deliverable_en": "A small attention matrix computed by hand and compared to the programmatic result."
+    },
+    {
+     "order": 19,
+     "topic_id": "LLM-013",
+     "role": "core",
+     "why_here_ar": "الانتباه السببي هو ما يمنع النموذج من رؤية المستقبل أثناء التدريب.",
+     "deliverable_ar": "إثبات أن الأقنعة تمنع الموضع من رؤية ما بعده.",
+     "activity": {
+      "sees_ar": "مصفوفة انتباه كاملة قبل القناع.",
+      "tries_ar": "تطبيق قناع مثلثي وإعادة الحساب.",
+      "discovers_ar": "القناع ليس تحسيناً بل شرط لصحة التدريب السببي.",
+      "hypothesis_ar": "أتوقع أن القناع يصفّر وزن المستقبل، وأن خرج أي موضع يظل ثابتاً — ضمن سماحية عددية معلنة — مهما تغيّرت الرموز اللاحقة، ما دامت بادئته وموضعه ثابتين.",
+      "possible_outcomes_ar": [
+       "وزن المستقبل صفر، وخرج الموضع ثابت ضمن السماحية عند تغيير اللاحقة وحدها",
+       "تسرب: تغيير اللاحقة وحده يغيّر الخرج خارج السماحية أو وزن المستقبل ليس صفراً",
+       "عدم تكافؤ مساري التقييم: الموضع نفسه ببادئته يختلف خرجه بين قراءة البادئة وحدها وقراءة الحلقة الكاملة خارج السماحية"
+      ],
+      "interpretation_ar": "الأولى علامة القناع الصحيح؛ والثانية تسرب مستقبل — عيب تصميم يوقف كل قراءة بعده؛ والثالثة خلل تنفيذ يجعل المسارين حسابين مختلفين (تطبيع أو دقة) لا قناعاً ناقصاً، ولكل عيب علاجه. أما مقارنة الأوزان المرئية بحالتها قبل القناع فليست اختباراً: حجب درجات المستقبل يعيد تطبيع softmax فتتغير الأوزان المرئية تغيراً متوقعاً.",
+      "hypothesis_en": "I expect the mask to zero the future weight and keep every position's output constant — within a declared numerical tolerance — however the later tokens change, as long as its prefix and position are fixed.",
+      "possible_outcomes_en": [
+       "future weight zero and the output constant within tolerance when only the suffix changes",
+       "leakage: changing the suffix alone moves the output beyond tolerance, or the future weight is nonzero",
+       "evaluation-path inequivalence: the same position with its prefix yields different outputs between prefix-only and full-sequence reads beyond tolerance"
+      ],
+      "interpretation_en": "The first marks a correct mask; the second is future leakage — a design flaw halting every later reading; the third is an implementation defect making the two paths different computations (normalization or precision), not an incomplete mask — each flaw has its own fix. Comparing visible weights against their pre-mask values is not a test: dropping future scores renormalizes the softmax, so visible weights shift as expected.",
+      "sees_en": "A full attention matrix before masking.",
+      "tries_en": "Applies a triangular mask and recomputes.",
+      "discovers_en": "The mask is not an enhancement; it is a condition for correct causal training."
+     },
+     "why_here_en": "Causal attention is what stops the model from seeing the future during training.",
+     "deliverable_en": "A demonstration that the masks keep a position from seeing what follows it."
+    },
+    {
+     "order": 20,
+     "topic_id": "DLN-014",
+     "role": "optional",
+     "why_here_ar": "طبقة الانتباه الواحدة بلا ترميز موضعي عمياء عن الترتيب في هذه المهمة؛ تُفتح عند بناء النموذج الكامل واختبار أثر العمق.",
+     "deliverable_ar": "تمثيل موضعي واختبار فهم الترتيب.",
+     "activity": {
+      "sees_ar": "جملتان بالكلمات نفسها بترتيب مختلف.",
+      "tries_ar": "مقارنة مخرجات النموذج دون تمثيل موضعي ثم معه.",
+      "discovers_ar": "في الطبقة الواحدة تحتاج معلومة الترتيب ناقلاً صريحاً؛ والبني الأعمق قد تستقيها من تراكم ملخصات البادئات — كما قاس الفصل التاسع.",
+      "hypothesis_ar": "أتوقع أن طبقة انتباه واحدة بلا ترميز موضعي تعطي، عند موضع السؤال نفسه وبرمز سؤال ثابت وبادئتين متساويتين في تعداد الرموز، الخرج نفسه أيًّا كان ترتيب كل منهما.",
+      "possible_outcomes_ar": [
+       "الثبات عند موضع السؤال بين البادئتين المتساويتين تعداداً، واختلاف مع الترميز",
+       "اختلاف عند موضع السؤال حتى بين البادئتين المتساويتين",
+       "لا أثر للترميز في هذه المهمة"
+      ],
+      "interpretation_ar": "الثبات عند موضع السؤال نتيجة بنيوية للطبقة الواحدة — أوزان انتباهها دالة في هوية الرموز لا مواضعها — وليس حكماً على الانتباه كله: القناع السببي في بنية أعمق يتيح ملخصات بادئات تحمل أثر الترتيب، وهو ما قاسه الفصل التاسع بتفوق طبقتين بلا ترميز؛ والاختلاف في الطبقة الواحدة يستدعي البحث عن ناقل موضعي خفي؛ وغياب أثر الترميز يعني أن التدريب لم يوظفه هنا.",
+      "hypothesis_en": "I expect a single attention layer without positional encoding to give, at the same query position with a fixed query token and two prefixes equal in token counts, the identical output regardless of each prefix's order.",
+      "possible_outcomes_en": [
+       "invariance at the query position across the count-equal prefixes, difference with the encoding",
+       "difference at the query position even across the count-equal prefixes",
+       "no encoding effect in this task"
+      ],
+      "interpretation_en": "Invariance at the query position is structural for a single layer — its attention weights depend on token identities, not positions — and is no verdict on attention as such: a causal mask in deeper stacks lets prefix summaries carry order, which Chapter Nine measured with two encoding-free layers outperforming; a difference in one layer calls for hunting a hidden positional carrier; and no encoding effect means training did not exploit it here.",
+      "sees_en": "Two sentences with the same words in a different order.",
+      "tries_en": "Compares the model's outputs without positional encoding, then with it.",
+      "discovers_en": "In a single layer, order information needs an explicit carrier; deeper stacks may draw it from accumulated prefix summaries — as Chapter Nine measured."
+     },
+     "why_here_en": "A single attention layer without positional encoding is order-blind in this task; opened when building the full model and testing depth's effect.",
+     "deliverable_en": "A positional encoding and a test of order understanding."
+    },
+    {
+     "order": 21,
+     "topic_id": "LLM-014",
+     "role": "core",
+     "why_here_ar": "تجميع الانتباه والطبقات والتطبيع في بنية واحدة قابلة للتدريب.",
+     "deliverable_ar": "مخطط للنموذج بترتيب مكوناته وشرح وظيفة كل مكوّن.",
+     "activity": {
+      "sees_ar": "قائمة مكونات بلا ترتيب.",
+      "tries_ar": "ترتيبها على ورق أولاً، ثم مقارنتها ببنية مرجعية.",
+      "discovers_ar": "البنية تجميع لمكونات معروفة لا اختراع جديد.",
+      "hypothesis_ar": "أتوقع اختلافاً بين المتعلمين في ترتيب المكونات، ثم اتفاقاً على وظائفها.",
+      "possible_outcomes_ar": [
+       "ترتيبات مختلفة ووظائف متفق عليها",
+       "اتفاق كامل حتى في الترتيب",
+       "اختلاف حتى في الوظائف"
+      ],
+      "interpretation_ar": "تعدد الترتيب الممكن يظهر أن البنية قرار تصميم؛ والاتفاق الكامل يستحق فحص مصدره؛ واختلاف الوظائف يعني فهماً أساسياً ناقصاً يجب حله قبل التركيب.",
+      "hypothesis_en": "I expect learners to differ in component order, then agree on the functions.",
+      "possible_outcomes_en": [
+       "different orders, agreed functions",
+       "full agreement even on order",
+       "disagreement even on functions"
+      ],
+      "interpretation_en": "Multiple workable orders show architecture is a design decision; full agreement deserves a source check; disagreement on functions means a foundational gap to close before assembly.",
+      "sees_en": "A list of components without an order.",
+      "tries_en": "Orders them on paper first, then compares against a reference architecture.",
+      "discovers_en": "The architecture is an assembly of known parts, not a new invention."
+     },
+     "why_here_en": "Assembling attention, layers, and normalization into one trainable architecture.",
+     "deliverable_en": "A diagram of the model with its components ordered, and each component's function explained."
+    },
+    {
+     "order": 22,
+     "topic_id": "DLN-010",
+     "role": "optional",
+     "why_here_ar": "المصطلحات تحدد ما نرصده في حلقة التدريب.",
+     "deliverable_ar": "حساب عدد الخطوات في عصر تدريب.",
+     "activity": {
+      "sees_ar": "1000 مثال، حجم دفعة 32.",
+      "tries_ar": "حساب الخطوات لكل عصر، وعدد العصور المطلوب.",
+      "discovers_ar": "الفرق بين مثال وخطوة وعصر يحدد تفسير منحنى الخسارة.",
+      "hypothesis_ar": "أتوقع أن تقسيم 1000 مثال على دفعات من 32 يعطي عدداً صحيحاً من الدفعات المتساوية.",
+      "possible_outcomes_ar": [
+       "31 دفعة كاملة ودفعة أخيرة من 8 أمثلة",
+       "31 دفعة مع إسقاط الثمانية بقرار معلن",
+       "تكرار أمثلة لإكمال الدفعة الأخيرة"
+      ],
+      "interpretation_ar": "الدفعة الأخيرة الأصغر هي الوضع المعتاد ولا تتكرر فيها أمثلة أصلاً؛ وإسقاطها قرار صريح يترك 8 أمثلة دون عرض في العصر؛ والتكرار لا يقع إلا بسياسة معلنة — ومعرفة السياسة المعتمدة شرط لتفسير منحنى الخسارة لأن الدفعة الأصغر تعطي تحديثاً أعلى تبايناً.",
+      "hypothesis_en": "I expect dividing 1000 examples into batches of 32 to yield a whole number of equal batches.",
+      "possible_outcomes_en": [
+       "31 full batches plus a final batch of 8 examples",
+       "31 batches with the eight dropped by an explicit choice",
+       "examples repeated to fill the last batch"
+      ],
+      "interpretation_en": "The smaller final batch is the ordinary case and repeats no example; dropping it is an explicit choice leaving 8 examples unseen in the epoch; repetition only happens under a declared policy — and knowing the policy is a precondition for reading the curve, since the smaller batch yields a higher-variance update.",
+      "sees_en": "1000 examples, batch size 32.",
+      "tries_en": "Computes the steps per epoch, and the epochs needed.",
+      "discovers_en": "The difference between example, step, and epoch defines how to read the loss curve."
+     },
+     "why_here_en": "Terminology determines what we observe in the training loop.",
+     "deliverable_en": "Computing the number of steps in a training epoch."
+    },
+    {
+     "order": 23,
+     "topic_id": "TRN-005",
+     "role": "core",
+     "why_here_ar": "يُكتب الاختبار قبل التشغيل، لا بعده: السلامة شرط لا إصلاح.",
+     "deliverable_ar": "اختبار يفشل عند التسرب وينجح على النموذج السببي.",
+     "activity": {
+      "sees_ar": "نموذجان: أحدهما بقناع سببي والآخر بلا قناع.",
+      "tries_ar": "كتابة اختبار يتنبأ بموضع ثم يحاول قراءة ما بعده.",
+      "discovers_ar": "التسرب خطأ تصميم يُكتشف باختبار قبل أن يفسد النتائج.",
+      "hypothesis_ar": "أتوقع أن اختبار التسرب يفشل على النموذج غير المقنّع وينجح على السببي.",
+      "possible_outcomes_ar": [
+       "فشل واضح عند التسرب ونجاح للسببي",
+       "الاختبار ينجح على النموذجين",
+       "الاختبار يفشل على النموذجين"
+      ],
+      "interpretation_ar": "النتيجة الأولى تثبت أن السلامة قابلة للاختبار قبل التشغيل؛ ونجاح الاختبار مع التسرب يعني أن الاختبار لا يفحص المستقبل أصلاً؛ وفشلهما معاً خلل في الاختبار نفسه — فالاختبار كود له أخطاؤه.",
+      "hypothesis_en": "I expect the leakage test to fail the unmasked model and pass the causal one.",
+      "possible_outcomes_en": [
+       "clear failure on leakage, pass for the causal model",
+       "the test passes on both models",
+       "the test fails on both"
+      ],
+      "interpretation_en": "The first proves safety is testable before running; passing with leakage means the test never checks the future; failing both is a defect in the test itself — a test is code with its own bugs.",
+      "sees_en": "Two models: one causally masked, one without a mask.",
+      "tries_en": "Writes a test that predicts a position, then tries to read past it.",
+      "discovers_en": "Leakage is a design error caught by a test before it corrupts the results."
+     },
+     "why_here_en": "The test is written before running, not after: safety is a condition, not a repair.",
+     "deliverable_en": "A test that fails on leakage and passes on the causal model."
+    },
+    {
+     "order": 24,
+     "topic_id": "TRN-004",
+     "role": "core",
+     "why_here_ar": "أول تشغيل فعلي: حلقة تدريب وخسارة تُرصد لا تُخمّن.",
+     "deliverable_ar": "منحنى خسارة على عدد خطوات محدد مع تفسير اتجاهه.",
+     "activity": {
+      "sees_ar": "حلقة تدريب صغيرة مع تسجيل كل خطوة.",
+      "tries_ar": "تشغيل 200 خطوة، ثم رسم الخسارة.",
+      "discovers_ar": "الخسارة إشارة لا حكم؛ وأن مكتبة autograd تحسب المشتقات التي كان يمكن حسابها يدوياً.",
+      "hypothesis_ar": "أتوقع نزولاً خطياً سلساً لمنحنى الخسارة.",
+      "possible_outcomes_ar": [
+       "تذبذب نازل مع قفزات أحياناً",
+       "نزول شبه خطي",
+       "ارتفاع مستمر أو انفجار"
+      ],
+      "interpretation_ar": "التذبذب سلوك دفعات صغيرة طبيعي لا ضجيج يفسد؛ والنعومة الشديدة قد تعني دفعة كاملة ومعدلاً صغيراً؛ والانفجار إشارة معدل تعلم كبير تُعالج قبل استنتاج أي شيء عن النموذج.",
+      "hypothesis_en": "I expect the loss curve to descend smoothly and linearly.",
+      "possible_outcomes_en": [
+       "noisy descent with occasional spikes",
+       "near-linear descent",
+       "sustained rise or divergence"
+      ],
+      "interpretation_en": "Noise is normal small-batch behavior, not corrupting jitter; excessive smoothness may mean full batches and a small rate; divergence flags a learning rate to fix before any conclusion about the model.",
+      "sees_en": "A small training loop logging every step.",
+      "tries_en": "Runs 200 steps, then plots the loss.",
+      "discovers_en": "Loss is a signal, not a verdict; and the autograd library computes derivatives you could have computed by hand."
+     },
+     "why_here_en": "The first real run: a training loop and a loss that is observed, not guessed.",
+     "deliverable_en": "A loss curve over a fixed number of steps, with its direction explained."
+    },
+    {
+     "order": 25,
+     "topic_id": "TRN-006",
+     "role": "core",
+     "why_here_ar": "متى نتوقف؟ التحقق هو ما يفصل التدريب عن الحفظ.",
+     "deliverable_ar": "قرار توقف مبني على مجموعة تحقق، لا على مجموعة تدريب.",
+     "activity": {
+      "sees_ar": "منحنى خسارة تدريب ينخفض باستمرار.",
+      "tries_ar": "مقارنته بمنحنى تحقق.",
+      "discovers_ar": "التوقف قرار تعليمي لا تقني، وله نقطة مثلى قابلة للملاحظة.",
+      "hypothesis_ar": "أتوقع أن خسارة التحقق تتبع خسارة التدريب في النزول حتى النهاية.",
+      "possible_outcomes_ar": [
+       "التحقق يبدأ بالارتفاع بينما التدريب ينزل",
+       "المنحنيان ينزلان معاً حتى النهاية",
+       "التحقق أعلى لكنه مستقر"
+      ],
+      "interpretation_ar": "الافتراق علامة الحفظ ونقطة التوقف قرار تعليمي لا تقني؛ والنزول معاً قد يعني تحت-تدريب أو مجموعة تحقق سهلة؛ والفجوة الثابتة قد تكون ضجيج بيانات لا خلط نموذج.",
+      "hypothesis_en": "I expect validation loss to track training loss downward to the end.",
+      "possible_outcomes_en": [
+       "validation starts rising while training keeps falling",
+       "both descend together to the end",
+       "validation higher but stable"
+      ],
+      "interpretation_en": "Divergence marks overfitting and makes stopping an educational decision, not a technical one; joint descent may mean undertraining or an easy validation set; a stable gap may be data noise rather than a model flaw.",
+      "sees_en": "A training loss curve descending steadily.",
+      "tries_en": "Compares it against a validation curve.",
+      "discovers_en": "Stopping is an educational decision, not a technical one, and it has an observable optimum."
+     },
+     "why_here_en": "When do we stop? Validation is what separates training from memorization.",
+     "deliverable_en": "A stopping decision grounded in a validation set, not the training set."
+    },
+    {
+     "order": 26,
+     "topic_id": "LLM-021",
+     "role": "core",
+     "why_here_ar": "المحطة التي تُركّب كل ما سبق في نموذج واحد يعمل.",
+     "deliverable_ar": "نموذج صغير متكامل يولّد نصاً من مطالبة المتعلم.",
+     "activity": {
+      "sees_ar": "كل المكونات التي بناها في محطات سابقة.",
+      "tries_ar": "تركيبها، ثم تدريب قصير، ثم توليد.",
+      "discovers_ar": "النموذج نتيجة تراكم قرارات صغيرة، لا خطوة سحرية واحدة.",
+      "hypothesis_ar": "أتوقع نصاً متماسكاً من أول تشغيل للنموذج المركب.",
+      "possible_outcomes_ar": [
+       "نص متعثر متصل محلياً مع تكرارات",
+       "نص متماسك بشكل مفاجئ",
+       "خرج غير لغوي"
+      ],
+      "interpretation_ar": "التعثر المحلي هو المتوقع من نموذج صغير قصير التدريب؛ والتماسك المفاجئ يستدعي فحص تسرب أو نسخ؛ والخرج غير اللغوي علامة خلل تركيب يُراجع المخطط قبله.",
+      "hypothesis_en": "I expect coherent text from the assembled model's first run.",
+      "possible_outcomes_en": [
+       "stumbling locally-coherent text with repetitions",
+       "surprisingly coherent text",
+       "non-linguistic output"
+      ],
+      "interpretation_en": "Local stumbling is expected from a small, briefly trained model; surprising coherence calls for a leakage or copying check; non-linguistic output signals an assembly defect — review the diagram first.",
+      "sees_en": "All the components built in earlier stations.",
+      "tries_en": "Assembles them, briefly trains, then generates.",
+      "discovers_en": "The model is the accumulation of small decisions, not one magical step."
+     },
+     "why_here_en": "The station that assembles everything before it into one working model.",
+     "deliverable_en": "A complete small model that generates text from the learner's prompt."
+    },
+    {
+     "order": 27,
+     "topic_id": "EVA-002",
+     "role": "core",
+     "why_here_ar": "البناء بلا قياس ادعاء، لكن المقياس نفسه له شروط وحدود.",
+     "deliverable_ar": "تقرير: قيمة Perplexity على التحقق، وخط أساس، وتكرار، وما لا تقيسه.",
+     "activity": {
+      "sees_ar": "نموذجه ومجموعة تحقق منفصلة.",
+      "tries_ar": "قياس perplexity، ثم قياس نموذج أبسط كخط أساس، ثم إعادة التشغيل بالبذرة نفسها.",
+      "discovers_ar": "القياس يحتاج شرطاً وخط أساس؛ وعدم التحسن نتيجة صالحة لا فشل.",
+      "hypothesis_ar": "أتوقع أن نموذجي يتفوق على خط الأساس دائماً وبالقيمة نفسها بين تشغيلين.",
+      "possible_outcomes_ar": [
+       "تفوق خارج نطاق اختلاف التكرارات",
+       "لا تفوق أو تفوق ضمن الاختلاف",
+       "تفوق كبير مع تطابق تام"
+      ],
+      "interpretation_ar": "التفوق خارج نطاق التكرار نتيجة صالحة يُبنى عليها؛ وداخله لا يُدّعى؛ والتطابق التام يستدعي التحقق من بذرة ثابتة أو تقييم حتمي قبل الاحتفال به.",
+      "hypothesis_en": "I expect my model to beat the baseline always, with the identical value across runs.",
+      "possible_outcomes_en": [
+       "a win beyond the run-to-run spread",
+       "no win, or a win within the spread",
+       "a large win with exact agreement"
+      ],
+      "interpretation_en": "A win beyond the spread is a usable result; within it, nothing is claimed; exact agreement warrants checking for a fixed seed or deterministic evaluation before celebrating.",
+      "sees_en": "Their model and a separate validation set.",
+      "tries_en": "Measures perplexity, then a simpler baseline, then reruns with the same seed.",
+      "discovers_en": "Measurement needs a condition and a baseline; non-improvement is a valid result, not a failure."
+     },
+     "why_here_en": "Building without measuring is a claim; but the measure itself has conditions and limits.",
+     "deliverable_en": "A report: perplexity on validation, a baseline, a repetition, and what it does not measure."
+    },
+    {
+     "order": 28,
+     "topic_id": "INF-001",
+     "role": "core",
+     "why_here_ar": "التشغيل يختلف عن التدريب: الأوزان تثبت والحساب يتغير.",
+     "deliverable_ar": "مقارنة سلوك وزمن بين مرحلة التعلم ومرحلة الاستخدام.",
+     "activity": {
+      "sees_ar": "نفس النموذج في وضعين.",
+      "tries_ar": "قياس زمن توليد مقابل زمن خطوة تدريب.",
+      "discovers_ar": "الاستدلال ليس تدريباً مصغراً؛ إنه استعمال ثابت لنموذج متغير سابقاً.",
+      "hypothesis_ar": "أتوقع أن توليد حالة واحدة أبطأ من خطوة تدريب لأنه يبدو عملاً أخف.",
+      "possible_outcomes_ar": [
+       "التوليد أسرع للحالة الواحدة ولا يمس الأوزان",
+       "التوليد أبطأ فعلياً",
+       "الفارق مهمل"
+      ],
+      "interpretation_ar": "السرعة مع ثبات الأوزان تثبت أن الاستدلال استعمال ثابت لنموذج تعلم سابقاً؛ وبطؤه يعكس تكاليف تنفيذ متسلسلة لا تعلماً؛ والفارق المهمل يجعل الاختيار قرار نشر لا علم.",
+      "hypothesis_en": "I expect generating one case to be slower than a training step, even though generation seems lighter.",
+      "possible_outcomes_en": [
+       "generation is faster per case and never touches weights",
+       "generation is actually slower",
+       "the gap is negligible"
+      ],
+      "interpretation_en": "Speed with frozen weights proves inference is fixed use of a previously learned model; slowness reflects sequential execution costs, not learning; a negligible gap makes the choice a deployment decision, not a scientific one.",
+      "sees_en": "The same model in two modes.",
+      "tries_en": "Measures generation time against a training-step time.",
+      "discovers_en": "Inference is not miniature training; it is the fixed use of a previously changed model."
+     },
+     "why_here_en": "Running differs from training: the weights freeze and the computation changes.",
+     "deliverable_en": "A behavior and time comparison between the learning phase and the usage phase."
+    },
+    {
+     "order": 29,
+     "topic_id": "INF-002",
+     "role": "core",
+     "why_here_ar": "نفس النموذج يعطي مخرجات مختلفة بحسب استراتيجية الاختيار.",
+     "deliverable_ar": "مقارنة greedy وTemperature على المطالبة نفسها.",
+     "activity": {
+      "sees_ar": "مطالبة واحدة وإعدادان.",
+      "tries_ar": "توليد خمس مرات بكل إعداد.",
+      "discovers_ar": "الاختيار من التوزيع قرار تصميم لا تفصيل تقني.",
+      "hypothesis_ar": "أتوقع أن الاختيار الجشع يعطي أفضل المخرجات دائماً.",
+      "possible_outcomes_ar": [
+       "greedy متطابق ومتكرر والتنويع يضيف أخطاء",
+       "التنويع يحسّن النوعية",
+       "لا فرق يذكر بين الإعدادين"
+      ],
+      "interpretation_ar": "الثبات ليس جودة بل حتمية اختيار؛ والتنويع سلاح ذو حدين يُقاس أثره على المهمة؛ وغياب الفرق يرجّح إعداداً لا يغير التوزيع فعلياً.",
+      "hypothesis_en": "I expect greedy selection to give the best output always.",
+      "possible_outcomes_en": [
+       "greedy is identical and repetitive, variation adds errors",
+       "variation improves quality",
+       "no appreciable difference"
+      ],
+      "interpretation_en": "Constancy is determinism, not quality; variation cuts both ways and its effect is task-measured; no difference suggests a setting that does not appreciably change the distribution.",
+      "sees_en": "One prompt and two settings.",
+      "tries_en": "Generates five times per setting.",
+      "discovers_en": "Choosing from the distribution is a design decision, not a technical detail."
+     },
+     "why_here_en": "The same model gives different outputs depending on the selection strategy.",
+     "deliverable_en": "A comparison of greedy and temperature on the same prompt."
+    },
+    {
+     "order": 30,
+     "topic_id": "EVA-007",
+     "role": "optional",
+     "why_here_ar": "بعد التشغيل تظهر ادعاءات لا يسندها نص التدريب.",
+     "deliverable_ar": "مثال مخرج واثق لا يسنده النص، مع سبب محتمل.",
+     "activity": {
+      "sees_ar": "مخرج طليق عن موضوع لم يرد في نصه.",
+      "tries_ar": "البحث عن سند في المجموعة.",
+      "discovers_ar": "الطلاقة ليست دليلاً على الإسناد.",
+      "hypothesis_ar": "أتوقع وجود سند ما في نص التدريب لكل مخرج واثق يلاحظه المتعلم.",
+      "possible_outcomes_ar": [
+       "مخرج واثق بلا سند",
+       "سند جزئي قابل للتأويل",
+       "سند واضح"
+      ],
+      "interpretation_ar": "غياب السند يفصل الطلاقة عن الإسناد؛ والجزئي يكشف حدود الاسترجاع؛ والسند الواضح لا يثبت فهماً عاماً — مثال واحد لا يُعمَّم منه.",
+      "hypothesis_en": "I expect some training-text support to exist for every confident output I notice.",
+      "possible_outcomes_en": [
+       "a confident output with no support",
+       "partial support open to interpretation",
+       "clear support"
+      ],
+      "interpretation_en": "Missing support separates fluency from grounding; partial support exposes retrieval limits; clear support does not prove general understanding — one example does not generalize.",
+      "sees_en": "A fluent output on a topic absent from its text.",
+      "tries_en": "Searches the corpus for support.",
+      "discovers_en": "Fluency is not evidence of grounding."
+     },
+     "why_here_en": "After running, claims appear that the training text does not support.",
+     "deliverable_en": "An example of a confident output unsupported by the text, with a plausible cause."
+    },
+    {
+     "order": 31,
+     "topic_id": "AGT-013",
+     "role": "optional",
+     "why_here_ar": "محطة الفصل السابع الافتتاحية: التمييز بين ثلاث قدرات — الاحتفاظ والعثور والاستخدام — التي بنى عليها الفصلان السادس والسابع تجاربهما.",
+     "activity": {
+      "hypothesis_ar": "الاحتفاظ والعثور والاستخدام قدرة واحدة مترابطة",
+      "possible_outcomes_ar": [
+       "قدرات منفصلة يقيسها الفصلان بتجارب مستقلة",
+       "قدرة واحدة تظهر تلقائياً من غيرها"
+      ],
+      "interpretation_ar": "الانفصال يعني أن كل قدرة تحتاج قياسها الخاص؛ والترابط يعني أن تجربة واحدة تكفي",
+      "sees_ar": "ثلاث قدرات منفصلة تُعرَّف على مهمة واحدة",
+      "tries_ar": "تصنيف ما أثبتته تجارب الاحتفاظ والعثور",
+      "discovers_ar": "القدرات ثلاث ولا نفترض أن إتقان واحدة يمنح الأخرى",
+      "sees_en": "Three separate capacities defined on one task",
+      "tries_en": "Classifying what the retention and retrieval experiments proved",
+      "hypothesis_en": "Retention, finding, and using are one interconnected capacity",
+      "possible_outcomes_en": [
+       "separate capacities, measured by the two chapters in independent experiments",
+       "one capacity that emerges automatically from the others"
+      ],
+      "interpretation_en": "Separation means each capacity needs its own measurement; interconnection means one experiment suffices",
+      "discovers_en": "The capacities are three, and we do not assume that mastering one grants another"
+     },
+     "why_here_en": "Chapter Seven's opening station: distinguishing three capacities — retaining, finding, and using — on which Chapters Six and Seven built their experiments.",
+     "deliverable_en": null
+    },
+    {
+     "order": 32,
+     "topic_id": "HIS-010",
+     "role": "optional",
+     "why_here_ar": "الاستعلام والمفتاح والقيمة كآلية وصول: من أي مشكلة جاءت آليات الانتباه، وما الذي يضيفه القارئ أحادي الاستعلام دون Self-Attention كاملة.",
+     "activity": {
+      "hypothesis_ar": "الاستعلام والمفتاح والقيمة صياغة أفضل من التمرير المتكرر",
+      "possible_outcomes_ar": [
+       "صياغة الوصول أقل تكلفة وأدق",
+       "الصياغة الجديدة بلا ميزة على التكرار"
+      ],
+      "interpretation_ar": "ميزة الصياغة تعتمد على المهمة؛ وغيابها لا يبطل التمييز المفاهيمي بين O(n) وO(n²)",
+      "sees_ar": "مفاتيح وقيم واستعلاماً واحداً بتكلفة O(n)",
+      "tries_ar": "تمييز الاستعلام الواحد من الانتباه الذاتي O(n²)",
+      "discovers_ar": "صياغتان بمعمارية وانقسام تعقيد مختلفان",
+      "sees_en": "Keys and values, and one query, at O(n) cost",
+      "tries_en": "Distinguishing the single query from O(n²) self-attention",
+      "hypothesis_en": "Query/key/value is a better formulation than repeated scanning",
+      "possible_outcomes_en": [
+       "the access formulation is cheaper and more precise",
+       "the new formulation has no advantage over scanning"
+      ],
+      "interpretation_en": "The formulation's advantage depends on the task; its absence does not void the conceptual distinction between O(n) and O(n²)",
+      "discovers_en": "Two formulations, with different architecture and a different complexity split"
+     },
+     "why_here_en": "Query, key, and value as an access mechanism: from which problem attention mechanisms came, and what the single-query reader adds without full self-attention.",
+     "deliverable_en": null
+    },
+    {
+     "order": 33,
+     "topic_id": "AGT-007",
+     "role": "optional",
+     "why_here_ar": "تجربة الاسترجاع واختصار تفرد المحتوى: كيف نقيس الاسترجاع ولا نخلطه بمعرفة مسبقة بموضع الإجابة.",
+     "activity": {
+      "hypothesis_ar": "قارئ الانتباه سيتفوق على RNN في الاسترجاع",
+      "possible_outcomes_ar": [
+       "تفوق عبر اختصار تفرد المحتوى",
+       "تفوق حقيقي عبر فهم الموضع",
+       "لا فرق"
+      ],
+      "interpretation_ar": "التفوق مع غياب حرفي الفئة عن الحشو يدل على اختصار محتوى لا فهم موضع",
+      "sees_ar": "مهمة استرجاع يغيب فيها حرفا الفئة عن الحشو",
+      "tries_ar": "مقارنة RNN بقارئ انتباه على نفس السحبات",
+      "discovers_ar": "الانتباه يحل حتى تأخير 8 — عبر اختصار التفرد المعلن",
+      "sees_en": "A retrieval task where the two category letters are absent from the filler",
+      "tries_en": "Comparing an RNN with an attention reader on the same draws",
+      "hypothesis_en": "The attention reader will beat the RNN at retrieval",
+      "possible_outcomes_en": [
+       "an advantage via the content-uniqueness shortcut",
+       "a genuine advantage via position understanding",
+       "no difference"
+      ],
+      "interpretation_en": "An advantage while the category letters are absent from the filler indicates a content shortcut, not position understanding",
+      "discovers_en": "Attention solves even delay 8 — via the declared uniqueness shortcut"
+     },
+     "why_here_en": "The retrieval experiment and the content-uniqueness shortcut: how to measure retrieval without confusing it with prior knowledge of the answer's position.",
+     "deliverable_en": null
+    },
+    {
+     "order": 34,
+     "topic_id": "LLM-016",
+     "role": "optional",
+     "why_here_ar": "الترتيب والمعلومات الموضعية: أزواج متقابلة بالحشو نفسه تجعل الموضع المتغير المستقل الوحيد.",
+     "activity": {
+      "hypothesis_ar": "الانتباه الموضعي سيتعلم التمييز حين يصبح الموضع المتغير الوحيد",
+      "possible_outcomes_ar": [
+       "يتعلم التمييز",
+       "يفشل التعلم رغم سلامة المشتقات",
+       "يتعلم ولا يعمم على موضع جديد"
+      ],
+      "interpretation_ar": "الفشل مع نجاح التحكمات يعني قيد تعلم معلن الإعدادات؛ والنجاح بلا تعميم يعني تعلم موضع ثابت لا مفهوم الموضع",
+      "sees_ar": "أمثلة متقابلة تختلف في الترتيب وحده مع تحكمات إيجابية موضعية",
+      "tries_ar": "RNN وانتباه بموضع وبدونه وbag على نفس الأزواج",
+      "discovers_ar": "النتيجة السلبية المعتمدة: لا نموذج تعلم التمييز تحت الميزانية المعلنة",
+      "sees_en": "Counterbalanced examples differing in order alone, with positive positional controls",
+      "tries_en": "RNN and attention, with and without position, and a bag baseline, on the same pairs",
+      "hypothesis_en": "Positional attention will learn the distinction once position becomes the only varying variable",
+      "possible_outcomes_en": [
+       "it learns the distinction",
+       "learning fails despite correct derivatives",
+       "it learns but does not generalize to a new position"
+      ],
+      "interpretation_en": "Failure with passing controls means a declared learning constraint; success without generalization means a fixed position was learned, not the concept of position",
+      "discovers_en": "The accepted negative result: no model learned the distinction under the declared budget"
+     },
+     "why_here_en": "Order and positional information: matched pairs with the same filler make position the only independent variable.",
+     "deliverable_en": null
+    },
+    {
+     "order": 35,
+     "topic_id": "DLN-012",
+     "role": "optional",
+     "why_here_ar": "صحة المشتقات وحساسية التهيئة: فحص تدرج عددي إلزامي، وعزل مكونات التهيئة (مفاتيح/استعلام/قيم/مواضع) بعد أن كشف التدقيق حساسية التعلم لمقياس التهيئة.",
+     "activity": {
+      "hypothesis_ar": "المشتقات الصحيحة كافية لنجاح التعلم",
+      "possible_outcomes_ar": [
+       "الصحة كافية والفشل سببه غيرها",
+       "الصحة ضرورية غير كافية والتهيئة تحسم",
+       "النتيجة عشوائية"
+      ],
+      "interpretation_ar": "الصحة ضرورة غير كافية: حساسية التهيئة تكشف فجوة إشارة التحسين، وعزل المكونات يحدد مسؤولها",
+      "sees_ar": "فروقاً مركزية مقابل المشتقات التحليلية وعزلاً انتقائياً للتضخيم",
+      "tries_ar": "إعادة التدريب بتضخيم انتقائي وقراءة معايير التدرج عند التهيئة",
+      "discovers_ar": "صحة المشتقة لا تضمن وصول إشارة التحسين — القيد تعلمي معلن",
+      "sees_en": "Central differences against analytic derivatives, and selective-amplification isolations",
+      "tries_en": "Retraining with selective amplification and reading gradient criteria at initialization",
+      "hypothesis_en": "Correct derivatives suffice for learning to succeed",
+      "possible_outcomes_en": [
+       "correctness suffices, and failure has another cause",
+       "correctness is necessary but insufficient, and initialization decides",
+       "the outcome is random"
+      ],
+      "interpretation_en": "Correctness is necessary but not sufficient: initialization sensitivity exposes an optimization-signal gap, and component isolation identifies the responsible part",
+      "discovers_en": "A correct derivative does not guarantee that the optimization signal arrives — a declared learning constraint"
+     },
+     "why_here_en": "Derivative correctness and initialization sensitivity: a mandatory numerical gradient check, and isolation of initialization components (keys/query/values/positions) after the audit revealed learning's sensitivity to initialization scale.",
+     "deliverable_en": null
+    },
+    {
+     "order": 36,
+     "topic_id": "TRN-003",
+     "role": "optional",
+     "why_here_ar": "التكاليف والقيود ثم الجسر إلى الانتباه السببي متعدد المواضع: إعلان كلفة كل صياغة وحدود ما أثبتته التجارب.",
+     "activity": {
+      "hypothesis_ar": "المعمارية الأسرع حسابياً هي الأفضل تعليمياً",
+      "possible_outcomes_ar": [
+       "السرعة ترافق النجاح",
+       "السرعة بلا علاقة بالنتيجة",
+       "السرعة تتعارض مع القابلية"
+      ],
+      "interpretation_ar": "الكلفة بُعد مستقل عن الجودة؛ والجسر إلى الانتباه السببي سؤال معلق لا حل حتمي",
+      "sees_ar": "جدول معلمات وأزمنة وتعقيد لكل نموذج وحدود النتائج معلنة",
+      "tries_ar": "قراءة الفرق الحسابي بين الصياغتين بلا استنتاج جودة",
+      "discovers_ar": "الكلفة جزء من النتيجة، والجسر سؤال معلق لا حل حتمي",
+      "sees_en": "A table of parameters, times, and complexity per model, with the results' limits declared",
+      "tries_en": "Reading the computational difference between the two formulations, without a quality inference",
+      "hypothesis_en": "The computationally faster architecture is also the better teacher",
+      "possible_outcomes_en": [
+       "speed accompanies success",
+       "speed is unrelated to the result",
+       "speed conflicts with learnability"
+      ],
+      "interpretation_en": "Cost is a dimension independent of quality; and the bridge to causal attention is an open question, not an inevitable solution",
+      "discovers_en": "Cost is part of the result, and the bridge is an open question, not an inevitable solution"
+     },
+     "why_here_en": "Costs and limits, then the bridge to multi-position causal attention: declaring each formulation's cost and the boundaries of what the experiments proved.",
+     "deliverable_en": null
+    },
+    {
+     "order": 37,
+     "topic_id": "LLM-004",
+     "why_here_ar": "الجسر من الفصل السابع: بعد الاسترجاع المعلن الترتيب، ينتقل الفصل الثامن إلى التنبؤ بكل موضع دفعة واحدة تحت قناع سببي — فيصبح التدريب نفسه موضع التجربة.",
+     "deliverable_ar": "مقارنة مكتوبة بين تنبؤ البادئات المتتالية وتنبؤ الحلقة الكاملة عند المواضع نفسها.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن التنبؤ عند كل مواضع الحلقة دفعة واحدة يكافئ التنبؤ بالبادئات واحدة واحدة.",
+      "possible_outcomes_ar": [
+       "تكافؤ تام",
+       "تكافؤ مع فروق في آخر الخانات",
+       "اختلاف جوهري"
+      ],
+      "interpretation_ar": "التكافؤ نتيجة القناع السببي لا صدفة؛ والفروق الدقيقة حدود حسابية تُقاس لا تُهمَل؛ والاختلاف الجوهري يعني تسرباً أو خللاً في القناع يوقف قراءة أي نتيجة بعده.",
+      "sees_ar": "حلقات كاملة تُقرأ دفعة واحدة مقابل قراءة بادئات متتالية.",
+      "tries_ar": "مقارنة تنبؤ الموضع نفسه بين المسارين قبل أي تدريب وبعده.",
+      "discovers_ar": "التدريب السببي يجمع كثافة الحساب مع حفظ حدود المعلومة — والبوابة العددية هي ما يثبت ذلك لا الانطباع.",
+      "hypothesis_en": "I expect predicting all positions of a loop in one pass to equal predicting its prefixes one by one.",
+      "possible_outcomes_en": [
+       "exact equivalence",
+       "equivalence with last-digit differences",
+       "substantive divergence"
+      ],
+      "interpretation_en": "Equivalence is a consequence of the causal mask, not luck; tiny differences are numerical limits to measure, not dismiss; substantive divergence means leakage or a mask defect that halts every later reading.",
+      "sees_en": "Full loops read in one pass versus sequential prefix reads.",
+      "tries_en": "Comparing the same position's prediction across both paths, before and after training.",
+      "discovers_en": "Causal training combines computational density with information bounds — the numeric gate, not intuition, proves it."
+     },
+     "role": "optional",
+     "why_here_en": "The bridge from Chapter Seven: after ordered retrieval, Chapter Eight moves to predicting every position at once under a causal mask — training itself becomes the experiment.",
+     "deliverable_en": "A written comparison between sequential prefix predictions and full-loop prediction at the same positions."
+    },
+    {
+     "order": 38,
+     "topic_id": "DLN-004",
+     "why_here_ar": "أول عزل معماري في الفصل الثامن: من استعلام ثابت واحد إلى استعلام مشتق من تمثيل الموضع نفسه.",
+     "deliverable_ar": "قراءة المقارنة بين القارئ الثابت والانتباه الذاتي مع الإفصاح عن منفذ المعلومات لرأس الإخراج.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن فارق الأداء بين القارئ الثابت والانتباه الذاتي يرجع إلى تغيّر الاستعلام وحده.",
+      "possible_outcomes_ar": [
+       "الفارق يبقى بعد ضبط سلك الإخراج",
+       "الفارق يختفي عند ضبط السلك",
+       "الفارق يتبع تعداد المعلمات"
+      ],
+      "interpretation_ar": "بقاء الفارق بعد ضبط العوامل الأخرى يسند دور الاستعلام؛ واختفاؤه يعيد الفضل للسلك أو السعة؛ ولهذا يُكمل الفصل شبكة عاملية بدل الاكتفاء بمقارنة عمودين.",
+      "sees_ar": "نموذجان يختلفان في مصدر الاستعلام وسلك الإخراج معاً.",
+      "tries_ar": "تفكيك الفارق: أي عامل تغيّر مع أي، وبأي عدد معلمات.",
+      "discovers_ar": "المقارنة بين عمودين تبدّل عاملين معاً — والعزل النظيف يحتاج شبكة عاملية ومجموعة تأكيدية مستقلة.",
+      "hypothesis_en": "I expect the gap between the fixed reader and self-attention to come from the changing query alone.",
+      "possible_outcomes_en": [
+       "the gap survives after controlling the output wire",
+       "the gap vanishes when the wire is controlled",
+       "the gap tracks parameter count"
+      ],
+      "interpretation_en": "A surviving gap supports the query's role; a vanishing one returns credit to the wire or capacity — which is why the chapter completes a factorial grid instead of two columns.",
+      "sees_en": "Two models differing in query source and output wire together.",
+      "tries_en": "Decomposing the gap: which factor changed with which, at what parameter count.",
+      "discovers_en": "A two-column comparison changes two factors at once — clean isolation needs a factorial grid and an independent confirmatory set."
+     },
+     "role": "optional",
+     "why_here_en": "The chapter's first architectural isolation: from one fixed query to a query derived from the position's own representation.",
+     "deliverable_en": "A reading of the fixed-reader versus self-attention comparison, disclosing the output head's information port."
+    },
+    {
+     "order": 39,
+     "topic_id": "DAT-015",
+     "why_here_ar": "التجربة الضابطة تُكمل: الخلية الرابعة في الشبكة العاملية 2×2 أُضيفت بلا أي اختيار جديد وبمجموعة تأكيدية ببذرة مستقلة.",
+     "deliverable_ar": "جدول الشبكة العاملية (مصدر الاستعلام × سلك الإخراج) مع عدد معلمات كل خلية ونتيجتها.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن أثر كل عامل معماري يظهر مستقلاً عن العامل الآخر.",
+      "possible_outcomes_ar": [
+       "أثر معزول متسق لكل عامل",
+       "تفاعل بين العاملين",
+       "الفارق يتبع عدد المعلمات"
+      ],
+      "interpretation_ar": "الاتساق يسمح عزلاً نظيفاً؛ والتفاعل يعني أن أثر اختيار يعتمد على اختيار آخر — وهو درس الفصل التاسع نفسه؛ وتتبع المعلمات يمنع إسناد السعة إلى البنية.",
+      "sees_ar": "أربع خلايا عاملية بأعداد معلمات معلنة ومجموعة تأكيدية لم تُرَ من قبل.",
+      "tries_ar": "قراءة كل خلية بمعزل عن سابقتها ثم قراءة الفروق المتقاطعة.",
+      "discovers_ar": "الضابط الجيد لا يكتفي بعمودين؛ التصميم العاملي مع الاستقلال العائلي هو ما يجعل الفارق قابلاً للتأويل.",
+      "hypothesis_en": "I expect each architectural factor's effect to appear independently of the other.",
+      "possible_outcomes_en": [
+       "a consistent isolated effect per factor",
+       "an interaction between the factors",
+       "the gap follows parameter count"
+      ],
+      "interpretation_en": "Consistency allows clean isolation; interaction means one choice's effect depends on another — Chapter Nine's own lesson; parameter-following blocks attributing capacity to structure.",
+      "sees_en": "Four factorial cells with declared parameter counts and a never-seen confirmatory set.",
+      "tries_en": "Reading each cell on its own, then the crossed differences.",
+      "discovers_en": "A good control is never two columns; factorial design with family independence is what makes a difference interpretable."
+     },
+     "role": "optional",
+     "why_here_en": "The controlled experiment completed: a fourth factorial cell added with no new selection and an independent confirmatory set.",
+     "deliverable_en": "The 2×2 factorial table (query source × output wire) with each cell's parameter count and result."
+    },
+    {
+     "order": 40,
+     "topic_id": "EVA-009",
+     "why_here_ar": "الجسر إلى الفصل التاسع: خريطة الانتباه قرينة مغرية لكنها ليست إسناداً سببياً — والربط التركيبي القادم سيحتاج التدخلات المقاسة.",
+     "deliverable_ar": "تمييز مكتوب بين ما تثبته خريطة الانتباه وما يثبته قلب القيمة المقاس.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن الموضع الذي يستقبله الانتباه بوزن أعلى هو ما يحدد الإجابة.",
+      "possible_outcomes_ar": [
+       "الانتباه يتوجه للسجل الصحيح والتدخل يتبعه",
+       "انتباه صحيح دون اتباع للتدخل",
+       "أداء سليم مع انتباه مشتت"
+      ],
+      "interpretation_ar": "التوافق قرينة متضافرة لا إثبات؛ وانتباه بلا أثر يفصل القراءة عن الاستخدام؛ والأداء السليم بانتباه مشتت يكشف مساراً بديلاً — وكل ذلك يهيئ لسؤال الربط التركيبي في الفصل التاسع.",
+      "sees_ar": "خرائط انتباه عند مواضع الأسئلة مقابل تدخلات قلب القيمة المقاسة.",
+      "tries_ar": "قراءة الخريطة أولاً والتنبؤ بأثر التدخل ثم مطابقة التدخل الفعلي.",
+      "discovers_ar": "القرينة توجه السؤال والتدخلات تجيبه — ومزجهما خطأ منهجي شائع.",
+      "hypothesis_en": "I expect the position attended most heavily to be what decides the answer.",
+      "possible_outcomes_en": [
+       "attention goes to the right record and the intervention follows it",
+       "correct attention without following the intervention",
+       "sound performance with scattered attention"
+      ],
+      "interpretation_en": "Agreement is corroborating evidence, not proof; attention without effect separates reading from using; sound performance with scattered attention reveals an alternative path — all of which prepares compositional binding in Chapter Nine.",
+      "sees_en": "Attention maps at query positions versus measured value-flip interventions.",
+      "tries_en": "Reading the map first, predicting the intervention's effect, then matching the actual intervention.",
+      "discovers_en": "Evidence directs the question and interventions answer it — mixing them is a common methodological error."
+     },
+     "role": "optional",
+     "why_here_en": "The bridge into Chapter Nine: an attention map is tempting evidence but not causal attribution — binding will need measured interventions.",
+     "deliverable_en": "A written distinction between what an attention map proves and what the measured value-flip proves."
+    },
+    {
+     "order": 41,
+     "topic_id": "DAT-014",
+     "why_here_ar": "افتتاح الفصل التاسع: من سجل ذرّي واحد إلى مفتاح وقيمة رمزين منفصلين — تحويل «الربط» من كلمة إلى سؤال قابل للقياس.",
+     "deliverable_ar": "صياغة اختبار يفصل الربط عن تعداد الرموز، مع ضابط عدّادي يحده.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن دقة التصنيف كافية لإثبات قدرة النموذج على الربط.",
+      "possible_outcomes_ar": [
+       "دقة عالية مع فشل الأزواج المضادة",
+       "تلازم الدقة العالية مع الأزواج",
+       "قصور الدقة والأزواج معاً"
+      ],
+      "interpretation_ar": "ارتفاع الدقة مع فشل الأزواج لا يثبت الارتباط التركيبي ولا يحدد بمفرده آلية الخطأ — فقد يكون النموذج حساساً للترتيب دون أن يطبقه اتساقاً، كالقارئ الثابت في هذا الفصل الذي يحمل حساسية موضعية ويستقر عند السقف العدّادي قياساً؛ ويميز الضابط العدّادي مع التدخل المباشر الاختصارَ من الربط؛ أما تلازم الدقة العالية مع الأزواج فهو أقوى دليل متاح، وقصورهما معاً يعيد السؤال إلى التصميم.",
+      "sees_ar": "حلقتان متطابقتان في تعداد كل رمز ومختلفتان في الإجابة الصحيحة.",
+      "tries_ar": "بناء زوج مضاد يدوياً والتحقق أن أي قارئ عدّادي سيفشل في أحد طرفيه.",
+      "discovers_ar": "السؤال القابل للقياس يسبق النموذج: سقف 0.750 للعدّادي محسوب قبل أي تدريب.",
+      "hypothesis_en": "I expect classification accuracy to suffice as proof of binding.",
+      "possible_outcomes_en": [
+       "high accuracy with counterfactual-pair failure",
+       "high accuracy tracking the pairs",
+       "both falling short"
+      ],
+      "interpretation_en": "High accuracy with pair failure neither proves compositional binding nor pinpoints the error mechanism — the model may be order-sensitive yet fail to apply it consistently, like this chapter's fixed-query reader that carries positional sensitivity while settling at the measured counter ceiling; a counter control plus a direct intervention separate the shortcut from binding; accuracy-and-pairs together are the strongest available evidence, and both failing returns the question to the design.",
+      "sees_en": "Two loops identical in every token count and different in the correct answer.",
+      "tries_en": "Building a counterfactual pair by hand and checking that any counting reader fails one of its sides.",
+      "discovers_en": "The measurable question precedes the model: the 0.750 counter ceiling was computed before any training."
+     },
+     "role": "optional",
+     "why_here_en": "Chapter Nine's opening: from one atomic record to a key and value as two separate tokens — turning 'binding' from a word into a measurable question.",
+     "deliverable_en": "A test formulation that separates binding from token counting, with a counting control bounding it."
+    },
+    {
+     "order": 42,
+     "topic_id": "EVA-005",
+     "why_here_ar": "كاشف الاختصارات: السؤال الثاني في المهمة قابل للحل من الجواب السابق المعروض — فيجب فضحه لا احتسابه دليلاً.",
+     "deliverable_ar": "اختبار اختصار مكتوب على السؤال الثاني مع تفسير مشروط لنتيجته.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن نجاح النموذج في السؤال الثاني دليل إضافي مستقل على الربط.",
+      "possible_outcomes_ar": [
+       "نجاح الثاني عبر اختصار الجواب السابق",
+       "نجاح مستقل عن الجواب السابق",
+       "فشل السؤالين معاً"
+      ],
+      "interpretation_ar": "الاختصار شرعي داخل المهمة لكنه لا يثبت الربط — لذلك يُفصل الدليل الرئيسي عنه؛ والاستقلال عن السابق يدعم الربط؛ والفشل المزدوج يعيد السؤال للتصميم — والتدخلات المزدوجة هي أداة الفصل لهذا الفحص.",
+      "sees_ar": "سقف عدّادي محسوب عند السؤال الثاني يساوي واحداً كاملاً — القناة بنيوية لا عرضية.",
+      "tries_ar": "قلب الجواب السابق وحده ومراقبة هل تتبعه إجابة السؤال الثاني.",
+      "discovers_ar": "المهمة الجيدة تصمم اختصاراتها علناً وتقيس من يتبعها بدل إنكار وجودها.",
+      "hypothesis_en": "I expect success on the second question to be independent evidence of binding.",
+      "possible_outcomes_en": [
+       "second-question success via the prior-answer shortcut",
+       "success independent of the prior answer",
+       "both questions failing"
+      ],
+      "interpretation_en": "The shortcut is legitimate inside the task but proves no binding — hence the evidence separation; independence from the prior answer supports binding; double failure returns the question to the design — double interventions are the chapter's tool for this probe.",
+      "sees_en": "A computed counter ceiling at the second question equal to one — the channel is structural, not incidental.",
+      "tries_en": "Flipping only the prior answer and watching whether the second answer follows it.",
+      "discovers_en": "A good task designs its shortcuts in the open and measures who follows them, rather than denying they exist."
+     },
+     "role": "optional",
+     "why_here_en": "The shortcut detector: the task's second question is solvable from the displayed first answer — it must be exposed, not counted as evidence.",
+     "deliverable_en": "A written shortcut test on the second question with a conditional interpretation of its result."
+    },
+    {
+     "order": 43,
+     "topic_id": "DLN-002",
+     "why_here_ar": "محور الفصل التاسع: طبقتان سببيتان بلا ترميز موضعي التقطتا الترتيب هنا وطبقة واحدة لم تستطع — فأثر الترميز لا يُقال بمعزل عن العمق.",
+     "deliverable_ar": "قراءة الشبكة 2×2 (العمق × الترميز الموضعي) مع حدود المقارنة: 753 مقابل 945 معلمة.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن الترميز الموضعي ضروري عند كل عمق أو غير ضروري عند كل عمق.",
+      "possible_outcomes_ar": [
+       "ضروريته أو غيابها باتساق عبر الأعماق",
+       "أثره ينقلب اتجاهه بين عمق وآخر",
+       "لا أثر له في هذه المهمة"
+      ],
+      "interpretation_ar": "الانقلاب تفاعل: أثر اختيار معماري يعتمد على اختيار آخر وهو المحور التعليمي؛ والاتساق يسمح قاعدة أبسط ضمن هذه المهمة والميزانية؛ وغياب الأثر يقيّد الاستنتاج — ولا عزل سببي للعمق ما دام تعداد المعلمات يتغير معه.",
+      "sees_ar": "أربع نتائج مرتبة شبكةً: طبقة/طبقتان مع ترميز جيبي ودونه.",
+      "tries_ar": "حساب أثر إزالة الترميز داخل كل عمق، ثم أثر إضافة الطبقة داخل كل حالة ترميز.",
+      "discovers_ar": "أثر إزالة الترميز انقلب إشارته بين طبقة وطبقتين — ولا شعار واحداً يصلح للحالتين.",
+      "hypothesis_en": "I expect positional encoding to be necessary at every depth, or unnecessary at every depth.",
+      "possible_outcomes_en": [
+       "necessity or lack of necessity, consistently across depths",
+       "its effect flips direction between depths",
+       "no effect in this task"
+      ],
+      "interpretation_en": "A flip is an interaction: one architectural choice's effect depends on another — the core lesson; consistency allows a simpler rule within this task and budget; no effect bounds the conclusion — and no causal isolation of depth while parameter count changes with it.",
+      "sees_en": "Four results arranged as a grid: one/two layers with and without sinusoidal encoding.",
+      "tries_en": "Computing the encoding-removal effect within each depth, then the layer-addition effect within each encoding case.",
+      "discovers_en": "The sign of removing the encoding flipped between one and two layers — no single slogan fits both."
+     },
+     "role": "optional",
+     "why_here_en": "The chapter's core: two causal layers without positional encoding captured order here while one layer could not — the encoding's effect cannot be stated apart from depth.",
+     "deliverable_en": "A reading of the 2×2 grid (depth × positional encoding) with the comparison's bounds: 753 versus 945 parameters."
+    },
+    {
+     "order": 44,
+     "topic_id": "DAT-016",
+     "why_here_ar": "محطة الخروج من التوسعة: قراءة انتشار البذور والتعميم للطول 16 وحدود إعادة الإنتاج — كيف نقرأ نتائج قد تتغير؟",
+     "deliverable_ar": "قرار مكتوب: ما النتيجة القابلة للاستشهاد من ثلاث بذور على مجموعة نهائية مشتركة، وما حدود نقلها.",
+     "activity": {
+      "hypothesis_ar": "أتوقع أن البذور الثلاث تعطي الاستنتاج نفسه بالأرقام نفسها تقريباً.",
+      "possible_outcomes_ar": [
+       "استقرار الاستنتاج رغم تفاوت الأرقام",
+       "انقلاب ترتيب نماذج بين بذور",
+       "اتفاق تام بالأرقام"
+      ],
+      "interpretation_ar": "الاستقرار مع التفاوت يوجب التبليغ لكل بذرة ثم متوسطها وتشتتها؛ والانقلاب يمنع الترتيب الحاسم ويثري حدود الادعاء؛ والتطابق التام يستدعي فحص الحتمية قبل الاطمئنان — وبه تكتمل الرحلة: من نموذج يعمل إلى ادعاء يعرف حدوده.",
+      "sees_ar": "نتائج كل بذرة على حدة على مقاطع محجوزة لم تُقرأ إلا بعد التجميد.",
+      "tries_ar": "إعادة قراءة جدول النتائج بذرةً بذرة قبل متوسطها، وتحديد أي الفروق يتجاوز التشتت.",
+      "discovers_ar": "البذور ليست ضجيجاً يُدفن في متوسط؛ إنها حدود الصدق الادعاء — والرقم الواحد بلا تشتت ادعاء ناقص.",
+      "hypothesis_en": "I expect the three seeds to give the same conclusion with nearly identical numbers.",
+      "possible_outcomes_en": [
+       "a stable conclusion despite number spread",
+       "a model-order flip between seeds",
+       "exact numerical agreement"
+      ],
+      "interpretation_en": "Stability with spread requires reporting every seed, then mean and dispersion; a flip forbids decisive ranking and enriches the claim's limits; exact agreement calls for a determinism check before comfort — and so the journey closes: from a model that runs to a claim that knows its bounds.",
+      "sees_en": "Per-seed results on quarantined segments read only after the freeze.",
+      "tries_en": "Re-reading the results table seed by seed before its mean, and locating which differences exceed the spread.",
+      "discovers_en": "Seeds are not noise to bury in a mean; they are the honesty bounds of a claim — a lone number without spread is an incomplete claim."
+     },
+     "role": "optional",
+     "why_here_en": "The expansion's exit station: reading seed spread, length-16 generalization, and reproduction limits — how do we read results that may vary?",
+     "deliverable_en": "A written decision: which finding is quotable from three seeds on a shared final set, and its transfer limits."
+    }
+   ],
+   "methodology_notes_ar": [
+    {
+     "topic_id": "EVA-019",
+     "note_ar": "حدود الاختبار الاصطناعي والتعلم البشري ليست محطة في هذه الرحلة؛ موضعها منهجية تقييم المنصة نفسها، إذ لا يثبت نجاح النموذج في اختبار تعلماً بشرياً. تُعرض في وثائق المنهج لا في مسار المتعلم."
+    }
+   ],
+   "optional_branches_ar": [
+    {
+     "topic_id": "DLN-007",
+     "when_ar": "إذا أراد فهم ما تفعله مكتبة autograd بتفصيل."
+    },
+    {
+     "topic_id": "MAT-017",
+     "when_ar": "إذا أراد الجانب الرياضي لمقياس الخسارة بعد استخدامه رقمياً في الفصل الثالث."
+    },
+    {
+     "topic_id": "NLP-009",
+     "when_ar": "إذا تخيلنا توسيع النموذج إلى وحدات كلمات: الوحدات حينها متجهات لا أرقام خام."
+    },
+    {
+     "topic_id": "LLM-001",
+     "when_ar": "مرجع تعريفي: ما النموذج اللغوي وما لا يضمنه — يقرأ في أي وقت."
+    },
+    {
+     "topic_id": "SYS-003",
+     "when_ar": "إذا لم تستطع تحميل النموذج في الذاكرة المتاحة."
+    },
+    {
+     "topic_id": "NLP-007",
+     "when_ar": "إذا أراد اختبار استرجاع النص بعد فك ترميز الرموز."
+    }
+   ],
+   "goal_en": "That the learner build a small language model from scratch, train it, verify its integrity before running it, measure it against a fixed baseline, and run it — understanding why each step exists rather than memorizing its order.",
+   "starts_with_question_en": "How do we make the computer work with language? And why did next-token prediction become one of the important ways to train language models?",
+   "independence_note_en": "Every station here is an independent link to its topic. The journey was not designed as a gate; whoever wants the tokenizer alone enters NLP-003 directly and finds its brief primer inside it.",
+   "exit_evidence_en": [
+    "A small model that runs end to end on a text of the learner's choosing.",
+    "An evaluation report on a separate validation set, with fixed data, a baseline, and at least one repetition, explicitly stating what did not improve.",
+    "A leakage test written before training is run, failing on leakage and passing on the causal model.",
+    "A comparison of two decoding strategies on the same prompt, with the difference explained.",
+    "A compositional binding test with counterfactual pairs separating binding from token counting, with a declared shortcut control on the second query and a seed reading conditioned on its limits."
+   ],
+   "methodology_notes_en": [
+    {
+     "topic_id": "EVA-019",
+     "note_en": "The limits of the artificial test and of human learning are not a station on this journey; their place is the platform's evaluation methodology, since a model's success on a test proves no human learning. They appear in the methodology documents, not in the learner's path."
+    }
+   ],
+   "optional_branches_en": [
+    {
+     "topic_id": "DLN-007",
+     "when_en": "If they want a detailed view of what the autograd library does."
+    },
+    {
+     "topic_id": "MAT-017",
+     "when_en": "If they want the mathematical side of the loss metric after using it numerically in Chapter Three."
+    },
+    {
+     "topic_id": "NLP-009",
+     "when_en": "If we imagine extending the model to word units: the units are then vectors, not raw numbers."
+    },
+    {
+     "topic_id": "LLM-001",
+     "when_en": "A definitional reference: what a language model is and what it does not guarantee — readable at any time."
+    },
+    {
+     "topic_id": "SYS-003",
+     "when_en": "If the model cannot be loaded into the available memory."
+    },
+    {
+     "topic_id": "NLP-007",
+     "when_en": "If they want to test text recovery after decoding the tokens."
+    }
+   ]
+  }
+ ],
+ "separation_rule_en": "This file expresses an ordered learning experience, not a knowledge truth. Its stations are not to be read as scientific requirements, and its edges are not merged into the relations registry. The ordering here is a teaching-design decision, and it may differ from the scientific dependency order between the topics themselves.",
+ "station_roles_en": {
+  "core": "A core station on the journey path; it has an activity and a deliverable the learner verifies.",
+  "optional": "Opened only when needed; the journey can be completed without it, with a brief primer inside the station that needs it.",
+  "reference": "Reference material linked to the journey, not included in its sequence."
+ }
+}

@@ -1,0 +1,382 @@
+{
+ "generated_from": "content/chapter-03/examples.json",
+ "worked_example": {
+  "mini_text": "سأحضر سأحضر",
+  "chars": 11,
+  "transitions": 11,
+  "mini_vocab_size": 7,
+  "output_vocab_size": 6,
+  "alpha": 1.0,
+  "probabilities": {
+   " →س": 0.286,
+   "<s>→س": 0.286,
+   "أ→ح": 0.375,
+   "ح→ض": 0.375,
+   "ر→ ": 0.286,
+   "س→أ": 0.375,
+   "ض→ر": 0.375
+  },
+  "start_symbol_generated": false
+ },
+ "languages": {
+  "ar": {
+   "char_level_check": {
+    "total_chars": 245,
+    "unknown_chars": 0,
+    "per_message": [
+     {
+      "text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+      "chars": 35,
+      "unknown": []
+     },
+     {
+      "text": "أعتذر عن حضور اجتماع الغد.",
+      "chars": 26,
+      "unknown": []
+     },
+     {
+      "text": "أين القاعة؟",
+      "chars": 11,
+      "unknown": []
+     },
+     {
+      "text": "لن أستطيع المجيء، أرجو أن تعذرني.",
+      "chars": 33,
+      "unknown": []
+     },
+     {
+      "text": "أيمكن نقل الموعد إلى وقت لاحق؟",
+      "chars": 30,
+      "unknown": []
+     },
+     {
+      "text": "سأكون معكم غداً بإذن الله.",
+      "chars": 26,
+      "unknown": []
+     },
+     {
+      "text": "ما هو مكان الانعقاد؟",
+      "chars": 20,
+      "unknown": []
+     },
+     {
+      "text": "أعتذر عن الإزعاج، ما رابط الاجتماع؟",
+      "chars": 35,
+      "unknown": []
+     },
+     {
+      "text": "لن أتخلف عن الحضور هذه المرة.",
+      "chars": 29,
+      "unknown": []
+     }
+    ],
+    "t1": {
+     "text": "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+     "chars": 35,
+     "unknown": []
+    }
+   },
+   "units_actual": {
+    "train": 712,
+    "val": 133,
+    "test": 245
+   },
+   "targets": {
+    "train": 700,
+    "val": 150,
+    "test": 150
+   },
+   "vocab_size_incl_unk_and_start": 39,
+   "unk_id": 38,
+   "loss_examples": {
+    "correct_char": null
+   },
+   "models": {
+    "unigram": {
+     "val_loss": 3.131,
+     "test_loss": 3.1757
+    },
+    "count_bigram": {
+     "alpha_grid": [
+      0.1,
+      0.5,
+      1.0
+     ],
+     "val_losses": {
+      "0.1": 2.7198,
+      "0.5": 2.656,
+      "1.0": 2.7266
+     },
+     "chosen_alpha": 0.5,
+     "val_loss": 2.656,
+     "test_loss": 2.638
+    },
+    "neural_bigram": {
+     "curve": [
+      {
+       "epoch": 1,
+       "train_loss": 3.6377
+      },
+      {
+       "epoch": 10,
+       "train_loss": 3.584
+      },
+      {
+       "epoch": 50,
+       "train_loss": 3.3621
+      },
+      {
+       "epoch": 100,
+       "train_loss": 3.1331
+      },
+      {
+       "epoch": 150,
+       "train_loss": 2.9588
+      },
+      {
+       "epoch": 200,
+       "train_loss": 2.8252
+      }
+     ],
+     "val_loss": 2.9268,
+     "test_loss": 3.0616
+    }
+   },
+   "generation": {
+    "prompt": "أود",
+    "count_text": "أودمالغء?كن ةةىصماجت",
+    "count_steps_head": [
+     {
+      "char": "م",
+      "p": 0.098
+     },
+     {
+      "char": "ا",
+      "p": 0.358
+     },
+     {
+      "char": "ل",
+      "p": 0.299
+     },
+     {
+      "char": "غ",
+      "p": 0.041
+     },
+     {
+      "char": "ء",
+      "p": 0.02
+     },
+     {
+      "char": "<unk>",
+      "p": 0.025
+     }
+    ],
+    "neural_text": "أودلةهق",
+    "greedy_count_text": "أودأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأسأس",
+    "decoding_note": "النصوص أعلاه أخذ عينات ببذرة مثبتة؛ وضع greedy يختار الأعلى احتمالاً دائماً"
+   },
+   "failure_demo": {
+    "context_char": " ",
+    "distinct_next_chars_in_test": [
+     "آ",
+     "أ",
+     "إ",
+     "ا",
+     "ب",
+     "ت",
+     "ح",
+     "ر",
+     "ع",
+     "غ",
+     "ل",
+     "م",
+     "ن",
+     "ه",
+     "و",
+     "ي"
+    ],
+    "count_model_prediction": "ا"
+   }
+  },
+  "en": {
+   "char_level_check": {
+    "total_chars": 280,
+    "unknown_chars": 1,
+    "per_message": [
+     {
+      "text": "Could we move the meeting to another day?",
+      "chars": 41,
+      "unknown": []
+     },
+     {
+      "text": "I'm sorry, I won't be able to attend.",
+      "chars": 37,
+      "unknown": []
+     },
+     {
+      "text": "Which room is it in?",
+      "chars": 20,
+      "unknown": []
+     },
+     {
+      "text": "I can't make it tomorrow, apologies.",
+      "chars": 36,
+      "unknown": []
+     },
+     {
+      "text": "Can we shift the time to later?",
+      "chars": 31,
+      "unknown": []
+     },
+     {
+      "text": "I'll join you tomorrow.",
+      "chars": 23,
+      "unknown": []
+     },
+     {
+      "text": "What's the location?",
+      "chars": 20,
+      "unknown": []
+     },
+     {
+      "text": "Sorry to bother you — what's the meeting link?",
+      "chars": 46,
+      "unknown": [
+       "—"
+      ]
+     },
+     {
+      "text": "I won't miss it this time.",
+      "chars": 26,
+      "unknown": []
+     }
+    ],
+    "t1": {
+     "text": "Could we move the meeting to another day?",
+     "chars": 41,
+     "unknown": []
+    }
+   },
+   "units_actual": {
+    "train": 729,
+    "val": 163,
+    "test": 280
+   },
+   "targets": {
+    "train": 700,
+    "val": 150,
+    "test": 150
+   },
+   "vocab_size_incl_unk_and_start": 37,
+   "unk_id": 36,
+   "loss_examples": {
+    "correct_char": null
+   },
+   "models": {
+    "unigram": {
+     "val_loss": 2.9783,
+     "test_loss": 3.0255
+    },
+    "count_bigram": {
+     "alpha_grid": [
+      0.1,
+      0.5,
+      1.0
+     ],
+     "val_losses": {
+      "0.1": 2.2232,
+      "0.5": 2.3286,
+      "1.0": 2.4601
+     },
+     "chosen_alpha": 0.1,
+     "val_loss": 2.2232,
+     "test_loss": 2.2234
+    },
+    "neural_bigram": {
+     "curve": [
+      {
+       "epoch": 1,
+       "train_loss": 3.5841
+      },
+      {
+       "epoch": 10,
+       "train_loss": 3.535
+      },
+      {
+       "epoch": 50,
+       "train_loss": 3.3316
+      },
+      {
+       "epoch": 100,
+       "train_loss": 3.1161
+      },
+      {
+       "epoch": 150,
+       "train_loss": 2.9451
+      },
+      {
+       "epoch": 200,
+       "train_loss": 2.8108
+      }
+     ],
+     "val_loss": 2.7885,
+     "test_loss": 2.9087
+    }
+   },
+   "generation": {
+    "prompt": "I'd",
+    "count_text": "I'dWhos win's'tirome tindvvolf bhithee an",
+    "count_steps_head": [
+     {
+      "char": "W",
+      "p": 0.229
+     },
+     {
+      "char": "h",
+      "p": 0.635
+     },
+     {
+      "char": "o",
+      "p": 0.118
+     },
+     {
+      "char": "s",
+      "p": 0.06
+     },
+     {
+      "char": " ",
+      "p": 0.37
+     },
+     {
+      "char": "w",
+      "p": 0.089
+     }
+    ],
+    "neural_text": "I'dpfuo",
+    "greedy_count_text": "I'dI the the the the the the the the the the the the the the the the the the the the the the the the the the the the the th",
+    "decoding_note": "النصوص أعلاه أخذ عينات ببذرة مثبتة؛ وضع greedy يختار الأعلى احتمالاً دائماً"
+   },
+   "failure_demo": {
+    "context_char": " ",
+    "distinct_next_chars_in_test": [
+     "I",
+     "a",
+     "b",
+     "c",
+     "d",
+     "i",
+     "j",
+     "l",
+     "m",
+     "r",
+     "s",
+     "t",
+     "w",
+     "y",
+     "—"
+    ],
+    "count_model_prediction": "t"
+   }
+  }
+ }
+}

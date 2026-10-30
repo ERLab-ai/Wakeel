@@ -1,0 +1,533 @@
+{
+ "simulator_version": "simulate_chapter4-1.0",
+ "generated_from": "content/chapter-03/examples.json",
+ "input_hash": "08214db672a50483034616124218b511347171fcecaf41e96cc7406ebe8441ae",
+ "languages": {
+  "ar": {
+   "vocab_size_incl_specials": 39,
+   "output_space": 38,
+   "models": {
+    "k0": {
+     "name": "Unigram",
+     "alpha_from_validation": 1.0,
+     "val_losses_grid": {
+      "0.1": 3.1504,
+      "0.5": 3.1367,
+      "1.0": 3.131
+     },
+     "train_nll": 3.0878,
+     "val_nll": 3.131,
+     "test_nll": 3.1757,
+     "eval_tokens": 245,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.0,
+     "unseen_context_rate_test": 0.0,
+     "theoretical_dense_cells": 38,
+     "sparse_storage_records": 37,
+     "observed_unique_contexts_train": 1,
+     "observed_pairs_train": 37,
+     "observed_unique_contexts_val": 1,
+     "observed_unique_contexts_test": 1
+    },
+    "k1": {
+     "name": "Bigram",
+     "alpha_from_validation": 0.5,
+     "val_losses_grid": {
+      "0.1": 2.7198,
+      "0.5": 2.656,
+      "1.0": 2.7266
+     },
+     "train_nll": 2.1444,
+     "val_nll": 2.656,
+     "test_nll": 2.638,
+     "eval_tokens": 245,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.0075,
+     "unseen_context_rate_test": 0.0,
+     "theoretical_dense_cells": 1482,
+     "sparse_storage_records": 202,
+     "observed_unique_contexts_train": 36,
+     "observed_pairs_train": 202,
+     "observed_unique_contexts_val": 30,
+     "observed_unique_contexts_test": 34
+    },
+    "k2": {
+     "name": "Trigram",
+     "alpha_from_validation": 0.1,
+     "val_losses_grid": {
+      "0.1": 2.2915,
+      "0.5": 2.543,
+      "1.0": 2.7275
+     },
+     "train_nll": 1.1758,
+     "val_nll": 2.2915,
+     "test_nll": 2.2239,
+     "eval_tokens": 245,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.2331,
+     "unseen_context_rate_test": 0.1347,
+     "theoretical_dense_cells": 57798,
+     "sparse_storage_records": 318,
+     "observed_unique_contexts_train": 188,
+     "observed_pairs_train": 318,
+     "observed_unique_contexts_val": 91,
+     "observed_unique_contexts_test": 140
+    },
+    "k3": {
+     "name": "4-gram",
+     "alpha_from_validation": 0.1,
+     "val_losses_grid": {
+      "0.1": 2.4659,
+      "0.5": 2.7496,
+      "1.0": 2.9218
+     },
+     "train_nll": 1.1161,
+     "val_nll": 2.4659,
+     "test_nll": 2.3961,
+     "eval_tokens": 245,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.3985,
+     "unseen_context_rate_test": 0.3184,
+     "theoretical_dense_cells": 2254122,
+     "sparse_storage_records": 373,
+     "observed_unique_contexts_train": 301,
+     "observed_pairs_train": 373,
+     "observed_unique_contexts_val": 108,
+     "observed_unique_contexts_test": 185
+    }
+   },
+   "backoff": {
+    "method": "Stupid Backoff (weight=0.4), k=3→0",
+    "separate_from_base_models": true,
+    "val_loss": 2.7328,
+    "test_loss": 2.3511
+   },
+   "case_studies": [
+    {
+     "message": "أين القاعة؟",
+     "true_next": "ا",
+     "contexts": [
+      {
+       "k": 1,
+       "context": " ",
+       "context_seen_in_training": true,
+       "context_training_count": 98,
+       "training_followers": {
+        "ا": 34,
+        "ل": 9,
+        "أ": 6,
+        "م": 6,
+        "ن": 6,
+        "ي": 5,
+        "ت": 4,
+        "إ": 4,
+        "ح": 4,
+        "غ": 3,
+        "س": 3,
+        "ف": 3,
+        "ه": 3,
+        "ر": 2,
+        "آ": 2,
+        "ع": 1,
+        "ب": 1,
+        "ق": 1,
+        "و": 1
+       },
+       "true_next": "ا",
+       "true_next_in_training_followers": true,
+       "true_next_count": 34
+      },
+      {
+       "k": 2,
+       "context": "ن ",
+       "context_seen_in_training": true,
+       "context_training_count": 14,
+       "training_followers": {
+        "ا": 4,
+        "ت": 3,
+        "أ": 2,
+        "س": 2,
+        "ه": 1,
+        "ن": 1,
+        "ح": 1
+       },
+       "true_next": "ا",
+       "true_next_in_training_followers": true,
+       "true_next_count": 4
+      },
+      {
+       "k": 3,
+       "context": "ين ",
+       "context_seen_in_training": true,
+       "context_training_count": 3,
+       "training_followers": {
+        "س": 2,
+        "ن": 1
+       },
+       "true_next": "ا",
+       "true_next_in_training_followers": false,
+       "true_next_count": 0
+      }
+     ]
+    },
+    {
+     "message": "لن أستطيع المجيء، أرجو أن تعذرني.",
+     "true_next": "أ",
+     "contexts": [
+      {
+       "k": 1,
+       "context": " ",
+       "context_seen_in_training": true,
+       "context_training_count": 98,
+       "training_followers": {
+        "ا": 34,
+        "ل": 9,
+        "أ": 6,
+        "م": 6,
+        "ن": 6,
+        "ي": 5,
+        "ت": 4,
+        "إ": 4,
+        "ح": 4,
+        "غ": 3,
+        "س": 3,
+        "ف": 3,
+        "ه": 3,
+        "ر": 2,
+        "آ": 2,
+        "ع": 1,
+        "ب": 1,
+        "ق": 1,
+        "و": 1
+       },
+       "true_next": "أ",
+       "true_next_in_training_followers": true,
+       "true_next_count": 6
+      },
+      {
+       "k": 2,
+       "context": "ن ",
+       "context_seen_in_training": true,
+       "context_training_count": 14,
+       "training_followers": {
+        "ا": 4,
+        "ت": 3,
+        "أ": 2,
+        "س": 2,
+        "ه": 1,
+        "ن": 1,
+        "ح": 1
+       },
+       "true_next": "أ",
+       "true_next_in_training_followers": true,
+       "true_next_count": 2
+      },
+      {
+       "k": 3,
+       "context": "لن ",
+       "context_seen_in_training": true,
+       "context_training_count": 2,
+       "training_followers": {
+        "أ": 2
+       },
+       "true_next": "أ",
+       "true_next_in_training_followers": true,
+       "true_next_count": 2
+      }
+     ]
+    }
+   ],
+   "generation": [
+    {
+     "k": 0,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "لجمك يلل جبوعمجأر معلاينلأج ،فليابحأ حأغجمكاممتاف"
+    },
+    {
+     "k": 1,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "لالغء<unk>كن ةةىصماجت"
+    },
+    {
+     "k": 2,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "لديط"
+    },
+    {
+     "k": 3,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "لدهف"
+    },
+    {
+     "k": 2,
+     "decoding": "greedy",
+     "text": "                                                                                "
+    }
+   ]
+  },
+  "en": {
+   "vocab_size_incl_specials": 37,
+   "output_space": 36,
+   "models": {
+    "k0": {
+     "name": "Unigram",
+     "alpha_from_validation": 1.0,
+     "val_losses_grid": {
+      "0.1": 2.9961,
+      "0.5": 2.9809,
+      "1.0": 2.9783
+     },
+     "train_nll": 3.0172,
+     "val_nll": 2.9783,
+     "test_nll": 3.0255,
+     "eval_tokens": 280,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.0,
+     "unseen_context_rate_test": 0.0,
+     "theoretical_dense_cells": 36,
+     "sparse_storage_records": 35,
+     "observed_unique_contexts_train": 1,
+     "observed_pairs_train": 35,
+     "observed_unique_contexts_val": 1,
+     "observed_unique_contexts_test": 1
+    },
+    "k1": {
+     "name": "Bigram",
+     "alpha_from_validation": 0.1,
+     "val_losses_grid": {
+      "0.1": 2.2232,
+      "0.5": 2.3286,
+      "1.0": 2.4601
+     },
+     "train_nll": 1.8815,
+     "val_nll": 2.2232,
+     "test_nll": 2.2234,
+     "eval_tokens": 280,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.0123,
+     "unseen_context_rate_test": 0.0036,
+     "theoretical_dense_cells": 1332,
+     "sparse_storage_records": 194,
+     "observed_unique_contexts_train": 34,
+     "observed_pairs_train": 194,
+     "observed_unique_contexts_val": 27,
+     "observed_unique_contexts_test": 32
+    },
+    "k2": {
+     "name": "Trigram",
+     "alpha_from_validation": 0.1,
+     "val_losses_grid": {
+      "0.1": 1.9625,
+      "0.5": 2.3092,
+      "1.0": 2.545
+     },
+     "train_nll": 1.1969,
+     "val_nll": 1.9625,
+     "test_nll": 1.9494,
+     "eval_tokens": 280,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.092,
+     "unseen_context_rate_test": 0.0786,
+     "theoretical_dense_cells": 49284,
+     "sparse_storage_records": 325,
+     "observed_unique_contexts_train": 181,
+     "observed_pairs_train": 325,
+     "observed_unique_contexts_val": 91,
+     "observed_unique_contexts_test": 125
+    },
+    "k3": {
+     "name": "4-gram",
+     "alpha_from_validation": 0.1,
+     "val_losses_grid": {
+      "0.1": 2.1224,
+      "0.5": 2.5136,
+      "1.0": 2.7363
+     },
+     "train_nll": 1.0738,
+     "val_nll": 2.1224,
+     "test_nll": 2.0234,
+     "eval_tokens": 280,
+     "observed_contexts_val": null,
+     "unseen_context_rate_val": 0.2699,
+     "unseen_context_rate_test": 0.2357,
+     "theoretical_dense_cells": 1823508,
+     "sparse_storage_records": 392,
+     "observed_unique_contexts_train": 309,
+     "observed_pairs_train": 392,
+     "observed_unique_contexts_val": 118,
+     "observed_unique_contexts_test": 188
+    }
+   },
+   "backoff": {
+    "method": "Stupid Backoff (weight=0.4), k=3→0",
+    "separate_from_base_models": true,
+    "val_loss": 1.8201,
+    "test_loss": 1.6799
+   },
+   "case_studies": [
+    {
+     "message": "Which room is it in?",
+     "true_next": "r",
+     "contexts": [
+      {
+       "k": 1,
+       "context": " ",
+       "context_seen_in_training": true,
+       "context_training_count": 110,
+       "training_followers": {
+        "t": 26,
+        "m": 16,
+        "w": 10,
+        "a": 9,
+        "l": 5,
+        "p": 5,
+        "I": 5,
+        "c": 5,
+        "i": 5,
+        "b": 5,
+        "s": 5,
+        "n": 2,
+        "h": 2,
+        "j": 2,
+        "o": 1,
+        "f": 1,
+        "d": 1,
+        "r": 1,
+        "T": 1,
+        "F": 1,
+        "u": 1,
+        "e": 1
+       },
+       "true_next": "r",
+       "true_next_in_training_followers": true,
+       "true_next_count": 1
+      },
+      {
+       "k": 2,
+       "context": "h ",
+       "context_seen_in_training": true,
+       "context_training_count": 2,
+       "training_followers": {
+        "t": 1,
+        "r": 1
+       },
+       "true_next": "r",
+       "true_next_in_training_followers": true,
+       "true_next_count": 1
+      },
+      {
+       "k": 3,
+       "context": "ch ",
+       "context_seen_in_training": true,
+       "context_training_count": 1,
+       "training_followers": {
+        "r": 1
+       },
+       "true_next": "r",
+       "true_next_in_training_followers": true,
+       "true_next_count": 1
+      }
+     ]
+    },
+    {
+     "message": "I can't make it tomorrow, apologies.",
+     "true_next": "c",
+     "contexts": [
+      {
+       "k": 1,
+       "context": " ",
+       "context_seen_in_training": true,
+       "context_training_count": 110,
+       "training_followers": {
+        "t": 26,
+        "m": 16,
+        "w": 10,
+        "a": 9,
+        "l": 5,
+        "p": 5,
+        "I": 5,
+        "c": 5,
+        "i": 5,
+        "b": 5,
+        "s": 5,
+        "n": 2,
+        "h": 2,
+        "j": 2,
+        "o": 1,
+        "f": 1,
+        "d": 1,
+        "r": 1,
+        "T": 1,
+        "F": 1,
+        "u": 1,
+        "e": 1
+       },
+       "true_next": "c",
+       "true_next_in_training_followers": true,
+       "true_next_count": 5
+      },
+      {
+       "k": 2,
+       "context": "I ",
+       "context_seen_in_training": true,
+       "context_training_count": 7,
+       "training_followers": {
+        "c": 4,
+        "w": 2,
+        "n": 1
+       },
+       "true_next": "c",
+       "true_next_in_training_followers": true,
+       "true_next_count": 4
+      },
+      {
+       "k": 3,
+       "context": "<s>I ",
+       "context_seen_in_training": false,
+       "context_training_count": 0,
+       "training_followers": {},
+       "true_next": "c",
+       "true_next_in_training_followers": false,
+       "true_next_count": 0
+      }
+     ]
+    }
+   ],
+   "generation": [
+    {
+     "k": 0,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "petn wor fetnreIi smoewtp?g 'nowdeg"
+    },
+    {
+     "k": 1,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "rour?<unk>rree"
+    },
+    {
+     "k": 2,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "rell yrsCfcxmteao,tlrbyvsIf'Cnpyack I cannogsscWnCI witogiF?nfirming laltS,WWmjsmdtF "
+    },
+    {
+     "k": 3,
+     "seed": 42,
+     "decoding": "sampling",
+     "text": "reuo"
+    },
+    {
+     "k": 2,
+     "decoding": "greedy",
+     "text": "                                                                                "
+    }
+   ]
+  }
+ }
+}

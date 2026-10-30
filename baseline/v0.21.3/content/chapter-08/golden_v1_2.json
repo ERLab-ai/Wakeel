@@ -1,0 +1,260 @@
+{
+ "dual_lookup": {
+  "fixed_query_prefix_reader": {
+   "42": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0002,
+    "params": 936,
+    "train_nll": 0.0001,
+    "test_in": 1.0,
+    "test_ood16": 0.9688
+   },
+   "43": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0001,
+    "params": 936,
+    "train_nll": 0.0001,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   },
+   "44": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0001,
+    "params": 936,
+    "train_nll": 0.0,
+    "test_in": 1.0,
+    "test_ood16": 0.9375
+   }
+  },
+  "causal_self_attention_1h": {
+   "42": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0002,
+    "params": 736,
+    "train_nll": 0.0002,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   },
+   "43": {
+    "val": 0.875,
+    "dev": 0.875,
+    "val_nll": 0.1735,
+    "params": 736,
+    "train_nll": 0.1735,
+    "test_in": 0.875,
+    "test_ood16": 0.875
+   },
+   "44": {
+    "val": 0.75,
+    "dev": 0.75,
+    "val_nll": 0.4545,
+    "params": 736,
+    "train_nll": 0.4545,
+    "test_in": 0.75,
+    "test_ood16": 0.75
+   }
+  },
+  "no_position": {
+   "42": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0,
+    "params": 736,
+    "train_nll": 0.0,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   },
+   "43": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.001,
+    "params": 736,
+    "train_nll": 0.001,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   },
+   "44": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0,
+    "params": 736,
+    "train_nll": 0.0,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   }
+  },
+  "no_query_dependency": {
+   "42": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0002,
+    "params": 680,
+    "train_nll": 0.0002,
+    "test_in": 1.0,
+    "test_ood16": 0.9375
+   },
+   "43": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0001,
+    "params": 680,
+    "train_nll": 0.0001,
+    "test_in": 1.0,
+    "test_ood16": 0.9844
+   },
+   "44": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0002,
+    "params": 680,
+    "train_nll": 0.0002,
+    "test_in": 1.0,
+    "test_ood16": 0.9297
+   }
+  },
+  "csa_learned_absolute_pe": {
+   "42": {
+    "val": 0.7617,
+    "dev": 0.7617,
+    "val_nll": 0.4545,
+    "params": 912,
+    "train_nll": 0.4545,
+    "test_in": 0.7656,
+    "test_ood16": 0.75
+   },
+   "43": {
+    "val": 1.0,
+    "dev": 1.0,
+    "val_nll": 0.0002,
+    "params": 912,
+    "train_nll": 0.0002,
+    "test_in": 1.0,
+    "test_ood16": 1.0
+   },
+   "44": {
+    "val": 0.875,
+    "dev": 0.875,
+    "val_nll": 0.1734,
+    "params": 912,
+    "train_nll": 0.1734,
+    "test_in": 0.875,
+    "test_ood16": 0.75
+   }
+  },
+  "local_only": {
+   "42": {
+    "val": 0.5,
+    "dev": 0.5,
+    "val_nll": 0.6933,
+    "params": 544,
+    "train_nll": 0.6933,
+    "test_in": 0.5,
+    "test_ood16": 0.5
+   },
+   "43": {
+    "val": 0.5,
+    "dev": 0.5,
+    "val_nll": 0.6933,
+    "params": 544,
+    "train_nll": 0.6933,
+    "test_in": 0.5,
+    "test_ood16": 0.5
+   },
+   "44": {
+    "val": 0.5,
+    "dev": 0.5,
+    "val_nll": 0.6933,
+    "params": 544,
+    "train_nll": 0.6933,
+    "test_in": 0.5,
+    "test_ood16": 0.5
+   }
+  }
+ },
+ "factorial_cells": {
+  "fixed_query_residual": {
+   "val_mean": 1.0,
+   "cin_mean": 1.0,
+   "cood_mean": 0.9505,
+   "params": 680,
+   "counterfactual_confirm_in": {
+    "42": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "43": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "44": {
+     "follow": 1.0,
+     "stable": 1.0
+    }
+   }
+  },
+  "state_query_residual": {
+   "val_mean": 0.875,
+   "cin_mean": 0.875,
+   "cood_mean": 0.875,
+   "params": 736,
+   "counterfactual_confirm_in": {
+    "42": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "43": {
+     "follow": 0.6667,
+     "stable": 1.0
+    },
+    "44": {
+     "follow": 0.8571,
+     "stable": 0.25
+    }
+   }
+  },
+  "fixed_query_concat": {
+   "val_mean": 1.0,
+   "cin_mean": 1.0,
+   "cood_mean": 0.9714,
+   "params": 936,
+   "counterfactual_confirm_in": {
+    "42": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "43": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "44": {
+     "follow": 1.0,
+     "stable": 1.0
+    }
+   }
+  },
+  "state_query_concat": {
+   "val_mean": 0.9583,
+   "cin_mean": 0.9583,
+   "cood_mean": 0.9583,
+   "params": 992,
+   "counterfactual_confirm_in": {
+    "42": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "43": {
+     "follow": 1.0,
+     "stable": 1.0
+    },
+    "44": {
+     "follow": 1.0,
+     "stable": 0.5
+    }
+   }
+  }
+ }
+}

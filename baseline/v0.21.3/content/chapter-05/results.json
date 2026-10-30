@@ -1,0 +1,163 @@
+{
+ "simulator_version": "simulate_chapter5-1.0",
+ "input_hash": "08214db672a50483034616124218b511347171fcecaf41e96cc7406ebe8441ae",
+ "languages": {
+  "ar": {
+   "units": {
+    "train": 712,
+    "val": 133,
+    "test": 245
+   },
+   "vocab": {
+    "context": 39,
+    "output": 38
+   },
+   "architecture": {
+    "embedding_dim": 8,
+    "hidden": 32,
+    "activation": "tanh",
+    "context_k": 2,
+    "output_excludes_start": true
+   },
+   "params": {
+    "total_declared": 2110,
+    "embedding": 312,
+    "hidden_layer": 544,
+    "output_layer": 1254
+   },
+   "training_curve": [
+    {
+     "epoch": 1,
+     "train_nll": 3.638
+    },
+    {
+     "epoch": 10,
+     "train_nll": 3.4085
+    },
+    {
+     "epoch": 50,
+     "train_nll": 3.0588
+    },
+    {
+     "epoch": 100,
+     "train_nll": 2.8013
+    },
+    {
+     "epoch": 200,
+     "train_nll": 2.2843
+    },
+    {
+     "epoch": 300,
+     "train_nll": 1.9891
+    }
+   ],
+   "losses": {
+    "train_final": 1.9891,
+    "val_nll": 2.5579,
+    "test_nll": 2.7634
+   },
+   "val_seen_unseen_split": {
+    "seen_nll": 2.2335,
+    "unseen_nll": 3.6251,
+    "seen_count": 102,
+    "unseen_count": 31
+   },
+   "frozen_embedding_ablation": {
+    "trainable": false,
+    "train_nll": 3.025,
+    "val_nll": 3.0632,
+    "test_nll": 3.1371,
+    "trainable_params": 1798,
+    "note_ar": "التضمينات عشوائية ثابتة بلا تحسين",
+    "note_en": "frozen random embeddings, never optimised"
+   },
+   "generation": {
+    "prompt_chars": "أو",
+    "learned": "ع نن ين الاًبماستأعضلاًع..س ألري ال؟ءد لدلحجوم؟خل ا.عحفن ضبأ",
+    "frozen": "لتمغ يلل تبوعمتأر معلاينلأج ؟كليااجأ حأفتمفاملااف أ لفغلتر  ",
+    "seed": 42,
+    "decoding": "sampling"
+   },
+   "timing_seconds": 0.76
+  },
+  "en": {
+   "units": {
+    "train": 729,
+    "val": 163,
+    "test": 280
+   },
+   "vocab": {
+    "context": 37,
+    "output": 36
+   },
+   "architecture": {
+    "embedding_dim": 8,
+    "hidden": 32,
+    "activation": "tanh",
+    "context_k": 2,
+    "output_excludes_start": true
+   },
+   "params": {
+    "total_declared": 2028,
+    "embedding": 296,
+    "hidden_layer": 544,
+    "output_layer": 1188
+   },
+   "training_curve": [
+    {
+     "epoch": 1,
+     "train_nll": 3.5861
+    },
+    {
+     "epoch": 10,
+     "train_nll": 3.3582
+    },
+    {
+     "epoch": 50,
+     "train_nll": 2.9801
+    },
+    {
+     "epoch": 100,
+     "train_nll": 2.7183
+    },
+    {
+     "epoch": 200,
+     "train_nll": 2.2288
+    },
+    {
+     "epoch": 300,
+     "train_nll": 1.9084
+    }
+   ],
+   "losses": {
+    "train_final": 1.9084,
+    "val_nll": 2.1609,
+    "test_nll": 2.1759
+   },
+   "val_seen_unseen_split": {
+    "seen_nll": 2.0859,
+    "unseen_nll": 2.9005,
+    "seen_count": 148,
+    "unseen_count": 15
+   },
+   "frozen_embedding_ablation": {
+    "trainable": false,
+    "train_nll": 2.961,
+    "val_nll": 2.8913,
+    "test_nll": 2.9648,
+    "trainable_params": 1732,
+    "note_ar": "التضمينات عشوائية ثابتة بلا تحسين",
+    "note_en": "frozen random embeddings, never optimised"
+   },
+   "generation": {
+    "prompt_chars": "I'",
+    "learned": "plot wng mermre n't,e.tore I towe me meeniteng loce ting re ",
+    "frozen": "retn wor getmrg?i smoewtpIf ,noweeg? hInesndsreWn C rnorgi  ",
+    "seed": 42,
+    "decoding": "sampling"
+   },
+   "timing_seconds": 1.44
+  }
+ },
+ "total_seconds": 1.44
+}

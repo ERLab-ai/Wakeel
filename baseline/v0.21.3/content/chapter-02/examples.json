@@ -1,0 +1,105 @@
+{
+ "schema": "wakeel.chapter-content.v0.2",
+ "chapter_id": "CH-2",
+ "bridge": {
+  "steps_ar": [
+   "نريد رداً جديداً ومناسباً؛ لم تعد قائمة الردود الثابتة كافية لطموحنا.",
+   "نجرّب تركيب الرد بقالب: ينجح في بعض الحالات، ويتطلب منطقاً أكثر تعقيداً مع تنوع الرسائل.",
+   "نتساءل: هل يمكن أن نتعلم طريقة لتوليد النص؟ التوليد التدريجي أحد الخيارات الممكنة، وليس الخيار الوحيد.",
+   "لكي ننفذ توليداً تدريجياً، علينا تحديد الوحدات التي سننتجها."
+  ],
+  "steps_en": [
+   "We want a new, appropriate reply; a fixed list of replies is no longer enough.",
+   "We try composing the reply with a template: it works in some cases and needs more logic as variety grows.",
+   "We ask: can we learn a way to generate text? Step-by-step generation is one possible option, not the only one.",
+   "To implement step-by-step generation we must define the units we generate."
+  ]
+ },
+ "template": {
+  "ar": {"text": "عذراً على الإزعاج، بخصوص «{الموضوع}» نستطيع {البديل}، وسنرسل دعوة محدثة."},
+  "en": {"text": "Sorry for the bother — regarding \"{topic}\", we can {alternative}, and we'll send an updated invite."}
+ },
+ "fills": {
+  "ar": {
+   "T1": {"الموضوع": "اللقاء", "البديل": "نقله إلى يوم آخر"},
+   "T5": {"الموضوع": "الموعد", "البديل": "نقله إلى وقت لاحق"},
+   "T3": {"الموضوع": "الاجتماع", "البديل": null}
+  },
+  "en": {
+   "T1": {"topic": "the meeting", "alternative": "move it to another day"},
+   "T5": {"topic": "the time", "alternative": "shift it later"},
+   "T3": {"topic": "the meeting", "alternative": null}
+  }
+ },
+ "unit_counts": {
+  "ar": {"sentence": "وسيشاركهم القرار في اجتماع الغد."},
+  "en": {"sentence": "I won't miss the meeting."}
+ },
+ "tokenization": {
+  "pinned_version": "edu-tok-0.1",
+  "method_a": "تقسيم على المسافات",
+  "method_b_rules_ar": [
+   {"rule": "افصل «و» الأولى إذا بقي بعد منها 4 أحرف على الأقل", "split": "و", "min_remainder": 4},
+   {"rule": "افصل «ال» الأولى إذا بقي بعدها حرفان على الأقل", "split": "ال", "min_remainder": 2}
+  ],
+  "texts": {
+   "ar": "وسيشاركهم القرار في اجتماع الغد.",
+   "en": "I'll share the decision at tomorrow's meeting."
+  }
+ },
+ "vocab": {
+  "unk": "<unk>",
+  "build": "رموز المسافات؛ إزالة الترقيم؛ توحيد حالة الأحرف للإنجليزية؛ أعلى N تكراراً، وعند التساوي الأسبق في القائمة",
+  "sizes": [8, 12, 20],
+  "corpus": [
+   "هل يمكن تأجيل الاجتماع إلى الغد؟",
+   "أحتاج موعداً آخر للاجتماع.",
+   "هل نؤجل الاجتماع؟",
+   "أعتذر، لن أستطيع الحضور.",
+   "معذرة، لا أستطيع المجيء.",
+   "أعتذر عن الحضور غداً.",
+   "أين سيعقد الاجتماع؟",
+   "ما مكان الاجتماع؟",
+   "ما رابط الاجتماع؟",
+   "سأحضر الاجتماع غداً.",
+   "أؤكد حضوري.",
+   "سأكون هناك."
+  ],
+  "corpus_en": [
+   "Can we postpone the meeting to tomorrow?",
+   "I need another slot for the meeting.",
+   "Should we delay the meeting?",
+   "Sorry, I can't attend.",
+   "I cannot attend, apologies.",
+   "Sorry, I won't be there tomorrow.",
+   "Where is the meeting?",
+   "Which room is the meeting in?",
+   "What's the meeting link?",
+   "I will attend tomorrow.",
+   "Count me in, I'll be there.",
+   "Confirming my attendance."
+  ],
+  "tests_ar": [
+   "هل يمكننا إرجاء اللقاء إلى يوم آخر؟",
+   "أعتذر عن حضور اجتماع الغد.",
+   "أين القاعة؟",
+   "لن أستطيع المجيء، أرجو أن تعذرني.",
+   "أيمكن نقل الموعد إلى وقت لاحق؟",
+   "سأكون معكم غداً بإذن الله.",
+   "ما هو مكان الانعقاد؟",
+   "أعتذر عن الإزعاج، ما رابط الاجتماع؟",
+   "لن أتخلف عن الحضور هذه المرة."
+  ],
+  "tests_en": [
+   "Could we move the meeting to another day?",
+   "I'm sorry, I won't be able to attend.",
+   "Which room is it in?",
+   "I can't make it tomorrow, apologies.",
+   "Can we shift the time to later?",
+   "I'll join you tomorrow.",
+   "What's the location?",
+   "Sorry to bother you — what's the meeting link?",
+   "I won't miss it this time."
+  ]
+ }
+}
