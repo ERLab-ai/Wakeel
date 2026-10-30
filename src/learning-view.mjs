@@ -88,7 +88,7 @@ function renderJourney(){
  append(objective,el("strong","",d.goal),el("p","",local(chapter,language,"goal")));
  area.append(objective);
  for(const [titleKey,val] of [["why",local(station,language,"why_here")],["deliverable",local(station,language,"deliverable")]]){
-  area.append(append(el("section","lesson-field"),el("h4","",d[titleKey]),el("p","",val)));
+  if(val)area.append(append(el("section","lesson-field"),el("h4","",d[titleKey]),el("p","",val)));
  }
  const act=station.activity;
  for(const key of ["sees","tries","hypothesis","possible_outcomes","interpretation","discovers"]){

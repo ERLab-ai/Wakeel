@@ -19,7 +19,8 @@ test("Arabic/English authored activity mirror has no missing outcomes",()=>{
   const result=compileLearning(...readInputs());
   for(const s of result.stations){
     assert.equal(s.activity.possible_outcomes_ar.length,s.activity.possible_outcomes_en.length);
-    assert.ok(s.why_here_ar && s.why_here_en && s.deliverable_ar && s.deliverable_en);
+    assert.ok(s.why_here_ar && s.why_here_en);
+    assert.equal(Boolean(s.deliverable_ar),Boolean(s.deliverable_en));
   }
 });
 test("refuse missing English and mismatched alternatives",()=>{

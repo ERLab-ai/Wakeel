@@ -35,9 +35,10 @@ export function compileLearning(journeyData, registry, manifest) {
   const stations = j.stations.map(s => {
     demand(Number.isInteger(s.order) && s.order >= 1 && s.order <= 44 && !stationByOrder.has(s.order), "duplicate/out-of-range station order");
     demand(topicMap.has(s.topic_id), "station topic not in registry");
-    for (const key of ["why_here", "deliverable"]) {
-      demand(text(s[key + "_ar"]) && text(s[key + "_en"]), "station bilingual field " + s.order + "/" + key);
-    }
+    demand(text(s.why_here_ar) && text(s.why_here_en), "station bilingual field " + s.order + "/why_here");
+    // G7 requires bilingual presence parity, not mandatory deliverables for legacy optional stations.
+    demand(Boolean(text(s.deliverable_ar)) === Boolean(text(s.deliverable_en)),
+      "station bilingual presence parity " + s.order + "/deliverable");
     const activity = {};
     for (const key of FIELDS) {
       const ar = s.activity?.[key + "_ar"], en = s.activity?.[key + "_en"];
