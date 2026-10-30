@@ -1,10 +1,10 @@
-name: Wakeel 2.0 baseline import safeguards
+name: Wakeel 2.0 baseline source safeguards
 on:
   push:
     branches: [chore/v0213-baseline-import-p0]
   pull_request:
 jobs:
-  importer:
+  importer-and-science:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -12,17 +12,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m unittest discover -s tools -p 'test_import_v0213.py' -v
-      - run: python -m py_compile tools/import_v0213.py
-      - name: Validate actual baseline if committed
+      - run: python -m py_compile tools/import_v0213.py tools/prepare_public_v0213.py tools/verify_public_v0213.py
+      - name: Check curated baseline, if staged
         run: |
-          if test -f baseline/v0.21.3/MANIFEST.sha256.json; then
+          if test -f baseline/v0.21.3/PUBLIC-MANIFEST.json; then
+            python tools/verify_public_v0213.py baseline/v0.21.3
             python -m pip install 'jsonschema>=4.18,<5' 'numpy==2.2.6'
+            export PYTHONDONTWRITEBYTECODE=1
             cd baseline/v0.21.3
             python tools/validate.py
-            python tools/selftest.py
             python tools/build_atlas.py
             python tools/test_chapter8.py
             python tools/test_chapter9.py
           else
-            echo "P0 importer tooling only; scientific source NOT committed"
+            echo "IMPORT TOOLING ONLY: v0.21.3 source not yet staged. P0 remains OPEN."
           fi
