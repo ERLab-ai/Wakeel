@@ -61,6 +61,11 @@ jobs:
         run: python -m unittest discover -s tools -p 'test_render_chapters.py' -v
       - name: Full build and tests on Windows (Arabic render acceptance)
         run: npm run check
+        env:
+          # Use the setup-python interpreter (the one markdown-it-py was
+          # installed for); the `py -3` launcher may resolve to the image's
+          # default Python without the renderer dependency.
+          PYTHON: python
       - name: Allowlisted distribution only (6 files)
         shell: pwsh
         run: |
