@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 import zipfile
+from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("wakeel_import", Path(__file__).with_name("import_v0213.py"))
 m = importlib.util.module_from_spec(spec)
@@ -29,8 +30,9 @@ class TestImport(unittest.TestCase):
             output = Path(tmp) / "dest"
             output.mkdir()
             (output / "existing").write_text("safe")
-            with self.assertRaises(ValueError):
-                m.extract(f, output)
+            with patch.object(m, "verify", return_value={"entries": 1, "verified": 0}):
+                with self.assertRaisesRegex(ValueError, "nonempty"):
+                    m.extract(f, output)
             self.assertEqual((output / "existing").read_text(), "safe")
 
 if __name__ == "__main__":
