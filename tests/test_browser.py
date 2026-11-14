@@ -159,6 +159,19 @@ class BrowserGate(unittest.TestCase):
                              "Horizontal document overflow on 390px English phone")
         self.page.screenshot(path=str(OUT/"english-mobile.png"))
 
+    def test_07_hash_navigation_focus_and_malformed_uri(self):
+        self.visit()
+        self.page.locator("#chapter-nav a.chapter-choice").nth(1).click()
+        self.page.wait_for_function(
+            "() => document.activeElement?.matches('#station-content .station-main-title')")
+        self.assertEqual(self.page.locator("#station-content .station-main-title").get_attribute("tabindex"),"-1")
+        self.page.locator("#topic-results a.topic-result").nth(5).click()
+        self.page.wait_for_function(
+            "() => document.activeElement?.matches('#topic-detail .station-main-title')")
+        self.page.evaluate("location.hash = '#topic/%E0%A4%A'")
+        self.page.wait_for_timeout(100)
+        self.assertTrue(self.page.locator("#topic-detail .station-main-title").is_visible())
+
     def test_06_no_public_science_archives_and_no_active_user_markup(self):
         self.visit()
         for name in [
