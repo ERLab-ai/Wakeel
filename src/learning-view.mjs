@@ -181,28 +181,58 @@ function renderTopic(){
 function renderAll(){
  setStaticLanguage();renderJourney();renderTopic();renderTopicList();
 }
-function navigateHash(){
- if(!catalog)return;
- const hash=decodeURIComponent(location.hash.slice(1));
- const station=/^station\/([1-9]\d?)$/.exec(hash);
- const topic=/^topic\/([A-Za-z0-9-]+)$/.exec(hash);
- const chapterHash=/^chapter\/([1-9])$/.exec(hash);
+/**
+ * Parse a catalog deep link without allowing a malformed URI escape to throw
+ * during a hashchange event. Catalog membership is checked by the caller.
+ */
+export function parseLearningRoute(hash){
+ if(typeof hash!=="string")return null;
+ let value;
+ try{value=decodeURIComponent(hash.startsWith("#")?hash.slice(1):hash);}
+ catch{return null;}
+ const station=/^station\/([1-9]\d?)$/.exec(value);
  if(station){
-  const num=Number(station[1]);
-  if(num>=1 && num<=44){currentStation=num;renderJourney();document.getElementById("journey").scrollIntoView({block:"start"});}
- }else if(chapterHash){
-  const index=Number(chapterHash[1]);
-  const chapter=catalog.chapters[index-1];
-  if(chapter){
-    currentStation=chapter.station_orders[0];
-    expandedChapter=chapter.id;
-    renderJourney();
-    document.getElementById("journey").scrollIntoView({block:"start"});
+  const order=Number(station[1]);
+  return order<=44?{kind:"station",order}:null;
+ }
+ const chapter=/^chapter\/([1-9])$/.exec(value);
+ if(chapter)return {kind:"chapter",index:Number(chapter[1])};
+ const topic=/^topic\/([A-Za-z0-9-]+)$/.exec(value);
+ return topic?{kind:"topic",id:topic[1]}:null;
+}
+function navigateHash({moveFocus=false}={}){
+ if(!catalog)return;
+ const route=parseLearningRoute(location.hash);
+ if(!route)return;
+ const reveal=(sectionId,headingSelector)=>{
+  const section=q(sectionId);
+  section.scrollIntoView({block:"start"});
+  if(moveFocus){
+   const heading=section.querySelector(headingSelector);
+   if(heading){
+    heading.setAttribute("tabindex","-1");
+    heading.focus({preventScroll:true});
+   }
   }
- }else if(topic){
-  if(catalog.topics.some(t=>t.id===topic[1])){
-   currentTopic=topic[1];renderTopic();renderTopicList();
-   document.getElementById("atlas").scrollIntoView({block:"start"});
+ };
+ if(route.kind==="station"){
+  currentStation=route.order;
+  renderJourney();
+  reveal("journey","#station-content .station-main-title");
+ }else if(route.kind==="chapter"){
+  const chapter=catalog.chapters[route.index-1];
+  if(chapter){
+   currentStation=chapter.station_orders[0];
+   expandedChapter=chapter.id;
+   renderJourney();
+   reveal("journey","#station-content .station-main-title");
+  }
+ }else if(route.kind==="topic"){
+  if(catalog.topics.some(t=>t.id===route.id)){
+   currentTopic=route.id;
+   renderTopic();
+   renderTopicList();
+   reveal("atlas","#topic-detail .station-main-title");
   }
  }
 }
@@ -211,7 +241,7 @@ export async function initLearning(){
  if(!area)return;
  area.textContent=getDict().loading;
  q("topic-search").addEventListener("input",e=>{search=e.target.value;shown=40;renderTopicList();});
- window.addEventListener("hashchange",navigateHash);
+ window.addEventListener("hashchange",()=>navigateHash({moveFocus:true}));
  document.addEventListener("wakeel:locale",e=>{
   language=e.detail?.locale==="en"?"en":"ar";renderAll();
  });

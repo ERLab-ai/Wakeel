@@ -20,3 +20,9 @@ Screenshots in `wakeel-v022-browser-evidence` (7-day retention) document sample 
 **Still OPEN:** human review of actual visual hierarchy/table legibility, RTL mixed Arabic/English math, zoom and reflow at 200%–400%, browser-specific behavior beyond Chromium, formal WCAG 2.2 audit, NVDA/VoiceOver speech/focus sequence, and usability of disabled/unavailable laboratory features. Keep PR #4 Draft until independently reviewed.
 
 All frozen scientific content remains unchanged. No new training, scientific result, or evidence claim is made by this browser test.
+## Safe deep links and keyboard destination focus (2026-11-14)
+- Hash routes for stations (1–44), chapters (1–9), and topic identifiers are decoded inside a guarded parser. Malformed percent-encoded links are ignored without throwing a browser exception.
+- Keyboard navigation through chapter/station/topic links moves focus to the newly rendered content heading after the route changes. The heading receives a transient `tabindex=-1` so it stays out of the normal Tab sequence.
+- Initial page loads with a deep link retain normal browser focus; the application still scrolls to the selected content after loading.
+- Unit regression tests cover valid and malformed routes. A real Chromium scenario checks heading focus and malformed hash tolerance. These tests do not certify NVDA/VoiceOver announcements or all mobile browsers.
+- The frozen v0.21.3 scientific baseline and the six-asset publishing allowlist are unchanged.
