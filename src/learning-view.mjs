@@ -23,6 +23,12 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  evidenceTitle:"نتائج الفصل الأول المجمدة — عرض القراءات الأصلية",
+  evidenceDescription:"مقارنة على رسائل محددة فقط. الأرقام من نتائج المصدر المجمد؛ لم تُعَد التجربة هنا ولم تُراجع نتائجها علمياً مراجعة مستقلة.",
+  evidenceSplit:"مجموعة الرسائل",evidenceTotal:"عدد الرسائل",evidenceRules:"إجابات صحيحة بالقواعد",evidenceNearest:"إجابات صحيحة بأقرب مثال",
+  evidenceSeed:"الرسائل الست المعروفة عند كتابة القواعد",evidenceTests:"تسع صياغات جديدة للاختبار",
+  evidenceSource:"ملف النتائج الأصلي:",
+  evidenceLimit:"هذه أعداد نجاح ضمن مجموعة صغيرة ومحددة؛ لا تُثبت جودة عامة أو دلالة إحصائية أو تفوقاً على بيانات أخرى.",
   source:"المصدر",sourceInfo:"v0.21.3 — بيانات مؤلفة ومجمّدة، وليست تجربة تدريب جديدة",
   topicOpen:"استكشف موضوعاً مستقلاً",allTopics:"جميع الموضوعات",notFound:"المحطة أو الموضوع غير موجود في المصدر المعتمد."
  },
@@ -44,6 +50,12 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  evidenceTitle:"Frozen Chapter 1 results — read-only replay",
+  evidenceDescription:"A comparison on specific messages only. These numbers come from the frozen source; no experiment has been rerun here and no independent scientific approval is claimed.",
+  evidenceSplit:"Message set",evidenceTotal:"Messages",evidenceRules:"Correct with rules",evidenceNearest:"Correct with nearest example",
+  evidenceSeed:"Original six used to write the rules",evidenceTests:"Nine alternate test phrasings",
+  evidenceSource:"Original results file:",
+  evidenceLimit:"These are success counts on a small, defined sample. They do not establish general performance, statistical significance, or superiority on other data.",
   source:"Source",sourceInfo:"v0.21.3 — authored, frozen educational data; not a new training run",
   topicOpen:"Open independent topic",allTopics:"All topics",notFound:"Station or topic does not exist in the approved source."
  }
@@ -53,7 +65,7 @@ const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className
 const append=(p,...children)=>{p.append(...children);return p;};
 const local=(object,l,field)=>object?.[field+"_"+l]||"";
 const link=(hash,txt,cls)=>{const a=el("a",cls,txt);a.href=hash;return a;};
-let catalog=null,language="ar",currentStation=1,currentTopic="FND-001",shown=40,search="",expandedChapter="";
+let catalog=null,language="ar",currentStation=1,currentTopic="FND-001",shown=40,search="",expandedChapter="",expandedEvidenceChapter="";
 const getDict=()=>labels[language];
 function setStaticLanguage(){
  const d=getDict();
@@ -122,6 +134,48 @@ function renderJourney(){
       expandedChapter=details.open?chapter.id:"";
    });
    area.append(details);
+ }
+ // Aggregates are projected only at build time from SHA-verified frozen Chapter 1 results.
+ // This is a read-only, scoped evidence view, not a rerun of the original experiment.
+ const evidence=catalog.evidence_replays?.[chapter.id];
+ if(evidence?.schema==="wakeel-v022-frozen-aggregate/v1" &&
+    evidence.chapter_id===chapter.id && evidence.status==="approved-source-aggregate-not-independent-review"){
+  const details=el("details","evidence-replay");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.evidenceTitle));
+  details.append(el("p","evidence-note",d.evidenceDescription));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const origin=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  origin.dir="ltr";provenance.append(origin);details.append(provenance);
+  const scroll=el("div","evidence-scroll");
+  const table=el("table","evidence-table");
+  table.append(el("caption","",d.evidenceTitle));
+  const head=el("thead"),header=el("tr");
+  for(const label of [d.evidenceSplit,d.evidenceTotal,d.evidenceRules,d.evidenceNearest]){
+   const th=el("th","",label);th.scope="col";header.append(th);
+  }
+  head.append(header);table.append(head);
+  const body=el("tbody");
+  const dataset=evidence.datasets?.[language];
+  for(const [key,label] of [["seed",d.evidenceSeed],["tests",d.evidenceTests]]){
+   const values=dataset?.[key];
+   if(!values)continue;
+   const row=el("tr"),name=el("th","",label);name.scope="row";row.append(name);
+   const counts=[String(values.total),
+     String(values.rules_correct)+" / "+String(values.total),
+     String(values.nearest_example_correct)+" / "+String(values.total)];
+   for(const count of counts){
+    const cell=el("td","evidence-number",count);
+    cell.dir="ltr";row.append(cell);
+   }
+   body.append(row);
+  }
+  table.append(body);scroll.append(table);details.append(scroll);
+  details.append(el("p","evidence-note",d.evidenceLimit));
+  details.addEventListener("toggle",()=>{
+   expandedEvidenceChapter=details.open?chapter.id:"";
+  });
+  area.append(details);
  }
  const foot=append(el("div","learning-source"),el("span","",d.source+": "),el("span","",d.sourceInfo));
  area.append(foot);

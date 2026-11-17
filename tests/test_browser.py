@@ -172,6 +172,31 @@ class BrowserGate(unittest.TestCase):
         self.page.wait_for_timeout(100)
         self.assertTrue(self.page.locator("#topic-detail .station-main-title").is_visible())
 
+    def test_08_chapter_one_frozen_aggregates_in_both_languages(self):
+        self.visit("#chapter/1")
+        evidence=self.page.locator(".evidence-replay")
+        self.assertEqual(evidence.count(),1)
+        evidence.locator("summary").click()
+        self.assertTrue(evidence.evaluate("(e)=>e.open"))
+        rows=evidence.locator(".evidence-table tbody tr")
+        self.assertEqual(rows.count(),2)
+        self.assertIn("4 / 9",rows.nth(1).inner_text())
+        self.assertIn("8 / 9",rows.nth(1).inner_text())
+        self.assertIn("SHA-256:",evidence.locator(".evidence-provenance").inner_text())
+        catalog=self.page.evaluate("""async() => {
+          const j=await (await fetch('/data/learning.json')).json();
+          return {evidence:j.evidence_replays?.['CH-1'],
+            hasRows:JSON.stringify(j.evidence_replays).includes('rule_rows')};
+        }""")
+        self.assertEqual(catalog["evidence"]["datasets"]["ar"]["tests"]["rules_correct"],4)
+        self.assertFalse(catalog["hasRows"])
+        self.page.locator("#locale").select_option("en")
+        self.assertIn("Frozen Chapter 1",self.page.locator(".evidence-summary").inner_text())
+        self.assertTrue(self.page.locator(".evidence-replay").evaluate("(e)=>e.open"))
+        self.assertIn("Correct with rules",self.page.locator(".evidence-table").inner_text())
+        self.page.goto(BASE+"/#chapter/9",wait_until="networkidle")
+        self.assertEqual(self.page.locator(".evidence-replay").count(),0)
+
     def test_06_no_public_science_archives_and_no_active_user_markup(self):
         self.visit()
         for name in [
