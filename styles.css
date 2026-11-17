@@ -59,3 +59,19 @@
 .chapter-prose tr:nth-child(even){background:#f6f9f8}
 .chapter-prose hr{border:0;border-top:1px solid var(--line);margin:24px 0}
 @media(max-width:520px){.chapter-prose{padding:4px 13px 16px}.chapter-prose table{font-size:12px}.chapter-prose th,.chapter-prose td{padding:7px}}
+
+/* Read-only, SHA-pinned aggregate result projection (Chapter 1 only). */
+.evidence-replay{margin:16px 0 20px;border:1px solid #c6d9e6;border-radius:12px;background:#f8fbfd;overflow:hidden}
+.evidence-summary{cursor:pointer;padding:14px 18px;font-size:14px;font-weight:800;color:#164f73;background:#eaf3f8}
+.evidence-summary:hover{background:#dcecf5}
+.evidence-summary:focus-visible{outline:3px solid #9b6bdd;outline-offset:-3px}
+.evidence-note{font-size:13px;line-height:1.75;color:#385461;margin:12px 18px}
+.evidence-provenance{font-size:11px;color:var(--muted);margin:8px 18px;overflow-wrap:anywhere}
+.evidence-provenance code{font:11px ui-monospace,monospace;unicode-bidi:isolate;overflow-wrap:anywhere}
+.evidence-scroll{max-width:100%;overflow-x:auto;margin:8px 18px}
+.evidence-table{border-collapse:collapse;min-width:530px;width:100%;font-size:12px}
+.evidence-table caption{text-align:start;font-size:12px;color:var(--muted);margin:4px 0 8px}
+.evidence-table th,.evidence-table td{border:1px solid var(--line);padding:8px 10px;text-align:start;vertical-align:middle}
+.evidence-table thead{background:#e5eef4}
+.evidence-table tbody tr:nth-child(even){background:#eef5f7}
+.evidence-number{font:700 12px ui-monospace,monospace;white-space:nowrap;text-align:center!important}
