@@ -1,3 +1,4 @@
+import {smoothedTransition} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -23,6 +24,19 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  bigramEvidenceTitle:"الفصل الثالث — قياسات النماذج الأصلية",
+  bigramEvidenceIntro:"قيم خسارة التحقق والاختبار مسجلة في المصدر المجمد. تُقارن النماذج على بيانات الفصل نفسه وبطريقة التمثيل نفسها؛ الأرقام ليست نتائج تشغيل جديد.",
+  bigramModel:"النموذج",bigramValidation:"خسارة التحقق",bigramTest:"خسارة الاختبار",
+  bigramUnigram:"أحادي التكرار",bigramCount:"Bigram بالعدّ",bigramNeural:"Bigram عصبي",
+  bigramChosen:"قيمة التنعيم المختارة على مجموعة التحقق:",
+  bigramLabTitle:"جرّب حساب احتمال انتقال واحد",
+  bigramLabIntro:"غيّر الأعداد ضمن الحدود المحددة. هذا حساب جديد بمعادلة التنعيم، وليس إعادة تدريب للنموذج أو إعادة تشغيل اختبار الفصل.",
+  bigramTotal:"مرات ظهور السياق (n)",bigramObserved:"مرات الانتقال الصحيح (c)",
+  bigramVocabulary:"حجم مفردات المخرجات (V)",bigramAlpha:"قوة التنعيم (α)",
+  bigramOutput:"احتمال الانتقال وخسارته",bigramProbability:"احتمال الانتقال",
+  bigramLoss:"خسارة الانتقال (nats)",bigramInvalid:"أدخل أعداداً صحيحة ضمن الحدود، مع 0 ≤ c ≤ n.",
+  bigramReference:"مثال المصدر المجمد: n=1، c=1، V=6، α=1؛ الاحتمال المسجل:",
+  bigramCaveat:"خسارة انتقال واحد (−ln p) لا تُقارن مباشرةً بمتوسط خسارة التحقق أو الاختبار في الجدول. لا يمكن استنتاج تعميم النموذج من هذا الحساب.",
   tokensTitle:"الفصل الثاني — مقارنة وحدات النص المجمدة",
   tokensDescription:"مثالان مرجعيان مختلفان في الصياغة؛ يتغير عدد الوحدات عند تغيير طريقة التقسيم. النتائج الأصلية معروضة دون إعادة تشغيل المُقسّم.",
   tokensMethod:"طريقة التقسيم",tokensCount:"عدد الوحدات",
@@ -56,6 +70,19 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  bigramEvidenceTitle:"Chapter 3 — frozen model metrics",
+  bigramEvidenceIntro:"Validation and test losses are recorded in the frozen source. Models use the chapter's same evaluation data and representation; these are not new run results.",
+  bigramModel:"Model",bigramValidation:"Validation loss",bigramTest:"Test loss",
+  bigramUnigram:"Unigram",bigramCount:"Count Bigram",bigramNeural:"Neural Bigram",
+  bigramChosen:"Smoothing selected using validation:",
+  bigramLabTitle:"Calculate one smoothed transition",
+  bigramLabIntro:"Vary the bounded counts below. This is a new calculation using the smoothing equation, not retraining or rerunning Chapter 3's test.",
+  bigramTotal:"Context observations (n)",bigramObserved:"Observed next-character count (c)",
+  bigramVocabulary:"Output vocabulary size (V)",bigramAlpha:"Smoothing strength (α)",
+  bigramOutput:"Transition probability and loss",bigramProbability:"Transition probability",
+  bigramLoss:"Single-transition loss (nats)",bigramInvalid:"Enter in-range integers with 0 ≤ c ≤ n.",
+  bigramReference:"Frozen source example: n=1, c=1, V=6, α=1; recorded probability:",
+  bigramCaveat:"A single-transition loss (−ln p) cannot be compared directly to the mean validation or test losses in the table. This calculation makes no generalization claim.",
   tokensTitle:"Chapter 2 — frozen text-unit comparison",
   tokensDescription:"Two reference sentences with different wording; changing the segmentation method changes the unit count. Original outputs are displayed without rerunning the tokenizer.",
   tokensMethod:"Segmentation method",tokensCount:"Number of units",
@@ -184,6 +211,98 @@ function renderJourney(){
   }
   table.append(body);scroll.append(table);details.append(scroll);
   details.append(el("p","evidence-note",d.evidenceLimit));
+  details.addEventListener("toggle",()=>{
+   expandedEvidenceChapter=details.open?chapter.id:"";
+  });
+  area.append(details);
+ }
+ // A separate local, bounded calculation accompanies frozen Chapter 3 metrics.
+ // Neither the learner's counts nor computed outputs modify the reference evidence.
+ if(evidence?.schema==="wakeel-v022-frozen-bigram-metrics/v1" &&
+    evidence.chapter_id===chapter.id && evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay bigram-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.bigramEvidenceTitle));
+  details.append(el("p","evidence-note",d.bigramEvidenceIntro));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const code=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  code.dir="ltr";provenance.append(code);details.append(provenance);
+  const scroll=el("div","evidence-scroll"),table=el("table","evidence-table");
+  table.append(el("caption","",d.bigramEvidenceTitle));
+  const thead=el("thead"),header=el("tr");
+  for(const label of [d.bigramModel,d.bigramValidation,d.bigramTest]){
+   const th=el("th","",label);th.scope="col";header.append(th);
+  }
+  thead.append(header);table.append(thead);
+  const rows=el("tbody"),reference=evidence.datasets?.[language];
+  for(const [key,label] of [["unigram",d.bigramUnigram],
+   ["count_bigram",d.bigramCount],["neural_bigram",d.bigramNeural]]){
+   const values=reference?.[key];
+   if(!values)continue;
+   const row=el("tr"),head=el("th","",label);head.scope="row";row.append(head);
+   for(const metric of ["validation_loss","test_loss"]){
+    const cell=el("td","evidence-number",values[metric].toFixed(4));
+    cell.dir="ltr";row.append(cell);
+   }
+   rows.append(row);
+  }
+  table.append(rows);scroll.append(table);details.append(scroll);
+  details.append(el("p","evidence-note",
+   d.bigramChosen+" "+reference?.count_bigram?.chosen_alpha));
+  const lab=el("section","smoothing-lab");
+  lab.append(el("h4","",d.bigramLabTitle),el("p","evidence-note",d.bigramLabIntro));
+  const controls=el("div","smoothing-controls");
+  const inputs={};
+  const fields=[
+   ["total",d.bigramTotal,"0","100","1"],
+   ["observed",d.bigramObserved,"0","100","1"],
+   ["vocabulary",d.bigramVocabulary,"2","32","1"]
+  ];
+  for(const [key,label,min,max,step] of fields){
+   const field=el("label","smoothing-field");
+   const caption=el("span","",label);
+   const input=el("input");
+   input.type="number";input.min=min;input.max=max;input.step=step;
+   const defaults={total:evidence.mini_example.total_context_count,
+    observed:evidence.mini_example.observed_next_count,
+    vocabulary:evidence.mini_example.output_vocabulary};
+   input.value=String(defaults[key]);
+   field.append(caption,input);controls.append(field);inputs[key]=input;
+  }
+  const alphaField=el("label","smoothing-field");
+  alphaField.append(el("span","",d.bigramAlpha));
+  const alpha=el("select");
+  for(const value of [0.1,0.5,1]){
+   const option=el("option","",String(value));option.value=String(value);
+   alpha.append(option);
+  }
+  alpha.value=String(evidence.mini_example.alpha);
+  alphaField.append(alpha);controls.append(alphaField);
+  lab.append(controls);
+  const output=el("p","smoothing-output");output.setAttribute("role","status");
+  output.setAttribute("aria-live","polite");
+  const update=()=>{
+   try{
+    const values=fields.map(([key])=>{
+     const input=inputs[key];
+     if(input.value.trim()===""||!input.checkValidity())throw new RangeError();
+     return Number(input.value);
+    });
+    const result=smoothedTransition(...values,Number(alpha.value));
+    output.textContent=d.bigramProbability+": "+result.probability.toFixed(4)+
+      " · "+d.bigramLoss+": "+result.loss.toFixed(4);
+   }catch{
+    output.textContent=d.bigramInvalid;
+   }
+  };
+  for(const input of [...Object.values(inputs),alpha]){
+   input.addEventListener("input",update);input.addEventListener("change",update);
+  }
+  update();
+  lab.append(el("p","evidence-note",d.bigramReference+" "+
+   evidence.mini_example.reported_probability.toFixed(3)));
+  lab.append(output,el("p","evidence-note",d.bigramCaveat));
+  details.append(lab);
   details.addEventListener("toggle",()=>{
    expandedEvidenceChapter=details.open?chapter.id:"";
   });

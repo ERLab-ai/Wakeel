@@ -62,3 +62,16 @@ function assertPairs(pairs) {
     throw new TypeError("Invalid association state");
   }
 }
+/**
+ * A bounded, single-transition additive-smoothing calculator.
+ * Deliberately distinct from the frozen Chapter 3 corpus, tokenizer,
+ * validation protocol and aggregate test losses.
+ */
+export function smoothedTransition(total,observed,vocabulary,alpha){
+  if(!Number.isInteger(total)||total<0||total>100)throw new RangeError("Total transitions must be 0–100");
+  if(!Number.isInteger(observed)||observed<0||observed>total)throw new RangeError("Observed transitions exceed total");
+  if(!Number.isInteger(vocabulary)||vocabulary<2||vocabulary>32)throw new RangeError("Vocabulary size must be 2–32");
+  if(![0.1,0.5,1].includes(alpha))throw new RangeError("Alpha must be a declared grid value");
+  const probability=(observed+alpha)/(total+alpha*vocabulary);
+  return {probability,loss:-Math.log(probability)};
+}

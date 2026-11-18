@@ -115,3 +115,74 @@ export function projectFrozenChapter2Evidence(bytes,manifest){
   samples
  };
 }
+
+/**
+ * Frozen Chapter 3: allowlist only validation/test losses, selected smoothing,
+ * and a single pinned mini-example probability. Never publish the corpus,
+ * generated text, training curves, full predictions or raw results JSON.
+ */
+export function projectFrozenChapter3Evidence(bytes,manifest){
+ const sourcePath="content/chapter-03/results.json";
+ requireEvidence(Buffer.isBuffer(bytes),"Chapter 3 source must be raw bytes");
+ requireEvidence(manifest?.source_version==="v0.21.3","Chapter 3 wrong source version");
+ const expected=manifest?.files?.[sourcePath];
+ requireEvidence(typeof expected==="string"&&/^[a-f0-9]{64}$/.test(expected),
+  "Chapter 3 missing source SHA-256");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(digest===expected,"Chapter 3 SHA-256 mismatch");
+ let raw;
+ try{raw=JSON.parse(bytes.toString("utf8"));}
+ catch{throw new Error("Frozen Chapter 3 evidence rejected: invalid JSON");}
+ requireEvidence(raw?.generated_from==="content/chapter-03/examples.json",
+  "Chapter 3 unexpected evidence origin");
+ const mini=raw.worked_example;
+ requireEvidence(mini && mini.alpha===1 && mini.output_vocab_size===6,
+  "Chapter 3 unexpected worked-example settings");
+ const reference=mini.probabilities?.["<s>→س"];
+ requireEvidence(typeof reference==="number"&&Number.isFinite(reference)&&
+  Math.abs(reference-(2/7))<=0.0005,
+  "Chapter 3 worked-example probability mismatch");
+ const datasets={};
+ const grid=[0.1,0.5,1];
+ for(const lang of LANGUAGES){
+  const data=raw.languages?.[lang], models=data?.models;
+  requireEvidence(models && typeof models==="object","Chapter 3 missing models "+lang);
+  const projected={};
+  for(const model of ["unigram","count_bigram","neural_bigram"]){
+   const row=models[model];
+   requireEvidence(row && typeof row==="object","Chapter 3 missing "+lang+"/"+model);
+   for(const key of ["val_loss","test_loss"]){
+    requireEvidence(typeof row[key]==="number"&&Number.isFinite(row[key])&&
+     row[key]>0&&row[key]<30,
+     "Chapter 3 invalid "+lang+"/"+model+"/"+key);
+   }
+   projected[model]={validation_loss:row.val_loss,test_loss:row.test_loss};
+  }
+  const bigram=models.count_bigram;
+  requireEvidence(Array.isArray(bigram.alpha_grid)&&
+    bigram.alpha_grid.length===grid.length&&
+    bigram.alpha_grid.every((x,i)=>x===grid[i]),
+    "Chapter 3 validation alpha grid drift "+lang);
+  requireEvidence(grid.includes(bigram.chosen_alpha),
+    "Chapter 3 invalid selected alpha "+lang);
+  const chosenKey=bigram.chosen_alpha===1?"1.0":String(bigram.chosen_alpha);
+  requireEvidence(bigram.val_losses&&
+    Object.keys(bigram.val_losses).sort().join(",")==="0.1,0.5,1.0"&&
+    Object.values(bigram.val_losses).every(x=>typeof x==="number"&&Number.isFinite(x)&&x>0),
+    "Chapter 3 incomplete validation loss grid "+lang);
+  requireEvidence(Math.abs(bigram.val_losses[chosenKey]-bigram.val_loss)<1e-9,
+    "Chapter 3 selected alpha/validation loss mismatch "+lang);
+  projected.count_bigram.chosen_alpha=bigram.chosen_alpha;
+  datasets[lang]=projected;
+ }
+ return {
+  schema:"wakeel-v022-frozen-bigram-metrics/v1",
+  chapter_id:"CH-3",
+  status:"approved-source-metrics-not-independent-review",
+  source_path:sourcePath,
+  source_sha256:digest,
+  mini_example:{alpha:1,total_context_count:1,observed_next_count:1,output_vocabulary:6,
+    reported_probability:reference},
+  datasets
+ };
+}

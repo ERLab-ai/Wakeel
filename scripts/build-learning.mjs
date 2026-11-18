@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, cpSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
-import { projectFrozenChapter1Evidence, projectFrozenChapter2Evidence } from "./frozen-evidence.mjs";
+import { projectFrozenChapter1Evidence, projectFrozenChapter2Evidence, projectFrozenChapter3Evidence } from "./frozen-evidence.mjs";
 
 const source = "baseline/v0.21.3";
 const JOURNEY = source + "/data/WAKEEL-2-JOURNEYS-v0.3.json";
@@ -129,6 +129,10 @@ export function build(root=process.cwd()){
     ),
     "CH-2":projectFrozenChapter2Evidence(
       readFileSync(path.join(root,source,"content/chapter-02/results.json")),
+      sourceManifest
+    ),
+    "CH-3":projectFrozenChapter3Evidence(
+      readFileSync(path.join(root,source,"content/chapter-03/results.json")),
       sourceManifest
     )
   };

@@ -75,3 +75,14 @@
 .evidence-table thead{background:#e5eef4}
 .evidence-table tbody tr:nth-child(even){background:#eef5f7}
 .evidence-number{font:700 12px ui-monospace,monospace;white-space:nowrap;text-align:center!important}
+
+/* Chapter 3: bounded learner calculation, never scientific-result mutation. */
+.smoothing-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.smoothing-lab h4{margin:0 0 8px;font-size:16px}
+.smoothing-lab .evidence-note{margin:10px 0}
+.smoothing-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.smoothing-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}
+.smoothing-field input,.smoothing-field select{width:100%;min-width:0;border:1px solid #a7c1ca;border-radius:8px;background:#fff;padding:9px;font:inherit}
+.smoothing-field input:focus-visible,.smoothing-field select:focus-visible{outline:3px solid #9b6bdd;outline-offset:2px}
+.smoothing-output{background:#eaf3f8;padding:12px 14px;border-radius:9px;font-weight:750;font-size:13px;overflow-wrap:anywhere}
+@media(max-width:520px){.smoothing-controls{grid-template-columns:1fr}.smoothing-lab{margin:12px;padding:12px}}
