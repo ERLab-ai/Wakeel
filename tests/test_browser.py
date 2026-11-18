@@ -197,6 +197,33 @@ class BrowserGate(unittest.TestCase):
         self.page.goto(BASE+"/#chapter/9",wait_until="networkidle")
         self.assertEqual(self.page.locator(".evidence-replay").count(),0)
 
+    def test_09_chapter_two_tokenization_evidence_is_language_scoped(self):
+        self.visit("#chapter/2")
+        evidence=self.page.locator(".tokenization-evidence")
+        self.assertEqual(evidence.count(),1)
+        evidence.locator("summary").click()
+        self.assertTrue(evidence.evaluate("(e)=>e.open"))
+        counts=evidence.locator(".evidence-table tbody tr")
+        self.assertEqual(counts.count(),2)
+        self.assertEqual(counts.nth(0).locator("td").inner_text(),"5")
+        self.assertEqual(counts.nth(1).locator("td").inner_text(),"8")
+        self.assertIn("edu-tok-0.1",evidence.locator(".evidence-provenance").inner_text())
+        self.page.locator("#locale").select_option("en")
+        evidence=self.page.locator(".tokenization-evidence")
+        self.assertTrue(evidence.evaluate("(e)=>e.open"))
+        self.assertIn("frozen text-unit comparison",evidence.locator("summary").inner_text())
+        counts=evidence.locator(".evidence-table tbody tr")
+        self.assertEqual(counts.nth(0).locator("td").inner_text(),"7")
+        self.assertEqual(counts.nth(1).locator("td").inner_text(),"9")
+        projection=self.page.evaluate("""async() => {
+          const j=await (await fetch('/data/learning.json')).json();
+          return j.evidence_replays?.['CH-2'];
+        }""")
+        self.assertEqual(projection["tokenizer"],"edu-tok-0.1")
+        self.assertNotIn("edu_tokens",str(projection))
+        self.page.goto(BASE+"/#chapter/3",wait_until="networkidle")
+        self.assertEqual(self.page.locator(".tokenization-evidence").count(),0)
+
     def test_06_no_public_science_archives_and_no_active_user_markup(self):
         self.visit()
         for name in [

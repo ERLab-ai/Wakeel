@@ -23,6 +23,12 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  tokensTitle:"الفصل الثاني — مقارنة وحدات النص المجمدة",
+  tokensDescription:"مثالان مرجعيان مختلفان في الصياغة؛ يتغير عدد الوحدات عند تغيير طريقة التقسيم. النتائج الأصلية معروضة دون إعادة تشغيل المُقسّم.",
+  tokensMethod:"طريقة التقسيم",tokensCount:"عدد الوحدات",
+  tokensWhitespace:"الكلمات المفصولة بالمسافات (مع إبقاء علامات الترقيم)",
+  tokensEducational:"المُقسّم التعليمي المحدد بالإصدار",
+  tokensLimit:"الجملتان ليستا ترجمة متطابقة. لا تثبت الأرقام أن لغة ما أعلى كلفة من الأخرى؛ كما أنها لا تقيس نموذجاً إنتاجياً.",
   evidenceTitle:"نتائج الفصل الأول المجمدة — عرض القراءات الأصلية",
   evidenceDescription:"مقارنة على رسائل محددة فقط. الأرقام من نتائج المصدر المجمد؛ لم تُعَد التجربة هنا ولم تُراجع نتائجها علمياً مراجعة مستقلة.",
   evidenceSplit:"مجموعة الرسائل",evidenceTotal:"عدد الرسائل",evidenceRules:"إجابات صحيحة بالقواعد",evidenceNearest:"إجابات صحيحة بأقرب مثال",
@@ -50,6 +56,12 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  tokensTitle:"Chapter 2 — frozen text-unit comparison",
+  tokensDescription:"Two reference sentences with different wording; changing the segmentation method changes the unit count. Original outputs are displayed without rerunning the tokenizer.",
+  tokensMethod:"Segmentation method",tokensCount:"Number of units",
+  tokensWhitespace:"Whitespace-separated units (punctuation retained)",
+  tokensEducational:"Pinned educational tokenizer",
+  tokensLimit:"These sentences are not exact translations. The counts do not show that one language costs more, nor do they measure a production model.",
   evidenceTitle:"Frozen Chapter 1 results — read-only replay",
   evidenceDescription:"A comparison on specific messages only. These numbers come from the frozen source; no experiment has been rerun here and no independent scientific approval is claimed.",
   evidenceSplit:"Message set",evidenceTotal:"Messages",evidenceRules:"Correct with rules",evidenceNearest:"Correct with nearest example",
@@ -172,6 +184,41 @@ function renderJourney(){
   }
   table.append(body);scroll.append(table);details.append(scroll);
   details.append(el("p","evidence-note",d.evidenceLimit));
+  details.addEventListener("toggle",()=>{
+   expandedEvidenceChapter=details.open?chapter.id:"";
+  });
+  area.append(details);
+ }
+ // Display only frozen, SHA-verified Chapter 2 reference counts, never raw tokens.
+ if(evidence?.schema==="wakeel-v022-frozen-tokenization/v1" &&
+    evidence.chapter_id===chapter.id && evidence.status==="approved-source-counts-not-independent-review"){
+  const details=el("details","evidence-replay tokenization-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.tokensTitle));
+  details.append(el("p","evidence-note",d.tokensDescription));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const origin=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256+
+     " · "+evidence.tokenizer);
+  origin.dir="ltr";provenance.append(origin);details.append(provenance);
+  const scroll=el("div","evidence-scroll"),table=el("table","evidence-table");
+  table.append(el("caption","",d.tokensTitle));
+  const head=el("thead"),header=el("tr");
+  for(const label of [d.tokensMethod,d.tokensCount]){
+   const th=el("th","",label);th.scope="col";header.append(th);
+  }
+  head.append(header);table.append(head);
+  const values=evidence.samples?.[language];
+  const body=el("tbody");
+  for(const [label,value] of [[d.tokensWhitespace,values?.whitespace_units],
+    [d.tokensEducational,values?.educational_tokenizer_units]]){
+   if(!Number.isSafeInteger(value))continue;
+   const row=el("tr"),name=el("th","",label);
+   name.scope="row";
+   const cell=el("td","evidence-number",String(value));cell.dir="ltr";
+   row.append(name,cell);body.append(row);
+  }
+  table.append(body);scroll.append(table);details.append(scroll);
+  details.append(el("p","evidence-note",d.tokensLimit));
   details.addEventListener("toggle",()=>{
    expandedEvidenceChapter=details.open?chapter.id:"";
   });
