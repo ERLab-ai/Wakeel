@@ -66,3 +66,52 @@ export function projectFrozenChapter1Evidence(bytes,manifest){
   datasets
  };
 }
+
+/**
+ * Project only the token-count comparison for the Chapter 2 reference sentences.
+ * Arabic and English use related but non-identical sentences; the numbers do
+ * not support language efficiency, pricing or model-level performance claims.
+ */
+export function projectFrozenChapter2Evidence(bytes,manifest){
+ const sourcePath="content/chapter-02/results.json";
+ requireEvidence(Buffer.isBuffer(bytes),"Chapter 2 source must be raw bytes");
+ requireEvidence(manifest?.source_version==="v0.21.3","Chapter 2 wrong source version");
+ const expected=manifest?.files?.[sourcePath];
+ requireEvidence(typeof expected==="string"&&/^[a-f0-9]{64}$/.test(expected),
+   "Chapter 2 missing source SHA-256");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(digest===expected,"Chapter 2 SHA-256 mismatch");
+ let raw;
+ try{raw=JSON.parse(bytes.toString("utf8"));}
+ catch{throw new Error("Frozen Chapter 2 evidence rejected: invalid JSON");}
+ requireEvidence(raw?.generated_from==="content/chapter-02/examples.json",
+   "Chapter 2 unexpected evidence origin");
+ requireEvidence(raw?.pinned_tokenizer==="edu-tok-0.1","Chapter 2 tokenizer version mismatch");
+ const samples={};
+ for(const lang of LANGUAGES){
+  const entry=raw.sections?.tokenization?.[lang];
+  requireEvidence(entry && typeof entry.text==="string" && entry.text.trim().length>0,
+    "Chapter 2 missing reference sentence "+lang);
+  for(const [countKey,tokensKey] of [["ws_keep_count","ws_keep_tokens"],["edu_count","edu_tokens"]]){
+   requireEvidence(Number.isSafeInteger(entry[countKey])&&entry[countKey]>0,
+     "Chapter 2 invalid "+lang+"/"+countKey);
+   requireEvidence(Array.isArray(entry[tokensKey])&&
+     entry[tokensKey].every(x=>typeof x==="string"&&x.length>0)&&
+     entry[tokensKey].length===entry[countKey],
+     "Chapter 2 count/token array mismatch "+lang+"/"+countKey);
+  }
+  samples[lang]={
+   whitespace_units:entry.ws_keep_count,
+   educational_tokenizer_units:entry.edu_count
+  };
+ }
+ return {
+  schema:"wakeel-v022-frozen-tokenization/v1",
+  chapter_id:"CH-2",
+  status:"approved-source-counts-not-independent-review",
+  source_path:sourcePath,
+  source_sha256:digest,
+  tokenizer:"edu-tok-0.1",
+  samples
+ };
+}
