@@ -75,3 +75,21 @@ export function smoothedTransition(total,observed,vocabulary,alpha){
   const probability=(observed+alpha)/(total+alpha*vocabulary);
   return {probability,loss:-Math.log(probability)};
 }
+
+/**
+ * Explore the theoretical number of dense N-gram context/next-token cells.
+ * This is a bounded arithmetic model, not an allocation, a training run,
+ * a measured runtime/memory cost or a reproduction of Chapter 4 experiments.
+ */
+export function denseContextTableCells(contextVocabulary,outputVocabulary,order){
+  if(!Number.isInteger(contextVocabulary)||contextVocabulary<2||contextVocabulary>64){
+    throw new RangeError("Context vocabulary must be an integer from 2 to 64");
+  }
+  if(!Number.isInteger(outputVocabulary)||outputVocabulary<2||outputVocabulary>64){
+    throw new RangeError("Output vocabulary must be an integer from 2 to 64");
+  }
+  if(!Number.isInteger(order)||order<0||order>3){
+    throw new RangeError("Context order must be an integer from 0 to 3");
+  }
+  return contextVocabulary**order*outputVocabulary;
+}

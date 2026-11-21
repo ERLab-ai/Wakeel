@@ -1,4 +1,4 @@
-import {smoothedTransition} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,19 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  contextEvidenceTitle:"الفصل الرابع — طول السياق وندرة البيانات",
+  contextEvidenceIntro:"نتائج النماذج من المصدر المجمد: خسائر التحقق والاختبار، والسياقات غير المرصودة، وحجم الجدول النظري مقارنة بعدد سجلات السياق–المحرف المخزنة.",
+  contextOrder:"طول السياق (k)",contextValidation:"خسارة التحقق",
+  contextTest:"خسارة الاختبار",contextUnseen:"سياقات تحقق غير مرصودة",
+  contextDense:"خلايا الجدول الكثيف (نظرياً)",contextSparse:"سجلات السياق–المحرف المخزنة",
+  contextAlpha:"التنعيم المختار على مجموعة التحقق",
+  contextCaveat:"هذه نتائج مجموعة صغيرة اطلعنا عليها سابقاً، وليست إثبات تعميم مستقل. أرقام Backoff مستبعدة لأن درجاتها غير مطبّعة ولا تصلح للمقارنة المباشرة كاحتمالات.",
+  contextLabTitle:"جرّب نمو حجم جدول السياق",
+  contextLabIntro:"غيّر طول السياق وحجمي المفردات. الناتج عدد خلايا نظري فقط؛ لا يخصص ذاكرة ولا يشغّل نموذجاً. أعداد السجلات الفعلية في الجدول أعلاه تبقى ثابتة.",
+  contextVocabulary:"مفردات السياق (تتضمن رمز البداية)",
+  contextOutputVocabulary:"مفردات المخرجات",contextCells:"الخلايا النظرية",
+  contextInvalid:"القيم غير صالحة: 2–64 لكل حجم مفردات و0–3 لطول السياق.",
+  contextFormula:"المعادلة: V_context^k × V_output. حجم الجدول ليس قياساً مباشراً لاستهلاك الذاكرة أو زمن التشغيل.",
   bigramEvidenceTitle:"الفصل الثالث — قياسات النماذج الأصلية",
   bigramEvidenceIntro:"قيم خسارة التحقق والاختبار مسجلة في المصدر المجمد. تُقارن النماذج على بيانات الفصل نفسه وبطريقة التمثيل نفسها؛ الأرقام ليست نتائج تشغيل جديد.",
   bigramModel:"النموذج",bigramValidation:"خسارة التحقق",bigramTest:"خسارة الاختبار",
@@ -70,6 +83,19 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  contextEvidenceTitle:"Chapter 4 — context length and data sparsity",
+  contextEvidenceIntro:"Frozen source results for validation/test losses, unseen contexts, and theoretical dense-table size versus actually stored context–character records.",
+  contextOrder:"Context order (k)",contextValidation:"Validation loss",
+  contextTest:"Test loss",contextUnseen:"Unseen validation contexts",
+  contextDense:"Dense-table cells (theoretical)",contextSparse:"Stored context–character records",
+  contextAlpha:"Smoothing selected on validation",
+  contextCaveat:"These small reference test sets have been seen before; this is not independent generalization proof. Backoff numbers are excluded because their scores are unnormalized and cannot be directly compared as probabilities.",
+  contextLabTitle:"Explore theoretical context-table growth",
+  contextLabIntro:"Change context length and vocabulary sizes. The output is only a theoretical cell count: no memory allocation or model run. Actual stored records in the frozen table above remain unchanged.",
+  contextVocabulary:"Context vocabulary (includes start symbol)",
+  contextOutputVocabulary:"Output vocabulary",contextCells:"Theoretical cells",
+  contextInvalid:"Invalid values: each vocabulary size must be 2–64 and order must be 0–3.",
+  contextFormula:"Formula: V_context^k × V_output. Cell count is not a direct memory-use or runtime measurement.",
   bigramEvidenceTitle:"Chapter 3 — frozen model metrics",
   bigramEvidenceIntro:"Validation and test losses are recorded in the frozen source. Models use the chapter's same evaluation data and representation; these are not new run results.",
   bigramModel:"Model",bigramValidation:"Validation loss",bigramTest:"Test loss",
@@ -338,6 +364,93 @@ function renderJourney(){
   }
   table.append(body);scroll.append(table);details.append(scroll);
   details.append(el("p","evidence-note",d.tokensLimit));
+  details.addEventListener("toggle",()=>{
+   expandedEvidenceChapter=details.open?chapter.id:"";
+  });
+  area.append(details);
+ }
+ // Build-time SHA verification keeps frozen Chapter 4 results read-only.
+ // This panel excludes unnormalized Backoff scores, raw contexts and samples.
+ if(evidence?.schema==="wakeel-v022-frozen-context-orders/v1" &&
+    evidence.chapter_id===chapter.id &&
+    evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay context-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.contextEvidenceTitle));
+  details.append(el("p","evidence-note",d.contextEvidenceIntro));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const source=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  source.dir="ltr";provenance.append(source);details.append(provenance);
+  const dataset=evidence.datasets?.[language];
+  const scroll=el("div","evidence-scroll"),table=el("table","evidence-table");
+  table.append(el("caption","",d.contextEvidenceTitle));
+  const head=el("thead"),rowHead=el("tr");
+  for(const heading of [d.contextOrder,d.contextValidation,d.contextTest,
+   d.contextUnseen,d.contextDense,d.contextSparse,d.contextAlpha]){
+   const th=el("th","",heading);th.scope="col";rowHead.append(th);
+  }
+  head.append(rowHead);table.append(head);
+  const body=el("tbody");
+  for(const record of dataset?.orders||[]){
+   const row=el("tr");
+   const label=el("th","",String(record.k));label.scope="row";label.dir="ltr";
+   row.append(label);
+   for(const value of [
+    record.validation_loss.toFixed(4),
+    record.test_loss.toFixed(4),
+    (record.unseen_validation_rate*100).toFixed(2)+"%",
+    record.dense_cells.toLocaleString("en-US"),
+    record.sparse_records.toLocaleString("en-US"),
+    String(record.selected_alpha)
+   ]){
+    const cell=el("td","evidence-number",value);cell.dir="ltr";row.append(cell);
+   }
+   body.append(row);
+  }
+  table.append(body);scroll.append(table);details.append(scroll);
+  details.append(el("p","evidence-note",d.contextCaveat));
+  const lab=el("section","context-lab");
+  lab.append(el("h4","",d.contextLabTitle),el("p","evidence-note",d.contextLabIntro));
+  const controls=el("div","smoothing-controls");
+  const inputs={};
+  for(const [key,label,value] of [
+   ["contextVocabulary",d.contextVocabulary,dataset?.context_vocabulary],
+   ["outputVocabulary",d.contextOutputVocabulary,dataset?.output_vocabulary]
+  ]){
+   const field=el("label","smoothing-field");
+   const input=el("input","context-"+key);
+   input.type="number";input.min="2";input.max="64";input.step="1";
+   input.value=String(value);
+   field.append(el("span","",label),input);controls.append(field);inputs[key]=input;
+  }
+  const orderField=el("label","smoothing-field");
+  orderField.append(el("span","",d.contextOrder));
+  const select=el("select","context-order");
+  for(const k of [0,1,2,3]){
+   const option=el("option","",String(k));option.value=String(k);select.append(option);
+  }
+  select.value="2";orderField.append(select);controls.append(orderField);
+  lab.append(controls);
+  const output=el("p","smoothing-output context-output");
+  output.setAttribute("role","status");output.setAttribute("aria-live","polite");
+  const update=()=>{
+   try{
+    const values=[inputs.contextVocabulary,inputs.outputVocabulary].map(input=>{
+      if(input.value.trim()===""||!input.checkValidity())throw new RangeError();
+      return Number(input.value);
+    });
+    const count=denseContextTableCells(...values,Number(select.value));
+    output.textContent=d.contextCells+": "+count.toLocaleString("en-US");
+   }catch{
+    output.textContent=d.contextInvalid;
+   }
+  };
+  for(const input of [...Object.values(inputs),select]){
+   input.addEventListener("input",update);input.addEventListener("change",update);
+  }
+  update();
+  lab.append(output,el("p","evidence-note",d.contextFormula));
+  details.append(lab);
   details.addEventListener("toggle",()=>{
    expandedEvidenceChapter=details.open?chapter.id:"";
   });

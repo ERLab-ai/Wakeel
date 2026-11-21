@@ -186,3 +186,98 @@ export function projectFrozenChapter3Evidence(bytes,manifest){
   datasets
  };
 }
+
+/**
+ * A strict, build-only projection of frozen Chapter 4 N-gram reference metrics.
+ * Backoff results are deliberately omitted because source Backoff scores
+ * are not normalized probabilities and their loss is not comparable here.
+ */
+export function projectFrozenChapter4Evidence(bytes,manifest){
+ const sourcePath="content/chapter-04/results.json";
+ requireEvidence(Buffer.isBuffer(bytes),"Chapter 4 source must be raw bytes");
+ requireEvidence(manifest?.source_version==="v0.21.3","Chapter 4 wrong source version");
+ const expected=manifest?.files?.[sourcePath];
+ requireEvidence(typeof expected==="string"&&/^[a-f0-9]{64}$/.test(expected),
+   "Chapter 4 missing source SHA-256");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(digest===expected,"Chapter 4 SHA-256 mismatch");
+ let raw;
+ try{raw=JSON.parse(bytes.toString("utf8"));}
+ catch{throw new Error("Frozen Chapter 4 evidence rejected: invalid JSON");}
+ const inputPath="content/chapter-03/examples.json";
+ requireEvidence(raw?.simulator_version==="simulate_chapter4-1.0" &&
+   raw.generated_from===inputPath &&
+   raw.input_hash===manifest.files?.[inputPath],
+   "Chapter 4 simulator/input provenance mismatch");
+ const datasets={};
+ for(const lang of LANGUAGES){
+  const data=raw.languages?.[lang];
+  const contextVocabulary=data?.vocab_size_incl_specials;
+  const outputVocabulary=data?.output_space;
+  requireEvidence(Number.isSafeInteger(contextVocabulary)&&contextVocabulary>=2&&
+    contextVocabulary<=64&&outputVocabulary===contextVocabulary-1,
+    "Chapter 4 invalid vocabularies "+lang);
+  const orders=[];
+  let evaluationTokens=null;
+  for(let k=0;k<=3;k++){
+   const source=data.models?.["k"+k];
+   const context=lang+"/k"+k;
+   requireEvidence(source&&typeof source==="object",
+     "Chapter 4 missing model "+context);
+   for(const field of ["train_nll","val_nll","test_nll"]){
+    requireEvidence(typeof source[field]==="number"&&
+      Number.isFinite(source[field])&&source[field]>0&&source[field]<30,
+      "Chapter 4 invalid loss "+context+"/"+field);
+   }
+   const grid=[0.1,0.5,1];
+   requireEvidence(grid.includes(source.alpha_from_validation) &&
+     source.val_losses_grid &&
+     Object.keys(source.val_losses_grid).sort().join(",")==="0.1,0.5,1.0",
+     "Chapter 4 invalid alpha grid "+context);
+   const alphaKey=source.alpha_from_validation===1?"1.0":String(source.alpha_from_validation);
+   const scores=Object.values(source.val_losses_grid);
+   requireEvidence(scores.every(v=>typeof v==="number"&&Number.isFinite(v)&&v>0) &&
+     Math.abs(source.val_losses_grid[alphaKey]-source.val_nll)<1e-8 &&
+     source.val_nll<=Math.min(...scores)+1e-8,
+     "Chapter 4 invalid validation selection "+context);
+   const expectedDense=contextVocabulary**k*outputVocabulary;
+   requireEvidence(Number.isSafeInteger(source.theoretical_dense_cells)&&
+     source.theoretical_dense_cells===expectedDense,
+     "Chapter 4 dense-table mismatch "+context);
+   requireEvidence(Number.isSafeInteger(source.sparse_storage_records)&&
+     source.sparse_storage_records>0&&source.sparse_storage_records<=expectedDense,
+     "Chapter 4 invalid sparse records "+context);
+   for(const name of ["unseen_context_rate_val","unseen_context_rate_test"]){
+    const n=source[name];
+    requireEvidence(typeof n==="number"&&Number.isFinite(n)&&n>=0&&n<=1,
+      "Chapter 4 invalid unseen rate "+context+"/"+name);
+   }
+   requireEvidence(Number.isSafeInteger(source.eval_tokens)&&source.eval_tokens>0,
+     "Chapter 4 invalid evaluation token count "+context);
+   if(evaluationTokens===null)evaluationTokens=source.eval_tokens;
+   requireEvidence(source.eval_tokens===evaluationTokens,
+     "Chapter 4 unequal test token counts "+lang);
+   orders.push({
+    k,
+    selected_alpha:source.alpha_from_validation,
+    training_loss:source.train_nll,
+    validation_loss:source.val_nll,
+    test_loss:source.test_nll,
+    unseen_validation_rate:source.unseen_context_rate_val,
+    unseen_test_rate:source.unseen_context_rate_test,
+    dense_cells:source.theoretical_dense_cells,
+    sparse_records:source.sparse_storage_records
+   });
+  }
+  datasets[lang]={context_vocabulary:contextVocabulary,
+    output_vocabulary:outputVocabulary,orders};
+ }
+ return {
+  schema:"wakeel-v022-frozen-context-orders/v1",
+  chapter_id:"CH-4",
+  status:"approved-source-metrics-not-independent-review",
+  source_path:sourcePath,
+  source_sha256:digest,
+  datasets
+ };
+}
