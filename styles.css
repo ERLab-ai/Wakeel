@@ -86,3 +86,13 @@
 .smoothing-field input:focus-visible,.smoothing-field select:focus-visible{outline:3px solid #9b6bdd;outline-offset:2px}
 .smoothing-output{background:#eaf3f8;padding:12px 14px;border-radius:9px;font-weight:750;font-size:13px;overflow-wrap:anywhere}
 @media(max-width:520px){.smoothing-controls{grid-template-columns:1fr}.smoothing-lab{margin:12px;padding:12px}}
+
+/* Chapter 4: read-only context-order evidence and a separate arithmetic exercise. */
+.context-evidence .evidence-scroll{overscroll-behavior-inline:contain}
+.context-evidence .evidence-table{min-width:880px}
+.context-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.context-lab h4{margin:0 0 8px;font-size:16px}
+.context-lab .evidence-note{margin:10px 0}
+.context-lab .smoothing-controls{margin-block:16px}
+.context-output{font-variant-numeric:tabular-nums}
+@media(max-width:520px){.context-lab{margin:12px;padding:12px}}
