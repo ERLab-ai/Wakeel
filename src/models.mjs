@@ -123,3 +123,16 @@ export function toyScalarEmbeddingUpdate(initial,target,learningRate,steps){
   frozen_loss:loss(initial)
  };
 }
+
+/**
+ * Bounded scalar recurrence with zero intervening input. No RNN training,
+ * classifier, or empirical recall probability is inferred from its state.
+ */
+export function toyMemoryRetention(initial,retention,delay){
+ if(![-1,1].includes(initial))throw new RangeError("Initial state must be -1 or 1");
+ if(![0,0.5,0.9,1].includes(retention))throw new RangeError("Unsupported retention factor");
+ if(!Number.isInteger(delay)||delay<0||delay>16)throw new RangeError("Delay must be 0–16");
+ const states=[initial];
+ for(let i=0;i<delay;i++)states.push(states.at(-1)*retention);
+ return {states,final_state:states.at(-1),magnitude:Math.abs(states.at(-1))};
+}
