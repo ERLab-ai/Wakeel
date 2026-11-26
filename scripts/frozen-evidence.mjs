@@ -281,3 +281,90 @@ export function projectFrozenChapter4Evidence(bytes,manifest){
   datasets
  };
 }
+
+/**
+ * Chapter 5 read-only metrics: a strict, SHA-pinned projection of the MLP
+ * representation experiment and the frozen-random-embedding ablation.
+ * No embedding vectors, weights, corpora or generated samples are exported.
+ */
+export function projectFrozenChapter5Evidence(bytes,manifest){
+ const sourcePath="content/chapter-05/results.json";
+ const sourceInput="content/chapter-03/examples.json";
+ requireEvidence(Buffer.isBuffer(bytes),"Chapter 5 source must be raw bytes");
+ requireEvidence(manifest?.source_version==="v0.21.3","Chapter 5 wrong source version");
+ const expected=manifest?.files?.[sourcePath];
+ requireEvidence(typeof expected==="string"&&/^[a-f0-9]{64}$/.test(expected),
+  "Chapter 5 missing source SHA-256");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(digest===expected,"Chapter 5 SHA-256 mismatch");
+ let raw;
+ try{raw=JSON.parse(bytes.toString("utf8"));}
+ catch{throw new Error("Frozen Chapter 5 evidence rejected: invalid JSON");}
+ requireEvidence(raw?.simulator_version==="simulate_chapter5-1.0" &&
+  raw.input_hash===manifest.files?.[sourceInput],
+  "Chapter 5 simulator/input provenance mismatch");
+ const datasets={};
+ const checkpoints=[1,10,50,100,200,300];
+ const lossOk=(v)=>typeof v==="number"&&Number.isFinite(v)&&v>0&&v<30;
+ for(const lang of LANGUAGES){
+  const data=raw.languages?.[lang];
+  requireEvidence(data&&typeof data==="object","Chapter 5 missing language "+lang);
+  const {architecture:arch,vocab,params,losses,training_curve:curve,
+   frozen_embedding_ablation:frozen,val_seen_unseen_split:split,units}=data;
+  requireEvidence(arch?.context_k===2 && arch.embedding_dim===8 &&
+   arch.hidden===32 && arch.activation==="tanh" &&
+   arch.output_excludes_start===true &&
+   Number.isSafeInteger(vocab?.context)&&vocab.context>=2&&vocab.context<=64&&
+   vocab.output===vocab.context-1,
+   "Chapter 5 unexpected architecture "+lang);
+  const embedded=vocab.context*arch.embedding_dim;
+  const hidden=(arch.context_k*arch.embedding_dim+1)*arch.hidden;
+  const output=(arch.hidden+1)*vocab.output;
+  const total=embedded+hidden+output;
+  requireEvidence(params?.embedding===embedded&&
+   params.hidden_layer===hidden&&params.output_layer===output&&
+   params.total_declared===total&&frozen?.trainable===false&&
+   frozen.trainable_params===total-embedded,
+   "Chapter 5 parameter accounting mismatch "+lang);
+  requireEvidence(lossOk(losses?.train_final)&&lossOk(losses?.val_nll)&&lossOk(losses?.test_nll)&&
+   lossOk(frozen.train_nll)&&lossOk(frozen.val_nll)&&lossOk(frozen.test_nll),
+   "Chapter 5 invalid learned/frozen loss "+lang);
+  requireEvidence(Array.isArray(curve)&&curve.length===checkpoints.length &&
+   curve.every((p,i)=>p?.epoch===checkpoints[i]&&lossOk(p.train_nll))&&
+   Math.abs(curve.at(-1).train_nll-losses.train_final)<1e-8,
+   "Chapter 5 training curve/final loss mismatch "+lang);
+  requireEvidence(Number.isSafeInteger(units?.val)&&units.val>0 &&
+   Number.isSafeInteger(split?.seen_count)&&split.seen_count>0 &&
+   Number.isSafeInteger(split?.unseen_count)&&split.unseen_count>0 &&
+   split.seen_count+split.unseen_count===units.val &&
+   lossOk(split.seen_nll)&&lossOk(split.unseen_nll),
+   "Chapter 5 seen/unseen validation split mismatch "+lang);
+  const weighted=(split.seen_nll*split.seen_count+
+    split.unseen_nll*split.unseen_count)/units.val;
+  requireEvidence(Math.abs(weighted-losses.val_nll)<=0.0002,
+   "Chapter 5 weighted validation loss mismatch "+lang);
+  datasets[lang]={
+   architecture:{context_vocabulary:vocab.context,output_vocabulary:vocab.output,
+    context_order:arch.context_k,embedding_dim:arch.embedding_dim,hidden:arch.hidden},
+   parameters:{total,embedding:embedded,hidden,output,
+    trainable_frozen_embeddings:total-embedded},
+   learned:{train_loss:losses.train_final,validation_loss:losses.val_nll,
+    test_loss:losses.test_nll},
+   frozen:{train_loss:frozen.train_nll,validation_loss:frozen.val_nll,
+    test_loss:frozen.test_nll},
+   validation_contexts:{
+    seen:{count:split.seen_count,loss:split.seen_nll},
+    unseen:{count:split.unseen_count,loss:split.unseen_nll}
+   },
+   training_curve:curve.map(x=>({epoch:x.epoch,loss:x.train_nll}))
+  };
+ }
+ return {
+  schema:"wakeel-v022-frozen-embedding-ablation/v1",
+  chapter_id:"CH-5",
+  status:"approved-source-metrics-not-independent-review",
+  source_path:sourcePath,
+  source_sha256:digest,
+  datasets
+ };
+}

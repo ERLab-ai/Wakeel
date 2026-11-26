@@ -93,3 +93,33 @@ export function denseContextTableCells(contextVocabulary,outputVocabulary,order)
   }
   return contextVocabulary**order*outputVocabulary;
 }
+
+/**
+ * One-dimensional quadratic-loss demonstration of a trainable parameter
+ * versus a frozen one. NOT the Chapter 5 embedding MLP or its training data.
+ * All arithmetic is bounded, synchronous and deterministic.
+ */
+export function toyScalarEmbeddingUpdate(initial,target,learningRate,steps){
+ if(typeof initial!=="number"||!Number.isFinite(initial)||initial< -2||initial>2 ||
+    typeof target!=="number"||!Number.isFinite(target)||target< -2||target>2){
+  throw new RangeError("Scalar parameters must be finite numbers in [-2, 2]");
+ }
+ if(![0,0.25,0.5,1].includes(learningRate)){
+  throw new RangeError("Learning rate must be one of 0, 0.25, 0.5, 1");
+ }
+ if(!Number.isInteger(steps)||steps<0||steps>20){
+  throw new RangeError("Steps must be an integer from 0 to 20");
+ }
+ let trainable=initial;
+ for(let i=0;i<steps;i++){
+  trainable-=learningRate*(trainable-target);
+ }
+ const loss=(x)=>0.5*(x-target)**2;
+ return {
+  initial_loss:loss(initial),
+  learned_value:trainable,
+  learned_loss:loss(trainable),
+  frozen_value:initial,
+  frozen_loss:loss(initial)
+ };
+}
