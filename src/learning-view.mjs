@@ -26,7 +26,7 @@ const labels={
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
   memoryTitle:"الفصل السادس — الذاكرة المتكررة والتعميم على الأطوال",
   memoryIntro:"مهمة استرجاع الحرف الأول بعد حشو عشوائي ثم علامة السؤال. القياس بعد استهلاك علامة السؤال؛ الخسارة على موضع الإجابة فقط.",
-  memoryProtocol:"طول ثابت: تدريب مستقل لكل تأخير ولكل بذرة (120 تسلسلاً لكل فئة). مزيج الأطوال: نموذج واحد لكل بذرة (60 لكل فئة لكل طول من 2،4،5،6،7،8). الاختبار عند كل تأخير: 40 مثالاً لكل فئة؛ البذور 42،43،44. كلاهما 300 عصر ومعدل تعلم 0.3. التأخير 16 محجوز في تجربة المزيج فقط.",
+  memoryProtocol:"طول ثابت: تدريب مستقل لكل تأخير ولكل بذرة (120 تسلسلاً لكل فئة). مزيج الأطوال: نموذج واحد لكل بذرة (60 لكل فئة لكل طول من 2،4،5،6،7،8). الاختبار عند كل تأخير: 40 مثالاً لكل فئة؛ البذور 42،43،44. كلاهما 300 عصر ومعدل تعلم 0.3. التأخير 16 محجوز في تجربة المزيج فقط. لكل نموذج ثابت 240 تسلسلاً تدريبياً، ولكل نموذج مزيج 720؛ لذلك لا تعزل المقارنة أثر تنوع الأطوال عن حجم بيانات التدريب.",
   memoryDelay:"طول الحشو",memoryFixed:"تدريب بطول ثابت",memoryMixed:"تدريب بمزيج أطوال",
   memoryDomain:"مجال تجربة المزيج",memoryInside:"ضمن أطوال التدريب",memoryOutside:"طول محجوز",
   memoryAccuracy:"الدقة الثنائية (متوسط 3 بذور)",memorySeedAccuracy:"الدقة الثنائية",memoryNll:"خسارة الإجابة على الاختبار (NLL)",
@@ -121,7 +121,7 @@ const labels={
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
   memoryTitle:"Chapter 6 — recurrent memory and length generalization",
   memoryIntro:"Retrieve the first character after random filler and a question mark. Evaluation consumes the question mark; loss is computed at the answer position only.",
-  memoryProtocol:"Fixed length: a separately trained model for each delay and seed (120 sequences per class). Mixed lengths: one model per seed (60 per class per training delay 2,4,5,6,7,8). Test at each delay: 40 examples per class; seeds 42,43,44. Both use 300 epochs and learning rate 0.3. Delay 16 is held out only in mixed-length training.",
+  memoryProtocol:"Fixed length: a separately trained model for each delay and seed (120 sequences per class). Mixed lengths: one model per seed (60 per class per training delay 2,4,5,6,7,8). Test at each delay: 40 examples per class; seeds 42,43,44. Both use 300 epochs and learning rate 0.3. Delay 16 is held out only in mixed-length training. Each fixed-delay model sees 240 training sequences, each mixed model 720; the comparison does not isolate length diversity from training-set size.",
   memoryDelay:"Filler length",memoryFixed:"Fixed-length training",memoryMixed:"Mixed-length training",
   memoryDomain:"Mixed-length domain",memoryInside:"Training length",memoryOutside:"Held-out length",
   memoryAccuracy:"Binary accuracy (mean of 3 seeds)",memorySeedAccuracy:"Binary accuracy",memoryNll:"Test answer NLL",
@@ -688,7 +688,7 @@ function renderJourney(){
   };
   const addRow=(body,first,values)=>{
    const row=el("tr"),head=el("th","",String(first));head.scope="row";row.append(head);
-   for(const value of values){const td=el("td","evidence-number",String(value));td.dir="ltr";row.append(td);}
+   for(const value of values){const numeric=/^[0-9,%.−-]+$/.test(String(value));const td=el("td",numeric?"evidence-number":"",String(value));td.dir=numeric?"ltr":(language==="ar"?"rtl":"ltr");row.append(td);}
    body.append(row);
   };
   const percent=v=>(v*100).toFixed(1)+"%";
