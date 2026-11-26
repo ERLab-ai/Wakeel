@@ -106,3 +106,16 @@
 .embedding-lab .smoothing-controls{margin-block:16px}
 .embedding-output{font-variant-numeric:tabular-nums;line-height:1.9}
 @media(max-width:520px){.embedding-lab{margin:12px;padding:12px}}
+
+/* Chapter 6: distinct protocols and bounded scalar state trace. */
+.memory-evidence .evidence-scroll{overscroll-behavior-inline:contain}
+.memory-evidence .memory-accuracy{min-width:560px}
+.memory-evidence .memory-seeds{min-width:720px}
+.memory-evidence .memory-trace{min-width:240px}
+.memory-drill,.memory-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.memory-drill h4,.memory-lab h4{margin:0 0 12px;font-size:16px}
+.memory-drill .evidence-note,.memory-lab .evidence-note{margin:12px 0}
+.memory-drill>.smoothing-field{max-width:200px}
+.memory-lab .evidence-scroll,.memory-drill .evidence-scroll{margin:12px 0}
+.memory-output{font-variant-numeric:tabular-nums}
+@media(max-width:520px){.memory-drill,.memory-lab{margin:12px;padding:12px}}
