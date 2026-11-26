@@ -1,4 +1,4 @@
-import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,22 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  memoryTitle:"الفصل السادس — الذاكرة المتكررة والتعميم على الأطوال",
+  memoryIntro:"مهمة استرجاع الحرف الأول بعد حشو عشوائي ثم علامة السؤال. القياس بعد استهلاك علامة السؤال؛ الخسارة على موضع الإجابة فقط.",
+  memoryProtocol:"طول ثابت: تدريب مستقل لكل تأخير ولكل بذرة (120 تسلسلاً لكل فئة). مزيج الأطوال: نموذج واحد لكل بذرة (60 لكل فئة لكل طول من 2،4،5،6،7،8). الاختبار عند كل تأخير: 40 مثالاً لكل فئة؛ البذور 42،43،44. كلاهما 300 عصر ومعدل تعلم 0.3. التأخير 16 محجوز في تجربة المزيج فقط. لكل نموذج ثابت 240 تسلسلاً تدريبياً، ولكل نموذج مزيج 720؛ لذلك لا تعزل المقارنة أثر تنوع الأطوال عن حجم بيانات التدريب.",
+  memoryDelay:"طول الحشو",memoryFixed:"تدريب بطول ثابت",memoryMixed:"تدريب بمزيج أطوال",
+  memoryDomain:"مجال تجربة المزيج",memoryInside:"ضمن أطوال التدريب",memoryOutside:"طول محجوز",
+  memoryAccuracy:"الدقة الثنائية (متوسط 3 بذور)",memorySeedAccuracy:"الدقة الثنائية",memoryNll:"خسارة الإجابة على الاختبار (NLL)",
+  memoryUntrained:"خط الأساس غير المدرّب (ثنائي)",memoryOracle:"مرجع Oracle",
+  memorySeeds:"تفصيل النتائج حسب البذرة",memorySeed:"البذرة",memoryCorpus:"RNN على رسائل الاجتماع (متوسط 3 بذور)",
+  memoryValidation:"خسارة التحقق",memoryTest:"خسارة الاختبار",memoryParameters:"المعلمات",
+  memoryCaveat:"المقارنة بين بروتوكولي تدريب مختلفين، لا قياس ذاكرة نموذج واحد عبر الأطوال الثابتة. نجحت بذرتان من ثلاث في تجربة المزيج عند 16، وفشلت الثالثة. هذا لا يثبت حد ذاكرة عاماً أو تفوقاً معمارياً، ولم تُختبر أطوال أكبر من 16.",
+  memoryLabTitle:"تمرين مستقل: أثر اضمحلال حالة عددية",
+  memoryLabIntro:"نموذج حسابي مبسط بلا تدريب أو حشو مؤثر أو مصنّف: h(t+1)=ρh(t). غيّر الحالة الأولية ومعامل الاحتفاظ وعدد الخطوات.",
+  memoryInitial:"الحالة الأولية",memoryRetention:"معامل الاحتفاظ ρ",memorySteps:"عدد الخطوات",
+  memoryFinal:"الحالة النهائية",memoryMagnitude:"مقدار الحالة المطلق",
+  memoryTrace:"مسار الحالة",memoryStep:"الخطوة",memoryState:"الحالة",
+  memoryLabLimit:"مقدار الحالة ليس احتمال استرجاع ولا دقة RNN. حتى مقدار صغير غير صفري قد يحتفظ بإشارته في الحساب المثالي. لا تمثل هذه المعادلة الشبكة المتعلمة في التجربة الأصلية.",
   embeddingTitle:"الفصل الخامس — التمثيلات المتعلمة وعزل التضمينات",
   embeddingIntro:"نتائج أصلية من المصدر المجمد: نموذج MLP بتضمينات قابلة للتعلم، ونفس التجربة بتضمينات عشوائية مجمدة. لا تدريب جديد في المتصفح.",
   embeddingModel:"النموذج",embeddingValidation:"خسارة التحقق",embeddingTest:"خسارة الاختبار",
@@ -103,6 +119,22 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  memoryTitle:"Chapter 6 — recurrent memory and length generalization",
+  memoryIntro:"Retrieve the first character after random filler and a question mark. Evaluation consumes the question mark; loss is computed at the answer position only.",
+  memoryProtocol:"Fixed length: a separately trained model for each delay and seed (120 sequences per class). Mixed lengths: one model per seed (60 per class per training delay 2,4,5,6,7,8). Test at each delay: 40 examples per class; seeds 42,43,44. Both use 300 epochs and learning rate 0.3. Delay 16 is held out only in mixed-length training. Each fixed-delay model sees 240 training sequences, each mixed model 720; the comparison does not isolate length diversity from training-set size.",
+  memoryDelay:"Filler length",memoryFixed:"Fixed-length training",memoryMixed:"Mixed-length training",
+  memoryDomain:"Mixed-length domain",memoryInside:"Training length",memoryOutside:"Held-out length",
+  memoryAccuracy:"Binary accuracy (mean of 3 seeds)",memorySeedAccuracy:"Binary accuracy",memoryNll:"Test answer NLL",
+  memoryUntrained:"Untrained binary baseline",memoryOracle:"Oracle reference",
+  memorySeeds:"Per-seed results",memorySeed:"Seed",memoryCorpus:"Meeting-message RNN (mean of 3 seeds)",
+  memoryValidation:"Validation loss",memoryTest:"Test loss",memoryParameters:"Parameters",
+  memoryCaveat:"These are different training protocols, not a single model measured across fixed lengths. Two of three mixed-length seeds succeed at delay 16; the third fails. This is not a universal memory limit or architectural ranking. Delays beyond 16 were not tested.",
+  memoryLabTitle:"Separate exercise: decay of a scalar state",
+  memoryLabIntro:"A simplified calculation without training, interfering filler inputs or a classifier: h(t+1)=ρh(t). Vary the initial state, retention factor and number of steps.",
+  memoryInitial:"Initial state",memoryRetention:"Retention factor ρ",memorySteps:"Steps",
+  memoryFinal:"Final state",memoryMagnitude:"Absolute state magnitude",
+  memoryTrace:"State trace",memoryStep:"Step",memoryState:"State",
+  memoryLabLimit:"State magnitude is not a recall probability or RNN accuracy. Even a small nonzero state can retain its sign in ideal arithmetic. This recurrence is not the trained network in the frozen experiment.",
   embeddingTitle:"Chapter 5 — learned representations and frozen-embedding ablation",
   embeddingIntro:"Original frozen-source results: an MLP with trainable embeddings versus the same setup with frozen random embeddings. No browser training run.",
   embeddingModel:"Model",embeddingValidation:"Validation loss",embeddingTest:"Test loss",
@@ -633,6 +665,88 @@ function renderJourney(){
   details.addEventListener("toggle",()=>{
    expandedEvidenceChapter=details.open?chapter.id:"";
   });
+  area.append(details);
+ }
+ // Chapter 6: compare distinct frozen protocols, then isolate a scalar recurrence.
+ if(evidence?.schema==="wakeel-v022-frozen-recurrent-memory/v1"&&
+    evidence.chapter_id===chapter.id&&evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay memory-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.memoryTitle),
+   el("p","evidence-note",d.memoryIntro),el("p","evidence-note",d.memoryProtocol));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const code=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  code.dir="ltr";provenance.append(code);details.append(provenance);
+  const tableFor=(caption,headings,parent,className="")=>{
+   const scroll=el("div","evidence-scroll"),table=el("table","evidence-table "+className);
+   table.append(el("caption","",caption));
+   const head=el("thead"),row=el("tr");
+   for(const label of headings){const th=el("th","",label);th.scope="col";row.append(th);}
+   head.append(row);table.append(head);
+   const body=el("tbody");table.append(body);scroll.append(table);parent.append(scroll);
+   return body;
+  };
+  const addRow=(body,first,values)=>{
+   const row=el("tr"),head=el("th","",String(first));head.scope="row";row.append(head);
+   for(const value of values){const numeric=/^[0-9,%.−-]+$/.test(String(value));const td=el("td",numeric?"evidence-number":"",String(value));td.dir=numeric?"ltr":(language==="ar"?"rtl":"ltr");row.append(td);}
+   body.append(row);
+  };
+  const percent=v=>(v*100).toFixed(1)+"%";
+  const corpus=evidence.languages[language];
+  const corpusTable=tableFor(d.memoryCorpus,[d.memoryParameters,d.memoryValidation,d.memoryTest],details,"memory-corpus");
+  addRow(corpusTable,corpus.parameters.toLocaleString("en-US"),
+   [corpus.validation_loss.toFixed(4),corpus.test_loss.toFixed(4)]);
+  const scores=tableFor(d.memoryAccuracy,
+   [d.memoryDelay,d.memoryFixed,d.memoryMixed,d.memoryDomain],details,"memory-accuracy");
+  for(const row of evidence.rows){
+   addRow(scores,row.delay,[percent(row.fixed_accuracy),percent(row.mixed_accuracy),
+    row.mixed_in_domain?d.memoryInside:d.memoryOutside]);
+  }
+  const selectField=(parent,cls,label,values,initial)=>{
+   const field=el("label","smoothing-field"),select=el("select",cls);
+   field.append(el("span","",label));
+   for(const value of values){const option=el("option","",String(value));option.value=String(value);select.append(option);}
+   select.value=String(initial);field.append(select);parent.append(field);return select;
+  };
+  const drill=el("section","memory-drill");
+  drill.append(el("h4","",d.memorySeeds));
+  const delaySelect=selectField(drill,"memory-delay",d.memoryDelay,evidence.rows.map(x=>x.delay),16);
+  const seedBody=tableFor(d.memorySeeds,[d.memorySeed,d.memoryFixed+" · "+d.memorySeedAccuracy,
+   d.memoryMixed+" · "+d.memorySeedAccuracy,d.memoryFixed+" · "+d.memoryNll,
+   d.memoryMixed+" · "+d.memoryNll],drill,"memory-seeds");
+  const stats=el("p","evidence-note memory-stats");stats.setAttribute("role","status");
+  const updateDetail=()=>{
+   const row=evidence.rows.find(x=>x.delay===Number(delaySelect.value));
+   if(!row)return;
+   seedBody.replaceChildren();
+   for(const seed of row.seeds)addRow(seedBody,seed.seed,[percent(seed.fixed_accuracy),
+    percent(seed.mixed_accuracy),seed.fixed_nll.toFixed(4),seed.mixed_nll.toFixed(4)]);
+   stats.textContent=(row.mixed_in_domain?d.memoryInside:d.memoryOutside)+" · "+
+    d.memoryNll+": "+d.memoryFixed+" "+row.fixed_nll.toFixed(4)+" / "+
+    d.memoryMixed+" "+row.mixed_nll.toFixed(4)+" · "+
+    d.memoryUntrained+" "+percent(row.untrained_accuracy)+" · "+d.memoryOracle+" "+percent(row.oracle_accuracy);
+  };
+  delaySelect.addEventListener("change",updateDetail);updateDetail();
+  drill.append(stats);details.append(drill,el("p","evidence-note",d.memoryCaveat));
+  const lab=el("section","memory-lab");
+  lab.append(el("h4","",d.memoryLabTitle),el("p","evidence-note",d.memoryLabIntro));
+  const controls=el("div","smoothing-controls");
+  const initial=selectField(controls,"memory-initial",d.memoryInitial,[-1,1],1);
+  const retention=selectField(controls,"memory-retention",d.memoryRetention,[0,0.5,0.9,1],0.9);
+  const steps=selectField(controls,"memory-steps",d.memorySteps,[0,2,4,5,6,7,8,16],4);
+  lab.append(controls);
+  const output=el("p","smoothing-output memory-output");output.setAttribute("role","status");
+  lab.append(output);
+  const trace=tableFor(d.memoryTrace,[d.memoryStep,d.memoryState],lab,"memory-trace");
+  const updateLab=()=>{
+   const result=toyMemoryRetention(Number(initial.value),Number(retention.value),Number(steps.value));
+   output.textContent=d.memoryFinal+": "+result.final_state.toFixed(6)+" · "+d.memoryMagnitude+": "+result.magnitude.toFixed(6);
+   trace.replaceChildren();
+   result.states.forEach((v,i)=>addRow(trace,i,[v.toFixed(6)]));
+  };
+  for(const select of [initial,retention,steps])select.addEventListener("change",updateLab);
+  updateLab();lab.append(el("p","evidence-note",d.memoryLabLimit));details.append(lab);
+  details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
   area.append(details);
  }
  const foot=append(el("div","learning-source"),el("span","",d.source+": "),el("span","",d.sourceInfo));

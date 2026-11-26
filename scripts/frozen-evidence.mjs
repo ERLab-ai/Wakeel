@@ -368,3 +368,88 @@ export function projectFrozenChapter5Evidence(bytes,manifest){
   datasets
  };
 }
+
+/**
+ * Chapter 6: distinguish separately trained fixed-delay models from mixed-delay
+ * training and genuinely held-out delay 16. Project aggregate measurements only.
+ */
+export function projectFrozenChapter6Evidence(bytes,manifest){
+ const sourcePath="content/chapter-06/results.json";
+ const inputPath="content/chapter-03/examples.json";
+ requireEvidence(Buffer.isBuffer(bytes),"Chapter 6 source must be raw bytes");
+ requireEvidence(manifest?.source_version==="v0.21.3","Chapter 6 wrong source version");
+ const expected=manifest?.files?.[sourcePath];
+ requireEvidence(typeof expected==="string"&&/^[a-f0-9]{64}$/.test(expected),"Chapter 6 missing source SHA-256");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(digest===expected,"Chapter 6 SHA-256 mismatch");
+ let raw;
+ try{raw=JSON.parse(bytes.toString("utf8"));}
+ catch{throw new Error("Frozen Chapter 6 evidence rejected: invalid JSON");}
+ requireEvidence(raw?.simulator_version==="simulate_chapter6-3.2" &&
+   /^[a-f0-9]{64}$/.test(manifest.files?.[inputPath]||"") &&
+   raw.input_hash===manifest.files[inputPath] &&
+   raw.provenance?.input_hash===raw.input_hash &&
+   raw.provenance?.output_excludes_start===true &&
+   raw.provenance?.vocab_source==="train_only","Chapter 6 simulator/input provenance mismatch");
+ const delays=[2,4,5,6,7,8,16],seeds=[42,43,44];
+ const fixed=raw.memory_probe,mixed=raw.mixed_length_model;
+ const same=(a,b)=>Array.isArray(a)&&a.length===b.length&&a.every((v,i)=>v===b[i]);
+ const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+ const acc=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<=1;
+ const nll=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<30;
+ const near=(a,b,tolerance)=>Number.isFinite(a)&&Math.abs(a-b)<=tolerance;
+ requireEvidence(same(fixed?.delays,delays)&&same(fixed?.seeds,seeds)&&
+   fixed.train_per_class===120&&fixed.test_per_class===40&&fixed.epochs===300&&fixed.lr===0.3&&
+   fixed.oracle_label_swap_control===0,"Chapter 6 fixed protocol mismatch");
+ requireEvidence(same(mixed?.train_delays,delays.slice(0,-1))&&same(mixed?.holdout_delays,[16])&&
+   same(mixed?.seeds,seeds)&&mixed.train_per_class_per_delay===60&&
+   mixed.test_per_class===40&&mixed.epochs===300&&mixed.lr===0.3,
+   "Chapter 6 mixed protocol mismatch");
+ const rows=delays.map(delay=>{
+  const key="delay_"+delay,f=fixed.delays_data?.[key],m=mixed.means?.[key];
+  requireEvidence(f?.n_test===80&&f.oracle_binary_through_eval_path===1&&
+    Array.isArray(f.per_seed_binary)&&f.per_seed_binary.length===3&&f.per_seed_binary.every(acc)&&
+    acc(f.accuracy_binary)&&near(f.accuracy_binary,mean(f.per_seed_binary),0.00051)&&
+    acc(f.untrained_baseline_binary)&&nll(f.test_answer_nll_mean),
+    "Chapter 6 fixed metrics mismatch "+key);
+  requireEvidence(m?.in_domain===(delay!==16)&&
+    Array.isArray(m.per_seed_binary)&&m.per_seed_binary.length===3&&m.per_seed_binary.every(acc)&&
+    acc(m.binary_mean)&&near(m.binary_mean,mean(m.per_seed_binary),0.00051)&&nll(m.test_nll_mean),
+    "Chapter 6 mixed metrics mismatch "+key);
+  const seedRows=seeds.map((seed,i)=>{
+   const value=mixed.per_seed?.[String(seed)]?.[key];
+   requireEvidence(value?.in_domain===m.in_domain&&value.binary===m.per_seed_binary[i]&&
+     nll(value.test_nll),"Chapter 6 mixed per-seed mismatch "+seed+"/"+key);
+   return {seed,fixed_accuracy:f.per_seed_binary[i],mixed_accuracy:value.binary,mixed_nll:value.test_nll};
+  });
+  requireEvidence(near(m.test_nll_mean,mean(seedRows.map(x=>x.mixed_nll)),0.00011),
+    "Chapter 6 mixed NLL mismatch "+key);
+  requireEvidence(Array.isArray(f.per_seed_test_nll)&&f.per_seed_test_nll.length===3&&
+    f.per_seed_test_nll.every(nll)&&near(f.test_answer_nll_mean,mean(f.per_seed_test_nll),0.00011),
+    "Chapter 6 fixed NLL mismatch "+key);
+  return {delay,mixed_in_domain:m.in_domain,test_per_class:40,
+    fixed_accuracy:f.accuracy_binary,mixed_accuracy:m.binary_mean,
+    fixed_nll:f.test_answer_nll_mean,mixed_nll:m.test_nll_mean,
+    untrained_accuracy:f.untrained_baseline_binary,oracle_accuracy:1,
+    seeds:seedRows.map((x,i)=>({...x,fixed_nll:f.per_seed_test_nll[i]}))};
+ });
+ const languages={};
+ for(const lang of LANGUAGES){
+  const data=raw.languages?.[lang]?.rnn;
+  requireEvidence(data&&Number.isSafeInteger(data.params)&&data.params>0,
+    "Chapter 6 missing corpus model "+lang);
+  const runs=seeds.map(seed=>{
+   const s=data.seeds?.[String(seed)];
+   requireEvidence(nll(s?.val_nll)&&nll(s?.test_nll),"Chapter 6 missing corpus seed "+lang+"/"+seed);
+   return {seed,validation_loss:s.val_nll,test_loss:s.test_nll};
+  });
+  requireEvidence(nll(data.mean_val)&&nll(data.mean_test)&&
+    near(data.mean_val,mean(runs.map(x=>x.validation_loss)),0.00011)&&
+    near(data.mean_test,mean(runs.map(x=>x.test_loss)),0.00011),
+    "Chapter 6 corpus means mismatch "+lang);
+  languages[lang]={parameters:data.params,validation_loss:data.mean_val,test_loss:data.mean_test};
+ }
+ return {schema:"wakeel-v022-frozen-recurrent-memory/v1",chapter_id:"CH-6",
+   status:"approved-source-metrics-not-independent-review",source_path:sourcePath,source_sha256:digest,
+   seeds,train_delays:delays.slice(0,-1),holdout_delays:[16],languages,rows};
+}
