@@ -96,3 +96,13 @@
 .context-lab .smoothing-controls{margin-block:16px}
 .context-output{font-variant-numeric:tabular-nums}
 @media(max-width:520px){.context-lab{margin:12px;padding:12px}}
+
+/* Chapter 5: frozen embedding evidence and separate scalar-gradient illustration. */
+.embedding-evidence .evidence-table{min-width:480px}
+.embedding-evidence .evidence-scroll{overscroll-behavior-inline:contain}
+.embedding-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.embedding-lab h4{font-size:16px;margin:0 0 8px}
+.embedding-lab .evidence-note{margin:10px 0}
+.embedding-lab .smoothing-controls{margin-block:16px}
+.embedding-output{font-variant-numeric:tabular-nums;line-height:1.9}
+@media(max-width:520px){.embedding-lab{margin:12px;padding:12px}}
