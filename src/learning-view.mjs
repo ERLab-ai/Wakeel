@@ -1,4 +1,4 @@
-import {smoothedTransition,denseContextTableCells} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,26 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  embeddingTitle:"الفصل الخامس — التمثيلات المتعلمة وعزل التضمينات",
+  embeddingIntro:"نتائج أصلية من المصدر المجمد: نموذج MLP بتضمينات قابلة للتعلم، ونفس التجربة بتضمينات عشوائية مجمدة. لا تدريب جديد في المتصفح.",
+  embeddingModel:"النموذج",embeddingValidation:"خسارة التحقق",embeddingTest:"خسارة الاختبار",
+  embeddingTrainable:"MLP — تضمينات قابلة للتعلم",embeddingFrozen:"MLP — تضمينات مجمدة عشوائياً",
+  embeddingTrigram:"Trigram بالعدّ (مرجع الفصل الرابع)",
+  embeddingTrigramSource:"مرجع Trigram المستقل من الفصل الرابع:",
+  embeddingTrainableParams:"المعلمات القابلة للتدريب",
+  embeddingParams:"تفصيل المعلمات: الإجمالي / التضمينات / المخفية / المخرجات",
+  embeddingContexts:"سياقات التحقق",embeddingSeen:"مرصودة في التدريب",embeddingUnseen:"غير مرصودة في التدريب",
+  embeddingCount:"عدد المواضع",embeddingLoss:"متوسط الخسارة",
+  embeddingCurve:"منحنى خسارة تدريب MLP بالتضمينات المتعلمة",
+  embeddingEpoch:"العصر",embeddingTrainLoss:"خسارة التدريب",
+  embeddingCaveat:"في هذه التجربة فقط كانت خسارة التحقق والاختبار في Trigram أقل من MLP. فرق النسختين المتعلمة والمجمدة لا يثبت أن الأبعاد اكتسبت معاني لغوية؛ ومجموعة الاختبار ليست اختبار تعميم مستقلاً.",
+  embeddingLabTitle:"جرّب فرق معامل قابل للتعلم ومعامل مجمد",
+  embeddingLabIntro:"تمرين مستقل على معامل عددي واحد وخسارة تربيعية. يقارن تحديث المعامل بالتدرج مقابل تثبيته؛ ليس تدريب MLP ولا تضمينات الفصل الأصلية.",
+  embeddingInitial:"قيمة المعامل الأولية",embeddingTarget:"القيمة المستهدفة",
+  embeddingRate:"معدل التعلم",embeddingSteps:"خطوات التحديث",
+  embeddingValue:"قيمة المعامل",embeddingSingleLoss:"خسارة المثال",
+  embeddingInvalid:"أدخل قيماً عددية بين −2 و2.",
+  embeddingDemoLimit:"هذا تمرين على خسارة مثال واحد. لا يجوز مقارنة أرقامه بخسائر التحقق والاختبار المرجعية أو استنتاج تعميم النموذج.",
   contextEvidenceTitle:"الفصل الرابع — طول السياق وندرة البيانات",
   contextEvidenceIntro:"نتائج النماذج من المصدر المجمد: خسائر التحقق والاختبار، والسياقات غير المرصودة، وحجم الجدول النظري مقارنة بعدد سجلات السياق–المحرف المخزنة.",
   contextOrder:"طول السياق (k)",contextValidation:"خسارة التحقق",
@@ -83,6 +103,26 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  embeddingTitle:"Chapter 5 — learned representations and frozen-embedding ablation",
+  embeddingIntro:"Original frozen-source results: an MLP with trainable embeddings versus the same setup with frozen random embeddings. No browser training run.",
+  embeddingModel:"Model",embeddingValidation:"Validation loss",embeddingTest:"Test loss",
+  embeddingTrainable:"MLP — trainable embeddings",embeddingFrozen:"MLP — frozen random embeddings",
+  embeddingTrigram:"Count Trigram (Chapter 4 reference)",
+  embeddingTrigramSource:"Separate Trigram source from Chapter 4:",
+  embeddingTrainableParams:"Trainable parameters",
+  embeddingParams:"Parameter accounting: total / embedding / hidden / output",
+  embeddingContexts:"Validation contexts",embeddingSeen:"Seen in training",embeddingUnseen:"Unseen in training",
+  embeddingCount:"Positions",embeddingLoss:"Mean loss",
+  embeddingCurve:"Learned-embedding MLP training loss curve",
+  embeddingEpoch:"Epoch",embeddingTrainLoss:"Training loss",
+  embeddingCaveat:"On this specific dataset, Count Trigram had lower validation/test loss than the MLP. The trainable–frozen difference does not prove linguistic meaning in embedding dimensions, and these test sets are not an independent generalization evaluation.",
+  embeddingLabTitle:"Try one trainable versus one frozen parameter",
+  embeddingLabIntro:"An independent scalar quadratic-loss exercise: a parameter changes through gradient updates or remains fixed. This is not the chapter's MLP or its embedding training.",
+  embeddingInitial:"Initial parameter",embeddingTarget:"Target value",
+  embeddingRate:"Learning rate",embeddingSteps:"Update steps",
+  embeddingValue:"Parameter value",embeddingSingleLoss:"Example loss",
+  embeddingInvalid:"Enter finite numbers between −2 and 2.",
+  embeddingDemoLimit:"This is the loss of one toy example. It is not comparable with frozen validation/test corpus losses and establishes no generalization result.",
   contextEvidenceTitle:"Chapter 4 — context length and data sparsity",
   contextEvidenceIntro:"Frozen source results for validation/test losses, unseen contexts, and theoretical dense-table size versus actually stored context–character records.",
   contextOrder:"Context order (k)",contextValidation:"Validation loss",
@@ -450,6 +490,145 @@ function renderJourney(){
   }
   update();
   lab.append(output,el("p","evidence-note",d.contextFormula));
+  details.append(lab);
+  details.addEventListener("toggle",()=>{
+   expandedEvidenceChapter=details.open?chapter.id:"";
+  });
+  area.append(details);
+ }
+ // Chapter 5 source-backed losses and a separate scalar training illustration.
+ if(evidence?.schema==="wakeel-v022-frozen-embedding-ablation/v1" &&
+    evidence.chapter_id===chapter.id &&
+    evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay embedding-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.embeddingTitle));
+  details.append(el("p","evidence-note",d.embeddingIntro));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const source=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  source.dir="ltr";provenance.append(source);details.append(provenance);
+  const current=evidence.datasets?.[language];
+  const baselineSource=catalog.evidence_replays?.["CH-4"];
+  const trigram=baselineSource?.schema==="wakeel-v022-frozen-context-orders/v1"?
+    baselineSource.datasets?.[language]?.orders?.find(x=>x.k===2):null;
+  if(trigram){
+   const prior=el("p","evidence-provenance",d.embeddingTrigramSource+" ");
+   const pinned=el("code","",baselineSource.source_path+" · SHA-256: "+baselineSource.source_sha256);
+   pinned.dir="ltr";prior.append(pinned);details.append(prior);
+  }
+  const table=el("table","evidence-table");
+  table.append(el("caption","",d.embeddingTitle));
+  const header=el("tr");
+  for(const heading of [d.embeddingModel,d.embeddingValidation,d.embeddingTest,
+   d.embeddingTrainableParams]){
+   const th=el("th","",heading);th.scope="col";header.append(th);
+  }
+  const thead=el("thead");thead.append(header);table.append(thead);
+  const tbody=el("tbody");
+  for(const [name,values,params] of [
+   [d.embeddingTrainable,current.learned,current.parameters.total],
+   [d.embeddingFrozen,current.frozen,current.parameters.trainable_frozen_embeddings],
+   ...(trigram?[[d.embeddingTrigram,{
+     validation_loss:trigram.validation_loss,test_loss:trigram.test_loss},null]]:[])
+  ]){
+   const row=el("tr"),head=el("th","",name);head.scope="row";row.append(head);
+   for(const value of [values.validation_loss.toFixed(4),values.test_loss.toFixed(4),
+    params===null?"—":params.toLocaleString("en-US")]){
+    const td=el("td","evidence-number",value);td.dir="ltr";row.append(td);
+   }
+   tbody.append(row);
+  }
+  table.append(tbody);
+  const scroll=el("div","evidence-scroll");scroll.append(table);details.append(scroll);
+  const p=current.parameters;
+  details.append(el("p","evidence-note",
+   d.embeddingParams+": "+[p.total,p.embedding,p.hidden,p.output].join(" / ")));
+  const splitTable=el("table","evidence-table");
+  splitTable.append(el("caption","",d.embeddingContexts));
+  const splitHead=el("tr");
+  for(const heading of [d.embeddingContexts,d.embeddingCount,d.embeddingLoss]){
+   const th=el("th","",heading);th.scope="col";splitHead.append(th);
+  }
+  const splitThead=el("thead");splitThead.append(splitHead);splitTable.append(splitThead);
+  const splitBody=el("tbody");
+  for(const [name,values] of [[d.embeddingSeen,current.validation_contexts.seen],
+   [d.embeddingUnseen,current.validation_contexts.unseen]]){
+   const row=el("tr"),head=el("th","",name);head.scope="row";row.append(head);
+   for(const value of [String(values.count),values.loss.toFixed(4)]){
+    const td=el("td","evidence-number",value);td.dir="ltr";row.append(td);
+   }
+   splitBody.append(row);
+  }
+  splitTable.append(splitBody);
+  const splitScroll=el("div","evidence-scroll");splitScroll.append(splitTable);
+  details.append(splitScroll);
+  const curveTable=el("table","evidence-table");
+  curveTable.append(el("caption","",d.embeddingCurve));
+  const curveHead=el("tr");
+  for(const heading of [d.embeddingEpoch,d.embeddingTrainLoss]){
+   const th=el("th","",heading);th.scope="col";curveHead.append(th);
+  }
+  const curveThead=el("thead");curveThead.append(curveHead);curveTable.append(curveThead);
+  const curveBody=el("tbody");
+  for(const point of current.training_curve){
+   const row=el("tr");
+   for(const value of [String(point.epoch),point.loss.toFixed(4)]){
+    const td=el("td","evidence-number",value);td.dir="ltr";row.append(td);
+   }
+   curveBody.append(row);
+  }
+  curveTable.append(curveBody);
+  const curveScroll=el("div","evidence-scroll");curveScroll.append(curveTable);
+  details.append(curveScroll,el("p","evidence-note",d.embeddingCaveat));
+  const lab=el("section","embedding-lab");
+  lab.append(el("h4","",d.embeddingLabTitle),el("p","evidence-note",d.embeddingLabIntro));
+  const controls=el("div","smoothing-controls");
+  const scalarInputs={};
+  for(const [key,label,defaultValue] of [
+   ["initial",d.embeddingInitial,"0"],["target",d.embeddingTarget,"1"]
+  ]){
+   const field=el("label","smoothing-field");
+   const input=el("input","embedding-"+key);
+   input.type="number";input.min="-2";input.max="2";input.step="0.1";
+   input.value=defaultValue;
+   field.append(el("span","",label),input);controls.append(field);scalarInputs[key]=input;
+  }
+  for(const [key,label,values,defaultValue] of [
+   ["rate",d.embeddingRate,[0,0.25,0.5,1],"0.5"],
+   ["steps",d.embeddingSteps,[0,1,2,5,10],"1"]
+  ]){
+   const field=el("label","smoothing-field"),select=el("select","embedding-"+key);
+   field.append(el("span","",label));
+   for(const value of values){
+    const option=el("option","",String(value));option.value=String(value);select.append(option);
+   }
+   select.value=defaultValue;field.append(select);controls.append(field);
+   scalarInputs[key]=select;
+  }
+  lab.append(controls);
+  const output=el("p","smoothing-output embedding-output");
+  output.setAttribute("role","status");output.setAttribute("aria-live","polite");
+  const update=()=>{
+   try{
+    for(const input of [scalarInputs.initial,scalarInputs.target]){
+     if(input.value.trim()===""||!input.checkValidity())throw new RangeError();
+    }
+    const x=toyScalarEmbeddingUpdate(
+     Number(scalarInputs.initial.value),Number(scalarInputs.target.value),
+     Number(scalarInputs.rate.value),Number(scalarInputs.steps.value));
+    output.textContent=
+     d.embeddingTrainable+": "+d.embeddingValue+" "+x.learned_value.toFixed(4)+
+     " · "+d.embeddingSingleLoss+" "+x.learned_loss.toFixed(4)+
+     " | "+d.embeddingFrozen+": "+d.embeddingValue+" "+x.frozen_value.toFixed(4)+
+     " · "+d.embeddingSingleLoss+" "+x.frozen_loss.toFixed(4);
+   }catch{
+    output.textContent=d.embeddingInvalid;
+   }
+  };
+  for(const input of Object.values(scalarInputs)){
+   input.addEventListener("input",update);input.addEventListener("change",update);
+  }
+  update();lab.append(output,el("p","evidence-note",d.embeddingDemoLimit));
   details.append(lab);
   details.addEventListener("toggle",()=>{
    expandedEvidenceChapter=details.open?chapter.id:"";
