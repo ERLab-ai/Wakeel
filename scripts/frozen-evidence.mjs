@@ -535,3 +535,106 @@ export function projectFrozenChapter7Evidence(bytes,manifest){
   status:"approved-source-metrics-not-independent-review",source_path:sourcePath,source_sha256:digest,
   seeds,retrieval,order,validation_sensitivity:validation};
 }
+
+/** Chapter 8: two separately pinned sources; final and confirmatory splits are never pooled. */
+export function projectFrozenChapter8Evidence(bytes,factorialBytes,manifest){
+ const basePath="content/chapter-08/results.json",factorialPath="content/chapter-08/factorial_isolation.json";
+ const read=(data,path)=>{
+  requireEvidence(Buffer.isBuffer(data)&&manifest?.source_version==="v0.21.3","Chapter 8 source/version mismatch");
+  const digest=createHash("sha256").update(data).digest("hex");
+  requireEvidence(/^[a-f0-9]{64}$/.test(manifest.files?.[path]||"")&&digest===manifest.files[path],"Chapter 8 SHA-256 mismatch "+path);
+  try{return {raw:JSON.parse(data.toString("utf8")),digest};}
+  catch{throw new Error("Chapter 8 invalid JSON "+path);}
+ };
+ const base=read(bytes,basePath),factorial=read(factorialBytes,factorialPath),r=base.raw,f=factorial.raw;
+ const seeds=[42,43,44],same=(a,b)=>Array.isArray(a)&&a.length===b.length&&a.every((v,i)=>v===b[i]);
+ const near=(a,b,tol=0.00011)=>typeof a==="number"&&Number.isFinite(a)&&Math.abs(a-b)<=tol;
+ const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+ const acc=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<=1;
+ const loss=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<30;
+ const p=r.protocol,g=r.gates,fp=f.protocol;
+ requireEvidence(r.simulator_version==="simulate_chapter8-1.2"&&f.simulator_version==="simulate_chapter8_factorial-1.2"&&
+  f.provenance?.ch8_results_sha256===base.digest,"Chapter 8 source linkage mismatch");
+ requireEvidence(p?.frozen_budget?.lr===0.01&&p.frozen_budget.epochs===1200&&same(p.seeds?.model_init,seeds)&&
+  p.seeds.data_generation===8102&&same(p.loop_lengths?.train_val_dev,[2,4,8])&&p.loop_lengths.reserved_ood===16&&
+  p.supervised_positions_per_loop===2&&p.structural_balance_classes===16&&p.vocabulary?.size===32&&
+  p.splits?.train===512&&p.splits.val===128&&p.splits.dev_holdout===128&&
+  p.splits.test_in_distribution===64&&p.splits.test_ood_length16===64&&
+  g?.["11_validation_selection"]?.holdout_used_for_selection===false&&g["11_validation_selection"].frozen_lr===0.01,
+  "Chapter 8 main protocol mismatch");
+ requireEvidence(fp?.inherited_frozen_budget?.lr===0.01&&fp.inherited_frozen_budget.epochs===1200&&
+  same(fp.inherited_frozen_budget.seeds,seeds)&&fp.inherited_frozen_budget.new_selection_performed===false&&
+  fp.confirmatory_sets?.data_generation_seed===9204&&fp.confirmatory_sets.family_overlap_with_v015_segments===0&&
+  fp.confirmatory_sets.sizes?.confirm_in===64&&fp.confirmatory_sets.sizes.confirm_ood_length16===64,
+  "Chapter 8 confirmation protocol mismatch");
+ const arch=["fixed_query_prefix_reader","causal_self_attention_1h","no_position","no_query_dependency","csa_learned_absolute_pe","local_only"];
+ const cells=["fixed_query_residual","state_query_residual","fixed_query_concat","state_query_concat"];
+ const checkMasks=(gate,names)=>{
+  for(const name of names){
+   const m=gate?.["1_causal_mask_exact"]?.[name];
+   requireEvidence(m?.future_weight_max===0&&typeof m.row_sum_max_abs_error==="number"&&
+    m.row_sum_max_abs_error>=0&&m.row_sum_max_abs_error<=1e-9,"Chapter 8 causal mask mismatch "+name);
+   for(const stage of ["fresh","trained_seed42"]){
+    requireEvidence(gate["2_future_suffix_invariance"]?.[stage]?.[name]===0&&
+     near(gate["3_prefix_vs_full"]?.[stage]?.[name],0,1e-9),"Chapter 8 prefix invariance mismatch "+name);
+   }
+  }
+ };
+ checkMasks(g,arch.filter(x=>x!=="local_only"));checkMasks(f.gates,cells);
+ requireEvidence(g["4_loss_target_alignment"]?.supervised_positions===1024&&
+  g["4_loss_target_alignment"].answer_never_input_at_query_position===true&&
+  g["6_counterfactual_pairs"]?.loops_checked===896&&
+  g["6_counterfactual_pairs"].value_flip_changes_only_A_answer===true&&
+  g["6_counterfactual_pairs"].query_order_swap_changes_positions_not_records===true,
+  "Chapter 8 target/counterfactual mismatch");
+ const overlap=g["7_dataset_exclusivity"]?.family_overlap_counts;
+ requireEvidence(overlap&&Object.keys(overlap).length===10&&Object.values(overlap).every(x=>x===0),"Chapter 8 family overlap");
+ const oracle=g["8_positive_oracle"];
+ requireEvidence(oracle?.val_binary_accuracy===1&&oracle.dev_holdout_binary_accuracy===1&&
+  oracle.test_in_binary_accuracy===1&&oracle.val_label_flip_binary_accuracy===0&&
+  g["9_no_memory_control"]?.oracle_binary===0.5,"Chapter 8 oracle mismatch");
+ for(const name of arch){
+  const a=g["5b_aggregated_gradient"]?.[name];
+  requireEvidence(same(a?.buckets_positions,[6,10])&&a.total===16&&near(a.worst_abs_error,0,1e-6),
+   "Chapter 8 aggregated gradient mismatch "+name);
+ }
+ const a=f.gates?.["5b_aggregated_gradient_state_concat"];
+ requireEvidence(same(a?.buckets_positions,[6,10])&&a.total===16&&near(a.worst_abs_error,0,1e-6),
+  "Chapter 8 factorial gradient mismatch");
+ const metrics=["binary_accuracy","full_vocab_accuracy","nll_full_vocab","nll_binary_normalized"];
+ const projectSplit=(entry,split,n)=>{
+  const runs=seeds.map(seed=>{
+   const row=entry?.["seed_"+seed]?.[split];
+   requireEvidence(row?.n_loops===n&&row.n_positions===2*n&&
+    acc(row.binary_accuracy)&&acc(row.full_vocab_accuracy)&&loss(row.nll_full_vocab)&&
+    loss(row.nll_binary_normalized)&&row.nll_full_vocab+0.00011>=row.nll_binary_normalized,
+    "Chapter 8 metric mismatch "+split+"/"+seed);
+   return Object.fromEntries(metrics.map(k=>[k,row[k]]));
+  });
+  const result={};
+  for(const metric of metrics){
+   const source=entry.mean_across_seeds?.[split+"_"+metric],values=runs.map(x=>x[metric]);
+   requireEvidence(Array.isArray(source?.per_seed)&&source.per_seed.length===3&&
+    source.per_seed.every((v,i)=>v===values[i])&&near(source.mean,mean(values))&&
+    typeof source.std==="number"&&Number.isFinite(source.std)&&source.std>=0,
+    "Chapter 8 mean mismatch "+split+"/"+metric);
+   result[metric]={mean:source.mean,per_seed:values};
+  }
+  return result;
+ };
+ const main=arch.map(model=>{
+  const dev=r.experiments?.dual_lookup?.[model],test=r.experiments?.final_test?.[model],params=dev?.seed_42?.params;
+  requireEvidence(Number.isSafeInteger(params)&&params>0&&seeds.every(seed=>dev["seed_"+seed]?.params===params),
+   "Chapter 8 parameter mismatch "+model);
+  return {model,params,validation:projectSplit(dev,"val",128),development:projectSplit(dev,"dev_holdout",128),
+   test_in:projectSplit(test,"test_in",64),test_ood:projectSplit(test,"test_ood_length16",64)};
+ });
+ const confirmation=cells.map((model,i)=>{
+  const e=f.experiments?.factorial_cells?.[model],params=[680,736,936,992][i];
+  requireEvidence(seeds.every(seed=>e?.["seed_"+seed]?.params===params),"Chapter 8 factorial parameter mismatch "+model);
+  return {model,params,confirm_in:projectSplit(e,"confirm_in",64),confirm_ood:projectSplit(e,"confirm_ood_length16",64)};
+ });
+ return {schema:"wakeel-v022-frozen-causal-dual-lookup/v1",chapter_id:"CH-8",
+  status:"approved-source-metrics-not-independent-review",source_path:basePath,source_sha256:base.digest,
+  confirmation_source_path:factorialPath,confirmation_source_sha256:factorial.digest,seeds,main,confirmation};
+}
