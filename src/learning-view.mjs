@@ -1,4 +1,4 @@
-import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention,toyAttentionOrder} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention,toyAttentionOrder,toyCausalPrefix} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,21 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  causalTitle:"الفصل الثامن — الانتباه الذاتي السببي والاسترجاع المزدوج",
+  causalIntro:"استرجاع قيمتين مستقلتين A وB من سجلات ذرية. هذه مهمة اختيار سجل، لا إثبات ربط مفتاح وقيمة منفصلين. النموذج رأس واحد وطبقة واحدة، وليس Transformer كاملاً. التدريب 512 حلقة، التحقق والتطويري 128 لكل منهما، والاختبار 64 لكل مقطع. طول الحشو 16 خارج أطوال التدريب 2،4،8.",
+  causalMain:"نتائج المصدر المجمد — اختر مقطع التقييم",
+  causalConfirm:"التجربة العاملية 2×2 — مجموعة تأكيدية جديدة",
+  causalSplit:"مقطع التقييم",causalVal:"التحقق (اختيار المعدل)",causalDev:"التطويري (للتقرير فقط)",
+  causalIn:"داخل التوزيع",causalOod:"طول الحشو المحجوز 16",causalModel:"النموذج",causalParams:"المعلمات",
+  causalBinary:"الدقة الثنائية",causalFull:"دقة كامل المفردة",causalNll:"NLL كامل المفردة",causalBinNll:"NLL ثنائي منمّط",
+  causalLimit:"الأرقام متوسط ثلاث بذور 42،43،44. القارئ الثابت والاستعلام المشتق يختلفان أيضاً في سلك الإخراج. أُعيد تشغيل الاختبار النهائي بعد تصحيح تجميع التدرجات وفق الميزانية المجمدة؛ ليس اختباراً لم يسبق الاطلاع عليه.",
+  causalConfirmLimit:"المجموعة التأكيدية الجديدة: 64 حلقة لكل مقطع، بذرة بيانات 9204، دون اختيار إعدادات جديد. أعداد المعلمات 680/736/936/992 غير متساوية؛ المقارنة العاملية اتجاهية ولا تعزل الأثر السببي لمصدر الاستعلام.",
+  causalLab:"مختبر مستقل — ثبات البادئة عند تغيير المستقبل",
+  causalLabIntro:"أربع قيم عددية، الاستعلام ثابت Q=1 عند الموضع 1 (الترقيم من صفر)، والمفتاح والقيمة يساويان العدد نفسه. غيّر القيمتين المستقبليتين وقارن القراءة بالقناع وبدونه؛ ليس تدريباً ولا إعادة تنفيذ للنموذج الأصلي.",
+  causalFuture1:"قيمة المستقبل في الموضع 2",causalFuture2:"قيمة المستقبل في الموضع 3",causalMask:"القناع السببي",causalOn:"مفعّل",causalOff:"غير مفعّل",
+  causalOutput:"مخرج القراءة",causalPrefix:"مخرج البادئة وحدها",causalFutureWeight:"مجموع أوزان المستقبل",
+  causalPosition:"الموضع",causalValue:"القيمة",causalWeight:"وزن الانتباه",
+  causalLabLimit:"عند تفعيل القناع تكون أوزان المستقبل صفراً ويتساوى المخرج مع البادئة. تعطيل القناع ضابط تعليمي مضاد؛ هذا المثال العددي لا يثبت صحة جميع تطبيقات الانتباه ولا يقيس دقة النموذج.",
   attentionTitle:"الفصل السابع — الاسترجاع وتمييز الترتيب",
   attentionIntro:"نتائج المصدر المجمد لقارئ أحادي الاستعلام، لا Transformer كامل. في الاسترجاع 100 مثال تدريب و30 تحقق و40 اختبار محجوز لكل فئة؛ في الترتيب 100/30/40 زوجاً متقابلاً. ثلاث بذور، 300 عصر، معدل تعلم 0.3. الاختبار المحجوز لا يستخدم للضبط. النتائج متوسط ثلاث بذور لنماذج مدربة عند كل تأخير، وليست اختبار أطوال جديدة لنموذج واحد. خسارة جدول الترتيب تخص الترتيب القياسي.",
   attentionRetrieval:"الاسترجاع — الاختبار المحجوز",attentionOrder:"تمييز الترتيب — الاختبار المحجوز",
@@ -137,6 +152,21 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  causalTitle:"Chapter 8 — causal self-attention and dual retrieval",
+  causalIntro:"Retrieve two independent values A and B from atomic records. This tests record selection, not separate key/value binding. One head, one layer, not a full Transformer. Training has 512 loops; validation and development each have 128; each test split has 64. Filler length 16 is outside training lengths 2,4,8.",
+  causalMain:"Frozen source results — select evaluation split",
+  causalConfirm:"2×2 factorial experiment — new confirmation set",
+  causalSplit:"Evaluation split",causalVal:"Validation (rate selection)",causalDev:"Development (report only)",
+  causalIn:"In-distribution",causalOod:"Reserved filler length 16",causalModel:"Model",causalParams:"Parameters",
+  causalBinary:"Binary accuracy",causalFull:"Full-vocabulary accuracy",causalNll:"Full-vocabulary NLL",causalBinNll:"Binary-normalized NLL",
+  causalLimit:"Means of seeds 42,43,44. Fixed and state-derived query readers also differ in output wiring. The final test was reread after the gradient-aggregation fix under the frozen budget; it is not a never-before-read test.",
+  causalConfirmLimit:"New confirmation sets: 64 loops per split, data seed 9204, no new settings selection. Parameter counts 680/736/936/992 differ; the factorial comparison is directional and does not isolate the causal effect of query source.",
+  causalLab:"Separate lab — prefix invariance under future changes",
+  causalLabIntro:"Four scalar values, fixed Q=1 at position 1 (zero-based), with each key and value equal to its scalar. Change the two future values and compare masked and unmasked reads. No training or reproduction of the original model.",
+  causalFuture1:"Future value at position 2",causalFuture2:"Future value at position 3",causalMask:"Causal mask",causalOn:"Enabled",causalOff:"Disabled",
+  causalOutput:"Reader output",causalPrefix:"Prefix-only output",causalFutureWeight:"Total future weight",
+  causalPosition:"Position",causalValue:"Value",causalWeight:"Attention weight",
+  causalLabLimit:"With masking enabled, future weights are zero and the output equals the prefix-only read. Disabling masking is a teaching counter-control; this scalar example does not establish correctness of all attention implementations or model accuracy.",
   attentionTitle:"Chapter 7 — retrieval and order discrimination",
   attentionIntro:"Frozen single-query reader results, not a full Transformer. Retrieval: 100 train, 30 validation, 40 holdout per class; order: 100/30/40 matched pairs. Three seeds, 300 epochs, learning rate 0.3. Holdout is not used for tuning. Results are means of three seeds trained at each delay, not unseen-length evaluation of one model. Order-table NLL refers to standard-order holdout.",
   attentionRetrieval:"Retrieval — holdout",attentionOrder:"Order discrimination — holdout",
@@ -854,6 +884,72 @@ function renderJourney(){
   };
   for(const field of [scale,bias,index,shift])field.addEventListener("change",update);
   update();lab.append(el("p","evidence-note",d.attentionLabLimit));details.append(lab);
+  details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
+  area.append(details);
+ }
+ // Chapter 8: main and independent confirmation data stay visibly separate.
+ if(evidence?.schema==="wakeel-v022-frozen-causal-dual-lookup/v1"&&
+    evidence.chapter_id===chapter.id&&evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay causal-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.causalTitle),el("p","evidence-note",d.causalIntro));
+  const provenance=(path,hash)=>{
+   const p=el("p","evidence-provenance",d.evidenceSource+" ");
+   const code=el("code","",path+" · SHA-256: "+hash);code.dir="ltr";p.append(code);details.append(p);
+  };
+  const tableFor=(parent,caption,labels,cls)=>{
+   const scroll=el("div","evidence-scroll"),table=el("table","evidence-table "+cls);
+   table.append(el("caption","",caption));const head=el("thead"),row=el("tr");
+   for(const label of labels){const th=el("th","",label);th.scope="col";row.append(th);}
+   head.append(row);table.append(head);const body=el("tbody");table.append(body);scroll.append(table);parent.append(scroll);return body;
+  };
+  const addRow=(body,label,values)=>{
+   const row=el("tr"),th=el("th","",String(label));th.scope="row";row.append(th);
+   for(const v of values){const td=el("td","evidence-number",String(v));td.dir="ltr";row.append(td);}body.append(row);
+  };
+  const selectField=(parent,cls,label,choices,value)=>{
+   const field=el("label","smoothing-field"),select=el("select",cls);field.append(el("span","",label));
+   for(const [v,label] of choices){const option=el("option","",String(label));option.value=String(v);select.append(option);}
+   select.value=String(value);field.append(select);parent.append(field);return select;
+  };
+  const headings=[d.causalModel,d.causalParams,d.causalBinary,d.causalFull,d.causalNll,d.causalBinNll];
+  const pct=x=>(x*100).toFixed(2)+"%";
+  const render=(body,records,split)=>{
+   body.replaceChildren();
+   for(const record of records){
+    const v=record[split];
+    addRow(body,record.model,[record.params,pct(v.binary_accuracy.mean),
+     pct(v.full_vocab_accuracy.mean),v.nll_full_vocab.mean.toFixed(4),v.nll_binary_normalized.mean.toFixed(4)]);
+   }
+  };
+  provenance(evidence.source_path,evidence.source_sha256);
+  const main=el("section","causal-drill");main.append(el("h4","",d.causalMain));
+  const split=selectField(main,"causal-split",d.causalSplit,[["validation",d.causalVal],["development",d.causalDev],
+   ["test_in",d.causalIn],["test_ood",d.causalOod]],"test_in");
+  const mainBody=tableFor(main,d.causalMain,headings,"causal-main");
+  const updateMain=()=>render(mainBody,evidence.main,split.value);
+  split.addEventListener("change",updateMain);updateMain();main.append(el("p","evidence-note",d.causalLimit));details.append(main);
+  provenance(evidence.confirmation_source_path,evidence.confirmation_source_sha256);
+  const confirm=el("section","causal-drill");confirm.append(el("h4","",d.causalConfirm));
+  const cs=selectField(confirm,"causal-confirm-split",d.causalSplit,[["confirm_in",d.causalIn],["confirm_ood",d.causalOod]],"confirm_in");
+  const cb=tableFor(confirm,d.causalConfirm,headings,"causal-confirm");
+  const updateConfirm=()=>render(cb,evidence.confirmation,cs.value);
+  cs.addEventListener("change",updateConfirm);updateConfirm();confirm.append(el("p","evidence-note",d.causalConfirmLimit));details.append(confirm);
+  const lab=el("section","causal-lab");lab.append(el("h4","",d.causalLab),el("p","evidence-note",d.causalLabIntro));
+  const controls=el("div","smoothing-controls"),choices=[-2,-1,0,1,2].map(x=>[x,x]);
+  const f1=selectField(controls,"causal-future1",d.causalFuture1,choices,2);
+  const f2=selectField(controls,"causal-future2",d.causalFuture2,choices,-2);
+  const mask=selectField(controls,"causal-mask",d.causalMask,[[1,d.causalOn],[0,d.causalOff]],1);
+  lab.append(controls);const output=el("p","smoothing-output causal-output");output.setAttribute("role","status");lab.append(output);
+  const trace=tableFor(lab,d.causalLab,[d.causalPosition,d.causalValue,d.causalWeight],"causal-trace");
+  const update=()=>{
+   const v=toyCausalPrefix(Number(f1.value),Number(f2.value),mask.value==="1");
+   output.textContent=d.causalOutput+": "+v.output.toFixed(6)+" · "+d.causalPrefix+": "+v.prefix_output.toFixed(6)+
+    " · "+d.causalFutureWeight+": "+v.future_weight.toFixed(6);
+   trace.replaceChildren();v.values.forEach((value,i)=>addRow(trace,i,[value,v.weights[i].toFixed(6)]));
+  };
+  for(const control of [f1,f2,mask])control.addEventListener("change",update);
+  update();lab.append(el("p","evidence-note",d.causalLabLimit));details.append(lab);
   details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
   area.append(details);
  }

@@ -159,3 +159,25 @@ export function toyAttentionOrder(contentScale,positionBias,index,shifted){
  };
  return {target_index:targetIndex,first:read(first),second:read(second)};
 }
+
+/**
+ * Analytic scalar causal attention on a four-position toy sequence.
+ * Query position 1 is held fixed; two future values can be intervened on.
+ * Q=1, K=V=the supplied scalar; no learned parameters or full Transformer.
+ */
+export function toyCausalPrefix(firstFuture,secondFuture,causal){
+ if(![-2,-1,0,1,2].includes(firstFuture)||![-2,-1,0,1,2].includes(secondFuture)||typeof causal!=="boolean")
+  throw new RangeError("Unsupported toy causal settings");
+ const values=[1,-1,firstFuture,secondFuture],queryIndex=1;
+ const weightsFor=(v,masked)=>{
+  const allowed=v.map((_,i)=>!masked||i<=queryIndex);
+  const max=Math.max(...v.filter((_,i)=>allowed[i]));
+  const exps=v.map((x,i)=>allowed[i]?Math.exp(x-max):0);
+  const sum=exps.reduce((a,b)=>a+b,0);
+  const weights=exps.map(x=>x/sum);
+  return {weights,output:weights.reduce((a,w,i)=>a+w*v[i],0)};
+ };
+ const full=weightsFor(values,causal),prefix=weightsFor(values.slice(0,2),true);
+ return {values,query_index:queryIndex,weights:full.weights,output:full.output,
+  prefix_output:prefix.output,future_weight:full.weights.slice(2).reduce((a,b)=>a+b,0)};
+}
