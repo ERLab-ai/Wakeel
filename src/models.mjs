@@ -136,3 +136,26 @@ export function toyMemoryRetention(initial,retention,delay){
  for(let i=0;i<delay;i++)states.push(states.at(-1)*retention);
  return {states,final_state:states.at(-1),magnitude:Math.abs(states.at(-1))};
 }
+
+/**
+ * A toy single-query weighted reader on matched permutations.
+ * Scores are supplied analytically, not trained. Scalar values A=1,B=-1,filler=0.
+ * Both examples contain exactly the same multiset. The bias index is supplied
+ * by the learner; it is not a learned position table or an oracle prediction.
+ */
+export function toyAttentionOrder(contentScale,positionBias,index,shifted){
+ if(![0,1,2,4].includes(contentScale)||![0,1,2,4].includes(positionBias)||
+  !Number.isInteger(index)||index<0||index>3||typeof shifted!=="boolean")
+  throw new RangeError("Unsupported toy attention settings");
+ const first=shifted?[0,0,1,-1]:[1,-1,0,0];
+ const second=shifted?[0,0,-1,1]:[-1,1,0,0];
+ const targetIndex=shifted?2:0;
+ const read=values=>{
+  const scores=values.map((v,i)=>contentScale*v+(i===index?positionBias:0));
+  const max=Math.max(...scores),exps=scores.map(x=>Math.exp(x-max));
+  const sum=exps.reduce((a,b)=>a+b,0),weights=exps.map(x=>x/sum);
+  return {values,scores,weights,weighted_sum:weights.reduce((a,w,i)=>a+w*values[i],0),
+   oracle_value:values[targetIndex]};
+ };
+ return {target_index:targetIndex,first:read(first),second:read(second)};
+}
