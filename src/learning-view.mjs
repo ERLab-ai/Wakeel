@@ -1,4 +1,4 @@
-import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention,toyAttentionOrder} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,24 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  attentionTitle:"الفصل السابع — الاسترجاع وتمييز الترتيب",
+  attentionIntro:"نتائج المصدر المجمد لقارئ أحادي الاستعلام، لا Transformer كامل. في الاسترجاع 100 مثال تدريب و30 تحقق و40 اختبار محجوز لكل فئة؛ في الترتيب 100/30/40 زوجاً متقابلاً. ثلاث بذور، 300 عصر، معدل تعلم 0.3. الاختبار المحجوز لا يستخدم للضبط. النتائج متوسط ثلاث بذور لنماذج مدربة عند كل تأخير، وليست اختبار أطوال جديدة لنموذج واحد. خسارة جدول الترتيب تخص الترتيب القياسي.",
+  attentionRetrieval:"الاسترجاع — الاختبار المحجوز",attentionOrder:"تمييز الترتيب — الاختبار المحجوز",
+  attentionDelay:"طول الحشو",attentionAccuracy:"الدقة الثنائية",attentionNll:"خسارة الاختبار NLL",
+  attentionRetrievalLimit:"رمز الفئة فريد وغير موجود في الحشو؛ قد ينجح قارئ المحتوى دون تعلم الموضع. عند 16، الدقة 79.2% لكن NLL=0.7113 أعلى من ln(2)≈0.6931، وهو مرجع احتمالي ثنائي متوازن، لا توزيعاً منتظماً على المفردات الكاملة. لا تعني الدقة الأعلى احتمالات أفضل.",
+  attentionStandard:"الترتيب القياسي",attentionShifted:"الترتيب المزاح",
+  attentionModel:"النموذج",attentionParams:"المعلمات",attentionOracle:"مرجع يعرف الموضع مسبقاً",
+  attentionOrderLimit:"الأزواج لها المحتوى نفسه بترتيبين. قارئ المتوسط وقارئ المحتوى بلا موضع متطابقان في مخرجات كل زوج؛ أما إخفاق RNN والانتباه الموضعي في هذه الإعدادات فلا يثبت عجزاً بنيوياً. pos0 وpos_mid_shift تحكمان يقرآن موضعاً معلوماً بالبناء، والثاني مدرّب على التوزيع المزاح.",
+  attentionSensitivity:"حساسية التهيئة — تحقق استكشافي فقط",
+  attentionSensitivityLimit:"التهيئة ×3 لكل المجموعات نجحت على التحقق؛ لا نتيجة اختبار محجوز لهذه الإعدادات هنا. لم تعزل التجربة السبب، وزيادة معدل التعلم وحده لم تحقق النجاح نفسه في التجارب المسجلة.",
+  attentionAmp:"التهيئة",attentionOriginal:"الأصل ×1",attentionAll:"كل المجموعات ×3",
+  attentionKQ:"المفاتيح والاستعلام فقط ×3",attentionV:"القيم فقط ×3",attentionP:"الموضع فقط ×3",
+  attentionLab:"تمرين مستقل: قارئ موزون لزوج متقابل",
+  attentionLabIntro:"A=1 وB=−1 والحشو=0. الدرجة = معامل المحتوى × القيمة + انحياز موضع محدد، ثم softmax ومجموع موزون. لا أوزان متعلمة ولا مصنّف. اختر إزاحة الرمزين وانحياز الموضع، وقارن الزوجين؛ الموضع الصحيح معلوم للمرجع وحده.",
+  attentionScale:"معامل المحتوى",attentionBias:"انحياز الموضع",attentionIndex:"موضع الانحياز (يبدأ من 0)",
+  attentionPosition:"موضع",attentionValue:"القيمة",attentionWeight:"وزن softmax",
+  attentionPairA:"الزوج الأول",attentionPairB:"الزوج الثاني",attentionSum:"المجموع الموزون",
+  attentionLabLimit:"دون انحياز موضعي، تبديل الرمزين لا يغير المجموع الموزون. إعطاء القارئ موضعاً معروفاً لا يثبت تعلم العثور عليه. المجموع ليس احتمالاً أو دقة استرجاع.",
   memoryTitle:"الفصل السادس — الذاكرة المتكررة والتعميم على الأطوال",
   memoryIntro:"مهمة استرجاع الحرف الأول بعد حشو عشوائي ثم علامة السؤال. القياس بعد استهلاك علامة السؤال؛ الخسارة على موضع الإجابة فقط.",
   memoryProtocol:"طول ثابت: تدريب مستقل لكل تأخير ولكل بذرة (120 تسلسلاً لكل فئة). مزيج الأطوال: نموذج واحد لكل بذرة (60 لكل فئة لكل طول من 2،4،5،6،7،8). الاختبار عند كل تأخير: 40 مثالاً لكل فئة؛ البذور 42،43،44. كلاهما 300 عصر ومعدل تعلم 0.3. التأخير 16 محجوز في تجربة المزيج فقط. لكل نموذج ثابت 240 تسلسلاً تدريبياً، ولكل نموذج مزيج 720؛ لذلك لا تعزل المقارنة أثر تنوع الأطوال عن حجم بيانات التدريب.",
@@ -119,6 +137,24 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  attentionTitle:"Chapter 7 — retrieval and order discrimination",
+  attentionIntro:"Frozen single-query reader results, not a full Transformer. Retrieval: 100 train, 30 validation, 40 holdout per class; order: 100/30/40 matched pairs. Three seeds, 300 epochs, learning rate 0.3. Holdout is not used for tuning. Results are means of three seeds trained at each delay, not unseen-length evaluation of one model. Order-table NLL refers to standard-order holdout.",
+  attentionRetrieval:"Retrieval — holdout",attentionOrder:"Order discrimination — holdout",
+  attentionDelay:"Filler length",attentionAccuracy:"Binary accuracy",attentionNll:"Holdout NLL",
+  attentionRetrievalLimit:"The class token is unique and absent from filler, so content retrieval can succeed without learning position. At 16, accuracy is 79.2% but NLL=0.7113 exceeds ln(2)≈0.6931, a balanced binary probabilistic reference, not uniform over the full vocabulary. Higher accuracy need not mean better probabilities.",
+  attentionStandard:"Standard order",attentionShifted:"Shifted order",
+  attentionModel:"Model",attentionParams:"Parameters",attentionOracle:"Known-position oracle",
+  attentionOrderLimit:"Matched pairs have identical content in different orders. Mean and no-position readers have identical within-pair logits. Failure of RNN and positional attention in these settings does not establish structural incapacity. pos0 and pos_mid_shift are known-position positive controls; the latter is trained on the shifted distribution.",
+  attentionSensitivity:"Initialization sensitivity — exploratory validation only",
+  attentionSensitivityLimit:"Scaling all groups ×3 succeeds on validation; no holdout result for these settings is reported here. The mechanism is not isolated; increasing learning rate alone did not reproduce the success in the recorded experiments.",
+  attentionAmp:"Initialization",attentionOriginal:"Original ×1",attentionAll:"All groups ×3",
+  attentionKQ:"Keys and query only ×3",attentionV:"Values only ×3",attentionP:"Positions only ×3",
+  attentionLab:"Separate exercise: weighted reader on a matched pair",
+  attentionLabIntro:"A=1, B=−1, filler=0. Score = content scale × value + selected-position bias, then softmax and weighted sum. No learned weights or classifier. Shift the symbols and select a position bias; only the reference is given the correct position.",
+  attentionScale:"Content scale",attentionBias:"Position bias",attentionIndex:"Bias index (zero-based)",
+  attentionPosition:"Position",attentionValue:"Value",attentionWeight:"Softmax weight",
+  attentionPairA:"First counterpart",attentionPairB:"Second counterpart",attentionSum:"Weighted sum",
+  attentionLabLimit:"Without positional bias, swapping the symbols leaves the weighted sum unchanged. Supplying a known position does not demonstrate learned retrieval. The sum is neither a probability nor recall accuracy.",
   memoryTitle:"Chapter 6 — recurrent memory and length generalization",
   memoryIntro:"Retrieve the first character after random filler and a question mark. Evaluation consumes the question mark; loss is computed at the answer position only.",
   memoryProtocol:"Fixed length: a separately trained model for each delay and seed (120 sequences per class). Mixed lengths: one model per seed (60 per class per training delay 2,4,5,6,7,8). Test at each delay: 40 examples per class; seeds 42,43,44. Both use 300 epochs and learning rate 0.3. Delay 16 is held out only in mixed-length training. Each fixed-delay model sees 240 training sequences, each mixed model 720; the comparison does not isolate length diversity from training-set size.",
@@ -746,6 +782,78 @@ function renderJourney(){
   };
   for(const select of [initial,retention,steps])select.addEventListener("change",updateLab);
   updateLab();lab.append(el("p","evidence-note",d.memoryLabLimit));details.append(lab);
+  details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
+  area.append(details);
+ }
+ // Chapter 7 keeps holdout, exploratory validation, and toy arithmetic distinct.
+ if(evidence?.schema==="wakeel-v022-frozen-attention-order/v1"&&
+    evidence.chapter_id===chapter.id&&evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay attention-evidence");
+  details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.attentionTitle),el("p","evidence-note",d.attentionIntro));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const source=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);
+  source.dir="ltr";provenance.append(source);details.append(provenance);
+  const tableFor=(parent,caption,labels,cls)=>{
+   const scroll=el("div","evidence-scroll"),table=el("table","evidence-table "+cls);
+   table.append(el("caption","",caption));
+   const head=el("thead"),row=el("tr");
+   for(const label of labels){const th=el("th","",label);th.scope="col";row.append(th);}
+   head.append(row);table.append(head);
+   const body=el("tbody");table.append(body);scroll.append(table);parent.append(scroll);return body;
+  };
+  const addRow=(body,label,values)=>{
+   const row=el("tr"),th=el("th","",String(label));th.scope="row";row.append(th);
+   for(const v of values){const td=el("td","evidence-number",String(v));td.dir="ltr";row.append(td);}
+   body.append(row);
+  };
+  const pct=x=>(x*100).toFixed(1)+"%";
+  const a=tableFor(details,d.attentionRetrieval,[d.attentionDelay,"RNN · "+d.attentionAccuracy,
+   "RNN · "+d.attentionNll,"attn_content · "+d.attentionAccuracy,
+   "attn_content · "+d.attentionNll,d.attentionOracle],"attention-retrieval");
+  for(const row of evidence.retrieval)addRow(a,row.delay,[pct(row.rnn.accuracy),row.rnn.nll.toFixed(4),
+   pct(row.attn_content.accuracy),row.attn_content.nll.toFixed(4),pct(row.oracle_accuracy)]);
+  details.append(el("p","evidence-note",d.attentionRetrievalLimit));
+  const selectField=(parent,cls,label,choices,value)=>{
+   const field=el("label","smoothing-field"),select=el("select",cls);field.append(el("span","",label));
+   for(const [v,label] of choices){const option=el("option","",String(label));option.value=String(v);select.append(option);}
+   select.value=String(value);field.append(select);parent.append(field);return select;
+  };
+  const drill=el("section","attention-drill");drill.append(el("h4","",d.attentionOrder));
+  const delay=selectField(drill,"attention-delay",d.attentionDelay,[4,8,16].map(x=>[x,x]),4);
+  const order=tableFor(drill,d.attentionOrder,[d.attentionModel,d.attentionParams,d.attentionStandard,
+   d.attentionShifted,d.attentionNll],"attention-order");
+  const updateOrder=()=>{
+   const row=evidence.order.find(x=>x.delay===Number(delay.value));order.replaceChildren();
+   for(const [name,m] of Object.entries(row.models))addRow(order,name,[m.parameters,pct(m.accuracy),pct(m.shifted_accuracy),m.nll.toFixed(4)]);
+  };
+  delay.addEventListener("change",updateOrder);updateOrder();
+  drill.append(el("p","evidence-note",d.attentionOrderLimit));details.append(drill);
+  const validation=tableFor(details,d.attentionSensitivity,[d.attentionAmp,4,8,16],"attention-validation");
+  for(const [key,label] of [["amp1",d.attentionOriginal],["all3",d.attentionAll],
+   ["kq_only3",d.attentionKQ],["v_only3",d.attentionV],["pos_only3",d.attentionP]])
+   addRow(validation,label,evidence.validation_sensitivity.map(row=>pct(row.variants[key])));
+  details.append(el("p","evidence-note",d.attentionSensitivityLimit));
+  const lab=el("section","attention-lab");lab.append(el("h4","",d.attentionLab),el("p","evidence-note",d.attentionLabIntro));
+  const controls=el("div","smoothing-controls"),choices=[0,1,2,4].map(x=>[x,x]);
+  const scale=selectField(controls,"attention-scale",d.attentionScale,choices,1);
+  const bias=selectField(controls,"attention-bias",d.attentionBias,choices,0);
+  const index=selectField(controls,"attention-index",d.attentionIndex,[0,1,2,3].map(x=>[x,x]),0);
+  const shift=selectField(controls,"attention-shift",d.attentionOrder,[[0,d.attentionStandard],[1,d.attentionShifted]],0);
+  lab.append(controls);
+  const output=el("p","smoothing-output attention-output");output.setAttribute("role","status");lab.append(output);
+  const trace=tableFor(lab,d.attentionLab,[d.attentionPosition,d.attentionPairA+" · "+d.attentionValue,
+   d.attentionPairA+" · "+d.attentionWeight,d.attentionPairB+" · "+d.attentionValue,
+   d.attentionPairB+" · "+d.attentionWeight],"attention-trace");
+  const update=()=>{
+   const p=toyAttentionOrder(Number(scale.value),Number(bias.value),Number(index.value),shift.value==="1");
+   output.textContent=d.attentionSum+": "+p.first.weighted_sum.toFixed(4)+" / "+p.second.weighted_sum.toFixed(4)+
+    " · "+d.attentionOracle+": "+p.first.oracle_value+" / "+p.second.oracle_value;
+   trace.replaceChildren();
+   p.first.values.forEach((v,i)=>addRow(trace,i,[v,p.first.weights[i].toFixed(4),p.second.values[i],p.second.weights[i].toFixed(4)]));
+  };
+  for(const field of [scale,bias,index,shift])field.addEventListener("change",update);
+  update();lab.append(el("p","evidence-note",d.attentionLabLimit));details.append(lab);
   details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
   area.append(details);
  }
