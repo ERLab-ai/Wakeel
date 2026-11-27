@@ -181,3 +181,25 @@ export function toyCausalPrefix(firstFuture,secondFuture,causal){
  return {values,query_index:queryIndex,weights:full.weights,output:full.output,
   prefix_output:prefix.output,future_weight:full.weights.slice(2).reduce((a,b)=>a+b,0)};
 }
+
+/** Deterministic count-only versus structural lookup; not a trained model. */
+export function toyBindingCounter(query,priorMode){
+ if(!["A","B"].includes(query)||!["true","flipped"].includes(priorMode))
+  throw new RangeError("Unsupported binding settings");
+ const rows=[];
+ for(const a of [0,1])for(const b of [0,1]){
+  const first=query==="A"?a:b,second=query==="A"?b:a,sum=a+b;
+  // For equal counts, deterministic tie break is zero, independent of order.
+  const counterFirst=sum===2?1:0;
+  const prior=priorMode==="true"?first:1-first;
+  const inferred=sum-prior;
+  // An inconsistent prior can imply a value outside the binary domain.
+  const counterSecond=inferred===0||inferred===1?inferred:null;
+  rows.push({a,b,sum,first,second,counter_first:counterFirst,displayed_prior:prior,counter_second:counterSecond});
+ }
+ const pair=rows.filter(x=>x.a!==x.b);
+ return {rows,first_accuracy:rows.filter(x=>x.counter_first===x.first).length/4,
+  pair_both_correct:pair.every(x=>x.counter_first===x.first)?1:0,
+  second_accuracy:rows.filter(x=>x.counter_second===x.second).length/4,
+  invalid_second:rows.filter(x=>x.counter_second===null).length};
+}
