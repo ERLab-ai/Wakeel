@@ -144,3 +144,16 @@
 .causal-lab .evidence-scroll,.causal-drill .evidence-scroll{margin:12px 0}
 .causal-output{font-variant-numeric:tabular-nums}
 @media(max-width:520px){.causal-drill,.causal-lab{margin:12px;padding:12px}}
+
+/* Chapter 9: separate binding, rollout and intervention evidence. */
+.binding-evidence .evidence-scroll{overscroll-behavior-inline:contain}
+.binding-evidence .binding-results,.binding-evidence .binding-trace{min-width:800px}
+.binding-evidence .binding-free,.binding-evidence .binding-interventions{min-width:620px}
+.binding-evidence .binding-factor{min-width:400px}
+.binding-drill,.binding-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.binding-drill h4,.binding-lab h4{margin:0 0 12px;font-size:16px}
+.binding-drill .evidence-note,.binding-lab .evidence-note{margin:12px 0}
+.binding-drill>.smoothing-field{max-width:300px;margin-bottom:10px}
+.binding-lab .evidence-scroll,.binding-drill .evidence-scroll{margin:12px 0}
+.binding-output{font-variant-numeric:tabular-nums}
+@media(max-width:520px){.binding-drill,.binding-lab{margin:12px;padding:12px}}
