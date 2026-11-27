@@ -132,3 +132,15 @@
 .attention-lab .evidence-scroll,.attention-drill .evidence-scroll{margin:12px 0}
 .attention-output{font-variant-numeric:tabular-nums}
 @media(max-width:520px){.attention-drill,.attention-lab{margin:12px;padding:12px}}
+
+/* Chapter 8: independently sourced tables and causal-mask exercise. */
+.causal-evidence .evidence-scroll{overscroll-behavior-inline:contain}
+.causal-evidence .causal-main,.causal-evidence .causal-confirm{min-width:720px}
+.causal-evidence .causal-trace{min-width:300px}
+.causal-drill,.causal-lab{margin:18px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:15px}
+.causal-drill h4,.causal-lab h4{margin:0 0 12px;font-size:16px}
+.causal-drill .evidence-note,.causal-lab .evidence-note{margin:12px 0}
+.causal-drill>.smoothing-field{max-width:300px}
+.causal-lab .evidence-scroll,.causal-drill .evidence-scroll{margin:12px 0}
+.causal-output{font-variant-numeric:tabular-nums}
+@media(max-width:520px){.causal-drill,.causal-lab{margin:12px;padding:12px}}
