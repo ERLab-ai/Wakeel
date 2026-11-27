@@ -453,3 +453,85 @@ export function projectFrozenChapter6Evidence(bytes,manifest){
    status:"approved-source-metrics-not-independent-review",source_path:sourcePath,source_sha256:digest,
    seeds,train_delays:delays.slice(0,-1),holdout_delays:[16],languages,rows};
 }
+
+/** Chapter 7: holdout retrieval and order evidence; validation sensitivity stays separate. */
+export function projectFrozenChapter7Evidence(bytes,manifest){
+ const sourcePath="content/chapter-07/results.json",inputPath="content/chapter-03/examples.json";
+ requireEvidence(Buffer.isBuffer(bytes)&&manifest?.source_version==="v0.21.3","Chapter 7 source/version mismatch");
+ const expected=manifest.files?.[sourcePath],digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(/^[a-f0-9]{64}$/.test(expected||"")&&digest===expected,"Chapter 7 SHA-256 mismatch");
+ let raw;try{raw=JSON.parse(bytes.toString("utf8"));}catch{throw new Error("Chapter 7 invalid JSON");}
+ const seeds=[42,43,44],delays=[2,4,5,6,7,8,16],orderDelays=[4,8,16];
+ const same=(a,b)=>Array.isArray(a)&&a.length===b.length&&a.every((x,i)=>x===b[i]);
+ const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+ const acc=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<=1;
+ const loss=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<30;
+ const close=(a,b,tol)=>Number.isFinite(a)&&Math.abs(a-b)<=tol;
+ const p=raw.protocol,sp=p?.splits;
+ requireEvidence(raw.simulator_version==="simulate_chapter7-2.1"&&
+  /^[a-f0-9]{64}$/.test(manifest.files?.[inputPath]||"")&&raw.input_hash===manifest.files[inputPath]&&
+  p?.epochs===300&&p.lr===0.3&&p.emb_dim===8&&p.dk===8&&same(p.seeds,seeds)&&
+  sp?.train_pairs===100&&sp.val_pairs===30&&sp.holdout_pairs===40&&
+  sp.retrieval?.train_per_class===100&&sp.retrieval.val_per_class===30&&sp.retrieval.holdout_per_class===40,
+  "Chapter 7 protocol mismatch");
+ const models={rnn:1183,attn_content:671,attn_pos:991,attn_nopos:671,mean:535,pos0:535,pos_mid_shift:535};
+ const projectRow=(data,key,model,shifted)=>{
+  const runs=seeds.map(seed=>{
+   const record=data?.["seed_"+seed],m=record?.[model],s=record?.sizes;
+   requireEvidence(/^[a-f0-9]{16}$/.test(record?.dataset_fingerprint||"")&&
+    (shifted?s?.train_pairs===100&&s.val_pairs===30&&s.holdout_pairs===40:
+     s?.train_per_class===100&&s.val_per_class===30&&s.holdout_per_class===40)&&
+    m?.params===models[model]&&acc(m.holdout_binary)&&loss(m.holdout_test_nll)&&
+    (!shifted||acc(m.shifted_pair_binary)),"Chapter 7 seed/model mismatch "+key+"/"+model+"/"+seed);
+   if(shifted){
+    const c=record.controls,i=record.paired_invariance_maxdiff;
+    requireEvidence(c?.oracle_standard===1&&c.oracle_shifted===1&&c.oracle_label_swap===0&&
+     c.positive_control_pos0_standard===1&&c.positive_control_pos_mid_shifted===1&&
+     i?.mean===0&&i.attn_nopos===0,"Chapter 7 order controls mismatch "+key);
+    if(["mean","attn_nopos"].includes(model))requireEvidence(m.holdout_binary===0.5&&m.shifted_pair_binary===0.5,
+     "Chapter 7 permutation invariance mismatch "+key);
+    if(model==="pos0"||model==="pos_mid_shift")requireEvidence(
+     m.holdout_binary===(model==="pos0"?1:0.5)&&m.shifted_pair_binary===(model==="pos0"?0.5:1),
+     "Chapter 7 positive control mismatch "+key);
+   }else requireEvidence(record.oracle_ceiling===1,"Chapter 7 retrieval oracle mismatch "+key);
+   return {seed,accuracy:m.holdout_binary,nll:m.holdout_test_nll,
+    ...(shifted?{shifted_accuracy:m.shifted_pair_binary}:{})};
+  });
+  const avg=data.mean_across_seeds?.[model];
+  requireEvidence(acc(avg?.holdout_binary)&&loss(avg.holdout_test_nll)&&
+   close(avg.holdout_binary,mean(runs.map(x=>x.accuracy)),0.001)&&
+   close(avg.holdout_test_nll,mean(runs.map(x=>x.nll)),0.00011)&&
+   (!shifted||(acc(avg.shifted_pair_binary)&&close(avg.shifted_pair_binary,mean(runs.map(x=>x.shifted_accuracy)),0.001))),
+   "Chapter 7 mean mismatch "+key+"/"+model);
+  return {parameters:models[model],accuracy:avg.holdout_binary,nll:avg.holdout_test_nll,
+    ...(shifted?{shifted_accuracy:avg.shifted_pair_binary}:{}),runs};
+ };
+ const a=raw.experiments?.retrieval,b=raw.experiments?.order;
+ const retrieval=delays.map(delay=>{
+  const key="delay_"+delay,data=a?.delays?.[key];
+  return {delay,rnn:projectRow(data,key,"rnn",false),
+   attn_content:projectRow(data,key,"attn_content",false),oracle_accuracy:1};
+ });
+ const orderModels=["rnn","attn_pos","attn_nopos","mean","pos0","pos_mid_shift"];
+ const order=orderDelays.map(delay=>{
+  const key="delay_"+delay,data=b?.delays?.[key];
+  return {delay,models:Object.fromEntries(orderModels.map(m=>[m,projectRow(data,key,m,true)]))};
+ });
+ const sensitivity=b?.init_sensitivity;
+ requireEvidence(typeof sensitivity?.eval_set==="string"&&sensitivity.eval_set.startsWith("validation")&&
+  same(sensitivity.amplify_values,[1,3]),"Chapter 7 sensitivity split mismatch");
+ const variants=["amp1","all3","kq_only3","v_only3","pos_only3"];
+ const validation=orderDelays.map(delay=>{
+  const data=sensitivity.delays?.["delay_"+delay];
+  return {delay,variants:Object.fromEntries(variants.map(variant=>{
+   const runs=seeds.map(seed=>data?.["seed_"+seed]?.[variant]?.val_binary);
+   const avg=data?.mean_across_seeds?.[variant];
+   requireEvidence(runs.every(acc)&&acc(avg)&&close(avg,mean(runs),0.001),
+    "Chapter 7 sensitivity mean mismatch "+delay+"/"+variant);
+   return [variant,avg];
+  }))};
+ });
+ return {schema:"wakeel-v022-frozen-attention-order/v1",chapter_id:"CH-7",
+  status:"approved-source-metrics-not-independent-review",source_path:sourcePath,source_sha256:digest,
+  seeds,retrieval,order,validation_sensitivity:validation};
+}
