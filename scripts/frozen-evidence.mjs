@@ -638,3 +638,87 @@ export function projectFrozenChapter8Evidence(bytes,factorialBytes,manifest){
   status:"approved-source-metrics-not-independent-review",source_path:basePath,source_sha256:base.digest,
   confirmation_source_path:factorialPath,confirmation_source_sha256:factorial.digest,seeds,main,confirmation};
 }
+
+/** Chapter 9: separate binding metrics from the second-answer shortcut. */
+export function projectFrozenChapter9Evidence(bytes,manifest){
+ const sourcePath="content/chapter-09/results.json";
+ requireEvidence(Buffer.isBuffer(bytes)&&manifest?.source_version==="v0.21.3","Chapter 9 source/version mismatch");
+ const digest=createHash("sha256").update(bytes).digest("hex");
+ requireEvidence(/^[a-f0-9]{64}$/.test(manifest.files?.[sourcePath]||"")&&digest===manifest.files[sourcePath],"Chapter 9 SHA-256 mismatch");
+ let raw;try{raw=JSON.parse(bytes.toString("utf8"));}catch{throw new Error("Chapter 9 invalid JSON");}
+ const p=raw.protocol,g=raw.gates,e=raw.experiments,seeds=[42,43,44];
+ const same=(a,b)=>Array.isArray(a)&&a.length===b.length&&a.every((x,i)=>x===b[i]);
+ const near=(a,b)=>typeof a==="number"&&Number.isFinite(a)&&Math.abs(a-b)<=0.00011;
+ const acc=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<=1;
+ const loss=x=>typeof x==="number"&&Number.isFinite(x)&&x>=0&&x<30;
+ const mean=a=>a.reduce((x,y)=>x+y,0)/a.length;
+ const splits={train:512,val:128,dev_holdout:128,p0_probe_in:64,p0_probe_ood_length16:64,confirm_in:64,confirm_ood16:64,final_in:64,final_ood16:64};
+ requireEvidence(raw.simulator_version==="simulate_chapter9-1.1"&&p?.vocabulary?.size===33&&
+  p.supervised_positions_per_loop===2&&p.frozen_budget?.lr===0.003&&p.frozen_budget.epochs===1200&&
+  same(p.seeds?.model_init,seeds)&&p.seeds.data?.p0===9102&&p.seeds.data.confirm===9204&&p.seeds.data.final===9203&&
+  Object.entries(splits).every(([k,v])=>p.splits?.[k]===v),"Chapter 9 protocol mismatch");
+ const order=p.quarantine?.stage_order||[],freeze=order.indexOf("FREEZE_MODELS"),confirm=order.indexOf("confirmatory_read_all_models_all_seeds"),final=order.indexOf("final_read_all_models_all_seeds");
+ requireEvidence(p.quarantine?.families_disjoint_from_p0===true&&freeze>=0&&confirm>freeze&&final>confirm,
+  "Chapter 9 quarantine order mismatch");
+ const overlap=g?.["2_split_contract"]?.family_overlap_counts;
+ requireEvidence(overlap&&Object.keys(overlap).length===36&&Object.values(overlap).every(x=>x===0),"Chapter 9 family overlap");
+ const ref=g["4_references"];
+ const references={...ref?.non_blind?.segments,...ref?.blind_post_freeze?.segments};
+ requireEvidence(Object.keys(references).length===9&&Object.keys(splits).every(k=>{
+  const v=references[k];
+  return v?.oracle_binary_both_queries===1&&v.oracle_matched_pair_both_correct===1&&
+   v.bag_ceiling_first_query===0.75&&v.bag_ceiling_second_query===1&&
+   v.bag_matched_pair_both_correct_ceiling_first_query===0;
+ })&&ref.non_blind.val_label_flip_binary_accuracy===0&&ref.blind_post_freeze.val_label_flip_binary_accuracy===0,
+ "Chapter 9 reference mismatch");
+ const models=["local_only","fixed_query_prefix_reader","causal_self_attention_1h","causal_self_attention_2h","no_position","no_position_2h","csa1h_concat"];
+ const params=[561,961,753,945,753,945,1017];
+ const keys=["first_query_binary_accuracy","first_query_paired_both_correct","second_query_binary_accuracy","both_answers_correct","nll_full_vocab","nll_binary_normalized"];
+ const projectSplit=(entry,split)=>{
+  const runs=seeds.map(seed=>{
+   const row=entry?.["seed_"+seed]?.[split];
+   requireEvidence(row?.n_loops===64&&row.matched_pairs===16&&keys.every((k,i)=>(i<4?acc:loss)(row[k]))&&
+    row.both_answers_correct<=Math.min(row.first_query_binary_accuracy,row.second_query_binary_accuracy)+0.00011&&
+    row.nll_full_vocab+0.00011>=row.nll_binary_normalized,"Chapter 9 metric mismatch "+split+"/"+seed);
+   return row;
+  });
+  return Object.fromEntries(keys.map(k=>{
+   const v=entry.mean_across_seeds?.[split+"_"+k],values=runs.map(row=>row[k]);
+   requireEvidence(same(v?.per_seed,values)&&near(v.mean,mean(values)),"Chapter 9 mean mismatch "+split+"/"+k);
+   return [k,{mean:v.mean,per_seed:values}];
+  }));
+ };
+ const rows=models.map((model,i)=>{
+  const non=e?.models_non_blind?.[model],f=e?.final_test_post_freeze?.[model],c=e?.confirmatory_post_freeze?.[model];
+  requireEvidence(p.parameter_counts?.[model]===params[i]&&seeds.every(seed=>non?.seeds?.["seed_"+seed]?.params===params[i]),"Chapter 9 parameter mismatch "+model);
+  const free=seeds.map(seed=>{
+   const v=f?.["seed_"+seed]?.free_rollout_final_in;
+   requireEvidence(v?.n_loops===64&&["q1_accuracy","q2_free_accuracy","both_correct_free","gen1_is_answer_token_rate"].every(k=>acc(v[k])),"Chapter 9 free rollout mismatch "+model);
+   return {q1:v.q1_accuracy,q2:v.q2_free_accuracy,both:v.both_correct_free};
+  });
+  return {model,params:params[i],final_in:projectSplit(f,"final_in"),final_ood16:projectSplit(f,"final_ood16"),
+   confirm_in:projectSplit(c,"confirm_in"),confirm_ood16:projectSplit(c,"confirm_ood16"),
+   free_rollout_final_in:{q1:mean(free.map(x=>x.q1)),q2:mean(free.map(x=>x.q2)),both:mean(free.map(x=>x.both))}};
+ });
+ const get=m=>rows.find(x=>x.model===m).final_in.first_query_binary_accuracy.mean;
+ const a=get("causal_self_attention_1h"),b=get("no_position"),c=get("causal_self_attention_2h"),d=get("no_position_2h");
+ const factorial=e.factorial_reading_descriptive;
+ requireEvidence(near(factorial?.cells?.one_layer_with_pe,a)&&near(factorial.cells.one_layer_no_pe,b)&&
+  near(factorial.cells.two_layers_with_pe,c)&&near(factorial.cells.two_layers_no_pe,d)&&
+  near(factorial.descriptive_interaction,(d-c)-(b-a)),"Chapter 9 descriptive factorial mismatch");
+ const interventions=models.map(model=>{
+  const v=e.interventions_final_in_seed42_post_freeze?.[model];
+  requireEvidence(v?.loops===64&&acc(v.baseline_q2_binary_correct),"Chapter 9 intervention mismatch "+model);
+  const modes=Object.fromEntries(["memory_only","prior_answer_only","both"].map(k=>{
+   const m=v.modes?.[k];
+   requireEvidence(acc(m?.q2_binary_accuracy)&&acc(m.prediction_flip_rate_vs_base)&&acc(m.mean_max_binary_prob_shift),"Chapter 9 intervention metric mismatch "+model+"/"+k);
+   return [k,{accuracy:m.q2_binary_accuracy,flip_rate:m.prediction_flip_rate_vs_base}];
+  }));
+  return {model,baseline:v.baseline_q2_binary_correct,modes};
+ });
+ return {schema:"wakeel-v022-frozen-compositional-binding/v1",chapter_id:"CH-9",
+  status:"approved-source-metrics-not-independent-review",source_path:sourcePath,source_sha256:digest,seeds,rows,
+  references:{first_query_count_ceiling:0.75,paired_count_ceiling:0,second_query_count_ceiling:1,oracle:1},
+  factorial:{one_layer_with_pe:a,one_layer_no_pe:b,two_layers_with_pe:c,two_layers_no_pe:d,descriptive_interaction:factorial.descriptive_interaction},
+  interventions_final_in_seed42:interventions};
+}
