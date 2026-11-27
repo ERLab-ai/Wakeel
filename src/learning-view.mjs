@@ -1,4 +1,4 @@
-import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention,toyAttentionOrder,toyCausalPrefix} from "./models.mjs";
+import {smoothedTransition,denseContextTableCells,toyScalarEmbeddingUpdate,toyMemoryRetention,toyAttentionOrder,toyCausalPrefix,toyBindingCounter} from "./models.mjs";
 /**
  * Bilingual learning journey and open atlas built from authentic approved catalog.
  * Station cards are authored; other registry entries are NOT represented as lessons.
@@ -24,6 +24,26 @@ const labels={
   topicWithStation:"له محطة في الرحلة",goStation:"انتقل إلى المحطة",
   related:"موضوعات ذات علاقة",domain:"المجال",noRelation:"لا توجد علاقة مسجلة لهذه الصفحة.",
   atlasCount:"نتيجة من أصل",viewMore:"عرض المزيد",noResults:"لم يُعثر على موضوع مطابق.",
+  bindingTitle:"الفصل التاسع — الربط التركيبي بين المفتاح والقيمة",
+  bindingIntro:"البيانات الأصلية: مفتاح وقيمة ورمز فصل مستقلون، وقيمتان ثنائيتان مستقلتان. 64 حلقة و16 زوجاً متقابلاً في كل مقطع اختبار أو تأكيد، وثلاث بذور على البيانات المشتركة. التأكيدية قُرئت قبل النهائية بعد تجميد النماذج. طول 16 خارج أطوال التدريب.",
+  bindingSplit:"مقطع التقييم",bindingFinalIn:"نهائي — داخل التوزيع",bindingFinalOod:"نهائي — طول 16",
+  bindingConfirmIn:"تأكيدي — داخل التوزيع",bindingConfirmOod:"تأكيدي — طول 16",
+  bindingModel:"النموذج",bindingParams:"المعلمات",bindingFirst:"دقة السؤال الأول (ثنائية)",bindingPair:"نجاح طرفي الزوج المتقابل",
+  bindingSecond:"دقة السؤال الثاني (ثنائية، الإجابة الأولى صحيحة ومعروضة)",bindingBoth:"نجاح إجابتي الحلقة (Teacher forcing)",
+  bindingSeed:"البذرة",bindingMean:"المتوسط",bindingScope:"النتائج المجمدة",
+  bindingLimit:"سقف العدّ الحتمي في السؤال الأول 75%، وعلى طرفي الزوج 0%، وفي السؤال الثاني 100% عند عرض الإجابة الصحيحة الأولى. هذه حدود لفئة مصنفات العدّ، لا لجميع نماذج الاستعلام الثابت. ارتفاع دقة السؤال الثاني ليس دليلاً مستقلاً على الربط.",
+  bindingFactor:"قراءة عاملية وصفية — العمق والترميز الموضعي",bindingInteraction:"فرق الفروق (نقاط مئوية)",
+  bindingFactorLimit:"إزالة الترميز داخل العمق نفسه لا تغير تعداد المعلمات، لكن زيادة العمق ترفع المعلمات من 753 إلى 945. فرق الفروق وصفي، ولا اختبار دلالة أو عزل سببي للعمق.",
+  bindingFree:"التوليد الحر — النهائي داخل التوزيع فقط",bindingFreeFirst:"دقة السؤال الأول",bindingFreeSecond:"دقة السؤال الثاني بعد توقع النموذج الأول",bindingFreeBoth:"نجاح الإجابتين في التوليد الحر",
+  bindingInterventions:"تدخلات السؤال الثاني — النهائي داخل التوزيع، بذرة 42 فقط",
+  bindingBaseline:"الدقة الأساسية",bindingMemory:"تغيير الذاكرة فقط",bindingPrior:"تغيير الإجابة السابقة فقط",bindingInterventionBoth:"تغيير الاثنين",
+  bindingInterventionLimit:"هذه دقة السؤال الثاني في التدخلات المسجلة لبذرة واحدة، وليست متوسطاً عبر البذور أو اختباراً سببياً لجميع المعماريات.",
+  bindingLab:"مختبر مستقل — العدّ مقابل العلاقة",
+  bindingLabIntro:"اختر المفتاح المطلوب أولاً، ثم اعرض إجابة أولى صحيحة أو مقلوبة. نعدد الحالات الأربع المتساوية الوزن. قارئ البنية يعرف علاقة المفتاح بالقيمة؛ قارئ العدّ يرى مجموع القيم ويكسر التعادل إلى صفر، ثم يطرح الإجابة المعروضة لاستخراج القيمة الثانية.",
+  bindingQuery:"المفتاح الأول",bindingPriorMode:"الإجابة الأولى المعروضة",bindingTrue:"صحيحة",bindingFlipped:"مقلوبة",
+  bindingA:"قيمة A",bindingB:"قيمة B",bindingCount:"مجموع القيم",bindingTarget1:"الهدف الأول",bindingCounter1:"توقع العدّ الأول",
+  bindingDisplayed:"الإجابة المعروضة",bindingToySecond:"دقة استنتاج السؤال الثاني في التمرين",bindingTarget2:"الهدف الثاني",bindingCounter2:"توقع العدّ الثاني",bindingInvalid:"خارج المجال الثنائي",
+  bindingLabLimit:"التمرين تعداد حسابي، لا تدريب. الحالات غير الصالحة تُحسب أخطاء. عند قلب الإجابة السابقة قد يفشل استنتاج العدّ؛ لا تعمم ذلك على شبكة مدربة.",
   causalTitle:"الفصل الثامن — الانتباه الذاتي السببي والاسترجاع المزدوج",
   causalIntro:"استرجاع قيمتين مستقلتين A وB من سجلات ذرية. هذه مهمة اختيار سجل، لا إثبات ربط مفتاح وقيمة منفصلين. النموذج رأس واحد وطبقة واحدة، وليس Transformer كاملاً. التدريب 512 حلقة، التحقق والتطويري 128 لكل منهما، والاختبار 64 لكل مقطع. طول الحشو 16 خارج أطوال التدريب 2،4،8.",
   causalMain:"نتائج المصدر المجمد — اختر مقطع التقييم",
@@ -152,6 +172,26 @@ const labels={
   topicWithStation:"Linked journey station",goStation:"Open station",
   related:"Related topics",domain:"Domain",noRelation:"No recorded topic relationships for this entry.",
   atlasCount:"results out of",viewMore:"Show more",noResults:"No matching topic.",
+  bindingTitle:"Chapter 9 — compositional key–value binding",
+  bindingIntro:"Frozen experiment: separate key, value and separator tokens; two independent binary values. Each final or confirmation split has 64 loops and 16 matched pairs, with three seeds on shared data. Confirmation was read before final after model freeze. Length 16 is outside training lengths.",
+  bindingSplit:"Evaluation split",bindingFinalIn:"Final — in distribution",bindingFinalOod:"Final — length 16",
+  bindingConfirmIn:"Confirmation — in distribution",bindingConfirmOod:"Confirmation — length 16",
+  bindingModel:"Model",bindingParams:"Parameters",bindingFirst:"First-query binary accuracy",bindingPair:"Both matched-pair members correct",
+  bindingSecond:"Second-query binary accuracy (true first answer supplied)",bindingBoth:"Both loop answers (teacher forcing)",
+  bindingSeed:"Seed",bindingMean:"Mean",bindingScope:"Frozen results",
+  bindingLimit:"The deterministic count-only ceiling is 75% for query one, 0% on both pair members, and 100% for query two given the correct first answer. These are limits of count-only classifiers, not all fixed-query architectures. High second-query accuracy is not independent evidence of binding.",
+  bindingFactor:"Descriptive factorial reading — depth and positional encoding",bindingInteraction:"Difference of differences (percentage points)",
+  bindingFactorLimit:"Removing encoding at the same depth preserves parameter count, but adding depth increases parameters from 753 to 945. The difference of differences is descriptive, with no significance test or causal isolation of depth.",
+  bindingFree:"Free rollout — final in-distribution only",bindingFreeFirst:"First-query accuracy",bindingFreeSecond:"Second-query accuracy after own prediction",bindingFreeBoth:"Both answers correct in free rollout",
+  bindingInterventions:"Second-query interventions — final in-distribution, seed 42 only",
+  bindingBaseline:"Baseline accuracy",bindingMemory:"Memory only changed",bindingPrior:"Prior answer only changed",bindingInterventionBoth:"Both changed",
+  bindingInterventionLimit:"Recorded second-query intervention accuracies are for one seed, not seed averages or a causal test of all architectures.",
+  bindingLab:"Separate lab — counting versus relation",
+  bindingLabIntro:"Select the first queried key, and supply a true or flipped first answer. Enumerate four equally weighted worlds. The structural reader knows key–value adjacency; the count reader sees only the sum of values, breaks ties toward zero, and subtracts the displayed answer to infer the second value.",
+  bindingQuery:"First queried key",bindingPriorMode:"Displayed first answer",bindingTrue:"True",bindingFlipped:"Flipped",
+  bindingA:"Value A",bindingB:"Value B",bindingCount:"Sum of values",bindingTarget1:"First target",bindingCounter1:"First count prediction",
+  bindingDisplayed:"Displayed answer",bindingToySecond:"Toy second-query inference accuracy",bindingTarget2:"Second target",bindingCounter2:"Second count prediction",bindingInvalid:"Outside binary domain",
+  bindingLabLimit:"This is arithmetic enumeration, not training. Invalid predictions count as errors. Flipping the prior answer can break the count-based inference; do not generalize this to a trained network.",
   causalTitle:"Chapter 8 — causal self-attention and dual retrieval",
   causalIntro:"Retrieve two independent values A and B from atomic records. This tests record selection, not separate key/value binding. One head, one layer, not a full Transformer. Training has 512 loops; validation and development each have 128; each test split has 64. Filler length 16 is outside training lengths 2,4,8.",
   causalMain:"Frozen source results — select evaluation split",
@@ -952,6 +992,64 @@ function renderJourney(){
   update();lab.append(el("p","evidence-note",d.causalLabLimit));details.append(lab);
   details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});
   area.append(details);
+ }
+ // Chapter 9: matched-pair binding, teacher forcing and free rollout stay distinct.
+ if(evidence?.schema==="wakeel-v022-frozen-compositional-binding/v1"&&evidence.chapter_id===chapter.id&&
+    evidence.status==="approved-source-metrics-not-independent-review"){
+  const details=el("details","evidence-replay binding-evidence");details.open=expandedEvidenceChapter===chapter.id;
+  details.append(el("summary","evidence-summary",d.bindingTitle),el("p","evidence-note",d.bindingIntro));
+  const provenance=el("p","evidence-provenance",d.evidenceSource+" ");
+  const code=el("code","",evidence.source_path+" · SHA-256: "+evidence.source_sha256);code.dir="ltr";provenance.append(code);details.append(provenance);
+  const tableFor=(parent,caption,labels,cls)=>{
+   const scroll=el("div","evidence-scroll"),table=el("table","evidence-table "+cls);
+   table.append(el("caption","",caption));const head=el("thead"),row=el("tr");
+   for(const label of labels){const th=el("th","",label);th.scope="col";row.append(th);}
+   head.append(row);table.append(head);const body=el("tbody");table.append(body);scroll.append(table);parent.append(scroll);return body;
+  };
+  const rowFor=(body,label,values)=>{
+   const row=el("tr"),th=el("th","",String(label));th.scope="row";row.append(th);
+   for(const v of values){const td=el("td","evidence-number",String(v));if(typeof v==="number"||/^[0-9.% /-]+$/.test(String(v)))td.dir="ltr";row.append(td);}body.append(row);
+  };
+  const selectField=(parent,cls,label,choices,value)=>{
+   const field=el("label","smoothing-field"),select=el("select",cls);field.append(el("span","",label));
+   for(const [v,label] of choices){const o=el("option","",String(label));o.value=String(v);select.append(o);}
+   select.value=String(value);field.append(select);parent.append(field);return select;
+  };
+  const pct=v=>(v*100).toFixed(2)+"%";
+  const main=el("section","binding-drill");main.append(el("h4","",d.bindingScope));
+  const split=selectField(main,"binding-split",d.bindingSplit,[["final_in",d.bindingFinalIn],["final_ood16",d.bindingFinalOod],
+   ["confirm_in",d.bindingConfirmIn],["confirm_ood16",d.bindingConfirmOod]],"final_in");
+  const seed=selectField(main,"binding-seed",d.bindingSeed,[["mean",d.bindingMean],...evidence.seeds.map(x=>[x,x])],"mean");
+  const body=tableFor(main,d.bindingScope,[d.bindingModel,d.bindingParams,d.bindingFirst,d.bindingPair,d.bindingSecond,d.bindingBoth],"binding-results");
+  const updateMain=()=>{
+   body.replaceChildren();for(const model of evidence.rows){
+    const v=model[split.value],value=k=>seed.value==="mean"?v[k].mean:v[k].per_seed[evidence.seeds.indexOf(Number(seed.value))];
+    rowFor(body,model.model,[model.params,...["first_query_binary_accuracy","first_query_paired_both_correct","second_query_binary_accuracy","both_answers_correct"].map(k=>pct(value(k)))]);
+   }
+  };
+  split.addEventListener("change",updateMain);seed.addEventListener("change",updateMain);updateMain();main.append(el("p","evidence-note",d.bindingLimit));details.append(main);
+  const fact=tableFor(details,d.bindingFactor,[d.bindingModel,d.bindingFirst],"binding-factor");
+  for(const [k,v] of Object.entries(evidence.factorial))if(k!=="descriptive_interaction")rowFor(fact,k,[pct(v)]);
+  details.append(el("p","evidence-note",d.bindingInteraction+": "+(evidence.factorial.descriptive_interaction*100).toFixed(2)));
+  details.append(el("p","evidence-note",d.bindingFactorLimit));
+  const free=tableFor(details,d.bindingFree,[d.bindingModel,d.bindingFreeFirst,d.bindingFreeSecond,d.bindingFreeBoth],"binding-free");
+  for(const m of evidence.rows)rowFor(free,m.model,[pct(m.free_rollout_final_in.q1),pct(m.free_rollout_final_in.q2),pct(m.free_rollout_final_in.both)]);
+  const interventions=tableFor(details,d.bindingInterventions,[d.bindingModel,d.bindingBaseline,d.bindingMemory,d.bindingPrior,d.bindingInterventionBoth],"binding-interventions");
+  for(const m of evidence.interventions_final_in_seed42)rowFor(interventions,m.model,[pct(m.baseline),...["memory_only","prior_answer_only","both"].map(k=>pct(m.modes[k].accuracy))]);
+  details.append(el("p","evidence-note",d.bindingInterventionLimit));
+  const lab=el("section","binding-lab");lab.append(el("h4","",d.bindingLab),el("p","evidence-note",d.bindingLabIntro));
+  const controls=el("div","smoothing-controls");
+  const q=selectField(controls,"binding-query",d.bindingQuery,[["A","A"],["B","B"]],"A");
+  const prior=selectField(controls,"binding-prior",d.bindingPriorMode,[["true",d.bindingTrue],["flipped",d.bindingFlipped]],"true");
+  lab.append(controls);const output=el("p","smoothing-output binding-output");output.setAttribute("role","status");lab.append(output);
+  const trace=tableFor(lab,d.bindingLab,[d.bindingA,d.bindingB,d.bindingCount,d.bindingTarget1,d.bindingCounter1,d.bindingDisplayed,d.bindingTarget2,d.bindingCounter2],"binding-trace");
+  const update=()=>{
+   const v=toyBindingCounter(q.value,prior.value);trace.replaceChildren();
+   v.rows.forEach(r=>rowFor(trace,r.a,[r.b,r.sum,r.first,r.counter_first,r.displayed_prior,r.second,r.counter_second===null?d.bindingInvalid:r.counter_second]));
+   output.textContent=d.bindingFirst+": "+pct(v.first_accuracy)+" · "+d.bindingPair+": "+pct(v.pair_both_correct)+" · "+d.bindingToySecond+": "+pct(v.second_accuracy);
+  };
+  q.addEventListener("change",update);prior.addEventListener("change",update);update();lab.append(el("p","evidence-note",d.bindingLabLimit));details.append(lab);
+  details.addEventListener("toggle",()=>{expandedEvidenceChapter=details.open?chapter.id:"";});area.append(details);
  }
  const foot=append(el("div","learning-source"),el("span","",d.source+": "),el("span","",d.sourceInfo));
  area.append(foot);
