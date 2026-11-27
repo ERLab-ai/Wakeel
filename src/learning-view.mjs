@@ -383,7 +383,7 @@ function renderJourney(){
  const evidence=catalog.evidence_replays?.[chapter.id];
  if(evidence?.schema==="wakeel-v022-frozen-aggregate/v1" &&
     evidence.chapter_id===chapter.id && evidence.status==="approved-source-aggregate-not-independent-review"){
-  const details=el("details","evidence-replay");
+  const details=el("details","evidence-replay classification-evidence");
   details.open=expandedEvidenceChapter===chapter.id;
   details.append(el("summary","evidence-summary",d.evidenceTitle));
   details.append(el("p","evidence-note",d.evidenceDescription));
